@@ -1,2 +1,2 @@
-# nixconfig
+# nix-config
 My Nix config
