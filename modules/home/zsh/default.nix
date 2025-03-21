@@ -9,7 +9,7 @@
     shellAliases = {
       ll = "ls -l";
       rs = "sudo nixos-rebuild switch";
-      rsf = "sudo nixos-rebuild switch --flake ~/nix";
+      rsf = "sudo nixos-rebuild switch --flake ~/.config/nix";
     };
 
     history = {
