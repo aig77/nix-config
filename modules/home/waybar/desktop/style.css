@@ -1,0 +1,280 @@
+
+/* import default theme */
+/* @import './themes/default.css'; */
+@import '../../.cache/wal/colors-waybar.css';
+
+@define-color backgroundlight @color0;
+@define-color backgrounddark @color0;
+@define-color workspacesbackground1 @color0;
+@define-color workspacesbackground2 @color7;
+@define-color workspacebackground3 @color1;
+@define-color bordercolor @color8;
+@define-color textcolor1 @color7;
+@define-color textcolor2 @color0;
+@define-color textcolor3 @color2;
+@define-color textcolor4 @color4;
+@define-color textcolor5 @color6;
+@define-color iconcolor @color0;
+
+* { 
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: JetBrainsMono Nerd Font, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    border: none;
+    border-radius: 0;
+}
+
+window#waybar {
+    background-color: transparent;
+    opacity: 0.95;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+/* --------------
+ * Tooltips
+ * -------------- */
+
+tooltip {
+   background-color: @backgrounddark;
+   border-radius: 10px;
+   opacity: 0.8;
+}
+
+tooltip label{
+   color: @textcolor1;
+   margin: 0px;
+   padding: 0px 10px;
+}
+
+/* --------------
+ * Spotlight 
+ * -------------- */
+
+#custom-spotlight {
+    background: @backgroundlight;
+    color: @textcolor2;
+    font-size: 20px;
+    margin: 10px 10px 10px 10px;
+    padding-left: 20px;
+    padding-right: 21px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+/* --------------
+ * Taskbar 
+ * -------------- */
+
+#taskbar {
+    background: transparent;
+    margin: 10px 10px 10px 10px;
+    padding: 0px;
+    border-radius: 15px;
+    border: 2px solid @backgroundlight;
+}
+
+#taskbar button {
+    border-radius: 15px;
+}
+
+#taskbar button:hover {
+    background: @backgrounddark;
+    transition: all 0.3s ease-in-out;
+    opacity: 0.7;
+}
+
+#taskbar.empty {
+    border: 0px;
+    border-color: transparent;
+    margin-right: 0px;
+}
+
+/* --------------
+ * Workspaces
+ * -------------- */
+
+#workspaces {
+    background: @backgrounddark;
+    margin: 10px 0px 10px 10px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    padding-left: 10px;
+    border: 0px;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 16px;
+    color: transparent;
+}
+
+#workspaces button {
+    color: pink;
+    padding: 0px 6px;
+    margin: 4px 3px;
+    border-radius: 20px;
+    border: 0px;
+    background-color: @textcolor1;
+    transition: all 0.3s ease-in-out;
+    opacity: 0.4;
+}
+
+#workspaces button.active {
+    background: @textcolor3;
+    min-width: 25px; 
+    transition: all 0.3s ease-in-out;
+    opacity: 1.0;
+}
+
+#workspaces button:hover {
+    background: @textcolor4;
+    opacity: 0.7;
+}
+
+/* --------------
+ * Window 
+ * -------------- */
+
+ #window {
+    background: @backgroundlight; 
+    /* background: transparent; */
+    margin: 10px 0px 10px 0px;
+    padding-left: 10px;
+    padding-right: 20px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    /* border: 2px solid @backgroundlight; */
+    color: @textcolor1;
+    font-size: 16px;
+    font-weight: bold;
+} 
+
+window#waybar.empty #window {
+    padding: 0px 10px;
+}  
+
+/* --------------
+ * Network 
+ * -------------- */
+ 
+#network {
+    background: @backgrounddark;
+    margin: 10px 20px 10px 0px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 16px;
+    color: @textcolor1;
+}
+
+/* --------------
+ * Hardware 
+ * -------------- */
+
+#disk {
+    background: @backgrounddark;
+    margin: 10px 0px 10px 0px;
+    padding-left: 30px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 16px;
+    color: @textcolor3;
+}
+
+#cpu {
+    background: @backgrounddark;
+    margin: 10px 0px 10px 0px;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 16px;
+    color: @textcolor4;
+}
+
+#memory {
+    background: @backgrounddark;
+    margin: 10px 20px 10px 0px;
+    padding-right: 30px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 16px;
+    color: @textcolor5;
+}
+
+/* --------------
+ * Clock 
+ * -------------- */
+
+#clock {
+    background: @backgrounddark;
+    margin: 10px 20px 10px 0px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 15px;
+    border: 0px;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 16px;
+    color: @textcolor1;
+}
+
+/* --------------
+ * Weather 
+ * -------------- */
+
+#custom-weather {
+    background: @backgrounddark;
+    margin: 10px 20px 10px 0px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 15px;
+    font-size: 16px;
+    color: @textcolor1;
+}
+
+
+/* --------------
+ * Systray 
+ * -------------- */
+
+#custom-pipewire {
+    background: @backgrounddark;
+    margin: 10px 0px 10px 0px;
+    padding-left: 30px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 16px;
+    color: @textcolor3;
+}
+
+#custom-pacman {
+    background: @backgrounddark;
+    margin: 10px 0px 10px 0px;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 16px;
+    color: @textcolor4;
+}
+
+#custom-exit {
+    background: @backgrounddark;
+    margin: 10px 10px 10px 0px;
+    padding-right: 30px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 16px;
+    color: @textcolor5;
+}
+
+

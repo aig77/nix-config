@@ -1,0 +1,242 @@
+
+/* import default theme */
+/* @import './themes/default.css'; */
+/*
+@import '../../.cache/wal/colors-waybar.css';
+
+@define-color backgroundlight @color0;
+@define-color backgrounddark @color0;
+@define-color workspacesbackground1 @color0;
+@define-color workspacesbackground2 @color7;
+@define-color workspacebackground3 @color1;
+@define-color bordercolor @color8;
+@define-color textcolor1 @color7;
+@define-color textcolor2 @color0;
+@define-color textcolor3 @color2;
+@define-color textcolor4 @color4;
+@define-color textcolor5 @color6;
+@define-color iconcolor @color0;
+*/
+* { 
+    font-family: JetBrainsMono Nerd Font, DejaVu Sans, DejaVu Serif;
+    border: none;
+    border-radius: 0px;
+    font-size: 11px;
+    font-weight: normal;
+    font-style: normal;
+    min-height: 0px;
+}
+
+window#waybar {
+    background-color: transparent;
+    opacity: 0.95;
+    /*transition-property: background-color;*/
+    transition-duration: .5s;
+}
+
+/* --------------
+ * Tooltips
+ * -------------- */
+
+tooltip {
+   /*background-color: @backgrounddark;*/
+   background-color: black;
+   border-radius: 10px;
+   opacity: 0.8;
+}
+
+tooltip label{
+   /*color: @textcolor1;*/
+   color: grey;
+   margin: 0px;
+   padding: 0px 10px;
+}
+
+/* --------------
+ * Taskbar 
+ * -------------- */
+
+#taskbar {
+    background: transparent;
+    margin: 10px 10px 10px 10px;
+    padding: 0px;
+    border-radius: 15px;
+    /*border: 2px solid @backgroundlight;*/
+    border: 2px solid black;
+    border: 2px solid;
+}
+
+#taskbar button {
+    border-radius: 15px;
+}
+
+#taskbar button:hover {
+    /*background: @backgrounddark;*/
+    background: black;
+    transition: all 0.3s ease-in-out;
+    opacity: 0.7;
+}
+
+#taskbar.empty {
+    border: 0px;
+    border-color: transparent;
+    margin-right: 0px;
+}
+
+/* --------------
+ * Workspaces
+ * -------------- */
+
+#workspaces {
+    /*background: @backgrounddark;*/
+    background: black;
+    margin: 4px 0px 4px 6px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    padding-left: 4px;
+    border: 0px;
+    font-weight: normal;
+    font-style: normal;
+    color: transparent;
+    font-size: 0px;
+}
+
+#workspaces button {
+    /*padding: 0px 8px;*/
+    padding: 0px;
+    margin: 4px; 
+    border-radius: 20px;
+    border: 0px;
+    min-height: 0px;
+    /*background-color: @textcolor1;*/
+    background-color: grey;
+    transition: all 0.3s ease-in-out;
+    opacity: 0.4;
+    font-size: 0px;
+}
+
+#workspaces button.active {
+    /*background: @textcolor3;*/
+    background: grey;
+    transition: all 0.3s ease-in-out;
+    opacity: 1.0;
+}
+
+#workspaces button:hover {
+    /*background: @textcolor4;*/
+    background: white;
+    opacity: 0.7;
+}
+
+/* --------------
+ * Window 
+ * -------------- */
+
+ #window {
+    /*background: @backgroundlight;*/
+     background: black;
+    /* background: transparent; */
+    margin: 4px 6px 4px 0px;
+    padding-left: 6px;
+    padding-right: 10px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    /* border: 2px solid @backgroundlight; */
+    /*color: @textcolor1;*/
+    border: 2px solid black;
+    color: grey;
+    font-weight: bold;
+} 
+
+window#waybar.empty #window {
+    padding: 0px 8px;
+}  
+
+/* --------------
+ * Hardware 
+ * -------------- */
+
+#disk {
+    /*background: @backgrounddark;*/
+    background: black;
+    margin: 4px 0px 4px 0px;
+    padding-left: 15px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    /*color: @textcolor3;*/
+    color: grey;
+}
+
+#cpu {
+    /*background: @backgrounddark;*/
+    background: black;
+    margin: 4px 0px 4px 0px;
+    padding-left: 15px;
+    padding-right: 15px;
+    /*color: @textcolor4;*/
+    color: grey;
+}
+
+#memory {
+    /*background: @backgrounddark;*/
+    background: black;
+    margin: 4px 10px 4px 0px;
+    padding-right: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    /*color: @textcolor5;*/
+    color: grey;
+}
+
+/* --------------
+ * Clock 
+ * -------------- */
+
+#clock {
+    /*background: @backgrounddark;*/
+    background: black;
+    margin: 4px 10px 4px 0px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 15px;
+    border: 0px;
+    /*color: @textcolor1;*/
+    color: grey;
+}
+
+/* --------------
+ * Systray 
+ * -------------- */
+
+#custom-pipewire {
+    /*background: @backgrounddark;*/
+    background: black;
+    margin: 4px 0px 4px 0px;
+    padding-left: 15px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    /*color: @textcolor3;*/
+    color: grey;
+}
+
+#battery {
+    /*background: @backgrounddark;*/
+    background: black;
+    margin: 4px 0px 4px 0px;
+    padding-left: 15px;
+    padding-right: 15px;
+    /*color: @textcolor5;*/
+    color: grey;
+}
+
+#custom-exit {
+    /*background: @backgrounddark;*/
+    background: black;
+    margin: 4px 4px 4px 0px;
+    padding-right: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    /*color: @textcolor5;*/
+    color: grey;
+}
+
