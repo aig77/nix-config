@@ -6,12 +6,11 @@
 
   stylix = {
     enable = true;
-
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-city-terminal-dark.yaml";
+    image = ./tokyo-night-cat.jpeg;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
     
     targets.waybar.enable = false; 
     targets.rofi.enable = false;
-    image = ./sakura-midnight-train-thumb.jpg;
 
     cursor = {
       name = "Bibata-Modern-Ice";
