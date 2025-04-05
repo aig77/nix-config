@@ -127,7 +127,7 @@ in {
     }
 
     #battery {
-        padding-left: 8px;
+        padding-left: 7px;
         padding-right: 15px;
     }
 
