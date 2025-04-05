@@ -4,13 +4,13 @@ let
 in {
   programs.waybar.style = 
   ''
-    @define-color background ${scheme.base04};
+    @define-color background ${scheme.base06};
     @define-color workspacesbackground1 ${scheme.base00};
     @define-color workspacesbackground2 ${scheme.base00};
     @define-color workspacesbackground3 ${scheme.base01};
-    @define-color bordercolor ${scheme.base04};
+    @define-color bordercolor ${scheme.base06};
     @define-color textcolor1 ${scheme.base00};
-    @define-color textcolor2 ${scheme.base04};
+    @define-color textcolor2 ${scheme.base06};
     @define-color textcolor3 ${scheme.base0B};
     @define-color textcolor4 ${scheme.base0D};
     @define-color textcolor5 ${scheme.base0F};
