@@ -15,6 +15,7 @@
     ../../modules/home/thunar
     ../../modules/home/vim
     ../../modules/home/waybar
+    ../../modules/home/wlogout
     ../../modules/home/zen
     ../../modules/home/zsh
 
