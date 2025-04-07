@@ -2,7 +2,7 @@
 let 
   scheme = config.lib.stylix.colors.withHashtag;
 in {
-  programs.waybar.style = 
+  programs.waybar.style = lib.mkForce 
   ''
     @define-color background ${scheme.base06};
     @define-color workspacesbackground1 ${scheme.base00};

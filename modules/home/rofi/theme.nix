@@ -36,7 +36,7 @@
       dark-r = toString (builtins.elemAt dark-rgb 0);
       dark-g = toString (builtins.elemAt dark-rgb 1);
       dark-b = toString (builtins.elemAt dark-rgb 2);
-  in {
+  in lib.mkForce {
     "configuration" = {
       modi = "drun,filebrowser,window,run";
       show-icons = true;
