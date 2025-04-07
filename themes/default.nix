@@ -9,9 +9,6 @@
     image = ./tokyo-night-cat.jpeg;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
     
-    targets.waybar.enable = false; 
-    targets.rofi.enable = false;
-
     cursor = {
       name = "Bibata-Modern-Ice";
       package = pkgs.bibata-cursors;
