@@ -106,6 +106,9 @@
         # replaces nomaximizerequest, class:.* # You'll probably like this.
         #"windowrulev2 = suppressevent maximize, class:.*"
         #"windowrulev2 = forceinput, class:.*"
+        "float, class:^(org.pulseaudio.pavucontrol)$"
+        "float, class:^(nm-connection-editor)$"
+        "float, class:^(.blueman-manager-wrapped)$"
       ];
       
       layerrule = [
@@ -113,7 +116,10 @@
         "blur, rofi"
         "dimaround, rofi"
         "ignorezero, rofi"
+        "blur, wlogout"
       ];
+
+
 
     };
   };
