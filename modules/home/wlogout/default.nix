@@ -4,7 +4,7 @@ let
   backgrounddark = colors.base00;
   backgroundlight = colors.base06;
   textcolor1 = colors.base07;
-  highlighted = colors.base04;
+  highlighted = colors.base0A;
   font = config.stylix.fonts.monospace.name;
   iconPath = "/home/arturo/nix/modules/home/wlogout/icons";
 in {
@@ -13,38 +13,38 @@ in {
     layout = [
       {
         label = "lock";
-        action = "swaylock";
-        text = "Lock";
+        action = "hyprlock";
+        text = "";
         keybind = "l";
       }
       {
         label = "hibernate";
         action = "systemctl hibernate";
-        text = "Hibernate";
+        text = "";
         keybind = "h";
       }
       {
         label = "logout";
         action = "sleep 1; hyprctl dispatch exit";
-        text = "Logout";
+        text = "";
         keybind = "e";
       }
       {
         label = "shutdown";
         action = "systemctl poweroff";
-        text = "Shutdown";
+        text = "";
         keybind = "s";
       }
       {
         label ="suspend";
         action = "systemctl suspend";
-        text = "Suspend";
+        text = "";
         keybind = "u";
       }
       {
         label = "reboot";
         action = "systemctl reboot";
-        text = "Reboot";
+        text = "";
         keybind = "r";
       }
     ];
@@ -62,7 +62,8 @@ in {
         transition: 20ms;
     }
     window {
-        background-color: transparent;
+        background-color: rgba(0,0,0,0.7);
+        /*filter: blur(2px);*/
     }
 
     button {
@@ -80,7 +81,7 @@ in {
     button:focus, button:active, button:hover {
         background-color: @backgrounddark;
         border-color: @highlighted;
-        opacity: 0.8;
+        /*opacity: 0.8;*/
         outline-style: none;
         margin: 2px;
     }
