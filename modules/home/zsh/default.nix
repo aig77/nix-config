@@ -9,7 +9,8 @@
     shellAliases = {
       ll = "ls -l";
       rs = "sudo nixos-rebuild switch";
-      rsf = "sudo nixos-rebuild switch --flake ~/.config/nix";
+      rsf = "sudo nixos-rebuild switch --flake ~/nix --show-trace";
+      rtf = "sudo nixos-rebuild test --flake ~/nix --show-trace";
     };
 
     history = {
@@ -23,7 +24,7 @@
       theme = "simple";
     };
 
-    initExtraFirst = "krabby name umbreon -s --no-title | fastfetch --file-raw -";
+    initExtraFirst = "krabby name umbreon -s --no-title"; #| fastfetch --file-raw -";
 
     initExtra = "source ~/.p10k.zsh";
 
