@@ -28,6 +28,15 @@
         "waybar"
       ];
 
+      env = [
+        "XDG_CURRENT_DESKTOP,hyprland"
+        "MOZ_ENABLE_WAYLAND,1"
+        "NIXOS_OZONE_WL,1"
+        "XDG_SESSION_TYPE,wayland"
+        "XDG_SESSION_DESKTOP,Hyprland"
+        "ELECTRON_OZONE_PLATFORM_HINT,auto"
+      ];
+
       input = {
         kb_layout = "us";
 
