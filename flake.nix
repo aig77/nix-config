@@ -13,6 +13,7 @@
     stylix.url = "github:danth/stylix";
     swww.url = "github:LGFae/swww";
     zen-browser.url = "github:MarceColl/zen-browser-flake";
+    nixcord.url = "github:kaylorben/nixcord";
   };
   
   outputs = { self, nixpkgs, nixpkgs-stable, ... } @inputs: 

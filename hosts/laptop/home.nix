@@ -3,6 +3,7 @@
 {
   
   imports = [
+    #../../modules/home/discord
     ../../modules/home/fetch
     #../../modules/home/fonts
     ../../modules/home/ghostty
@@ -10,6 +11,7 @@
     #../../modules/home/gtk
     ../../modules/home/hyprland
     ../../modules/home/kitty
+    ../../modules/home/lazygit
     ../../modules/home/rofi
     ../../modules/home/thunar
     ../../modules/home/vim
