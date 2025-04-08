@@ -1,7 +1,7 @@
 {
   wayland.windowManager.hyprland.settings = {
     bind = [
-      "SUPER, RETURN, exec, kitty"
+      "SUPER, RETURN, exec, ghostty"
       "SUPER, W, killactive"
       "SUPER, SPACE, exec, rofi -show drun"
       #"SUPER SHIFT, Q, exit"

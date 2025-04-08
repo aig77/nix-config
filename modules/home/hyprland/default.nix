@@ -7,6 +7,8 @@
     #./animations.nix
     ./keybinds.nix
     ./monitors.nix
+    ../hyprlock
+    ../hypridle
   ]; 
 
   home.packages = with pkgs; [
@@ -22,6 +24,7 @@
 
     settings = {
       exec-once = [
+        "hypridle"
         "waybar"
       ];
 

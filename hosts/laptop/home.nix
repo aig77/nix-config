@@ -9,7 +9,6 @@
     ../../modules/home/git
     #../../modules/home/gtk
     ../../modules/home/hyprland
-    ../../modules/home/hyprlock
     ../../modules/home/kitty
     ../../modules/home/rofi
     ../../modules/home/thunar
