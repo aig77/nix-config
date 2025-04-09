@@ -4,7 +4,6 @@
   in {
 
   imports = [
-    #./animations.nix
     ./keybinds.nix
     ./monitors.nix
     ../hyprlock
@@ -29,7 +28,6 @@
       ];
 
       env = [
-        "XDG_CURRENT_DESKTOP,hyprland"
         "MOZ_ENABLE_WAYLAND,1"
         "NIXOS_OZONE_WL,1"
         "XDG_SESSION_TYPE,wayland"
