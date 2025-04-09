@@ -5,18 +5,21 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/release-24.11";
+    hyprland.url = "github:hyprwm/Hyprland"; 
+    stylix.url = "github:danth/stylix";
+    nixcord.url = "github:kaylorben/nixcord";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland.url = "github:hyprwm/Hyprland"; 
-    stylix.url = "github:danth/stylix";
-    swww.url = "github:LGFae/swww";
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixcord.url = "github:kaylorben/nixcord";
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   
   outputs = { self, nixpkgs, nixpkgs-stable, ... } @inputs: 

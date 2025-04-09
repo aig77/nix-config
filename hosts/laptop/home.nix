@@ -3,16 +3,15 @@
 {
   
   imports = [
-    #../../modules/home/discord
+    ../../modules/home/dunst
     ../../modules/home/fetch
-    #../../modules/home/fonts
     ../../modules/home/ghostty
     ../../modules/home/git
-    #../../modules/home/gtk
     ../../modules/home/hyprland
     ../../modules/home/kitty
     ../../modules/home/lazygit
     ../../modules/home/rofi
+    ../../modules/home/spicetify
     ../../modules/home/thunar
     ../../modules/home/vim
     ../../modules/home/waybar
