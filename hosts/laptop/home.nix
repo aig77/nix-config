@@ -3,6 +3,7 @@
 {
   
   imports = [
+    ../../modules/home/discord
     ../../modules/home/dunst
     ../../modules/home/fetch
     ../../modules/home/ghostty
@@ -27,19 +28,24 @@
     homeDirectory = "/home/arturo";
 
     packages = with pkgs; [
-      btop
-      mission-center
-      krabby
+      bitwarden
       zip
       unzip
       xz
+      btop
+      krabby
+      mission-center
+      feh
       vlc
-      bitwarden
-      #inputs.swww.packages.${pkgs.system}.swww
+      networkmanagerapplet
       pavucontrol
       qpwgraph
-      feh
-      networkmanagerapplet
+      discord-canary
+
+      # backups
+      brave
+      vscodium
+      zed-editor
     ]; 
 
     sessionVariables = {

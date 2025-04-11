@@ -36,5 +36,7 @@
       }
     ];
   };
+
+  home.packages = [ pkgs.meslo-lgs-nf ]; # for p10k
      
 }

@@ -1,6 +1,6 @@
 { pkgs, lib, config, inputs,... }:
   let
-    scheme = config.lib.stylix.colors;
+    colors = config.lib.stylix.colors;
   in {
 
   imports = [
@@ -12,27 +12,35 @@
 
   home.packages = with pkgs; [
     hyprshot
+    grim
+    slurp
     dconf
   ];
 
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
-    #package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    #portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+    systemd.enable = true;
+    systemd.variables = [ "--all" ];
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
     settings = {
-      exec-once = [
-        "hypridle"
-        "waybar"
-      ];
-
       env = [
+        "XDG_CURRENT_DESKTOP,Hyprland"
         "MOZ_ENABLE_WAYLAND,1"
         "NIXOS_OZONE_WL,1"
         "XDG_SESSION_TYPE,wayland"
         "XDG_SESSION_DESKTOP,Hyprland"
+        "T_QPA_PLATFORM,wayland"
+        "GDK_BACKEND,wayland"
         "ELECTRON_OZONE_PLATFORM_HINT,auto"
+      ];
+
+      exec-once = [
+        "dbus-update-activation-environment --systemd --all"
+        "hypridle"
+        "waybar"
       ];
 
       input = {
@@ -44,7 +52,7 @@
           natural_scroll = "no";
         };
 
-        sensitivity = -0.8; # -1.0 - 1.0, 0 means no modification
+        sensitivity = -0.7; # -1.0 - 1.0, 0 means no modification
         force_no_accel = true;
         accel_profile = "flat"; 
       };
@@ -53,9 +61,8 @@
         gaps_in = 5;
         gaps_out = 20;
         border_size = 2;
-        "col.active_border" = 
-        lib.mkForce "rgb(${scheme.base05}) rgb(${scheme.base0D}) rgb(${scheme.base0C}) 45deg";
-        "col.inactive_border" = lib.mkForce "rgb(${scheme.base03})";
+        "col.active_border" = lib.mkForce "rgb(${colors.base05}) rgb(${colors.base0D}) rgb(${colors.base0C}) 45deg";
+        "col.inactive_border" = lib.mkForce "rgb(${colors.base03})";
 
         layout = "dwindle";
 
@@ -128,9 +135,20 @@
         "ignorezero, rofi"
         "blur, wlogout"
       ];
+    };
+  };
 
-
-
+  xdg = {
+    autostart.enable = true;
+    portal = {
+      enable = true;
+      config = {
+        common.default = "*";
+      };
+      extraPortals = [
+        inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland
+        pkgs.xdg-desktop-portal-gtk 
+      ];
     };
   };
 }
