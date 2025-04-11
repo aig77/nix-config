@@ -20,6 +20,8 @@
     ../../modules/home/zen
     ../../modules/home/zsh
 
+    ../../modules/home/scripts/screenshot
+
     ./variables.nix
   ];
  
