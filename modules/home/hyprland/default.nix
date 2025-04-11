@@ -11,9 +11,6 @@
   ]; 
 
   home.packages = with pkgs; [
-    hyprshot
-    grim
-    slurp
     dconf
   ];
 
