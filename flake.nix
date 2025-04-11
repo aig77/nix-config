@@ -22,7 +22,7 @@
     };
   };
   
-  outputs = { self, nixpkgs, nixpkgs-stable, ... } @inputs: 
+  outputs = inputs@{ self, nixpkgs, nixpkgs-stable, ... }: 
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
