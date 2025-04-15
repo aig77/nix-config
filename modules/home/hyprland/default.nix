@@ -1,19 +1,35 @@
 { pkgs, lib, config, inputs,... }:
   let
     colors = config.lib.stylix.colors;
+    active-border-color = {
+      one = colors.base0C;
+      two = colors.base0D;
+      three = colors.base05;
+    };
+    inactive-border-color = colors.base03;
   in {
 
   imports = [
     ./keybinds.nix
     ./monitors.nix
+    ./polkitagent.nix
     ../hyprlock
     ../hypridle
   ]; 
-
+  
   home.packages = with pkgs; [
+    qt5.qtwayland
+    qt6.qtwayland
+    libsForQt5.qt5ct
+    libsForQt5.xwaylandvideobridge
+    qt6ct
+    imv
+    wf-recorder
+    wlr-randr
+    wl-clipboard
     dconf
   ];
-
+  
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -35,9 +51,10 @@
       ];
 
       exec-once = [
-        "dbus-update-activation-environment --systemd --all"
+        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "hypridle"
         "waybar"
+        "xwaylandvideobridg"
       ];
 
       input = {
@@ -46,10 +63,11 @@
         follow_mouse = 1;
 
         touchpad = {
-          natural_scroll = "no";
+          natural_scroll = true;
+          clickfinger_behavior = true;
         };
 
-        sensitivity = -0.7; # -1.0 - 1.0, 0 means no modification
+        sensitivity = -0.5; # -1.0 - 1.0, 0 means no modification
         force_no_accel = true;
         accel_profile = "flat"; 
       };
@@ -58,8 +76,8 @@
         gaps_in = 5;
         gaps_out = 20;
         border_size = 2;
-        "col.active_border" = lib.mkForce "rgb(${colors.base05}) rgb(${colors.base0D}) rgb(${colors.base0C}) 45deg";
-        "col.inactive_border" = lib.mkForce "rgb(${colors.base03})";
+        "col.active_border" = lib.mkForce "rgb(${active-border-color.one}) rgb(${active-border-color.two}) rgb(${active-border-color.three}) 45deg";
+        "col.inactive_border" = lib.mkForce "rgb(${inactive-border-color})";
 
         layout = "dwindle";
 
@@ -76,12 +94,6 @@
           new_optimizations = true;
           ignore_opacity = true;
         };
-
-        #drop_shadow = "yes";
-        #shadow_ignore_window = true;
-        #shadow_range = 4;
-        #shadow_render_power = 3;
-        #col.shadow = "rgba(1a1a1aee)";
       };
 
       dwindle = {
@@ -92,6 +104,8 @@
 
       misc = {
         force_default_wallpaper = 0; # Set to 0 to disable the anime mascot wallpapers
+        disable_hyprland_logo = true;
+        focus_on_activate = true;
       };
 
       animations = {
@@ -123,6 +137,14 @@
         "float, class:^(org.pulseaudio.pavucontrol)$"
         "float, class:^(nm-connection-editor)$"
         "float, class:^(.blueman-manager-wrapped)$"
+        "float, title:^(.*Bitwarden Password Manager.*)$"
+
+        # xwaylandvideobridge
+        "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
+        "noanim,class:^(xwaylandvideobridge)$"
+        "noinitialfocus,class:^(xwaylandvideobridge)$"
+        "maxsize 1 1,class:^(xwaylandvideobridge)$"
+        "noblur,class:^(xwaylandvideobridge)$"
       ];
       
       layerrule = [
@@ -143,7 +165,6 @@
         common.default = "*";
       };
       extraPortals = [
-        inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland
         pkgs.xdg-desktop-portal-gtk 
       ];
     };
