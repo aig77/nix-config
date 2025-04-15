@@ -43,6 +43,7 @@
       pavucontrol
       qpwgraph
       discord-canary
+      nixd
 
       # backups
       brave
