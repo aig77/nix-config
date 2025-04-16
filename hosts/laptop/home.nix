@@ -42,6 +42,7 @@
       qpwgraph
       discord-canary
       nixd
+      nixfmt-rfc-style
 
       # backups
       brave
