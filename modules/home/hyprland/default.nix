@@ -1,22 +1,16 @@
-{ pkgs, lib, config, inputs,... }:
-  let
-    colors = config.lib.stylix.colors;
-    active-border-color = {
-      one = colors.base0C;
-      two = colors.base0D;
-      three = colors.base05;
-    };
-    inactive-border-color = colors.base03;
-  in {
+{ pkgs, lib, config, inputs, ... }:
+let
+  colors = config.lib.stylix.colors;
+  active-border-color = {
+    one = colors.base0C;
+    two = colors.base0D;
+    three = colors.base05;
+  };
+  inactive-border-color = colors.base03;
+in {
+  imports =
+    [ ./keybinds.nix ./monitors.nix ./polkitagent.nix ../hyprlock ../hypridle ];
 
-  imports = [
-    ./keybinds.nix
-    ./monitors.nix
-    ./polkitagent.nix
-    ../hyprlock
-    ../hypridle
-  ]; 
-  
   home.packages = with pkgs; [
     qt5.qtwayland
     qt6.qtwayland
@@ -29,14 +23,15 @@
     wl-clipboard
     dconf
   ];
-  
+
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
     systemd.enable = true;
     systemd.variables = [ "--all" ];
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    portalPackage =
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
     settings = {
       env = [
@@ -69,14 +64,15 @@
 
         sensitivity = -0.5; # -1.0 - 1.0, 0 means no modification
         force_no_accel = true;
-        accel_profile = "flat"; 
+        accel_profile = "flat";
       };
 
       general = {
         gaps_in = 5;
         gaps_out = 20;
         border_size = 2;
-        "col.active_border" = lib.mkForce "rgb(${active-border-color.one}) rgb(${active-border-color.two}) rgb(${active-border-color.three}) 45deg";
+        "col.active_border" = lib.mkForce
+          "rgb(${active-border-color.one}) rgb(${active-border-color.two}) rgb(${active-border-color.three}) 45deg";
         "col.inactive_border" = lib.mkForce "rgb(${inactive-border-color})";
 
         layout = "dwindle";
@@ -103,7 +99,8 @@
       };
 
       misc = {
-        force_default_wallpaper = 0; # Set to 0 to disable the anime mascot wallpapers
+        force_default_wallpaper =
+          0; # Set to 0 to disable the anime mascot wallpapers
         disable_hyprland_logo = true;
         focus_on_activate = true;
       };
@@ -129,7 +126,7 @@
           "layers, 1, 9, wind, slide top"
         ];
       };
-      
+
       windowrulev2 = [
         # replaces nomaximizerequest, class:.* # You'll probably like this.
         #"windowrulev2 = suppressevent maximize, class:.*"
@@ -146,7 +143,7 @@
         "maxsize 1 1,class:^(xwaylandvideobridge)$"
         "noblur,class:^(xwaylandvideobridge)$"
       ];
-      
+
       layerrule = [
         "blur, waybar"
         "blur, rofi"
@@ -161,13 +158,8 @@
     autostart.enable = true;
     portal = {
       enable = true;
-      config = {
-        common.default = "*";
-      };
-      extraPortals = [
-        pkgs.xdg-desktop-portal-gtk 
-      ];
+      config = { common.default = "*"; };
+      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     };
   };
 }
-

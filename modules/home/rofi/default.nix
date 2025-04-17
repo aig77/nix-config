@@ -1,11 +1,8 @@
 { pkgs, ... }: {
-
   programs.rofi = {
     enable = true;
     package = pkgs.rofi-wayland;
   };
 
-  imports = [
-    ./theme.nix
-  ];
+  imports = [ ./theme.nix ];
 }

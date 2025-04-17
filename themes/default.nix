@@ -1,18 +1,15 @@
 { pkgs, ... }: {
-  
-  home.packages = [
-    pkgs.papirus-icon-theme
-  ];
+  home.packages = [ pkgs.papirus-icon-theme ];
 
   stylix = {
     enable = true;
     image = ./tokyo-night-cat.jpeg;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
-    
+
     cursor = {
       name = "Bibata-Modern-Ice";
       package = pkgs.bibata-cursors;
-      size = 22; 
+      size = 22;
     };
 
     fonts = {
@@ -23,7 +20,7 @@
 
       sansSerif = {
         package = pkgs.dejavu_fonts;
-        name = "DejaVu Sans"; 
+        name = "DejaVu Sans";
       };
 
       serif = {

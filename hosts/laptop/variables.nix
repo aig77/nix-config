@@ -1,9 +1,5 @@
-{ pkgs, config, ... }:
-
-{
-  imports = [
-    ../../themes
-  ];
+{ pkgs, config, ... }: {
+  imports = [ ../../themes ];
 
   #config.stylix = {
   #  enable = true;

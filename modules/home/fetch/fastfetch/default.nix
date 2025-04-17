@@ -1,15 +1,11 @@
-{ pkgs, ... }:
-
-{
-
+{ pkgs, ... }: {
   programs.fastfetch = {
     enable = true;
     settings = {
-      schema = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
-      display = {
-         separator = "  ";
-      }; 
-      modules =  [
+      schema =
+        "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
+      display = { separator = "  "; };
+      modules = [
         {
           type = "title";
           color = {
@@ -49,24 +45,24 @@
           keyColor = "green";
           format = "{1}";
         }
-        { 
+        {
           type = "terminal";
           key = "";
           keyColor = "green";
           format = "{1}";
         }
-        { 
+        {
           type = "cpu";
           key = "";
           keyColor = "blue";
           format = "{1}";
         }
-        { 
+        {
           type = "gpu";
           key = "";
           keyColor = "blue";
           format = "{2}";
-        } 
+        }
         {
           type = "memory";
           key = "";

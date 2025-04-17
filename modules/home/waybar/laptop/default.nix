@@ -1,5 +1,4 @@
 { pkgs, ... }: {
-  
   imports = [ ./style.nix ];
 
   programs.waybar = {
@@ -9,11 +8,9 @@
         layer = "top";
         reload_style_on_change = true;
 
-        modules-left = [
-          "group/navigation"
-        ];
+        modules-left = [ "group/navigation" ];
 
-        modules-center = [];
+        modules-center = [ ];
 
         modules-right = [
           "clock"
@@ -25,16 +22,11 @@
 
         "group/navigation" = {
           orientation = "horizontal";
-          modules = [
-            "hyprland/workspaces"
-            "hyprland/window"
-          ];
+          modules = [ "hyprland/workspaces" "hyprland/window" ];
         };
 
         "hyprland/workspaces" = {
-          persistent-workspaces = {
-            eDP-1 = [ 1 2 3 4 ];
-          };
+          persistent-workspaces = { eDP-1 = [ 1 2 3 4 ]; };
           on-click = "activate";
           sort-by-number = true;
           format = "{icon}";
@@ -47,18 +39,18 @@
         };
 
         "hyprland/window" = {
-            format = " {title}";
-            max-length = 50;
-            separate-outputs = true;
+          format = " {title}";
+          max-length = 50;
+          separate-outputs = true;
         };
 
         "wlr/taskbar" = {
-            format = "{icon}";
-            icon-size = 18;
-            spacing = 0;
-            all-outputs = true;
-            on-click = "activate";
-            on-click-right = "close";
+          format = "{icon}";
+          icon-size = 18;
+          spacing = 0;
+          all-outputs = true;
+          on-click = "activate";
+          on-click-right = "close";
         };
 
         "clock" = {
@@ -79,7 +71,7 @@
               today = "<span color='#ff6699'><b><u>{}</u></b></span>";
             };
           };
-          actions =  {
+          actions = {
             on-click-right = "mode";
             on-click-forward = "tz_up";
             on-click-backward = "tz_down";
@@ -87,24 +79,18 @@
             on-scroll-down = "shift_down";
           };
         };
-        
+
         #"network" = {
         #  format = "{bandwidthUpBits}  {bandwidthDownBits}";
         #  interval = 2;
-        #};       
+        #};
 
         "group/hardware" = {
           orientation = "horizontal";
-          modules = [
-            "disk"
-            "cpu"
-            "memory"
-          ];
+          modules = [ "disk" "cpu" "memory" ];
         };
 
-        "disk" = {
-          format = "{percentage_used}% 󰨣 /";
-        };
+        "disk" = { format = "{percentage_used}% 󰨣 /"; };
 
         "cpu" = {
           format = "{usage}%  /";
@@ -118,19 +104,15 @@
 
         "group/systray" = {
           orientation = "horizontal";
-          modules = [
-            "network"
-            "bluetooth"
-            "battery"
-          ];
-        }; 
+          modules = [ "network" "bluetooth" "battery" ];
+        };
 
         "network" = {
           #interface = "wlp2s0";
           #format = "{icon}";
           format-wifi = "{icon}";
           format-ethernet = "󰈁";
-          format-disconnected = "󰤭";  # An empty format will hide the module.
+          format-disconnected = "󰤭"; # An empty format will hide the module.
           format-icons = [ "󰤯" "󰤟" "󰤢" "󰤥" "󰤨" ];
           tooltip-format = "{ifname} via {gwaddr} 󰊗";
           tooltip-format-wifi = "{essid} ({signalStrength}%) ";
@@ -146,10 +128,16 @@
           format = "";
           format-disabled = "󰂲"; # an empty format will hide the module
           format-connected = "";
-          tooltip-format = "{controller_alias}\t{controller_address}\t{num_connections} connected";
-          tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
-          tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
-          tooltip-format-enumerate-connected-battery = "{device_alias}\t{device_address}\t{device_battery_percentage}%";
+          tooltip-format =
+            "{controller_alias}	{controller_address}	{num_connections} connected";
+          tooltip-format-connected = ''
+            {controller_alias}	{controller_address}
+
+            {device_enumerate}'';
+          tooltip-format-enumerate-connected =
+            "{device_alias}	{device_address}";
+          tooltip-format-enumerate-connected-battery =
+            "{device_alias}	{device_address}	{device_battery_percentage}%";
           on-click = "blueman-manager";
         };
 
@@ -167,10 +155,10 @@
           tooltip-format = "{capacity}% | {timeTo}";
           max-length = 25;
         };
-                
+
         "custom/pipewire" = {
           tooltip = false;
-          max-length = 6;   
+          max-length = 6;
           exec = pkgs.writeShellScript "run-pipewire" ''
             $HOME/nix/modules/home/waybar/laptop/pipewire.sh
           '';

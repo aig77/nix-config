@@ -7,7 +7,7 @@
       description = "Arturo";
       extraGroups = [ "networkmanager" "wheel" ];
       shell = pkgs.zsh;
-      packages = with pkgs; [];
+      packages = with pkgs; [ ];
     };
   };
 }

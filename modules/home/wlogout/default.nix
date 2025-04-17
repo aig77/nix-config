@@ -1,4 +1,4 @@
-{ config, ... }: 
+{ config, ... }:
 let
   colors = config.lib.stylix.colors.withHashtag;
   backgrounddark = colors.base00;
@@ -36,7 +36,7 @@ in {
         keybind = "s";
       }
       {
-        label ="suspend";
+        label = "suspend";
         action = "systemctl suspend";
         text = "";
         keybind = "u";
@@ -49,66 +49,65 @@ in {
       }
     ];
 
-    style = 
-    ''
-    @define-color backgroundlight ${backgroundlight};
-    @define-color backgrounddark ${backgrounddark};
-    @define-color textcolor1 ${textcolor1};
-    @define-color highlighted ${highlighted};
+    style = ''
+      @define-color backgroundlight ${backgroundlight};
+      @define-color backgrounddark ${backgrounddark};
+      @define-color textcolor1 ${textcolor1};
+      @define-color highlighted ${highlighted};
 
-    * {
-        font-family: ${font};
-        background-image: none;
-        transition: 20ms;
-    }
-    window {
-        background-color: rgba(0,0,0,0.7);
-        /*filter: blur(2px);*/
-    }
+      * {
+          font-family: ${font};
+          background-image: none;
+          transition: 20ms;
+      }
+      window {
+          background-color: rgba(0,0,0,0.7);
+          /*filter: blur(2px);*/
+      }
 
-    button {
-        color: @textcolor1;
-        background-color: @backgrounddark;
-        border: 2px solid @backgroundlight;
-        border-radius: 20px;
-        margin: 10px;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 25%;
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2) 0 6px 20px 0 rgba(0,0,0,0.19);
-    }
+      button {
+          color: @textcolor1;
+          background-color: @backgrounddark;
+          border: 2px solid @backgroundlight;
+          border-radius: 20px;
+          margin: 10px;
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: 25%;
+          box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2) 0 6px 20px 0 rgba(0,0,0,0.19);
+      }
 
-    button:focus, button:active, button:hover {
-        background-color: @backgrounddark;
-        border-color: @highlighted;
-        /*opacity: 0.8;*/
-        outline-style: none;
-        margin: 2px;
-    }
-    
-    #lock {
-        background-image: image(url("${iconPath}/lock.svg"));
-    }
+      button:focus, button:active, button:hover {
+          background-color: @backgrounddark;
+          border-color: @highlighted;
+          /*opacity: 0.8;*/
+          outline-style: none;
+          margin: 2px;
+      }
 
-    #logout {
-        background-image: image(url("${iconPath}/logout.svg"));
-    }
+      #lock {
+          background-image: image(url("${iconPath}/lock.svg"));
+      }
 
-    #suspend {
-        background-image: image(url("${iconPath}/suspend.svg"));
-    }
+      #logout {
+          background-image: image(url("${iconPath}/logout.svg"));
+      }
 
-    #hibernate {
-        background-image: image(url("${iconPath}/hibernate.svg"));
-    }
+      #suspend {
+          background-image: image(url("${iconPath}/suspend.svg"));
+      }
 
-    #shutdown {
-        background-image: image(url("${iconPath}/shutdown.svg"));
-    }
+      #hibernate {
+          background-image: image(url("${iconPath}/hibernate.svg"));
+      }
 
-    #reboot {
-        background-image: image(url("${iconPath}/reboot.svg"));
-    }
+      #shutdown {
+          background-image: image(url("${iconPath}/shutdown.svg"));
+      }
+
+      #reboot {
+          background-image: image(url("${iconPath}/reboot.svg"));
+      }
     '';
   };
 }
