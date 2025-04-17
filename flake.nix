@@ -1,5 +1,4 @@
 {
-
   description = "My system configuration";
 
   inputs = {
@@ -8,6 +7,7 @@
     hyprland.url = "github:hyprwm/Hyprland";
     stylix.url = "github:danth/stylix";
     nixcord.url = "github:kaylorben/nixcord";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,20 +22,13 @@
     };
   };
 
-  outputs =
-    inputs@{
-      self,
-      nixpkgs,
-      nixpkgs-stable,
-      ...
-    }:
+  outputs = inputs@{ self, nixpkgs, nixpkgs-stable, ... }:
     let
       system = "x86_64-linux";
+      systems = [ system ];
       pkgs = nixpkgs.legacyPackages.${system};
       pkgs-stable = nixpkgs-stable.legacyPackages.${system};
-    in
-    {
-      devShells.${system}.default = import ./shell.nix { inherit pkgs; };
+    in {
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem {
           inherit system;
@@ -47,5 +40,11 @@
           ];
         };
       };
+
+      # for `nix fmt`
+      formatter.${system} = pkgs.nixfmt;
+
+      # nix develop
+      devShells.${system}.default = import ./shell.nix { inherit pkgs; };
     };
 }
