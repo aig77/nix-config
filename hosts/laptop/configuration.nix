@@ -1,8 +1,8 @@
 { config, ... }:
 
 {
-  imports = [     
-    # Mostly system related configuration 
+  imports = [
+    # Mostly system related configuration
     ../../modules/nixos/audio.nix
     ../../modules/nixos/bluetooth.nix
     ../../modules/nixos/boot.nix

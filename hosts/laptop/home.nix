@@ -1,5 +1,6 @@
-{ pkgs, ... }: {
-  
+{ pkgs, ... }:
+{
+
   imports = [
     ../../modules/home/discord
     ../../modules/home/dunst
@@ -22,7 +23,7 @@
 
     ./variables.nix
   ];
- 
+
   home = {
     username = "arturo";
     homeDirectory = "/home/arturo";
@@ -48,14 +49,14 @@
       brave
       vscodium
       zed-editor
-    ]; 
+    ];
 
     sessionVariables = {
       # EDITOR = "nvim";
       WALLPAPERS = "$HOME/Pictures/Wallpapers";
     };
 
-    file = {};
+    file = { };
 
     # https://nixos.wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "24.05";
