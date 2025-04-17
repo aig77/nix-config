@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-{
-
+{ pkgs, ... }: {
   imports = [
     ../../modules/home/discord
     ../../modules/home/dunst
@@ -43,7 +41,6 @@
       qpwgraph
       discord-canary
       nixd
-      nixfmt-rfc-style
 
       # backups
       brave
