@@ -1,5 +1,4 @@
 { pkgs, config, ... }: {
-
   networking.hostName = "nixos";
   #networking.wireless.enable = true;
 
@@ -26,9 +25,8 @@
   };
 
   services.gnome.gnome-keyring.enable = true;
-  
+
   services.openssh.enable = true;
 
   services.printing.enable = true;
-
 }

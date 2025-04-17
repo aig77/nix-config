@@ -3,7 +3,7 @@
 
   programs.nixcord = {
     enable = true;
-    config = { 
+    config = {
       frameless = true;
       plugins = {
         alwaysAnimate.enable = true;

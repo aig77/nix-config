@@ -1,11 +1,8 @@
-#{ pkgs, inputs, ... }: 
-
+# { pkgs, inputs, ... }:
 #{
-
 #  home.packages = with pkgs;
 #   [ inputs.zen-browser.packages.${system}.default ];
 #}
-
 # Zen is a minimalistic web browser.
 { pkgs, inputs, ... }:
 let

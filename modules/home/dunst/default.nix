@@ -1,4 +1,4 @@
-{ lib, config, ... }: 
+{ lib, config, ... }:
 let
   colors = config.lib.stylix.colors.withHashtag;
   font = config.stylix.fonts.monospace.name;

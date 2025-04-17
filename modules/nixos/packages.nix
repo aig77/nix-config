@@ -1,8 +1,1 @@
-{ pkgs, ... }: {
-
-  environment.systemPackages = with pkgs; [
-    gcc
-    wget
-    curl
-  ];
-}
+{ pkgs, ... }: { environment.systemPackages = with pkgs; [ gcc wget curl ]; }

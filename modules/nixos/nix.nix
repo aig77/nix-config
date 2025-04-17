@@ -1,6 +1,4 @@
-{ inputs, ... }:
-
-{
+{ inputs, ... }: {
   nixpkgs.config = {
     allowUnfree = true;
     allowBroken = true;
@@ -10,10 +8,7 @@
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     settings = {
       auto-optimise-store = true;
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
+      experimental-features = [ "nix-command" "flakes" ];
       substituters = [
         "https://cache.nixos.org"
         "https://hyprland.cachix.org"

@@ -1,9 +1,7 @@
-{ lib, config, ... }: 
-let 
-  scheme = config.lib.stylix.colors.withHashtag;
+{ lib, config, ... }:
+let scheme = config.lib.stylix.colors.withHashtag;
 in {
-  programs.waybar.style = lib.mkForce 
-  ''
+  programs.waybar.style = lib.mkForce ''
     @define-color background ${scheme.base06};
     @define-color workspacesbackground1 ${scheme.base00};
     @define-color workspacesbackground2 ${scheme.base00};
@@ -15,8 +13,8 @@ in {
     @define-color textcolor4 ${scheme.base0D};
     @define-color textcolor5 ${scheme.base0F};
     @define-color iconcolor ${scheme.base03};
-    
-    * { 
+
+    * {
         font-family: JetBrainsMono Nerd Font, DejaVu Sans, DejaVu Serif;
         border: none;
         border-radius: 0px;
@@ -45,7 +43,7 @@ in {
 
     #workspaces button {
         padding: 0px;
-        margin: 4px; 
+        margin: 4px;
         border-radius: 20px;
         min-height: 0px;
         background-color: @workspacesbackground2;
@@ -70,11 +68,11 @@ in {
         padding-left: 6px;
         padding-right: 10px;
         font-weight: bold;
-    } 
+    }
 
     window#waybar.empty #window {
         padding: 0px 8px;
-    } 
+    }
 
     #clock {
         background-color: transparent;
@@ -115,7 +113,7 @@ in {
         border-radius: 15px;
         color: @textcolor2;
     }
-    
+
     #network {
         padding-left: 15px;
         padding-right: 10px;

@@ -1,9 +1,7 @@
 { lib, config, ... }: {
-  
   #imports = [ ./hexToRgb ];
 
-  programs.rofi.theme = 
-  let
+  programs.rofi.theme = let
     # Use `mkLiteral` for string-like values that should show without
     # quotes, e.g.:
     # {
@@ -32,7 +30,7 @@
       window-format = "{w}{t}";
       font = "JetBrainsMono Nerd Font 10";
       icon-theme = "Papirus";
-    }; 
+    };
 
     "window" = {
       height = mkLiteral "480px"; # 600
@@ -47,8 +45,10 @@
       border-radius = mkLiteral "32px"; # 40
       border-color = mkLiteral "${border}";
       background-color = mkLiteral ''
-        rgba(${builtins.toString dark-rgb.r}, ${builtins.toString dark-rgb.g}, ${builtins.toString dark-rgb.b}, 0.4)
-      ''; 
+        rgba(${builtins.toString dark-rgb.r}, ${
+          builtins.toString dark-rgb.g
+        }, ${builtins.toString dark-rgb.b}, 0.4)
+      '';
     };
 
     "mainbox" = {
@@ -102,12 +102,12 @@
       background-color = mkLiteral "transparent";
       text-color = mkLiteral "${light}";
     };
-    
+
     "mode-switcher" = {
       orientation = mkLiteral "vertical";
       width = mkLiteral "76px"; # 95
       enabled = true;
-      padding = mkLiteral "12px"; # 
+      padding = mkLiteral "12px";
       spacing = mkLiteral "10px"; # 10
       background-color = mkLiteral "transparent";
     };
@@ -127,7 +127,7 @@
     "element" = {
       enabled = true;
       spacing = mkLiteral "16px"; # 20
-      padding = mkLiteral "7px"; # 9 
+      padding = mkLiteral "7px"; # 9
       border-radius = mkLiteral "20px"; # 25
       cursor = mkLiteral "pointer";
       background-color = mkLiteral "transparent";
@@ -135,20 +135,20 @@
     };
 
     "element selected.normal" = {
-      background-color = mkLiteral "${selected1}"; 
+      background-color = mkLiteral "${selected1}";
       text-color = "${light}";
     };
 
     "element-icon" = {
-      size = mkLiteral "38px"; #
+      size = mkLiteral "38px";
       cursor = mkLiteral "inherit";
       background-color = mkLiteral "transparent";
-      text-color = mkLiteral "inherit"; 
+      text-color = mkLiteral "inherit";
     };
 
     "element-text" = {
-      vertical-align = mkLiteral "0.5"; 
-      horizontal-align = mkLiteral "0.0"; 
+      vertical-align = mkLiteral "0.5";
+      horizontal-align = mkLiteral "0.0";
       cursor = mkLiteral "inherit";
       background-color = mkLiteral "transparent";
       text-color = mkLiteral "inherit";

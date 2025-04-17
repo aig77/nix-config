@@ -1,5 +1,4 @@
 { pkgs, ... }: {
-  
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -24,19 +23,17 @@
       theme = "simple";
     };
 
-    initExtraFirst = "krabby name umbreon -s --no-title"; #| fastfetch --file-raw -";
+    initExtraFirst =
+      "krabby name umbreon -s --no-title"; # | fastfetch --file-raw -";
 
     initExtra = "source ~/.p10k.zsh";
 
-    plugins = [
-      {                                                                                   
-        name = "powerlevel10k";                                                           
-        src = pkgs.zsh-powerlevel10k;                                                     
-        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";                         
-      }
-    ];
+    plugins = [{
+      name = "powerlevel10k";
+      src = pkgs.zsh-powerlevel10k;
+      file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+    }];
   };
 
   home.packages = [ pkgs.meslo-lgs-nf ]; # for p10k
-     
 }
