@@ -8,8 +8,8 @@
     shellAliases = {
       ll = "ls -l";
       rs = "sudo nixos-rebuild switch";
-      rsf = "sudo nixos-rebuild switch --flake ~/nix --show-trace";
-      rtf = "sudo nixos-rebuild test --flake ~/nix --show-trace";
+      rsf = "sudo nixos-rebuild switch --flake --show-trace";
+      rtf = "sudo nixos-rebuild test --flake --show-trace";
     };
 
     history = {
