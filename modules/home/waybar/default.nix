@@ -1,4 +1,5 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, ... }: 
+{
   imports = [ ./style.nix ];
 
   programs.waybar = {
@@ -15,7 +16,7 @@
         modules-right = if (config.var.configName == "desktop") then [
           "clock"
           "group/hardware"
-          "custom/pipewire"
+          "wireplumber"
           "custom/exit"
         ] else [
           "clock"
@@ -31,7 +32,6 @@
         };
 
         "hyprland/workspaces" = {
-
           persistent-workspaces = if (config.var.configName == "desktop") then {
             DP-2 = [ 1 2 3 4 ];
             DP-1 = [ 5 6 7 8 ];
@@ -171,14 +171,13 @@
           max-length = 25;
         };
 
-        "custom/pipewire" = {
-          tooltip = false;
-          max-length = 6;
-          exec = pkgs.writeShellScript "run-pipewire" ''
-            $HOME/nix/modules/home/waybar/laptop/pipewire.sh
-          '';
+        "wireplumber" = {
+          format = "{volume}% {icon}";
+          format-muted = "";
+          scroll-step = 5.0;
           on-click = "pavucontrol";
           on-click-right = "qpwgraph";
+          format-icons = [ "" "" "" ];
         };
 
         "custom/exit" = {

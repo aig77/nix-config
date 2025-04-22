@@ -132,9 +132,9 @@ in {
     #battery.warning { color: orange; }
     #battery.critical { color: red; }
 
-    #custom-pipewire {
+    #wireplumber {
         background-color: transparent;
-        margin: 4px 10px 4px 15px;
+        margin: 4px 17px 4px 1px;
         color: @textcolor2;
     }
 
