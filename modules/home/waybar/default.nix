@@ -22,7 +22,7 @@
           "clock"
           "group/hardware"
           "group/systray"
-          "custom/pipewire"
+          "wireplumber"
           "custom/exit"
         ];
 
