@@ -1,6 +1,6 @@
 { pkgs, config, lib, ... }: {
   imports = [ ../../themes ];
-  
+
   options = {
     var = lib.mkOption {
       type = lib.types.attrs;
@@ -11,8 +11,8 @@
   config.var = {
     hostname = "nixos";
     username = "arturo";
-    configDirectory = "/home/" + config.var.username + "./config/nix"; 
-    configName = "desktop"; 
+    configDirectory = "/home/" + config.var.username + "./config/nix";
+    configName = "desktop";
 
     git = {
       username = "aig77";
