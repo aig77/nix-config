@@ -19,8 +19,11 @@
       email = "";
     };
 
-    browser = "zen";
     terminal = "ghostty";
-    fileManager = "thunar";
+    launcher = "rofi -show drun";
+    lock = "hyprlock";
+    logout = "wlogout";
+    browser = "zen";
+    file-manager = "thunar";
   };
 }

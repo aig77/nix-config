@@ -1,13 +1,17 @@
 { config, ... }: {
   wayland.windowManager.hyprland.settings = {
     bind = [
+      # Shortcuts
       "SUPER, RETURN, exec, ${config.var.terminal}"
+      "SUPER, SPACE, exec, ${config.var.launcher}"
+      "SUPER, E, exec, ${config.var.file-manager}"
+      "SUPER Control, Q, exec, ${config.var.lock}"
+      "SUPER, X, exec, ${config.var.logout}"
+      "SUPER, I, exec, ${config.var.browser}"
+
+      # Hypr binds
       "SUPER, W, killactive"
-      "SUPER, SPACE, exec, rofi -show drun"
       #"SUPER SHIFT, Q, exit"
-      "SUPER, E, exec, ${config.var.fileManager}"
-      "SUPER Control, Q, exec, hyprlock"
-      "SUPER, X, exec, wlogout"
       "SUPER, T, togglefloating"
       "SUPER, P, pseudo"
       "SUPER, O, togglesplit"

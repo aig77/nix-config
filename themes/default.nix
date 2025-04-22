@@ -1,6 +1,4 @@
 { pkgs, ... }: {
-  home.packages = [ pkgs.papirus-icon-theme ];
-
   stylix = {
     enable = true;
     image = ./tokyo-night-cat.jpeg;
@@ -50,4 +48,6 @@
 
     polarity = "dark";
   };
+
+  home.packages = [ pkgs.papirus-icon-theme ];
 }
