@@ -5,7 +5,7 @@ let
   foreground = "rgb(${colors.base06})";
   blue = "rgb(${colors.base0C})";
   red = "rgb(${colors.base0F})";
-  wallpaperPath = "${config.stylix.image}";
+  wallpaper = "${config.stylix.image}";
   font = config.stylix.fonts.monospace.name;
 in {
   programs.hyprlock = {
@@ -13,15 +13,14 @@ in {
 
     settings = {
       general = {
-        #disable_loading_bar = true;
-        #grace = 300;
         hide_cursor = true;
-        #no_fade_in = false;
+        ignore_empty_input = true;
+        immediate_render = true;
       };
 
       background = {
         monitor = "";
-        path = wallpaperPath;
+        path = wallpaper;
         blur_passes = 2;
         blur_size = 4;
       };
@@ -39,20 +38,16 @@ in {
         font_color = foreground;
         fade_on_empty = true;
         fade_timeout = 1000; # Milliseconds before fade_on_empty is triggered.
-        placeholder_text =
-          "<i>🔒Password...</i>"; # Text rendered in the input box when it's empty.
+        placeholder_text = "<i>🔒Password...</i>"; # Text rendered in the input box when it's empty.
         hide_input = false;
         rounding = -1; # -1 means complete rounding (circle/oval)
         check_color = blue;
-        fail_color =
-          red; # if authentication failed, changes outer_color and fail message color
+        fail_color = red; # if authentication failed, changes outer_color and fail message color
         fail_text = "<i>$FAIL <b>($ATTEMPTS)</b></i>"; # can be set to empty
-        fail_transition =
-          300; # transition time in ms between normal outer_color and fail_color
+        fail_transition = 300; # transition time in ms between normal outer_color and fail_color
         capslock_color = -1;
         numlock_color = -1;
-        bothlock_color =
-          -1; # when both locks are active. -1 means don't change outer color (same for above)
+        bothlock_color = -1; # when both locks are active. -1 means don't change outer color (same for above)
         invert_numlock = false; # change color if numlock is off
         swap_font_color = false; # see below
         position = "0, -20";

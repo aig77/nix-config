@@ -1,22 +1,26 @@
 { pkgs, ... }: {
   imports = [
-    ../../modules/home/discord
-    ../../modules/home/dunst
-    ../../modules/home/fetch
-    ../../modules/home/ghostty
-    ../../modules/home/git
-    ../../modules/home/hyprland
-    ../../modules/home/kitty
-    ../../modules/home/lazygit
-    ../../modules/home/rofi
-    ../../modules/home/spicetify
-    ../../modules/home/thunar
-    ../../modules/home/vim
-    ../../modules/home/waybar
-    ../../modules/home/wlogout
-    ../../modules/home/zen
-    ../../modules/home/zsh
+    # Programs
+    ../../modules/home/programs/discord
+    ../../modules/home/programs/fetch
+    ../../modules/home/programs/ghostty
+    ../../modules/home/programs/git
+    ../../modules/home/programs/kitty
+    ../../modules/home/programs/lazygit
+    ../../modules/home/programs/spicetify
+    ../../modules/home/programs/thunar
+    ../../modules/home/programs/vim
+    ../../modules/home/programs/zen
 
+    # System
+    ../../modules/home/system/dunst
+    ../../modules/home/system/hyprland
+    ../../modules/home/system/rofi
+    ../../modules/home/system/waybar
+    ../../modules/home/system/wlogout
+    ../../modules/home/system/zsh
+    
+    # Scripts
     ../../modules/home/scripts/screenshot
 
     ./variables.nix

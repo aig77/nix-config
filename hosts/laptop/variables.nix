@@ -1,18 +1,29 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, lib, ... }: {
   imports = [ ../../themes ];
 
-  #config.stylix = {
-  #  enable = true;
-  #  base16Scheme = "${pkgs.base16-schemes}/share/themes/onedark.yaml";
-  #};
+  options = {
+    var = lib.mkOption {
+      type = lib.types.attrs;
+      default = { };
+    };
+  };
 
-  #gitUsername = "";
-  #gitEmail = "";
+  config.var = {
+    hostname = "nixos";
+    username = "arturo";
+    configDirectory = "/home/" + config.var.username + "/nix";
+    configName = "laptop";
 
-  #clock24h = true;
+    git = {
+      username = "aig77";
+      email = "";
+    };
 
-  #browser = "zen";
-  #terminal = "kitty";
-  #keyboardLayout = "us";
-  #consoleKeyMap = "us";
+    terminal = "ghostty";
+    launcher = "rofi -show drun";
+    lock = "hyprlock";
+    logout = "wlogout";
+    browser = "zen";
+    file-manager = "thunar";
+  };
 }
