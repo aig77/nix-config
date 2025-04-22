@@ -15,7 +15,6 @@ in {
       general = {
         hide_cursor = true;
         ignore_empty_input = true;
-        immediate_render = true;
       };
 
       background = {
