@@ -12,7 +12,7 @@
 
         modules-center = [ ];
 
-        modules-right = if (config.var.configName == "desktop") then  [
+        modules-right = if (config.var.configName == "desktop") then [
           "clock"
           "group/hardware"
           "custom/pipewire"
@@ -31,11 +31,13 @@
         };
 
         "hyprland/workspaces" = {
-          
+
           persistent-workspaces = if (config.var.configName == "desktop") then {
             DP-2 = [ 1 2 3 4 ];
             DP-1 = [ 5 6 7 8 ];
-          } else { eDP-1 = [ 1 2 3 4 ]; };
+          } else {
+            eDP-1 = [ 1 2 3 4 ];
+          };
           on-click = "activate";
           sort-by-number = true;
           format = "{icon}";

@@ -1,5 +1,4 @@
-{ config, ...}:
-{
+{ config, ... }: {
   wayland.windowManager.hyprland.settings = {
     bind = [
       "SUPER, RETURN, exec, ${config.var.terminal}"

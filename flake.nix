@@ -39,7 +39,7 @@
             inputs.stylix.nixosModules.stylix
           ];
         };
-	    desktop = nixpkgs.lib.nixosSystem {
+        desktop = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [

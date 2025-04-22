@@ -1,10 +1,8 @@
 {
   services.xserver.videoDrivers = [ "nvidia" ];
-  
-  boot.kernelParams = [
-    "nvidia-drm.modeset=1"
-  ];
-  
+
+  boot.kernelParams = [ "nvidia-drm.modeset=1" ];
+
   environment.variables = {
     LIBVA_DRIVER_NAME = "nvidia"; # Hardware video acceleration
     GDM_BACKEND = "nvidia-drm"; # Graphics backend for Wayland
