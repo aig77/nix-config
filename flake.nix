@@ -39,6 +39,16 @@
             inputs.stylix.nixosModules.stylix
           ];
         };
+	desktop = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/desktop/configuration.nix # CHANGEME: change the path to match your host folder
+            inputs.home-manager.nixosModules.home-manager
+            inputs.stylix.nixosModules.stylix
+          ];
+        };
+
       };
 
       # for `nix fmt`
