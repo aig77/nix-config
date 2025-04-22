@@ -1,11 +1,12 @@
+{ config, ...}:
 {
   wayland.windowManager.hyprland.settings = {
     bind = [
-      "SUPER, RETURN, exec, ghostty"
+      "SUPER, RETURN, exec, ${config.var.terminal}"
       "SUPER, W, killactive"
       "SUPER, SPACE, exec, rofi -show drun"
       #"SUPER SHIFT, Q, exit"
-      "SUPER, E, exec, thunar"
+      "SUPER, E, exec, ${config.var.fileManager}"
       "SUPER Control, Q, exec, hyprlock"
       "SUPER, X, exec, wlogout"
       "SUPER, T, togglefloating"
