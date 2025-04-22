@@ -30,7 +30,7 @@
       pkgs-stable = nixpkgs-stable.legacyPackages.${system};
     in {
       nixosConfigurations = {
-        nixos = nixpkgs.lib.nixosSystem {
+        laptop = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [
@@ -39,7 +39,7 @@
             inputs.stylix.nixosModules.stylix
           ];
         };
-	desktop = nixpkgs.lib.nixosSystem {
+	    desktop = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [
