@@ -2,8 +2,8 @@
 let
   sddm-astronaut = pkgs.sddm-astronaut.override {
     themeConfig = {
-      Background = "${toString config.stylix.image}";
-      Font = "JetBrainsMono Nerd Font";
+      Background = config.stylix.image;
+      Font = config.stylix.fonts.monospace.name;
     };
   };
 in {
