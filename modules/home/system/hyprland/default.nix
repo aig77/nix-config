@@ -49,7 +49,7 @@ in {
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "hypridle"
         "waybar"
-        "xwaylandvideobridge"
+        "xwaylandvideobridge &"
       ];
 
       input = {
