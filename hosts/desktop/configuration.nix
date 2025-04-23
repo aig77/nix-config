@@ -1,6 +1,7 @@
 { config, ... }: {
   imports = [
     ../../modules/nixos/nvidia.nix
+    ../../modules/nixos/hyprland.nix
 
     # Mostly system related configuration
     ../../modules/nixos/audio.nix
@@ -17,6 +18,9 @@
   ];
 
   home-manager.users.arturo = import ./home.nix;
+
+  # enable hyprland in system
+  # programs.hyprland.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -2,9 +2,9 @@
 let
   colors = config.lib.stylix.colors;
   active-border-color = {
-    one = colors.base0C;
-    two = colors.base0D;
-    three = colors.base05;
+    a = colors.base0C;
+    b = colors.base0D;
+    c = colors.base05;
   };
   inactive-border-color = colors.base03;
 in {
@@ -26,16 +26,18 @@ in {
 
   wayland.windowManager.hyprland = {
     enable = true;
-    xwayland.enable = true;
-    systemd.enable = true;
-    systemd.variables = [ "--all" ];
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    portalPackage =
-      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    package = null;
+    portalPackage = null;
 
     settings = {
+      exec-once = [
+        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "hypridle"
+        "waybar"
+        #"xwaylandvideobridge &"
+      ];
+
       env = [
-        "XDG_CURRENT_DESKTOP,Hyprland"
         "MOZ_ENABLE_WAYLAND,1"
         "NIXOS_OZONE_WL,1"
         "XDG_SESSION_TYPE,wayland"
@@ -43,13 +45,6 @@ in {
         "T_QPA_PLATFORM,wayland"
         "GDK_BACKEND,wayland"
         "ELECTRON_OZONE_PLATFORM_HINT,auto"
-      ];
-
-      exec-once = [
-        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        "hypridle"
-        "waybar"
-        "xwaylandvideobridge &"
       ];
 
       input = {
@@ -62,7 +57,7 @@ in {
           clickfinger_behavior = true;
         };
 
-        sensitivity = -0.5; # -1.0 - 1.0, 0 means no modification
+        sensitivity = 0; # -1.0 - 1.0, 0 means no modification
         force_no_accel = true;
         accel_profile = "flat";
       };
@@ -72,7 +67,7 @@ in {
         gaps_out = 20;
         border_size = 2;
         "col.active_border" = lib.mkForce
-          "rgb(${active-border-color.one}) rgb(${active-border-color.two}) rgb(${active-border-color.three}) 45deg";
+          "rgb(${active-border-color.a}) rgb(${active-border-color.b}) rgb(${active-border-color.c}) 45deg";
         "col.inactive_border" = lib.mkForce "rgb(${inactive-border-color})";
 
         layout = "dwindle";
@@ -151,15 +146,6 @@ in {
         "ignorezero, rofi"
         "blur, wlogout"
       ];
-    };
-  };
-
-  xdg = {
-    autostart.enable = true;
-    portal = {
-      enable = true;
-      config = { common.default = "*"; };
-      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     };
   };
 }
