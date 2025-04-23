@@ -1,5 +1,10 @@
-{ pkgs, config, ... }: 
-{
+{ pkgs, config, ... }:
+let 
+  desktop-monitors = { # Change multi-monitor desktop setup here
+    DP-2 = [ 1 2 3 4 ]; 
+    DP-3 = [ 5 6 7 8 ]; 
+  };
+in {
   imports = [ ./style.nix ];
 
   programs.waybar = {
@@ -32,10 +37,9 @@
         };
 
         "hyprland/workspaces" = {
-          persistent-workspaces = if (config.var.configName == "desktop") then {
-            DP-2 = [ 1 2 3 4 ];
-            DP-1 = [ 5 6 7 8 ];
-          } else {
+          persistent-workspaces = if (config.var.configName == "desktop") then 
+            desktop-monitors 
+          else {
             eDP-1 = [ 1 2 3 4 ];
           };
           on-click = "activate";
