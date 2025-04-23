@@ -4,7 +4,6 @@
 
     # Mostly system related configuration
     ../../modules/nixos/audio.nix
-    ../../modules/nixos/bluetooth.nix
     ../../modules/nixos/boot.nix
     ../../modules/nixos/home-manager.nix
     ../../modules/nixos/nix.nix
