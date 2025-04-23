@@ -1,8 +1,8 @@
 { pkgs, config, ... }:
-let 
+let
   desktop-monitors = { # Change multi-monitor desktop setup here
-    DP-2 = [ 1 2 3 4 ]; 
-    DP-3 = [ 5 6 7 8 ]; 
+    DP-2 = [ 1 2 3 4 ];
+    DP-3 = [ 5 6 7 8 ];
   };
 in {
   imports = [ ./style.nix ];
@@ -37,8 +37,8 @@ in {
         };
 
         "hyprland/workspaces" = {
-          persistent-workspaces = if (config.var.configName == "desktop") then 
-            desktop-monitors 
+          persistent-workspaces = if (config.var.configName == "desktop") then
+            desktop-monitors
           else {
             eDP-1 = [ 1 2 3 4 ];
           };

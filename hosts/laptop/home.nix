@@ -19,7 +19,7 @@
     ../../modules/home/system/waybar
     ../../modules/home/system/wlogout
     ../../modules/home/system/zsh
-    
+
     # Scripts
     ../../modules/home/scripts/screenshot
 
