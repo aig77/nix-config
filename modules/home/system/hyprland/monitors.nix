@@ -1,7 +1,7 @@
 { config, ... }: 
 let 
-  m1 = "DP-2";
-  m2 = "DP-3";
+  m1 = "desc: ASUSTek COMPUTER INC XG27AQMR SALMTF054549";
+  m2 = "desc: LG Electronics LG ULTRAGEAR 107NTZN78013";
 in 
 {
   #wayland.windowManager.hyprland = {
@@ -12,8 +12,8 @@ in
     if (config.var.configName == "desktop") then {
       settings = {
         monitor = [
-          "${m1}, 2560x1440@300, 0x0, 1, bitdepth, 10"
-          "${m2}, 2560x1440@144, 2560x0, 1, bitdepth, 10"
+          "${m1}, highres@highrr, 0x0, 1, bitdepth, 10"
+          "${m2}, highres@highrr, 2560x0, 1, bitdepth, 10"
         ];
 
         workspace = [
