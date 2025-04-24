@@ -7,6 +7,7 @@
     ../../modules/home/programs/git
     ../../modules/home/programs/kitty
     ../../modules/home/programs/lazygit
+    ../../modules/home/programs/shell
     ../../modules/home/programs/spicetify
     ../../modules/home/programs/thunar
     ../../modules/home/programs/vim
@@ -18,7 +19,6 @@
     ../../modules/home/system/rofi
     ../../modules/home/system/waybar
     ../../modules/home/system/wlogout
-    ../../modules/home/system/zsh
 
     # Scripts
     ../../modules/home/scripts/screenshot
