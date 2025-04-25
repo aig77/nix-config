@@ -19,6 +19,11 @@
       email = "";
     };
 
+    monitors = {
+      main = "ASUSTek COMPUTER INC XG27AQMR SALMTF054549";
+      secondary = "LG Electronics LG ULTRAGEAR 107NTZN78013";
+    };
+
     terminal = "ghostty";
     launcher = "rofi -show drun";
     lock = "hyprlock";

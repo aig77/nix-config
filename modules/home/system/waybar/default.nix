@@ -1,8 +1,8 @@
 { pkgs, config, ... }:
 let
   desktop-monitors = { # Change multi-monitor desktop setup here
-    DP-2 = [ 1 2 3 4 ];
-    DP-3 = [ 5 6 7 8 ];
+    DP-1 = [ 1 2 3 4 ];
+    DP-2 = [ 5 6 7 8 ];
   };
 in {
   imports = [ ./style.nix ];

@@ -3,10 +3,7 @@ let
   m1 = "desc: ASUSTek COMPUTER INC XG27AQMR SALMTF054549";
   m2 = "desc: LG Electronics LG ULTRAGEAR 107NTZN78013";
 in {
-  #wayland.windowManager.hyprland = {
-  #  settings = { monitor = [ ",preferred,auto,auto" ]; };
-  #};
-
+  
   wayland.windowManager.hyprland =
     if (config.var.configName == "desktop") then {
       settings = {
