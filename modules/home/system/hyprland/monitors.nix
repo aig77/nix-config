@@ -13,12 +13,12 @@ in {
         ];
 
         workspace = [
-          "1, monitor:${m1}"
+          "1, monitor:${m1}, default:true"
           "2, monitor:${m1}"
           "3, monitor:${m1}"
           "4, monitor:${m1}"
 
-          "5, monitor:${m2}"
+          "5, monitor:${m2}, default:true"
           "6, monitor:${m2}"
           "7, monitor:${m2}"
           "8, monitor:${m2}"
