@@ -36,7 +36,6 @@
       unzip
       xz
       btop
-      krabby
       mission-center
       feh
       vlc

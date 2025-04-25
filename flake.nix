@@ -30,11 +30,11 @@
       pkgs-stable = nixpkgs-stable.legacyPackages.${system};
     in {
       nixosConfigurations = {
-        laptop = nixpkgs.lib.nixosSystem {
+        thinkpad = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [
-            ./hosts/laptop/configuration.nix # CHANGEME: change the path to match your host folder
+            ./hosts/thinkpad/configuration.nix # CHANGEME: change the path to match your host folder
             inputs.home-manager.nixosModules.home-manager
             inputs.stylix.nixosModules.stylix
           ];
