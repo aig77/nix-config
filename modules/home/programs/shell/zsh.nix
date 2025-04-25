@@ -10,6 +10,10 @@
       rs = "sudo nixos-rebuild switch";
       rsf = "sudo nixos-rebuild switch --flake";
       rtf = "sudo nixos-rebuild test --flake";
+      cd = "z";
+      ls = "eza --icons=always --no-quotes";
+      tree = "eza --icons=always --tree --no-quotes";
+      cat = "bat --theme=base16 --color=always --wrap=never";
     };
 
     history = {
@@ -71,6 +75,10 @@
   };
 
   home.packages = with pkgs; [ 
+    bat 
+    eza
+    ripgrep
+    krabby # for pokemon sprites
     zsh-fzf-tab
   ];
 }
