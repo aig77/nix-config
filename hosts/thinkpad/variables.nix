@@ -12,7 +12,7 @@
     hostname = "nixos";
     username = "arturo";
     configDirectory = "/home/" + config.var.username + "/nix";
-    configName = "laptop";
+    configName = "thinkpad";
 
     git = {
       username = "aig77";
