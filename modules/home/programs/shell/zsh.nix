@@ -71,6 +71,6 @@
   };
 
   home.packages = with pkgs; [ 
-    #zsh-fzf-tab
+    zsh-fzf-tab
   ];
 }
