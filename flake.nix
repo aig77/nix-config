@@ -4,8 +4,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/release-24.11";
-    hyprland.url = "github:hyprwm/Hyprland";
     stylix.url = "github:danth/stylix";
+    hyprland.url = "github:hyprwm/Hyprland";
     nixcord.url = "github:kaylorben/nixcord";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     home-manager = {
@@ -24,12 +24,12 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
   };
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-stable, ... }:
     let
       system = "x86_64-linux";
-      aarch = "aarch64-darwin";
       pkgs = nixpkgs.legacyPackages.${system};
       pkgs-stable = nixpkgs-stable.legacyPackages.${system};
     in {
@@ -54,17 +54,19 @@
       };
       
       darwinConfigurations.macbook = inputs.nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin"; 
-        specialArgs = { inherit inputs; };
+        system = "aarch64-darwin";
+        pkgs = import nixpkgs {
+          system = "aarch64-darwin";
+          config.allowUnfree = true;
+          config.allowBroken = true;
+        };
         modules = [
           ./hosts/macbook/configuration.nix # CHANGEME: change the path to match your host folder
           inputs.home-manager.darwinModules.home-manager
           inputs.stylix.darwinModules.stylix
+          inputs.nix-homebrew.darwinModules.nix-homebrew
         ];
       };      
-      
-      # Expose the package set, including overlays, for convenience.
-      darwinPackages = self.darwinConfigurations.macbook.pkgs;
       
       # for `nix fmt`
       formatter.${system} = pkgs.nixfmt;
