@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -28,10 +28,9 @@
       ignoreSpace = true;
     };
 
-    initExtraFirst =
-      "krabby name umbreon -s --no-title | fastfetch --file-raw -";
-
-    initExtra = ''
+    initContent = lib.mkBefore ''
+      krabby name umbreon -s --no-title | fastfetch --file-raw -
+      
       # Keybindings
       bindkey -e
       bindkey '^p' history-search-backward
