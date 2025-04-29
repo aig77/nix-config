@@ -1,8 +1,9 @@
 { pkgs, inputs, ... }: {
   imports = [
     # Programs
+    #../../modules/home/programs/discord
     ../../modules/home/programs/fetch
-    #../../modules/home/programs/ghostty # doesnt work
+    ../../modules/home/programs/ghostty/macbook.nix # installed using homebrew
     ../../modules/home/programs/git
     ../../modules/home/programs/kitty
     ../../modules/home/programs/lazygit
@@ -22,9 +23,10 @@
       xz
       btop
       discord-canary
+      spotify
       nixd
       
-      # doesnt work on aarch yet
+      # doesnt work on aarch yet, installed with homebrew
       #inputs.zen-browser.packages.${system}.default 
 
       # backups
@@ -47,15 +49,4 @@
   
   # Let home manager install and manage itself
   programs.home-manager.enable = true;
-
-  programs.ghostty = { 
-    enable = true;
-    package = null;
-    enableZshIntegration = true;
-    settings = {
-      window-padding-x = 10;
-      window-padding-balance = true; 
-    };
-  };
-
 }
