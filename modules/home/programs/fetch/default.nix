@@ -1,1 +1,1 @@
-{ imports = [ ./fastfetch ]; }
+{imports = [./fastfetch];}

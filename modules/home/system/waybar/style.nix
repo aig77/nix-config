@@ -1,5 +1,9 @@
-{ lib, config, ... }:
-let scheme = config.lib.stylix.colors.withHashtag;
+{
+  lib,
+  config,
+  ...
+}: let
+  scheme = config.lib.stylix.colors.withHashtag;
 in {
   programs.waybar.style = lib.mkForce ''
     @define-color background ${scheme.base06};

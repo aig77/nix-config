@@ -1,11 +1,15 @@
-{ pkgs, config, ... }:
-let
-  desktop-monitors = { # Change multi-monitor desktop setup here
-    DP-1 = [ 1 2 3 4 ];
-    DP-2 = [ 5 6 7 8 ];
+{
+  pkgs,
+  config,
+  ...
+}: let
+  desktop-monitors = {
+    # Change multi-monitor desktop setup here
+    DP-1 = [1 2 3 4];
+    DP-2 = [5 6 7 8];
   };
 in {
-  imports = [ ./style.nix ];
+  imports = [./style.nix];
 
   programs.waybar = {
     enable = true;
@@ -14,34 +18,38 @@ in {
         layer = "top";
         reload_style_on_change = true;
 
-        modules-left = [ "group/navigation" ];
+        modules-left = ["group/navigation"];
 
-        modules-center = [ ];
+        modules-center = [];
 
-        modules-right = if (config.var.configName == "desktop") then [
-          "clock"
-          "group/hardware"
-          "wireplumber"
-          "custom/exit"
-        ] else [
-          "clock"
-          "group/hardware"
-          "group/systray"
-          "wireplumber"
-          "custom/exit"
-        ];
+        modules-right =
+          if (config.var.configName == "desktop")
+          then [
+            "clock"
+            "group/hardware"
+            "wireplumber"
+            "custom/exit"
+          ]
+          else [
+            "clock"
+            "group/hardware"
+            "group/systray"
+            "wireplumber"
+            "custom/exit"
+          ];
 
         "group/navigation" = {
           orientation = "horizontal";
-          modules = [ "hyprland/workspaces" "hyprland/window" ];
+          modules = ["hyprland/workspaces" "hyprland/window"];
         };
 
         "hyprland/workspaces" = {
-          persistent-workspaces = if (config.var.configName == "desktop") then
-            desktop-monitors
-          else {
-            eDP-1 = [ 1 2 3 4 ];
-          };
+          persistent-workspaces =
+            if (config.var.configName == "desktop")
+            then desktop-monitors
+            else {
+              eDP-1 = [1 2 3 4];
+            };
           on-click = "activate";
           sort-by-number = true;
           format = "{icon}";
@@ -106,10 +114,10 @@ in {
 
         "group/hardware" = {
           orientation = "horizontal";
-          modules = [ "disk" "cpu" "memory" ];
+          modules = ["disk" "cpu" "memory"];
         };
 
-        "disk" = { format = "{percentage_used}% 󰨣 /"; };
+        "disk" = {format = "{percentage_used}% 󰨣 /";};
 
         "cpu" = {
           format = "{usage}%  /";
@@ -123,7 +131,7 @@ in {
 
         "group/systray" = {
           orientation = "horizontal";
-          modules = [ "network" "bluetooth" "battery" ];
+          modules = ["network" "bluetooth" "battery"];
         };
 
         "network" = {
@@ -132,7 +140,7 @@ in {
           format-wifi = "{icon}";
           format-ethernet = "󰈁";
           format-disconnected = "󰤭"; # An empty format will hide the module.
-          format-icons = [ "󰤯" "󰤟" "󰤢" "󰤥" "󰤨" ];
+          format-icons = ["󰤯" "󰤟" "󰤢" "󰤥" "󰤨"];
           tooltip-format = "{ifname} via {gwaddr} 󰊗";
           tooltip-format-wifi = "{essid} ({signalStrength}%) ";
           tooltip-format-ethernet = "{ifname} ";
@@ -147,16 +155,13 @@ in {
           format = "";
           format-disabled = "󰂲"; # an empty format will hide the module
           format-connected = "";
-          tooltip-format =
-            "{controller_alias}	{controller_address}	{num_connections} connected";
+          tooltip-format = "{controller_alias}	{controller_address}	{num_connections} connected";
           tooltip-format-connected = ''
             {controller_alias}	{controller_address}
 
             {device_enumerate}'';
-          tooltip-format-enumerate-connected =
-            "{device_alias}	{device_address}";
-          tooltip-format-enumerate-connected-battery =
-            "{device_alias}	{device_address}	{device_battery_percentage}%";
+          tooltip-format-enumerate-connected = "{device_alias}	{device_address}";
+          tooltip-format-enumerate-connected-battery = "{device_alias}	{device_address}	{device_battery_percentage}%";
           on-click = "blueman-manager";
         };
 
@@ -167,7 +172,7 @@ in {
             critical = 15;
           };
           format = "{icon}";
-          format-icons = [ "" "" "" "" "" ];
+          format-icons = ["" "" "" "" ""];
           format-charging = "";
           format-full = "";
           tooltip = true;
@@ -181,7 +186,7 @@ in {
           scroll-step = 5.0;
           on-click = "pavucontrol";
           on-click-right = "qpwgraph";
-          format-icons = [ "" "" "" ];
+          format-icons = ["" "" ""];
         };
 
         "custom/exit" = {

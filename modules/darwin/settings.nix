@@ -1,11 +1,16 @@
-{ config, inputs, pkgs, ... }: {
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}: {
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
   system.stateVersion = 5;
-  
+
   #Set Git commit hash for darwin-version.
   #system.configurationRevision = self.rev or self.dirtyRev or null;
-    
+
   # The platform the configuration will be used on
   nixpkgs.hostPlatform = "aarch64-darwin";
 
@@ -16,11 +21,11 @@
 
   # nixpkgs config is outside of darwin scope
   nixpkgs.config.allowUnfree = true;
-  
+
   nix = {
-    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+    nixPath = ["nixpkgs=${inputs.nixpkgs}"];
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = ["nix-command" "flakes"];
       substituters = [
         "https://cache.nixos.org"
         "https://nix-community.cachix.org"
@@ -30,11 +35,11 @@
       ];
     };
   };
-  
+
   environment = {
-    systemPackages = with pkgs; [ coreutils ];
-    systemPath = [ "/usr/local/bin" ];
-    pathsToLink = [ "/Applications" ];
+    systemPackages = with pkgs; [coreutils];
+    systemPath = ["/usr/local/bin"];
+    pathsToLink = ["/Applications"];
   };
 
   system.keyboard = {

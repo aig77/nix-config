@@ -1,5 +1,8 @@
-{ lib, config, ... }:
-let
+{
+  lib,
+  config,
+  ...
+}: let
   colors = config.lib.stylix.colors;
   background = "rgb(${colors.base00})";
   foreground = "rgb(${colors.base06})";
@@ -37,8 +40,7 @@ in {
         font_color = foreground;
         fade_on_empty = true;
         fade_timeout = 1000; # Milliseconds before fade_on_empty is triggered.
-        placeholder_text =
-          "<i>🔒Password...</i>"; # Text rendered in the input box when it's empty.
+        placeholder_text = "<i>🔒Password...</i>"; # Text rendered in the input box when it's empty.
         hide_input = false;
         rounding = -1; # -1 means complete rounding (circle/oval)
         check_color = blue;

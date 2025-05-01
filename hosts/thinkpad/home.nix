@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   imports = [
     # Programs
     ../../modules/home/programs/discord
@@ -56,7 +56,7 @@
       WALLPAPERS = "$HOME/Pictures/Wallpapers";
     };
 
-    file = { };
+    file = {};
 
     # https://nixos.wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "24.05";

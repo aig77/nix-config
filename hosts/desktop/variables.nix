@@ -1,10 +1,15 @@
-{ pkgs, config, lib, ... }: {
-  imports = [ ../../themes ];
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: {
+  imports = [../../themes];
 
   options = {
     var = lib.mkOption {
       type = lib.types.attrs;
-      default = { };
+      default = {};
     };
   };
 

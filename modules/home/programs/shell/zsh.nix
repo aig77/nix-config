@@ -1,4 +1,8 @@
-{ pkgs, lib, ... }: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -30,7 +34,7 @@
 
     initContent = lib.mkBefore ''
       krabby name umbreon -s --no-title | fastfetch --file-raw -
-      
+
       # Keybindings
       bindkey -e
       bindkey '^p' history-search-backward
@@ -69,12 +73,12 @@
       {
         name = "fzf-tab";
         src = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
-      } 
+      }
     ];
   };
 
-  home.packages = with pkgs; [ 
-    bat 
+  home.packages = with pkgs; [
+    bat
     eza
     ripgrep
     krabby # for pokemon sprites

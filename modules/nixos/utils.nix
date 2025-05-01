@@ -1,4 +1,8 @@
-{ pkgs, config, ... }: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   networking.hostName = "nixos";
   #networking.wireless.enable = true;
 

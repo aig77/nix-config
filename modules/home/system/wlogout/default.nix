@@ -1,5 +1,4 @@
-{ config, ... }:
-let
+{config, ...}: let
   colors = config.lib.stylix.colors.withHashtag;
   backgrounddark = colors.base00;
   backgroundlight = colors.base06;
