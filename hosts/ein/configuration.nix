@@ -1,8 +1,7 @@
-{ pkgs, config, ... }: {
+{ inputs,  ... }: {
   imports = [
     ../../modules/darwin
     ../../modules/nixos/home-manager.nix
-
     ./variables.nix
   ];
   

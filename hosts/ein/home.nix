@@ -31,7 +31,7 @@
 
       # backups
       brave
-      vscodium
+      #vscodium
       zed-editor
     ];
 

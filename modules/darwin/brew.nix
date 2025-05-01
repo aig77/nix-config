@@ -19,5 +19,9 @@
       "zen-browser"
     ];
 
+    masApps = {
+    #  XCode = 497799835;
+    };
+
   };
 }

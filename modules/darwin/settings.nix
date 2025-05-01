@@ -13,6 +13,9 @@
   nix.enable = false;
 
   users.users.arturo.home = "/Users/${config.var.username}";
+
+  # nixpkgs config is outside of darwin scope
+  nixpkgs.config.allowUnfree = true;
   
   nix = {
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
