@@ -1,4 +1,4 @@
-{ config, ... }: {
+{config, ...}: {
   #nix-homebrew = {
   #  enable = true;
   #  user = config.var.username;
@@ -8,9 +8,9 @@
   homebrew = {
     enable = true;
     onActivation.upgrade = true;
-    
+
     extraConfig = ''
-     cask_args appdir: "~/Applications"
+      cask_args appdir: "~/Applications"
     '';
 
     casks = [
@@ -20,8 +20,7 @@
     ];
 
     masApps = {
-    #  XCode = 497799835;
+      #  XCode = 497799835;
     };
-
   };
 }

@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   stylix = {
     enable = true;
     image = ./tokyo-night-cat.jpeg;

@@ -1,7 +1,7 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   programs.vim = {
     enable = true;
-    plugins = with pkgs.vimPlugins; [ vim-airline vim-sensible ];
+    plugins = with pkgs.vimPlugins; [vim-airline vim-sensible];
     settings = {
       ignorecase = true;
       history = 1000;

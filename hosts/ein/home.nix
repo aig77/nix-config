@@ -1,4 +1,8 @@
-{ pkgs, inputs, ... }: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     # Programs
     #../../modules/home/programs/discord
@@ -25,9 +29,9 @@
       discord-canary
       spotify
       nixd
-      
+
       # doesnt work on aarch yet, installed with homebrew
-      #inputs.zen-browser.packages.${system}.default 
+      #inputs.zen-browser.packages.${system}.default
 
       # backups
       brave
@@ -40,13 +44,12 @@
       WALLPAPERS = "$HOME/Pictures/Wallpapers";
     };
 
-    file = { };
+    file = {};
 
-    
     # https://nixos.wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "24.11";
   };
-  
+
   # Let home manager install and manage itself
   programs.home-manager.enable = true;
 }

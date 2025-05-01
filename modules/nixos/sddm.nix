@@ -1,5 +1,9 @@
-{ pkgs, config, inputs, ... }:
-let
+{
+  pkgs,
+  config,
+  inputs,
+  ...
+}: let
   sddm-astronaut = pkgs.sddm-astronaut.override {
     themeConfig = {
       Background = config.stylix.image;
@@ -11,17 +15,17 @@ in {
     sddm = {
       enable = true;
       package = pkgs.kdePackages.sddm;
-      extraPackages = [ sddm-astronaut ];
+      extraPackages = [sddm-astronaut];
       theme = "sddm-astronaut-theme";
       wayland.enable = true;
       settings = {
         Wayland.SessionDir = "${
-            inputs.hyprland.packages."${pkgs.system}".hyprland
-          }/share/wayland-sessions";
+          inputs.hyprland.packages."${pkgs.system}".hyprland
+        }/share/wayland-sessions";
       };
     };
   };
-  environment.systemPackages = [ sddm-astronaut ];
+  environment.systemPackages = [sddm-astronaut];
 
   # To prevent getting stuck at shutdown
   systemd.extraConfig = "DefaultTimeoutStopSec=10s";

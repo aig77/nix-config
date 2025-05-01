@@ -1,3 +1,3 @@
-{ pkgs, ... }: {
-  home.packages = with pkgs; [ xfce.thunar ];
+{pkgs, ...}: {
+  home.packages = with pkgs; [xfce.thunar];
 }

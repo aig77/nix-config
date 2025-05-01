@@ -1,1 +1,1 @@
-{ pkgs, ... }: { home.packages = with pkgs; [ hyprshot slurp grim grimblast ]; }
+{pkgs, ...}: {home.packages = with pkgs; [hyprshot slurp grim grimblast];}

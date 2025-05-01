@@ -1,10 +1,15 @@
-{ pkgs, config, lib, ... }: {
-  imports = [ ../../themes/macbook.nix ];
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: {
+  imports = [../../themes/macbook.nix];
 
   options = {
     var = lib.mkOption {
       type = lib.types.attrs;
-      default = { };
+      default = {};
     };
   };
 

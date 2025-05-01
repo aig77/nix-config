@@ -1,4 +1,4 @@
-{ config, ... }: {
+{config, ...}: {
   wayland.windowManager.hyprland.settings = {
     bind = [
       # Shortcuts
@@ -44,6 +44,6 @@
       "SUPER, mouse_up, workspace, e-1"
     ];
 
-    bindm = [ "SUPER, mouse:272, movewindow" "SUPER, mouse:273, resizewindow" ];
+    bindm = ["SUPER, mouse:272, movewindow" "SUPER, mouse:273, resizewindow"];
   };
 }

@@ -1,5 +1,10 @@
-{ pkgs, lib, config, inputs, ... }:
-let
+{
+  pkgs,
+  lib,
+  config,
+  inputs,
+  ...
+}: let
   colors = config.lib.stylix.colors;
   active-border-color = {
     a = colors.base0C;
@@ -8,8 +13,7 @@ let
   };
   inactive-border-color = colors.base03;
 in {
-  imports =
-    [ ./keybinds.nix ./monitors.nix ./polkitagent.nix ../hyprlock ../hypridle ];
+  imports = [./keybinds.nix ./monitors.nix ./polkitagent.nix ../hyprlock ../hypridle];
 
   home.packages = with pkgs; [
     qt5.qtwayland
@@ -66,7 +70,8 @@ in {
         gaps_in = 5;
         gaps_out = 20;
         border_size = 2;
-        "col.active_border" = lib.mkForce
+        "col.active_border" =
+          lib.mkForce
           "rgb(${active-border-color.a}) rgb(${active-border-color.b}) rgb(${active-border-color.c}) 45deg";
         "col.inactive_border" = lib.mkForce "rgb(${inactive-border-color})";
 

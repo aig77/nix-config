@@ -1,4 +1,4 @@
-{ config, ... }: {
+{config, ...}: {
   imports = [
     ../../modules/nixos/nvidia.nix
     ../../modules/nixos/hyprland.nix

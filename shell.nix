@@ -16,7 +16,7 @@
   code = pkgs.mkShell {
     packages = with pkgs; [
       # Python
-      (python3.withPackages (p: with p; [ numpy requests pandas ]))
+      (python3.withPackages (p: with p; [numpy requests pandas]))
 
       # Rust
       rustc

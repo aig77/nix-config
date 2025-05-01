@@ -1,11 +1,10 @@
-{ config, ... }:
-let
+{config, ...}: let
   m1 = "desc: ASUSTek COMPUTER INC XG27AQMR SALMTF054549";
   m2 = "desc: LG Electronics LG ULTRAGEAR 107NTZN78013";
 in {
-  
   wayland.windowManager.hyprland =
-    if (config.var.configName == "desktop") then {
+    if (config.var.configName == "desktop")
+    then {
       settings = {
         monitor = [
           "${m1}, highres@highrr, 0x0, 1, bitdepth, 10"
@@ -24,7 +23,8 @@ in {
           "8, monitor:${m2}"
         ];
       };
-    } else {
-      settings = { monitor = [ ",preferred,auto,auto" ]; };
+    }
+    else {
+      settings = {monitor = [",preferred,auto,auto"];};
     };
 }
