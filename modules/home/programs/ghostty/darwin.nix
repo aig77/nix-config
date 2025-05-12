@@ -1,4 +1,4 @@
-# temporary while theres a ghostty bug in new version?
+# darwin package has issue: https://github.com/NixOS/nixpkgs/issues/388984
 {
   programs.ghostty = {
     enable = true;

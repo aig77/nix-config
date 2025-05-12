@@ -7,7 +7,7 @@
     # Programs
     #../../modules/home/programs/discord
     ../../modules/home/programs/fetch
-    ../../modules/home/programs/ghostty/macbook.nix # installed using homebrew
+    ../../modules/home/programs/ghostty/darwin.nix # installed using homebrew
     ../../modules/home/programs/git
     ../../modules/home/programs/kitty
     ../../modules/home/programs/lazygit
