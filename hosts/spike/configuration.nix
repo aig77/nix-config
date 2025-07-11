@@ -15,12 +15,12 @@
     ../../modules/nixos/nvidia.nix
     ../../modules/nixos/gaming.nix
 
-    ../../themes/onedark.nix
+    ../../themes/onedark-linux.nix
     ./hardware-configuration.nix
     ./variables.nix
   ];
 
-  home-manager.users.arturo = import ./home.nix;
+  home-manager.users.${config.var.username} = import ./home.nix;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

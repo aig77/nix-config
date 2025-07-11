@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-parts.url = "github:hercules-ci/flake-parts";
     hyprland.url = "github:hyprwm/Hyprland";
     stylix.url = "github:danth/stylix";
     rust-overlay.url = "github:oxalica/rust-overlay";
@@ -40,7 +40,7 @@
   outputs = inputs @ {
     self,
     nixpkgs,
-    flake-utils,
+    flake-parts,
     home-manager,
     stylix,
     hyprpanel,
@@ -50,22 +50,27 @@
     rust-overlay,
     ...
   }: let
+    systems = [ "x86_64-linux" "aarch64-darwin" ];
     commonOverlays = [rust-overlay.overlays.default];
   in
-    flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-        overlays = commonOverlays;
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      inherit systems;
+
+      perSystem = { system, ...}: let
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+          overlays = commonOverlays;
+        };
+        treefmtEval = treefmt-nix.lib.evalModule pkgs ./tools/treefmt.nix;
+      in {
+        formatter = treefmtEval.config.build.wrapper;
+        checks.formatting = treefmtEval.config.build.check self;
+        devShells.default = import ./shell.nix { inherit pkgs; };
       };
-      treefmtEval = treefmt-nix.lib.evalModule pkgs ./tools/treefmt.nix;
-    in {
-      formatter = treefmtEval.config.build.wrapper;
-      checks.formatting = treefmtEval.config.build.check self;
-      devShells = import ./shell.nix {inherit pkgs;};
-    })
-    // {
-      nixosConfigurations = {
+
+      flake = {
+        nixosConfigurations = {
         thinkpad = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = {inherit inputs;};
@@ -100,4 +105,5 @@
         };
       };
     };
+  };
 }
