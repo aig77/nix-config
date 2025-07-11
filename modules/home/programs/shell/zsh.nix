@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }: {
   programs.zsh = {
@@ -33,7 +34,7 @@
     };
 
     initContent = lib.mkBefore ''
-      krabby name umbreon -s --no-title | fastfetch --file-raw -
+      krabby name ${config.var.pokemonSprite} --no-title | fastfetch --file-raw -
 
       # Keybindings
       bindkey -e
@@ -63,6 +64,9 @@
       zstyle ':fzf-tab:*' use-fzf-default-opts yes
       # switch group using `<` and `>`
       zstyle ':fzf-tab:*' switch-group '<' '>'
+
+      # direnv setup
+      eval "$(direnv hook zsh)"
     '';
 
     plugins = [

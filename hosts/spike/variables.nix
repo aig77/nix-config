@@ -4,8 +4,6 @@
   lib,
   ...
 }: {
-  imports = [../../themes];
-
   options = {
     var = lib.mkOption {
       type = lib.types.attrs;
@@ -13,11 +11,14 @@
     };
   };
 
-  config.var = {
-    hostname = "nixos";
+  config.var = let
     username = "arturo";
-    configDirectory = "/home/" + config.var.username + "./config/nix";
-    configName = "desktop";
+    hostname = "spike";
+    configPath = "/home/${username}/.config/nix-config";
+  in {
+    inherit username hostname configPath;
+    profileImagePath = configPath + "/themes/profilepics/ein.jpg";
+    pokemonSprite = "umbreon -s";
 
     git = {
       username = "aig77";
@@ -31,8 +32,6 @@
 
     terminal = "ghostty";
     launcher = "rofi -show drun";
-    lock = "hyprlock";
-    logout = "wlogout";
     browser = "zen";
     file-manager = "thunar";
   };

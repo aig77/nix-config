@@ -1,9 +1,10 @@
 {config, ...}: let
-  m1 = "desc: ASUSTek COMPUTER INC XG27AQMR SALMTF054549";
-  m2 = "desc: LG Electronics LG ULTRAGEAR 107NTZN78013";
+  host = config.var.hostname;
+  m1 = "desc: ${config.var.monitors.main}";
+  m2 = "desc: ${config.var.monitors.secondary}";
 in {
   wayland.windowManager.hyprland =
-    if (config.var.configName == "desktop")
+    if (host == "spike")
     then {
       settings = {
         monitor = [
