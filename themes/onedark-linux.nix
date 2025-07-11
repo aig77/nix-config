@@ -1,14 +1,13 @@
-{
-  pkgs,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   stylix = {
     enable = true;
+    polarity = "dark";
+
     image = pkgs.fetchurl {
       url = "https://raw.githubusercontent.com/Narmis-E/onedark-wallpapers/main/misc/od_neon_warm.png";
       sha256 = "sha256-nVyujlMFdeDkqYNFp+2I1BUei9/pf+N9IBGezhZ2VWU=";
     };
+
     base16Scheme = "${pkgs.base16-schemes}/share/themes/onedark.yaml";
 
     cursor = {
@@ -52,7 +51,5 @@
     #  terminal = 0.9;
     #  popups = 0.9;
     #};
-
-    polarity = "dark";
   };
 }

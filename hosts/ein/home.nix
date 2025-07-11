@@ -1,11 +1,11 @@
 {
   pkgs,
   inputs,
+  config,
   ...
 }: {
   imports = [
     # Programs
-    #../../modules/home/programs/discord
     ../../modules/home/programs/fetch
     ../../modules/home/programs/ghostty/darwin.nix # installed using homebrew
     ../../modules/home/programs/git
@@ -18,8 +18,8 @@
   ];
 
   home = {
-    username = "arturo";
-    homeDirectory = "/Users/arturo";
+    username = config.var.username;
+    homeDirectory = "/Users/" + config.var.username;
 
     packages = with pkgs; [
       zip
@@ -42,6 +42,7 @@
     sessionVariables = {
       # EDITOR = "nvim";
       WALLPAPERS = "$HOME/Pictures/Wallpapers";
+      NIX_CONFIG_PATH = config.var.configPath;
     };
 
     file = {};

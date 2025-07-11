@@ -7,12 +7,6 @@
 
     base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
 
-    cursor = {
-      name = "Bibata-Modern-Ice";
-      package = pkgs.bibata-cursors;
-      size = 22;
-    };
-
     fonts = {
       monospace = {
         package = pkgs.nerd-fonts.jetbrains-mono;
@@ -41,12 +35,5 @@
         popups = 10;
       };
     };
-
-    #opacity = {
-    #  applications = 0.9;
-    #  desktop = 0.9;
-    #  terminal = 0.9;
-    #  popups = 0.9;
-    #};
   };
 }
