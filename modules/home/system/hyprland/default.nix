@@ -35,10 +35,9 @@ in {
 
     settings = {
       exec-once = [
-        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "dbus-update-activation-environment --systemd --all"
         "hypridle"
-        "waybar"
-        #"xwaylandvideobridge &"
+        "xwaylandvideobridge"
       ];
 
       env = [
@@ -150,6 +149,11 @@ in {
         "dimaround, rofi"
         "ignorezero, rofi"
         "blur, wlogout"
+
+        # hyprpanel
+        "blur, bar-0"
+        "blur, bar-1"
+        "blur, bar-3"
       ];
     };
   };

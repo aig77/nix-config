@@ -5,13 +5,13 @@
       "SUPER, RETURN, exec, ${config.var.terminal}"
       "SUPER, SPACE, exec, ${config.var.launcher}"
       "SUPER, E, exec, ${config.var.file-manager}"
-      "SUPER Control, Q, exec, ${config.var.lock}"
-      "SUPER, X, exec, ${config.var.logout}"
       "SUPER, I, exec, ${config.var.browser}"
+      "SUPER SHIFT, L, exec, ${config.var.lock}"
+      #"SUPER, X, exec, ${config.var.logout}"
 
       # Hypr binds
       "SUPER, W, killactive"
-      #"SUPER SHIFT, Q, exit"
+      "SUPER SHIFT, Q, exit"
       "SUPER, T, togglefloating"
       "SUPER, P, pseudo"
       "SUPER, O, togglesplit"

@@ -8,7 +8,9 @@
   modulesPath,
   ...
 }: {
-  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
 
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod"];
   boot.initrd.kernelModules = [];
@@ -16,12 +18,25 @@
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/89bdce14-2544-4685-a245-49a6256fbdd2";
+    device = "/dev/disk/by-uuid/362606b0-ed33-4b33-92f3-f7190888d729";
     fsType = "btrfs";
+    options = ["subvol=@"];
+  };
+
+  fileSystems."/nix" = {
+    device = "/dev/disk/by-uuid/362606b0-ed33-4b33-92f3-f7190888d729";
+    fsType = "btrfs";
+    options = ["subvol=@nix"];
+  };
+
+  fileSystems."/home" = {
+    device = "/dev/disk/by-uuid/362606b0-ed33-4b33-92f3-f7190888d729";
+    fsType = "btrfs";
+    options = ["subvol=@home"];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/755A-E5E7";
+    device = "/dev/disk/by-uuid/6696-661F";
     fsType = "vfat";
     options = ["fmask=0022" "dmask=0022"];
   };
@@ -37,6 +52,5 @@
   # networking.interfaces.wlp9s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode =
-    lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

@@ -11,28 +11,37 @@
       gnupg
       age
     ];
-  };
-
-  code = pkgs.mkShell {
-    packages = with pkgs; [
-      # Python
-      (python3.withPackages (p: with p; [numpy requests pandas]))
-
-      # Rust
-      rustc
-      cargo
-      rust-analyzer
-      clippy
-
-      # Other
-      go
-      zig
-    ];
-
     shellHook = ''
-      exec $SHELL
+      echo "󱄅 Entered default Nix shell!"
     '';
-
-    RUST_BACKTRACE = 1;
   };
+
+  rust = pkgs.mkShell {
+    name = "rust-shell";
+    packages = with pkgs; [
+      rust-bin.stable.latest.default
+      rust-analyzer
+      cargo
+    ];
+    RUST_BACKTRACE = 1;
+    shellHook = ''
+      echo "Entered Rust shell! 🦀"
+    '';
+  };
+
+  rust-nightly = let
+    nightly-bin = pkgs.rust-bin.selectLatestNightlyWith (toolchain: toolchain.default);
+  in
+    pkgs.mkShell {
+      name = "rust-nightly-shell";
+      packages = with pkgs; [
+        nightly-bin
+        rust-analyzer
+        cargo
+      ];
+      RUST_BACKTRACE = 1;
+      shellHook = ''
+        echo "Entered Rust shell! 🦀 🌙"
+      '';
+    };
 }

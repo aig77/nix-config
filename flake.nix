@@ -3,19 +3,21 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    treefmt-nix.url = "github:numtide/treefmt-nix";
-    stylix.url = "github:danth/stylix";
-    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    flake-utils.url = "github:numtide/flake-utils";
     hyprland.url = "github:hyprwm/Hyprland";
+    stylix.url = "github:danth/stylix";
+    rust-overlay.url = "github:oxalica/rust-overlay";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
     nixcord.url = "github:kaylorben/nixcord";
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    darwin = {
-      url = "github:LnL7/nix-darwin";
+    hyprpanel = {
+      url = "github:Jas-SinghFSU/HyprPanel";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -28,64 +30,74 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
     self,
     nixpkgs,
+    flake-utils,
+    home-manager,
+    stylix,
+    hyprpanel,
     darwin,
+    nix-homebrew,
+    treefmt-nix,
+    rust-overlay,
     ...
   }: let
-    systems = ["x86_64-linux" "aarch64-darwin"];
-    forEachSystem = f: nixpkgs.lib.genAttrs systems (system: f pkgsFor.${system});
-    pkgsFor = nixpkgs.lib.genAttrs systems (
-      system:
-        import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        }
-    );
-    treefmtEval = forEachSystem (pkgs: inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix);
-  in {
-    formatter = forEachSystem (pkgs: treefmtEval.${pkgs.system}.config.build.wrapper);
-    checks = forEachSystem (pkgs: {
-      formatting = treefmtEval.${pkgs.system}.config.build.check self;
-    });
-    devShells = forEachSystem (pkgs: import ./shell.nix {inherit pkgs;});
-
-    nixosConfigurations = {
-      thinkpad = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit inputs;};
-        modules = [
-          ./hosts/thinkpad/configuration.nix
-          inputs.home-manager.nixosModules.home-manager
-          inputs.stylix.nixosModules.stylix
-        ];
+    commonOverlays = [rust-overlay.overlays.default];
+  in
+    flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+        overlays = commonOverlays;
       };
-      desktop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit inputs;};
-        modules = [
-          ./hosts/desktop/configuration.nix
-          inputs.home-manager.nixosModules.home-manager
-          inputs.stylix.nixosModules.stylix
-        ];
+      treefmtEval = treefmt-nix.lib.evalModule pkgs ./tools/treefmt.nix;
+    in {
+      formatter = treefmtEval.config.build.wrapper;
+      checks.formatting = treefmtEval.config.build.check self;
+      devShells = import ./shell.nix {inherit pkgs;};
+    })
+    // {
+      nixosConfigurations = {
+        thinkpad = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {inherit inputs;};
+          modules = [
+            home-manager.nixosModules.home-manager
+            stylix.nixosModules.stylix
+            ./hosts/thinkpad/configuration.nix
+          ];
+        };
+        spike = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {inherit inputs;};
+          modules = [
+            home-manager.nixosModules.home-manager
+            stylix.nixosModules.stylix
+            ./hosts/spike/configuration.nix
+          ];
+        };
+      };
+
+      darwinConfigurations = {
+        # macbook pro
+        ein = darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          specialArgs = {inherit inputs;};
+          modules = [
+            home-manager.darwinModules.home-manager
+            stylix.darwinModules.stylix
+            nix-homebrew.darwinModules.nix-homebrew
+            ./hosts/ein/configuration.nix
+          ];
+        };
       };
     };
-
-    darwinConfigurations = {
-      # macbook pro
-      ein = darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        specialArgs = {inherit inputs;};
-        modules = [
-          ./hosts/ein/configuration.nix
-          inputs.home-manager.darwinModules.home-manager
-          inputs.stylix.darwinModules.stylix
-          inputs.nix-homebrew.darwinModules.nix-homebrew
-        ];
-      };
-    };
-  };
 }

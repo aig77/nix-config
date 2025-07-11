@@ -1,8 +1,15 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   stylix = {
     enable = true;
-    image = ./tokyo-night-cat.jpeg;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+    image = pkgs.fetchurl {
+      url = "https://raw.githubusercontent.com/Narmis-E/onedark-wallpapers/main/misc/od_neon_warm.png";
+      sha256 = "sha256-nVyujlMFdeDkqYNFp+2I1BUei9/pf+N9IBGezhZ2VWU=";
+    };
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/onedark.yaml";
 
     cursor = {
       name = "Bibata-Modern-Ice";
@@ -39,20 +46,13 @@
       };
     };
 
-    opacity = {
-      applications = 0.9;
-      desktop = 0.9;
-      terminal = 0.9;
-      popups = 0.9;
-    };
+    #opacity = {
+    #  applications = 0.9;
+    #  desktop = 0.9;
+    #  terminal = 0.9;
+    #  popups = 0.9;
+    #};
 
     polarity = "dark";
-  };
-
-  gtk = {
-    iconTheme = {
-      name = "Papirus";
-      package = pkgs.papirus-icon-theme;
-    };
   };
 }

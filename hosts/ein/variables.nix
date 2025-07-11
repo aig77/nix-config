@@ -13,10 +13,13 @@
     };
   };
 
-  config.var = {
-    hostname = "macbook";
+  config.var = let
     username = "arturo";
-    configDirectory = "/home/" + config.var.username + "./config/nix";
+    hostname = "ein";
+    configPath = "/home/${username}/.config/nix-config";
+    {
+    inherit username hostname configPath;
+    profileImagePath = configPath + "/themes/profilepics/ein.jpg";
 
     git = {
       username = "aig77";
