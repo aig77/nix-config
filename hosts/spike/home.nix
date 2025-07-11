@@ -28,13 +28,13 @@
 
     # Scripts
     ../../modules/home/scripts/screenshot
-
+    
     ./variables.nix
   ];
 
   home = {
-    username = "arturo";
-    homeDirectory = "/home/arturo";
+    username = config.var.username;
+    homeDirectory = "/home/" + config.var.username;
 
     packages = with pkgs; [
       bitwarden
