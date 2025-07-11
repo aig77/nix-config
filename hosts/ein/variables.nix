@@ -4,8 +4,6 @@
   lib,
   ...
 }: {
-  imports = [../../themes/macbook.nix];
-
   options = {
     var = lib.mkOption {
       type = lib.types.attrs;
@@ -17,9 +15,10 @@
     username = "arturo";
     hostname = "ein";
     configPath = "/home/${username}/.config/nix-config";
-    {
+  in {
     inherit username hostname configPath;
     profileImagePath = configPath + "/themes/profilepics/ein.jpg";
+    pokemonSprite = "umbreon -s";
 
     git = {
       username = "aig77";

@@ -5,7 +5,6 @@
 }: {
   imports = [
     # Programs
-    ../../modules/home/programs/direnv
     #../../modules/home/programs/discord
     ../../modules/home/programs/fetch
     ../../modules/home/programs/ghostty
