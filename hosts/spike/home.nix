@@ -49,6 +49,8 @@
       pavucontrol
       qpwgraph
       discord-canary
+      lmstudio
+      ollama-cuda
       nixd
 
       # backups
@@ -60,7 +62,6 @@
     sessionVariables = {
       # EDITOR = "nvim";
       WALLPAPERS = "$HOME/Pictures/Wallpapers";
-      NIX_CONFIG_PATH = config.var.configPath;
     };
 
     file = {};

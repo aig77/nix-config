@@ -3,7 +3,7 @@
     ./direnv.nix
     ./fzf.nix
     ./starship.nix
-    ./zellij.nix
+    ./tmux.nix
     ./zoxide.nix
     ./zsh.nix
   ];
