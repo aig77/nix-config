@@ -81,6 +81,10 @@
     ];
   };
 
+  home.sessionVariables = {
+    NIX_CONFIG_PATH = config.var.configPath;
+  };
+
   home.packages = with pkgs; [
     bat
     eza

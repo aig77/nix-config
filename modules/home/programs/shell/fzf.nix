@@ -11,6 +11,7 @@ in {
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
+    tmux.enableShellIntegration = true;
     colors = lib.mkForce {
       "fg+" = accent;
       "bg+" = "-1";
