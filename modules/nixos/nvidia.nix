@@ -1,4 +1,9 @@
 {pkgs, ...}: {
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+
   services.xserver.videoDrivers = ["nvidia"];
 
   boot.kernelParams = ["nvidia-drm.modeset=1"];
@@ -17,31 +22,8 @@
 
   hardware.nvidia = {
     open = false;
-    nvidiaSettings = true; # Nvidia settings utility
+    nvidiaSettings = false; # Nvidia settings utility
     modesetting.enable = true; # Required for Wayland
     powerManagement.enable = true; # Suspend/wakeup issues
-  };
-
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [libva];
-  };
-
-  services.pipewire = {
-    # Add this part:
-    extraConfig.pipewire = {
-      "context.modules" = [
-        {
-          name = "libpipewire-module-spa-node-factory";
-          args = {
-            "factory.name" = "support.node.driver";
-            "node.name" = "driver";
-            "priority.driver" = 1;
-            "autoconnect" = true;
-            "flags" = ["no-dmabuf"];
-          };
-        }
-      ];
-    };
   };
 }

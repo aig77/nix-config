@@ -89,6 +89,16 @@
             ./hosts/spike/configuration.nix
           ];
         };
+        spike-amd = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {inherit inputs;};
+          modules = [
+            home-manager.nixosModules.home-manager
+            stylix.nixosModules.stylix
+            ./hosts/spike-amd/configuration.nix
+          ];
+        };
+
       };
 
       darwinConfigurations = {
