@@ -1,6 +1,5 @@
 {
   pkgs,
-  inputs,
   config,
   ...
 }: {
@@ -18,7 +17,7 @@
   ];
 
   home = {
-    username = config.var.username;
+    inherit (config.var) username;
     homeDirectory = "/Users/" + config.var.username;
 
     packages = with pkgs; [
