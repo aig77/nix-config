@@ -68,23 +68,9 @@
           config.allowUnfree = true;
         };
       in {
-        treefmt.config = {
-          projectRootFile = "flake.nix";
-          programs.alejandra.enable = true;
-        };
-        pre-commit = {
-          settings = {
-            hooks = {
-              alejandra.enable = true;
-              deadnix.enable = true;
-              statix = {
-                enable = true;
-                settings.ignore = ["hardware-configuration.nix"];
-              };
-            };
-          };
-        };
-        devShells.default = import ./shell.nix {inherit pkgs config;};
+        treefmt.config = import ./configs/treefmt.nix;
+        pre-commit.settings = import ./configs/pre-commit.nix;
+        devShells.default = import ./configs/shell.nix {inherit pkgs config;};
       };
 
       flake = {
