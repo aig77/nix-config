@@ -1,47 +1,28 @@
-{pkgs ? import <nixpkgs> {}, ...}: {
-  default = pkgs.mkShell {
-    NIX_CONFIG = "extra-experimental-features = nix-command flakes ca-derivations";
-    nativeBuildInputs = with pkgs; [
-      nix
-      home-manager
-      git
+{pkgs, ...}:
+pkgs.mkShell {
+  NIX_CONFIG = "extra-experimental-features = nix-command flakes ca-derivations";
+  packages = with pkgs; [
+    nix
+    home-manager
+    git
+    pre-commit
+    sops
+    ssh-to-age
+    gnupg
+    age
+  ];
 
-      sops
-      ssh-to-age
-      gnupg
-      age
-    ];
-    shellHook = ''
-      echo "󱄅 Entered default Nix shell!"
-    '';
+  shellHook = ''
+    echo "󱄅 Entered Nix dev shell!"
+    if [ ! -f .git/hooks/pre-commit ]; then
+      echo  "🧪 Installing pre-commit hooks..."
+      pre-commit install
+      echo "✅ pre-commit hooks installed."
+    fi
+  '';
+
+  env = {
+    EDITOR = "vim";
+    NIXPKGS_ALLOW_UNFREE = "1";
   };
-
-  rust = pkgs.mkShell {
-    name = "rust-shell";
-    packages = with pkgs; [
-      rust-bin.stable.latest.default
-      rust-analyzer
-      cargo
-    ];
-    RUST_BACKTRACE = 1;
-    shellHook = ''
-      echo "Entered Rust shell! 🦀"
-    '';
-  };
-
-  rust-nightly = let
-    nightly-bin = pkgs.rust-bin.selectLatestNightlyWith (toolchain: toolchain.default);
-  in
-    pkgs.mkShell {
-      name = "rust-nightly-shell";
-      packages = with pkgs; [
-        nightly-bin
-        rust-analyzer
-        cargo
-      ];
-      RUST_BACKTRACE = 1;
-      shellHook = ''
-        echo "Entered Rust shell! 🦀 🌙"
-      '';
-    };
 }

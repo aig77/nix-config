@@ -6,4 +6,3 @@
     mouse = true;
   };
 }
-  
