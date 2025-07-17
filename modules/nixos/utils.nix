@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{config, ...}: {
   networking.hostName = config.var.hostname;
   #networking.wireless.enable = true;
 
@@ -22,15 +18,14 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  services.xserver = {
-    enable = true;
-    xkb.layout = "us";
-    xkb.variant = "";
+  services = {
+    xserver = {
+      enable = true;
+      xkb.layout = "us";
+      xkb.variant = "";
+    };
+    gnome.gnome-keyring.enable = true;
+    openssh.enable = true;
+    printing.enable = true;
   };
-
-  services.gnome.gnome-keyring.enable = true;
-
-  services.openssh.enable = true;
-
-  services.printing.enable = true;
 }

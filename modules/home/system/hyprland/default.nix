@@ -2,16 +2,15 @@
   pkgs,
   lib,
   config,
-  inputs,
   ...
 }: let
-  colors = config.lib.stylix.colors;
+  stylixColors = config.lib.stylix.colors;
   active-border-color = {
-    a = colors.base0C;
-    b = colors.base0D;
-    c = colors.base05;
+    a = stylixColors.base0C;
+    b = stylixColors.base0D;
+    c = stylixColors.base05;
   };
-  inactive-border-color = colors.base03;
+  inactive-border-color = stylixColors.base03;
 in {
   imports = [./keybinds.nix ./monitors.nix ./polkitagent.nix ../hyprlock ../hypridle];
 

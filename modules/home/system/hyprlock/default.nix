@@ -3,7 +3,7 @@
   config,
   ...
 }: let
-  colors = config.lib.stylix.colors;
+  inherit (config.lib.stylix) colors;
   background = "rgb(${colors.base00})";
   foreground = "rgb(${colors.base06})";
   blue = "rgb(${colors.base0C})";

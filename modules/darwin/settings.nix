@@ -4,9 +4,31 @@
   pkgs,
   ...
 }: {
-  # Used for backwards compatibility, please read the changelog before changing.
-  # $ darwin-rebuild changelog
-  system.stateVersion = 5;
+  system = {
+    # Used for backwards compatibility, please read the changelog before changing.
+    # $ darwin-rebuild changelog
+    stateVersion = 5;
+
+    keyboard = {
+      enableKeyMapping = true;
+      remapCapsLockToControl = true;
+    };
+
+    defaults = {
+      dock = {
+        autohide = true;
+        orientation = "bottom";
+      };
+
+      finder = {
+        AppleShowAllExtensions = true;
+      };
+
+      NSGlobalDomain = {
+        AppleInterfaceStyle = "Dark";
+      };
+    };
+  };
 
   #Set Git commit hash for darwin-version.
   #system.configurationRevision = self.rev or self.dirtyRev or null;
@@ -40,25 +62,5 @@
     systemPackages = with pkgs; [coreutils];
     systemPath = ["/usr/local/bin"];
     pathsToLink = ["/Applications"];
-  };
-
-  system.keyboard = {
-    enableKeyMapping = true;
-    remapCapsLockToControl = true;
-  };
-
-  system.defaults = {
-    dock = {
-      autohide = true;
-      orientation = "bottom";
-    };
-
-    finder = {
-      AppleShowAllExtensions = true;
-    };
-
-    NSGlobalDomain = {
-      AppleInterfaceStyle = "Dark";
-    };
   };
 }

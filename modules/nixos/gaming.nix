@@ -1,19 +1,17 @@
-{
-  lib,
-  pkgs,
-  ...
-}: {
-  programs.steam.enable = true;
-  programs.steam.gamescopeSession = {
-    enable = true;
-    args = [
-      "-f"
-      "-w 2560"
-      "-h 1440"
-      "--cursor-lock-enabled"
-    ];
+{pkgs, ...}: {
+  programs = {
+    steam.enable = true;
+    steam.gamescopeSession = {
+      enable = true;
+      args = [
+        "-f"
+        "-w 2560"
+        "-h 1440"
+        "--cursor-lock-enabled"
+      ];
+    };
+    gamemode.enable = true;
   };
-  programs.gamemode.enable = true;
 
   environment.systemPackages = with pkgs; [
     mangohud

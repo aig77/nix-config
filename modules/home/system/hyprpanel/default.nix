@@ -29,38 +29,52 @@
         };
       };
 
-      theme.font = {
-        name = "JetBrainsMono Nerd Font";
-        size = "14px";
+      theme = {
+        font = {
+          name = "JetBrainsMono Nerd Font";
+          size = "14px";
+        };
+        bar = {
+          floating = true;
+          transparent = true;
+          border_radius = "0.8em";
+          outer_spacing = "0.8em";
+          margin_top = "0.2em";
+          margin_bottom = "0.2em";
+          margin_sides = "0em";
+          layer = "overlay";
+          buttons.radius = "1em";
+          opacity = 95;
+        };
+        menus.menu.dashboard.profile = {
+          size = "10em";
+          radius = "5em";
+        };
       };
 
-      theme.bar.floating = true;
-      theme.bar.transparent = true;
-      theme.bar.border_radius = "0.8em";
-      theme.bar.outer_spacing = "0.8em";
-      theme.bar.margin_top = "0.2em";
-      theme.bar.margin_bottom = "0.2em";
-      theme.bar.margin_sides = "0em";
-      theme.bar.layer = "overlay";
-      theme.bar.buttons.radius = "1em";
-      theme.bar.opacity = 95;
+      bar = {
+        launcher.icon = "";
+        workspaces = {
+          show_icons = false;
+          show_numbered = true;
+          monitorSpecific = false;
+          workspaces = 8;
+        };
+      };
 
-      theme.bar.menus.menu.dashboard.profile.size = "10em";
-      theme.bar.menus.menu.dashboard.profile.radius = "5em";
-
-      bar.launcher.icon = "";
-      bar.workspaces.show_icons = false;
-      bar.workspaces.show_numbered = true;
-      bar.workspaces.monitorSpecific = false;
-      bar.workspaces.workspaces = 8;
-
-      menus.dashboard.powermenu.avatar.image = config.var.profileImagePath;
-      menus.dashboard.directories.enabled = false;
-      menus.dashboard.shortcuts.left.shortcut1.icon = "󰖟";
-      menus.dashboard.shortcuts.left.shortcut1.command = config.var.browser;
-      menus.dashboard.shortcuts.left.shortcut1.tooltip = "Browser";
-      menus.dashboard.stats.enable_gpu = true;
-      menus.clock.weather.enabled = false;
+      menus = {
+        dashboard = {
+          powermenu.avatar.image = config.var.profileImagePath;
+          directories.enabled = false;
+          shortcuts.left.shortcut1 = {
+            icon = "󰖟";
+            command = config.var.browser;
+            tooltip = "Browser";
+          };
+          stats.enable_gpu = true;
+          clock.weather.enabled = false;
+        };
+      };
     };
   };
 }

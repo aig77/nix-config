@@ -40,7 +40,6 @@
   };
 
   outputs = inputs @ {
-    self,
     nixpkgs,
     flake-parts,
     treefmt-nix,
@@ -73,25 +72,23 @@
           projectRootFile = "flake.nix";
           programs.alejandra.enable = true;
         };
-        pre-commit.settings.hooks = {
-          alejandra.enable = true;
-          deadnix.enable = true;
-          statix.enable = true;
+        pre-commit = {
+          settings = {
+            hooks = {
+              alejandra.enable = true;
+              deadnix.enable = true;
+              statix = {
+                enable = true;
+                settings.ignore = ["hardware-configuration.nix"];
+              };
+            };
+          };
         };
-        devShells.default = import ./shell.nix {inherit pkgs;};
+        devShells.default = import ./shell.nix {inherit pkgs config;};
       };
 
       flake = {
         nixosConfigurations = {
-          thinkpad = nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            specialArgs = {inherit inputs;};
-            modules = [
-              home-manager.nixosModules.home-manager
-              stylix.nixosModules.stylix
-              ./hosts/thinkpad/configuration.nix
-            ];
-          };
           spike = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             specialArgs = {inherit inputs;};
