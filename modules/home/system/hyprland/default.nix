@@ -4,13 +4,13 @@
   config,
   ...
 }: let
-  stylixColors = config.lib.stylix.colors;
+  inherit (config.lib.stylix) colors;
   active-border-color = {
-    a = stylixColors.base0C;
-    b = stylixColors.base0D;
-    c = stylixColors.base05;
+    a = colors.base0C;
+    b = colors.base0D;
+    c = colors.base05;
   };
-  inactive-border-color = stylixColors.base03;
+  inactive-border-color = colors.base03;
 in {
   imports = [./keybinds.nix ./monitors.nix ./polkitagent.nix ../hyprlock ../hypridle];
 
