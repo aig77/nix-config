@@ -28,7 +28,7 @@
 
     # Scripts
     ../../modules/home/scripts/screenshot
-    
+
     ./variables.nix
   ];
 
@@ -50,7 +50,7 @@
       qpwgraph
       discord-canary
       lmstudio
-      ollama-cuda
+      ollama-rocm
       nixd
 
       # backups

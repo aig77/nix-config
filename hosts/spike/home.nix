@@ -28,7 +28,7 @@
 
     # Scripts
     ../../modules/home/scripts/screenshot
-    
+
     ./variables.nix
   ];
 

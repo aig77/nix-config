@@ -1,9 +1,15 @@
 {pkgs, ...}: {
-  services.xserver = {
+  #services.xserver = {
+  #  enable = true;
+  #  displayManager.gdm.enable = true;
+  #  displayManager.gdm.wayland = true;
+  #  desktopManager.gnome.enable = true;
+  #};
+
+  services.desktopManager.gnome.enable = true;
+  services.displayManager.gdm = {
     enable = true;
-    displayManager.gdm.enable = true;
-    displayManager.gdm.wayland = true;
-    desktopManager.gnome.enable = true;
+    wayland = true;
   };
 
   environment.gnome.excludePackages = with pkgs; [
@@ -25,10 +31,22 @@
     gnome-console
     gnome-text-editor
     gnome-calendar
-    xterm
+    gnome-system-monitor
+    gnome-logs
+    gnome-font-viewer
+    gnome-sound-recorder
+    gnome-disk-utility
+    gnome-connections
     hitori # sudoku game
     iagno # go game
     tali # poker game
     totem # video player
+    file-roller # archive manager
+    simple-scan # document scanner
+    seahorse # passwords and keys
+    decibels # audio player
+    loupe # image viewer
+    baobab # disk usage analyzer
+    snapshot # camera
   ];
 }
