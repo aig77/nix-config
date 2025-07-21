@@ -52,6 +52,7 @@
   }:
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
+        home-manager.flakeModules.home-manager
         treefmt-nix.flakeModule
         git-hooks-nix.flakeModule
       ];
@@ -68,8 +69,8 @@
           config.allowUnfree = true;
         };
       in {
-        treefmt.config = import ./configs/treefmt.nix;
-        pre-commit.settings = import ./configs/pre-commit.nix;
+        treefmt = import ./configs/treefmt.nix;
+        pre-commit = import ./configs/pre-commit.nix;
         devShells.default = import ./configs/shell.nix {inherit pkgs config;};
       };
 
