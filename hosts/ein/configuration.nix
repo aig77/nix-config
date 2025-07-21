@@ -1,8 +1,4 @@
-{
-  inputs,
-  config,
-  ...
-}: {
+{config, ...}: {
   imports = [
     ../../modules/darwin
     ../../modules/nixos/home-manager.nix

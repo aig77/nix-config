@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: let
+{config, ...}: let
   desktop-monitors = {
     # Change multi-monitor desktop setup here
     DP-1 = [1 2 3 4];

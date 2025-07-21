@@ -1,4 +1,4 @@
-{config, ...}: {
+{
   #nix-homebrew = {
   #  enable = true;
   #  user = config.var.username;
