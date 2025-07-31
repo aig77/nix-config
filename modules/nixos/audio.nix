@@ -1,7 +1,7 @@
 {
+  security.rtkit.enable = true;
   services = {
     dbus.enable = true;
-    rtkit.enable = true;
     pulseaudio.enable = false;
     pipewire = {
       enable = true;
