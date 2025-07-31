@@ -11,6 +11,7 @@
     ../../modules/home/programs/git
     ../../modules/home/programs/kitty
     ../../modules/home/programs/lazygit
+    ../../modules/home/programs/neovim
     ../../modules/home/programs/shell
     ../../modules/home/programs/spicetify
     ../../modules/home/programs/thunar
@@ -42,6 +43,7 @@
       unzip
       xz
       btop
+      ripgrep
       mission-center
       feh
       vlc
@@ -60,7 +62,7 @@
     ];
 
     sessionVariables = {
-      # EDITOR = "nvim";
+      EDITOR = "nvim";
       WALLPAPERS = "$HOME/Pictures/Wallpapers";
     };
 

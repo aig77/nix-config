@@ -2,8 +2,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    treefmt-nix.url = "github:numtide/treefmt-nix";
-    git-hooks-nix.url = "github:cachix/git-hooks.nix";
+    devenv.url = "github:cachix/devenv";
     hyprland.url = "github:hyprwm/Hyprland";
     stylix.url = "github:danth/stylix";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
@@ -42,8 +41,7 @@
   outputs = inputs @ {
     nixpkgs,
     flake-parts,
-    treefmt-nix,
-    git-hooks-nix,
+    devenv,
     home-manager,
     stylix,
     darwin,
@@ -52,9 +50,7 @@
   }:
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
-        home-manager.flakeModules.home-manager
-        treefmt-nix.flakeModule
-        git-hooks-nix.flakeModule
+        devenv.flakeModule
       ];
 
       systems = ["x86_64-linux" "aarch64-darwin"];
@@ -69,9 +65,7 @@
           config.allowUnfree = true;
         };
       in {
-        treefmt = import ./configs/treefmt.nix;
-        pre-commit = import ./configs/pre-commit.nix;
-        devShells.default = import ./configs/shell.nix {inherit pkgs config;};
+        devenv = import ./configs/devenv.nix {inherit pkgs;};
       };
 
       flake = {
