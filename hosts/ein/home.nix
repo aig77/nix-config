@@ -10,6 +10,7 @@
     ../../modules/home/programs/git
     ../../modules/home/programs/kitty
     ../../modules/home/programs/lazygit
+    ../../modules/home/programs/neovim
     ../../modules/home/programs/shell
     ../../modules/home/programs/vim
 
