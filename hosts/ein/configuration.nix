@@ -2,7 +2,7 @@
   imports = [
     ../../modules/darwin
     ../../modules/nixos/home-manager.nix
-    ../../themes/onedark-darwin.nix
+    ./theme.nix
     ./variables.nix
   ];
 
