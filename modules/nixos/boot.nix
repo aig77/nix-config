@@ -1,14 +1,11 @@
 {
-  boot = {
-    loader = {
-      efi = {canTouchEfiVariables = true;};
-      grub = {
-        enable = true;
-        #device = "/dev/sda";
-        devices = ["nodev"];
-        efiSupport = true;
-        useOSProber = true;
-      };
+  boot.loader = {
+    grub = {
+      enable = true;
+      efiSupport = true;
+      useOSProber = true;
+      devices = ["nodev"];
     };
+    efi.canTouchEfiVariables = true;
   };
 }

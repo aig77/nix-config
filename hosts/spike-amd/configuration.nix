@@ -2,7 +2,7 @@
   imports = [
     # Mostly system related configuration
     ../../modules/nixos/audio.nix
-    ../../modules/nixos/boot.nix
+    #../../modules/nixos/boot.nix
     ../../modules/nixos/home-manager.nix
     ../../modules/nixos/nix.nix
     ../../modules/nixos/packages.nix
@@ -16,9 +16,9 @@
     ../../modules/nixos/amdgpu.nix
     ../../modules/nixos/gaming.nix
 
-    ../../themes/onedark-linux.nix
     ./hardware-configuration.nix
     ./variables.nix
+    ./theme.nix
   ];
 
   home-manager.users.${config.var.username} = import ./home.nix;
