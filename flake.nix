@@ -65,7 +65,7 @@
           config.allowUnfree = true;
         };
       in {
-        devenv = import ./configs/devenv.nix {inherit pkgs;};
+        devenv = import ./devenv.nix {inherit pkgs;};
       };
 
       flake = {

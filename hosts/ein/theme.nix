@@ -4,7 +4,7 @@
     polarity = "dark";
 
     # https://github.com/tinted-theming/base16-schemes
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/onedark.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
     fonts = {
       monospace = {
