@@ -2,8 +2,8 @@
   imports = [
     ../../modules/darwin
     ../../modules/nixos/home-manager.nix
-    ./theme.nix
     ./variables.nix
+    ./theme.nix
   ];
 
   system.primaryUser = config.var.username;
