@@ -2,7 +2,7 @@
   imports = [
     # Mostly system related configuration
     ../../modules/nixos/audio.nix
-    #../../modules/nixos/boot.nix
+    ../../modules/nixos/boot.nix
     ../../modules/nixos/home-manager.nix
     ../../modules/nixos/nix.nix
     ../../modules/nixos/packages.nix
@@ -22,8 +22,6 @@
   ];
 
   home-manager.users.${config.var.username} = import ./home.nix;
-
-  programs.openvpn3.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
