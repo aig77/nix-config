@@ -8,7 +8,7 @@
 
   config.var = let
     username = "arturo";
-    hostname = "spike";
+    hostname = "fae";
     configPath = "/home/${username}/.config/nix-config";
   in {
     inherit username hostname configPath;
