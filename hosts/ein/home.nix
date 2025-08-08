@@ -13,6 +13,7 @@
     ../../modules/home/programs/neovim
     ../../modules/home/programs/shell
     ../../modules/home/programs/vim
+    ../../modules/home/programs/zen
 
     ./variables.nix
   ];
@@ -30,13 +31,10 @@
       spotify
       nixd
 
-      # doesnt work on aarch yet, installed with homebrew
-      #inputs.zen-browser.packages.${system}.default
-
       # backups
-      brave
+      #brave
       #vscodium
-      zed-editor
+      #zed-editor
     ];
 
     sessionVariables = {
