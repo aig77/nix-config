@@ -6,6 +6,17 @@
     ./theme.nix
   ];
 
+  homebrew = {
+    casks = [
+      "raycast"
+      "ghostty" # temporary while home manager doesnt work
+    ];
+
+    masApps = {
+      #  XCode = 497799835;
+    };
+  };
+
   system.primaryUser = config.var.username;
   home-manager.users.arturo = import ./home.nix;
 }
