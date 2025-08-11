@@ -15,6 +15,10 @@
     };
 
     defaults = {
+      controlcenter = {
+        BatteryShowPercentage = true;
+      };
+
       dock = {
         autohide = true;
         orientation = "bottom";
@@ -22,6 +26,9 @@
 
       finder = {
         AppleShowAllExtensions = true;
+        AppleShowAllFiles = true;
+        CreateDesktop = false;
+        FXRemoveOldTrashItems = true;
       };
 
       NSGlobalDomain = {
@@ -39,7 +46,14 @@
   # Disabled for Determinate systems nix
   nix.enable = false;
 
-  users.users.arturo.home = "/Users/${config.var.username}";
+  # Use fish instead of default zsh
+  programs.fish.enable = true;
+  environment.shells = [pkgs.fish];
+
+  users.users.arturo = {
+    home = "/Users/${config.var.username}";
+    shell = pkgs.fish;
+  };
 
   # nixpkgs config is outside of darwin scope
   nixpkgs.config.allowUnfree = true;

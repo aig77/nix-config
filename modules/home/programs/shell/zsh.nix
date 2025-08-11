@@ -12,9 +12,6 @@
 
     shellAliases = {
       ll = "ls -l";
-      rs = "sudo nixos-rebuild switch";
-      rsf = "sudo nixos-rebuild switch --flake";
-      rtf = "sudo nixos-rebuild test --flake";
       cd = "z";
       ls = "eza --icons=always --no-quotes";
       tree = "eza --icons=always --tree --no-quotes";
@@ -66,7 +63,7 @@
       zstyle ':fzf-tab:*' switch-group '<' '>'
 
       # direnv setup
-      eval "$(direnv hook zsh)"
+      #eval "$(direnv hook zsh)"
     '';
 
     plugins = [
@@ -81,8 +78,13 @@
     ];
   };
 
-  home.sessionVariables = {
-    NIX_CONFIG_PATH = config.var.configPath;
+  # Enable zsh integrations
+  programs = {
+    direnv.enableZshIntegration = true;
+    fzf.enableZshIntegration = true;
+    ghostty.enableZshIntegration = true;
+    starship.enableZshIntegration = true;
+    zoxide.enableZshIntegration = true;
   };
 
   home.packages = with pkgs; [
