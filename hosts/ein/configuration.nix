@@ -7,9 +7,10 @@
   ];
 
   homebrew = {
+    # not available in nixpkgs for darwin
     casks = [
       "raycast"
-      "ghostty" # temporary while home manager doesnt work
+      "ghostty"
       "lm-studio"
     ];
 

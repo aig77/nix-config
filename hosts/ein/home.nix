@@ -7,9 +7,8 @@
     # Programs
     ../../modules/home/programs/discord
     ../../modules/home/programs/fetch
-    ../../modules/home/programs/ghostty/darwin.nix # installed using homebrew
+    ../../modules/home/programs/ghostty
     ../../modules/home/programs/git
-    ../../modules/home/programs/kitty
     ../../modules/home/programs/lazygit
     ../../modules/home/programs/neovim
     ../../modules/home/programs/shell
@@ -40,6 +39,7 @@
 
     sessionVariables = {
       EDITOR = "nvim";
+      XDG_CONFIG_HOME = "$HOME/.config";
       WALLPAPERS = "$HOME/Pictures/Wallpapers";
     };
 
