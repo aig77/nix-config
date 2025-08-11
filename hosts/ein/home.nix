@@ -5,6 +5,7 @@
 }: {
   imports = [
     # Programs
+    ../../modules/home/programs/discord
     ../../modules/home/programs/fetch
     ../../modules/home/programs/ghostty/darwin.nix # installed using homebrew
     ../../modules/home/programs/git
@@ -12,6 +13,7 @@
     ../../modules/home/programs/lazygit
     ../../modules/home/programs/neovim
     ../../modules/home/programs/shell
+    ../../modules/home/programs/spotify
     ../../modules/home/programs/vim
     ../../modules/home/programs/zen
 
@@ -27,18 +29,17 @@
       unzip
       xz
       btop
-      discord-canary
-      spotify
+      nil
       nixd
 
       # backups
-      #brave
+      brave
       #vscodium
       #zed-editor
     ];
 
     sessionVariables = {
-      # EDITOR = "nvim";
+      EDITOR = "nvim";
       WALLPAPERS = "$HOME/Pictures/Wallpapers";
     };
 
