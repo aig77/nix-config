@@ -5,7 +5,7 @@
 }: {
   imports = [
     # Programs
-    #../../modules/home/programs/discord
+    ../../modules/home/programs/discord
     ../../modules/home/programs/fetch
     ../../modules/home/programs/ghostty
     ../../modules/home/programs/git
@@ -50,9 +50,9 @@
       networkmanagerapplet
       pavucontrol
       qpwgraph
-      discord-canary
       lmstudio
       ollama-rocm
+      nil
       nixd
 
       # backups
