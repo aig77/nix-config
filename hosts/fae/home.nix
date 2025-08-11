@@ -13,7 +13,7 @@
     ../../modules/home/programs/lazygit
     ../../modules/home/programs/neovim
     ../../modules/home/programs/shell
-    ../../modules/home/programs/spicetify
+    ../../modules/home/programs/spotify
     ../../modules/home/programs/thunar
     ../../modules/home/programs/vim
     ../../modules/home/programs/zen

@@ -10,6 +10,7 @@
     casks = [
       "raycast"
       "ghostty" # temporary while home manager doesnt work
+      "lm-studio"
     ];
 
     masApps = {

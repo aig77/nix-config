@@ -21,20 +21,18 @@
     };
   };
 
-  # --------------------------------------------------------------------
-  # Fix for nixcord Home-Manager activation failure:
-  # The nixcord module runs `disableDiscordUpdates` during activation,
-  # which edits ~/.config/discord/settings.json to stop Discord's auto-updater.
-  # If you’ve never run stock Discord (e.g. only use Vesktop/Dorion),
-  # that file won’t exist, so activation fails.
-  #
-  # This hook runs *before* disableDiscordUpdates, ensuring the directory
-  # and file exist with SKIP_HOST_UPDATE=true so nixcord can proceed cleanly.
-  # --------------------------------------------------------------------
+  # Ensure correct settings.json exists before nixcord runs
   home.activation.ensureDiscordSettings = lib.hm.dag.entryBefore ["disableDiscordUpdates"] ''
-    dir="$HOME/.config/discord"
+    if [ "$(uname)" = "Darwin" ]; then
+      dir="$HOME/Library/Application Support/discord"
+    else
+      dir="$HOME/.config/discord"
+    fi
+
     file="$dir/settings.json"
     mkdir -p "$dir"
-    [ -f "$file" ] || printf '{"SKIP_HOST_UPDATE":true}\n' > "$file"
+    if [ ! -f "$file" ]; then
+      printf '{"SKIP_HOST_UPDATE":true}\n' > "$file"
+    fi
   '';
 }
