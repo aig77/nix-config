@@ -9,9 +9,9 @@
     ../../modules/home/programs/fetch
     ../../modules/home/programs/ghostty
     ../../modules/home/programs/git
-    ../../modules/home/programs/kitty
     ../../modules/home/programs/lazygit
     ../../modules/home/programs/neovim
+    ../../modules/home/programs/opencode
     ../../modules/home/programs/shell
     ../../modules/home/programs/spotify
     ../../modules/home/programs/thunar
@@ -38,22 +38,25 @@
     homeDirectory = "/home/" + config.var.username;
 
     packages = with pkgs; [
-      bitwarden
+      nil
+      nixd
+      manix
+
       zip
       unzip
       xz
       btop
       ripgrep
-      mission-center
       feh
+
       vlc
+      bitwarden
+      mission-center
       networkmanagerapplet
       pavucontrol
       qpwgraph
       lmstudio
       ollama-rocm
-      nil
-      nixd
 
       # backups
       brave
