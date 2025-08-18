@@ -12,9 +12,9 @@
     };
 
     cursor = {
-      name = "catppuccin-mocha-dark-cursors";
-      package = pkgs.catppuccin-cursors.mochaDark;
-      size = 22;
+      name = "catppuccin-mocha-light-cursors";
+      package = pkgs.catppuccin-cursors.mochaLight;
+      size = 24;
     };
 
     fonts = {
