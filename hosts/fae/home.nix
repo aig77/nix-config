@@ -57,6 +57,7 @@
       qpwgraph
       lmstudio
       ollama-rocm
+      obs-studio
 
       # backups
       brave
