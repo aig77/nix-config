@@ -5,7 +5,7 @@
 }: {
   imports = [
     # Programs
-    ../../modules/home/programs/discord
+    #../../modules/home/programs/discord
     ../../modules/home/programs/fetch
     ../../modules/home/programs/ghostty
     ../../modules/home/programs/git
@@ -55,9 +55,9 @@
       networkmanagerapplet
       pavucontrol
       qpwgraph
-      lmstudio
-      ollama-rocm
+      discord
       obs-studio
+      lmstudio
 
       # backups
       brave
