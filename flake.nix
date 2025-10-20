@@ -6,6 +6,7 @@
     hyprland.url = "github:hyprwm/Hyprland";
     stylix.url = "github:danth/stylix";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    ghostty.url = "github:ghostty-org/ghostty";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -63,6 +64,7 @@
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
+          config.allowBroken = true;
         };
       in {
         devenv = import ./devenv.nix {inherit pkgs;};
@@ -70,15 +72,6 @@
 
       flake = {
         nixosConfigurations = {
-          spike = nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            specialArgs = {inherit inputs;};
-            modules = [
-              home-manager.nixosModules.home-manager
-              stylix.nixosModules.stylix
-              ./hosts/spike/configuration.nix
-            ];
-          };
           fae = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             specialArgs = {inherit inputs;};
@@ -106,3 +99,5 @@
       };
     };
 }
+# rebuild Mon Oct 20 14:06:47 EDT 2025
+
