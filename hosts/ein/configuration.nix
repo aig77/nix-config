@@ -12,6 +12,12 @@
       "raycast"
       "ghostty"
       "lm-studio"
+      "steam"
+
+      # experiencing issues
+      # https://github.com/0xc000022070/zen-browser-flake/issues/128
+      # https://nixpk.gs/pr-tracker.html?pr=449689
+      "zen-browser"
     ];
 
     masApps = {
