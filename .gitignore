@@ -3,3 +3,6 @@
 .devenv
 .pre-commit-config.yaml
 
+# darwin cached config
+/result
+
