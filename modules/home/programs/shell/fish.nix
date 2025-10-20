@@ -2,7 +2,9 @@
   pkgs,
   config,
   ...
-}: {
+}: let
+  colors = config.lib.stylix.colors.withHashtag;
+in {
   programs.fish = {
     enable = true;
 
@@ -26,8 +28,16 @@
         krabby name ${config.var.pokemonSprite} --no-title | fastfetch --file-raw -
       end
 
-      # Vi mode + history-search on Ctrl-p / Ctrl-n (insert + default modes)
+      # Vi mode
       fish_vi_key_bindings
+
+      # Up and down arrow chronological navigation
+      bind -M insert \e\[A history-search-backward
+      bind -M insert \e\[B history-search-forward
+      bind \e\[A history-search-backward
+      bind \e\[B history-search-forward
+
+      # Also set ctl-p and ctl-n as backup
       bind -M insert \cp history-search-backward
       bind -M insert \cn history-search-forward
       bind \cp history-search-backward
@@ -38,6 +48,10 @@
       if type -q fzf_configure_bindings
         fzf_configure_bindings --directory=\ct --git_log=\cl --git_status=\cg --history=\cr
       end
+    '';
+
+    shellInitLast = ''
+      set -g fish_color_param ${colors.base05}     # Bright readable text for params
     '';
 
     # Plugins
