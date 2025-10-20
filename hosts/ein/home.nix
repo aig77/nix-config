@@ -11,10 +11,11 @@
     ../../modules/home/programs/git
     ../../modules/home/programs/lazygit
     ../../modules/home/programs/neovim
+    ../../modules/home/programs/opencode
     ../../modules/home/programs/shell
     ../../modules/home/programs/spotify
     ../../modules/home/programs/vim
-    ../../modules/home/programs/zen
+    #../../modules/home/programs/zen
 
     ./variables.nix
   ];
