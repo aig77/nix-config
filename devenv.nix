@@ -1,9 +1,14 @@
 {pkgs, ...}: {
   shells.default = {
-    languages.nix.enable = true;
+    #languages.nix.enable = true;
 
     packages = with pkgs; [
       neovim
+      nil
+      nixd
+      alejandra
+      statix
+      deadnix
     ];
 
     enterShell = ''
