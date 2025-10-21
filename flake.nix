@@ -6,7 +6,6 @@
     hyprland.url = "github:hyprwm/Hyprland";
     stylix.url = "github:danth/stylix";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
-    ghostty.url = "github:ghostty-org/ghostty";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -56,11 +55,7 @@
 
       systems = ["x86_64-linux" "aarch64-darwin"];
 
-      perSystem = {
-        system,
-        config,
-        ...
-      }: let
+      perSystem = {system, ...}: let
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
