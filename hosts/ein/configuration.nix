@@ -1,6 +1,7 @@
 {config, ...}: {
   imports = [
     ../../modules/darwin
+    ../..modules/nixos/docker.nix
     ../../modules/nixos/home-manager.nix
     ./variables.nix
     ./theme.nix
