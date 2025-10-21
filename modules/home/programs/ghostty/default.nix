@@ -1,15 +1,11 @@
 # darwin package has issue: https://github.com/NixOS/nixpkgs/issues/388984
 # install using brew on darwin
-{
-  pkgs,
-  inputs,
-  ...
-}: let
+{pkgs, ...}: let
   inherit (pkgs.stdenv) isDarwin;
   ghosttyPkg =
     if isDarwin
     then null
-    else inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    else pkgs.ghostty;
   hasPkg = ghosttyPkg != null;
 in {
   programs.ghostty = {
