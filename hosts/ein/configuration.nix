@@ -1,7 +1,6 @@
 {config, ...}: {
   imports = [
     ../../modules/darwin
-    ../..modules/nixos/docker.nix
     ../../modules/nixos/home-manager.nix
     ./variables.nix
     ./theme.nix
@@ -14,6 +13,7 @@
       "ghostty"
       "lm-studio"
       "steam"
+      "docker"
 
       # experiencing issues
       # https://github.com/0xc000022070/zen-browser-flake/issues/128
