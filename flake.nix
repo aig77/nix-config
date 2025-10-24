@@ -90,6 +90,16 @@
               ./hosts/ein/configuration.nix
             ];
           };
+          spike = darwin.lib.darwinSystem {
+            system = "aarch64-darwin";
+            specialArgs = {inherit inputs;};
+            modules = [
+              home-manager.darwinModules.home-manager
+              stylix.darwinModules.stylix
+              nix-homebrew.darwinModules.nix-homebrew
+              ./hosts/spike/configuration.nix
+            ];
+          };
         };
       };
     };
