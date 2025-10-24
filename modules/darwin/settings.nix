@@ -50,7 +50,7 @@
   programs.fish.enable = true;
   environment.shells = [pkgs.fish];
 
-  users.users.arturo = {
+  users.users.${config.var.username} = {
     home = "/Users/${config.var.username}";
     shell = pkgs.fish;
   };
