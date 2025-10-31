@@ -1,7 +1,8 @@
 {config, ...}: {
   imports = [
-    ../../modules/darwin
+    ../../modules/nixos/darwin.nix
     ../../modules/nixos/home-manager.nix
+    ../../modules/nixos/nix.nix
     ./variables.nix
     ./theme.nix
   ];
@@ -9,11 +10,14 @@
   homebrew = {
     # not available in nixpkgs for darwin
     casks = [
-      "raycast"
+      "claude"
+      "discord"
+      "docker"
       "ghostty"
+      "raycast"
       "lm-studio"
       "steam"
-      "docker"
+      "whatsapp"
 
       # experiencing issues
       # https://github.com/0xc000022070/zen-browser-flake/issues/128
