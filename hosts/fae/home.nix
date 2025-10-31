@@ -5,12 +5,12 @@
 }: {
   imports = [
     # Programs
-    #../../modules/home/programs/discord
     ../../modules/home/programs/fetch
     ../../modules/home/programs/ghostty
     ../../modules/home/programs/git
     ../../modules/home/programs/lazygit
     ../../modules/home/programs/neovim
+    ../../modules/home/programs/nixcord
     ../../modules/home/programs/opencode
     ../../modules/home/programs/shell
     ../../modules/home/programs/spotify
@@ -55,7 +55,6 @@
       networkmanagerapplet
       pavucontrol
       qpwgraph
-      discord
       obs-studio
       lmstudio
 
