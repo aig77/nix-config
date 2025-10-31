@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   pkgs,
   ...
 }: {
@@ -9,6 +8,7 @@
     # $ darwin-rebuild changelog
     stateVersion = 5;
 
+    # MacOS specific settings
     keyboard = {
       enableKeyMapping = true;
       remapCapsLockToControl = true;
@@ -50,31 +50,26 @@
   programs.fish.enable = true;
   environment.shells = [pkgs.fish];
 
-  users.users.arturo = {
+  users.users.${config.var.username} = {
     home = "/Users/${config.var.username}";
     shell = pkgs.fish;
-  };
-
-  # nixpkgs config is outside of darwin scope
-  nixpkgs.config.allowUnfree = true;
-
-  nix = {
-    nixPath = ["nixpkgs=${inputs.nixpkgs}"];
-    settings = {
-      experimental-features = ["nix-command" "flakes"];
-      substituters = [
-        "https://cache.nixos.org"
-        "https://nix-community.cachix.org"
-      ];
-      trusted-public-keys = [
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      ];
-    };
   };
 
   environment = {
     systemPackages = with pkgs; [coreutils];
     systemPath = ["/usr/local/bin"];
     pathsToLink = ["/Applications"];
+  };
+
+  homebrew = {
+    enable = true;
+    onActivation = {
+      autoUpdate = true;
+      upgrade = true;
+      cleanup = "zap";
+    };
+    extraConfig = ''
+      cask_args appdir: "~/Applications"
+    '';
   };
 }
