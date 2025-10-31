@@ -1,7 +1,8 @@
 {config, ...}: {
   imports = [
-    ../../modules/darwin
+    ../../modules/nixos/darwin.nix
     ../../modules/nixos/home-manager.nix
+    ../../modules/nixos/nix.nix
     ./variables.nix
     ./theme.nix
   ];
