@@ -16,6 +16,7 @@
       "ghostty"
       "lm-studio"
       "docker"
+      "zen-browser"
     ];
 
     masApps = {
