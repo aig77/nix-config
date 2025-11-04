@@ -6,6 +6,7 @@
 }: {
   imports = [
     # Programs
+    ../../modules/home/programs/email
     ../../modules/home/programs/fetch
     ../../modules/home/programs/ghostty
     ../../modules/home/programs/git
@@ -15,7 +16,6 @@
     ../../modules/home/programs/shell
     ../../modules/home/programs/spotify
     ../../modules/home/programs/thunar
-    ../../modules/home/programs/thunderbird
     ../../modules/home/programs/vim
     ../../modules/home/programs/zen
 
@@ -42,18 +42,17 @@
       bitwarden-desktop
       brave
       btop
-      inputs.nix-ai-tools.packages.${pkgs.system}.claude-desktop
-      feh
+      inputs.claude-desktop.packages.${pkgs.system}.claude-desktop-with-fhs # claude
+      feh # cli image viewer
       lmstudio
-      manix
+      manix # nix cli docs
       mission-center
       networkmanagerapplet
-      nil
-      nixd
+      nil # nix language server
       obs-studio
       inputs.nix-ai-tools.packages.${pkgs.system}.opencode
-      pavucontrol
-      qpwgraph
+      pavucontrol # volume control
+      qpwgraph # pipewire graph manager
       ripgrep
       unzip
       vlc

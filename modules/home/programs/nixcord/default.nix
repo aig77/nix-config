@@ -1,13 +1,8 @@
-{
-  inputs,
-  lib,
-  ...
-}: {
+{inputs, ...}: {
   imports = [inputs.nixcord.homeModules.nixcord];
 
   programs.nixcord = {
     enable = true;
-    vesktop.enable = true;
     config = {
       frameless = true;
       plugins = {
@@ -20,19 +15,4 @@
       };
     };
   };
-
-  # Ensure correct settings.json exists before nixcord runs
-  home.activation.ensureDiscordSettings = lib.hm.dag.entryBefore ["disableDiscordUpdates"] ''
-    if [ "$(uname)" = "Darwin" ]; then
-      dir="$HOME/Library/Application Support/discord"
-    else
-      dir="$HOME/.config/discord"
-    fi
-
-    file="$dir/settings.json"
-    mkdir -p "$dir"
-    if [ ! -f "$file" ]; then
-      printf '{"SKIP_HOST_UPDATE":true}\n' > "$file"
-    fi
-  '';
 }
