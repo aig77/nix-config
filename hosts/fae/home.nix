@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  inputs,
   ...
 }: {
   imports = [
@@ -11,10 +12,10 @@
     ../../modules/home/programs/lazygit
     ../../modules/home/programs/neovim
     ../../modules/home/programs/nixcord
-    ../../modules/home/programs/opencode
     ../../modules/home/programs/shell
     ../../modules/home/programs/spotify
     ../../modules/home/programs/thunar
+    ../../modules/home/programs/thunderbird
     ../../modules/home/programs/vim
     ../../modules/home/programs/zen
 
@@ -38,30 +39,26 @@
     homeDirectory = "/home/" + config.var.username;
 
     packages = with pkgs; [
-      nil
-      nixd
-      manix
-
-      zip
-      unzip
-      xz
+      bitwarden-desktop
+      brave
       btop
-      ripgrep
+      inputs.nix-ai-tools.packages.${pkgs.system}.claude-desktop
       feh
-
-      vlc
-      bitwarden
+      lmstudio
+      manix
       mission-center
       networkmanagerapplet
+      nil
+      nixd
+      obs-studio
+      inputs.nix-ai-tools.packages.${pkgs.system}.opencode
       pavucontrol
       qpwgraph
-      obs-studio
-      lmstudio
-
-      # backups
-      brave
-      vscodium
-      zed-editor
+      ripgrep
+      unzip
+      vlc
+      xz
+      zip
     ];
 
     sessionVariables = {

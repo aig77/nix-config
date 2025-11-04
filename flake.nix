@@ -6,6 +6,7 @@
     hyprland.url = "github:hyprwm/Hyprland";
     stylix.url = "github:danth/stylix";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    nix-ai-tools.url = "github:numtide/nix-ai-tools";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -104,5 +105,3 @@
       };
     };
 }
-# rebuild Mon Oct 20 14:06:47 EDT 2025
-
