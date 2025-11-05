@@ -7,16 +7,14 @@
     ./theme.nix
   ];
 
-  # Enable SSH daemon
-  services.sshd.enable = true;
-
   homebrew = {
     # not available in nixpkgs for darwin
     casks = [
-      "raycast"
+      "docker"
+      "discord"
       "ghostty"
       "lm-studio"
-      "docker"
+      "raycast"
       "zen-browser"
     ];
 

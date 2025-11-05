@@ -11,7 +11,6 @@
     ../../modules/home/programs/git
     ../../modules/home/programs/lazygit
     ../../modules/home/programs/neovim
-    ../../modules/home/programs/opencode
     ../../modules/home/programs/shell
     ../../modules/home/programs/vim
 
