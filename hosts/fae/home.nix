@@ -44,6 +44,7 @@
       btop
       inputs.claude-desktop.packages.${pkgs.system}.claude-desktop-with-fhs # claude
       feh # cli image viewer
+      jq
       lmstudio
       manix # nix cli docs
       mission-center
