@@ -2,6 +2,7 @@
   imports = [
     # Mostly system related configuration
     ../../modules/nixos/audio.nix
+    ../../modules/nixos/avahi.nix
     ../../modules/nixos/boot.nix
     ../../modules/nixos/docker.nix
     ../../modules/nixos/home-manager.nix

@@ -23,6 +23,13 @@
     };
   };
 
+  # due to xterm ghostty issue
+  programs.fish.initExtra = ''
+    if [[ "$TERM" == "xterm-ghostty" ]]; then
+      export TERM=xterm-256color
+    fi
+  '';
+
   system.primaryUser = config.var.username;
   home-manager.users.arturo = import ./home.nix;
 }
