@@ -70,14 +70,4 @@ in {
     starship.enableFishIntegration = true;
     zoxide.enableFishIntegration = true;
   };
-
-  # Tools you used in zsh setup
-  home.packages = with pkgs; [
-    bat
-    eza
-    ripgrep
-    krabby
-    fastfetch
-    fzf
-  ];
 }

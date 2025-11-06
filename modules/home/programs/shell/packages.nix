@@ -1,0 +1,31 @@
+{pkgs, ...}: {
+  home.packages = with pkgs; [
+    bat
+    btop
+    curl
+    cmake
+    eza
+    fzf
+    gcc
+    gh
+    git
+    glow
+    gnumake
+    jq
+    krabby
+    manix
+    nil
+    ninja
+    nixd
+    nix-output-monitor
+    nix-tree
+    pkg-config
+    ripgrep
+    tldr
+    unzip
+    xz
+    wget
+    zip
+    zoxide
+  ];
+}

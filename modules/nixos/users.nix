@@ -1,8 +1,15 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: let
+  inherit (config.var) shell;
+in {
   # Enable shell
   environment.shells = with pkgs; [fish zsh];
-  programs.fish.enable = true;
-  #programs.zsh.enable = true;
+  programs.${shell}.enable = true;
+  #programs.fish.enable = true;
+  #programs.zsh.enable = false;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users = {
