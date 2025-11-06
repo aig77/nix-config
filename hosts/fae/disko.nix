@@ -1,13 +1,13 @@
 /*
 Disko configuration for fae desktop - FRESH INSTALLATION ONLY
 
-This file is used ONLY for fresh NixOS installations. It automates disk
-partitioning, formatting, and mounting during the initial install.
+This file defines disk partitioning for fresh NixOS installations.
+It's exposed as a separate 'diskoConfigurations.fae' output in flake.nix.
 
-After installation, configuration.nix automatically switches from disko.nix to
-hardware-configuration.nix, so rebuilds work without the device parameter.
+After installation, nixosConfigurations.fae uses hardware-configuration.nix,
+so this file is only used during initial installation.
 
-SINGLE-COMMAND INSTALLATION:
+INSTALLATION STEPS:
 
   1. Boot NixOS installer ISO
 
@@ -19,7 +19,7 @@ SINGLE-COMMAND INSTALLATION:
      git clone <your-repo-url> ~/nix-config
      cd ~/nix-config
 
-  4. ONE COMMAND to partition, format, mount, and install (DESTROYS ALL DATA):
+  4. Partition, format, and mount (DESTROYS ALL DATA):
      sudo nix run github:nix-community/disko -- \
        --mode disko \
        --flake .#fae \
@@ -37,8 +37,8 @@ SINGLE-COMMAND INSTALLATION:
   7. Reboot:
      reboot
 
-Your system will boot with the full flake configuration applied!
-Future rebuilds will use hardware-configuration.nix automatically - no device arg needed!
+Your system will boot with hardware-configuration.nix for filesystem mounts.
+Future rebuilds work normally - no device parameter needed!
 
 WARNING: Step 4 will DESTROY ALL DATA on the specified device!
 */
