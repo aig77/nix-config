@@ -1,53 +1,37 @@
 /*
-Disko configuration for fae desktop - FRESH INSTALLATION ONLY
+Disko configuration for fae desktop
 
-This file defines disk partitioning for fresh NixOS installations.
-It's exposed as a separate 'diskoConfigurations.fae' output in flake.nix.
+INSTALLATION WITH NIXOS-ANYWHERE:
 
-After installation, nixosConfigurations.fae uses hardware-configuration.nix,
-so this file is only used during initial installation.
+1. On TARGET machine (192.168.1.x):
+  - Boot NixOS installer ISO
+  - Check disk device: lsblk
+  - Enable SSH and set password:
+systemctl start sshd
+passwd
+- Get IP address:
+ip a
 
-INSTALLATION STEPS:
+2. From your machine:
+cd ~/.config/nix-config
 
-  1. Boot NixOS installer ISO
+nix run github:nix-community/nixos-anywhere -- \
+  --flake .#fae \
+  --target-host nixos@<ip> \
+  --generate-hardware-config nixos-generate-config ./hosts/fae/hardware-configuration.nix
 
-  2. Identify your disk device:
-     lsblk
-     (common examples: /dev/nvme0n1, /dev/sda, /dev/vda)
+3. Done! The system will reboot automatically with your full config applied.
+Set root password on first boot:
+sudo passwd root
 
-  3. Clone this repository:
-     git clone <your-repo-url> ~/nix-config
-     cd ~/nix-config
-
-  4. Partition, format, and mount (DESTROYS ALL DATA):
-     sudo nix run github:nix-community/disko -- \
-       --mode disko \
-       --flake .#fae \
-       --arg device '"/dev/nvme0n1"'
-
-     NOTE: Replace /dev/nvme0n1 with your actual disk device from step 2
-     The --arg device parameter is REQUIRED - defaults to /dev/null for safety
-
-  5. Install NixOS with your flake:
-     sudo nixos-install --flake .#fae --no-root-passwd
-
-  6. Set root password:
-     sudo nixos-enter --root /mnt -c 'passwd'
-
-  7. Reboot:
-     reboot
-
-Your system will boot with hardware-configuration.nix for filesystem mounts.
-Future rebuilds work normally - no device parameter needed!
-
-WARNING: Step 4 will DESTROY ALL DATA on the specified device!
+WARNING: This will DESTROY ALL DATA on the specified device!
 */
-{device ? "/dev/null", ...}: {
+{
   disko.devices = {
     disk = {
       main = {
         type = "disk";
-        inherit device;
+        device = "/dev/nvme0n1"; # change this
         content = {
           type = "gpt";
           partitions = {
