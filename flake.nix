@@ -81,7 +81,10 @@
         nixosConfigurations = {
           fae = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
-            specialArgs = {inherit inputs;};
+            specialArgs = {
+              inherit inputs;
+              device = "/dev/null"; # Safe default for disko during fresh install
+            };
             modules = [
               disko.nixosModules.disko
               home-manager.nixosModules.home-manager

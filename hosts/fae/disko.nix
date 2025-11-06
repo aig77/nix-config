@@ -4,10 +4,10 @@ Disko configuration for fae desktop - FRESH INSTALLATION ONLY
 This file is used ONLY for fresh NixOS installations. It automates disk
 partitioning, formatting, and mounting during the initial install.
 
-After installation, the system will have your full flake configuration applied.
-For subsequent updates, just use: sudo nixos-rebuild switch --flake .#fae
+After installation, configuration.nix automatically switches from disko.nix to
+hardware-configuration.nix, so rebuilds work without the device parameter.
 
-INSTALLATION STEPS:
+SINGLE-COMMAND INSTALLATION:
 
   1. Boot NixOS installer ISO
 
@@ -19,24 +19,30 @@ INSTALLATION STEPS:
      git clone <your-repo-url> ~/nix-config
      cd ~/nix-config
 
-  4. Run disko to partition, format, and mount (DESTROYS ALL DATA):
-     sudo nix --extra-experimental-features "nix-command flakes" run \
-       github:nix-community/disko -- \
+  4. ONE COMMAND to partition, format, mount, and install (DESTROYS ALL DATA):
+     sudo nix run github:nix-community/disko -- \
        --mode disko \
-       ./hosts/fae/disko.nix \
+       --flake .#fae \
        --arg device '"/dev/nvme0n1"'
 
-  5. Install NixOS from your flake:
-     sudo nixos-install --flake .#fae
+     NOTE: Replace /dev/nvme0n1 with your actual disk device from step 2
+     The --arg device parameter is REQUIRED - defaults to /dev/null for safety
 
-  6. Set root password when prompted, then reboot:
+  5. Install NixOS with your flake:
+     sudo nixos-install --flake .#fae --no-root-passwd
+
+  6. Set root password:
+     sudo nixos-enter --root /mnt -c 'passwd'
+
+  7. Reboot:
      reboot
 
-Your system will boot with the full configuration from this flake already applied!
+Your system will boot with the full flake configuration applied!
+Future rebuilds will use hardware-configuration.nix automatically - no device arg needed!
 
 WARNING: Step 4 will DESTROY ALL DATA on the specified device!
 */
-{device, ...}: {
+{device ? "/dev/null", ...}: {
   disko.devices = {
     disk = {
       main = {
