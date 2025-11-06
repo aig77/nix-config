@@ -18,6 +18,7 @@
     ../../modules/nixos/amdgpu.nix
     ../../modules/nixos/gaming.nix
 
+    ./disko.nix
     ./hardware-configuration.nix
     ./variables.nix
     ./theme.nix

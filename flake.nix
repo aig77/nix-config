@@ -13,6 +13,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -49,6 +54,7 @@
     flake-parts,
     devenv,
     home-manager,
+    disko,
     stylix,
     darwin,
     nix-homebrew,
@@ -77,6 +83,7 @@
             system = "x86_64-linux";
             specialArgs = {inherit inputs;};
             modules = [
+              disko.nixosModules.disko
               home-manager.nixosModules.home-manager
               stylix.nixosModules.stylix
               ./hosts/fae/configuration.nix
