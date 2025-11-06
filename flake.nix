@@ -54,7 +54,6 @@
     flake-parts,
     devenv,
     home-manager,
-    disko,
     stylix,
     darwin,
     nix-homebrew,
@@ -81,16 +80,19 @@
         nixosConfigurations = {
           fae = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
-            specialArgs = {
-              inherit inputs;
-              device = "/dev/null"; # Safe default for disko during fresh install
-            };
+            specialArgs = {inherit inputs;};
             modules = [
-              disko.nixosModules.disko
               home-manager.nixosModules.home-manager
               stylix.nixosModules.stylix
               ./hosts/fae/configuration.nix
             ];
+          };
+        };
+
+        diskoConfigurations = {
+          fae = import ./hosts/fae/disko.nix {
+            inherit (nixpkgs) lib;
+            device = "/dev/null"; # Override with: --arg device '"/dev/sda"'
           };
         };
 
