@@ -25,6 +25,7 @@
       secondary = "LG Electronics LG ULTRAGEAR 107NTZN78013";
     };
 
+    shell = "fish";
     terminal = "ghostty";
     launcher = "rofi -show drun";
     browser = "zen";

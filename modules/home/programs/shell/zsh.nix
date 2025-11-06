@@ -87,11 +87,5 @@
     zoxide.enableZshIntegration = true;
   };
 
-  home.packages = with pkgs; [
-    bat
-    eza
-    ripgrep
-    krabby # for pokemon sprites
-    zsh-fzf-tab
-  ];
+  home.packages = with pkgs; [zsh-fzf-tab];
 }

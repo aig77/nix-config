@@ -41,24 +41,18 @@
     packages = with pkgs; [
       bitwarden-desktop
       brave
-      btop
       inputs.claude-desktop.packages.${pkgs.system}.claude-desktop-with-fhs # claude
       feh # cli image viewer
-      jq
+      httpie
+      kitty
       lmstudio
-      manix # nix cli docs
       mission-center
       networkmanagerapplet
-      nil # nix language server
       obs-studio
-      inputs.nix-ai-tools.packages.${pkgs.system}.opencode
+      inputs.nix-ai-tools.packages.${pkgs.system}.opencode # opencode
       pavucontrol # volume control
       qpwgraph # pipewire graph manager
-      ripgrep
-      unzip
-      vlc
-      xz
-      zip
+      vlc # video player
     ];
 
     sessionVariables = {

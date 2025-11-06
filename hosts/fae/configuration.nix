@@ -8,7 +8,6 @@
     ../../modules/nixos/home-manager.nix
     ../../modules/nixos/networking.nix
     ../../modules/nixos/nix.nix
-    ../../modules/nixos/packages.nix
     ../../modules/nixos/users.nix
     ../../modules/nixos/utils.nix
 
