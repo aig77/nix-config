@@ -14,6 +14,7 @@
       email = "";
     };
 
+    shell = "zsh";
     terminal = "ghostty";
     browser = "zen";
   };

@@ -2,7 +2,9 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  inherit (config.var) username shell;
+in {
   system = {
     # Used for backwards compatibility, please read the changelog before changing.
     # $ darwin-rebuild changelog
@@ -46,13 +48,12 @@
   # Disabled for Determinate systems nix
   nix.enable = false;
 
-  # Use fish instead of default zsh
-  programs.fish.enable = true;
-  environment.shells = [pkgs.fish];
+  environment.shells = with pkgs; [fish zsh];
+  programs.${shell}.enable = true;
 
-  users.users.${config.var.username} = {
-    home = "/Users/${config.var.username}";
-    shell = pkgs.fish;
+  users.users.${username} = {
+    home = "/Users/${username}";
+    shell = pkgs.${shell};
   };
 
   environment = {
