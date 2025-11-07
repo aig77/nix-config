@@ -48,6 +48,9 @@ in {
       if type -q fzf_configure_bindings
         fzf_configure_bindings --directory=\ct --git_log=\cl --git_status=\cg --history=\cr
       end
+
+      # Save all commands (even failed ones) in history
+      set -U fish_history_save all
     '';
 
     shellInitLast = ''
