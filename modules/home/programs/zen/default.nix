@@ -1,14 +1,26 @@
 {
+  pkgs,
   inputs,
   config,
   ...
 }: {
-  #home.packages = [inputs.zen-browser.packages."${pkgs.system}".default];
-  imports = [inputs.zen-browser.homeModules.twilight];
+  imports = [inputs.zen-browser.homeModules.default];
 
   programs.zen-browser = {
     enable = true;
-    profiles.${config.var.username}.isDefault = true;
+    darwinDefaultsId =
+      if pkgs.stdenv.isDarwin
+      then "org.mozilla.firefox.plist"
+      else null;
+
+    profiles.${config.var.username} = {
+      isDefault = true;
+      extensions.packages = with inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
+        bitwarden
+        darkreader
+        ublock-origin
+      ];
+    };
 
     policies = {
       AutofillAddressEnabled = true;
@@ -33,7 +45,8 @@
         "dom.security.https_only_mode" = {Value = true;};
       };
 
-      ExtensionSettings = {
+      /*
+         ExtensionSettings = {
         "uBlock0@raymondhill.net" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
           installation_mode = "force_installed";
@@ -47,6 +60,7 @@
           installation_mode = "force_installed";
         };
       };
+      */
 
       SearchEngines = {
         Default = "Brave";

@@ -3,21 +3,19 @@
   config,
   ...
 }: let
-  inherit (config.var) shell;
+  inherit (config.var) shell username;
 in {
   # Enable shell
   environment.shells = with pkgs; [fish zsh];
   programs.${shell}.enable = true;
-  #programs.fish.enable = true;
-  #programs.zsh.enable = false;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users = {
-    arturo = {
+    ${username} = {
       isNormalUser = true;
-      description = "Arturo";
+      initialPassword = "";
       extraGroups = ["networkmanager" "wheel"];
-      shell = pkgs.fish; # fish or zsh
+      shell = pkgs.${shell}; # fish or zsh
       packages = with pkgs; [];
     };
   };
