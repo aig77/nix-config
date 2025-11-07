@@ -1,6 +1,11 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   programs.tmux = {
     enable = true;
+    shell = "${pkgs.${config.var.shell}}/bin/${config.var.shell}";
     clock24 = true;
     keyMode = "vi";
     baseIndex = 1;
@@ -14,6 +19,7 @@
     ];
 
     extraConfig = ''
+      set -g default-command "${pkgs.${config.var.shell}}/bin/${config.var.shell} -l"
       set-option -sa terminal-overrides ",xterm*:Tc"
 
       # Shift Alt vim keys to switch windows
