@@ -1,7 +1,6 @@
 {
   pkgs,
   config,
-  inputs,
   ...
 }: {
   imports = [
@@ -26,10 +25,7 @@
 
     packages = with pkgs; [
       brave
-      btop
-      inputs.nix-ai-tools.packages.${pkgs.system}.opencode
-      nil
-      xz
+      opencode
     ];
 
     sessionVariables = {

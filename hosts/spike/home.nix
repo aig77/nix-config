@@ -1,7 +1,6 @@
 {
   pkgs,
   config,
-  inputs,
   ...
 }: {
   imports = [
@@ -22,11 +21,7 @@
     homeDirectory = "/Users/" + config.var.username;
 
     packages = with pkgs; [
-      btop
-      inputs.nix-ai-tools.packages.${pkgs.system}.opencode
-      nil
-      wget
-      xz
+      opencode
     ];
 
     sessionVariables = {

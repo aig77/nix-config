@@ -49,7 +49,7 @@
       mission-center
       networkmanagerapplet
       obs-studio
-      inputs.nix-ai-tools.packages.${pkgs.system}.opencode # opencode
+      opencode
       pavucontrol # volume control
       qpwgraph # pipewire graph manager
       vlc # video player
