@@ -1,8 +1,7 @@
-.envrc
-.direnv
-.devenv
+# Development environment artifacts
+.envrc*
+.direnv*
 .pre-commit-config.yaml
 
 # darwin cached config
 /result
-

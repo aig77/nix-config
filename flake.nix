@@ -2,11 +2,9 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    devenv.url = "github:cachix/devenv";
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     hyprland.url = "github:hyprwm/Hyprland";
     stylix.url = "github:danth/stylix";
-    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
-    nix-ai-tools.url = "github:numtide/nix-ai-tools";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -26,6 +24,11 @@
 
     darwin = {
       url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    git-hooks-nix = {
+      url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -60,27 +63,17 @@
     };
   };
 
-  outputs = inputs @ {
-    nixpkgs,
-    flake-parts,
-    devenv,
-    ...
-  }:
+  outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
-        devenv.flakeModule
+        inputs.git-hooks-nix.flakeModule
       ];
 
       systems = ["x86_64-linux" "aarch64-darwin"];
 
-      perSystem = {system, ...}: let
-        pkgs = import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-          config.allowBroken = true;
-        };
-      in {
-        devenv = import ./lib/devenv.nix {inherit pkgs;};
+      perSystem = {pkgs, ...}: {
+        devShells.default = import ./lib/shell.nix {inherit pkgs;};
+        pre-commit = import ./lib/pre-commit.nix;
       };
 
       flake = let

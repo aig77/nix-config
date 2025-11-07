@@ -6,6 +6,7 @@
     curl
     cmake
     deadnix # Remove unused Nix code
+    devenv
     eza # Modern ls replacement
     fzf # Fuzzy finder for files/history
     gcc
