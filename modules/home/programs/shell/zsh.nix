@@ -12,7 +12,6 @@
 
     shellAliases = {
       ll = "ls -l";
-      cd = "z";
       ls = "eza --icons=always --no-quotes";
       tree = "eza --icons=always --tree --no-quotes";
       cat = "bat --theme=base16 --color=always --wrap=never";

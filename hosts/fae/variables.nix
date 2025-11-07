@@ -25,7 +25,7 @@
       secondary = "LG Electronics LG ULTRAGEAR 107NTZN78013";
     };
 
-    shell = "fish";
+    shell = "zsh"; # zsh or fish
     terminal = "ghostty";
     launcher = "rofi -show drun";
     browser = "zen";

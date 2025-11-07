@@ -16,7 +16,6 @@ in {
       initialPassword = "";
       extraGroups = ["networkmanager" "wheel"];
       shell = pkgs.${shell}; # fish or zsh
-      packages = with pkgs; [];
     };
   };
 }
