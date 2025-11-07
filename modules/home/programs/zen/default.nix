@@ -8,10 +8,6 @@
 
   programs.zen-browser = {
     enable = true;
-    darwinDefaultsId =
-      if pkgs.stdenv.isDarwin
-      then "org.mozilla.firefox.plist"
-      else null;
 
     profiles.${config.var.username} = {
       isDefault = true;
@@ -44,23 +40,6 @@
         "browser.contentblocking.category" = {Value = "strict";};
         "dom.security.https_only_mode" = {Value = true;};
       };
-
-      /*
-         ExtensionSettings = {
-        "uBlock0@raymondhill.net" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-          installation_mode = "force_installed";
-        };
-        "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
-          installation_mode = "force_installed";
-        };
-        "addon@darkreader.org" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
-          installation_mode = "force_installed";
-        };
-      };
-      */
 
       SearchEngines = {
         Default = "Brave";
