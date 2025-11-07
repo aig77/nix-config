@@ -64,11 +64,6 @@
     nixpkgs,
     flake-parts,
     devenv,
-    home-manager,
-    disko,
-    stylix,
-    darwin,
-    nix-homebrew,
     ...
   }:
     flake-parts.lib.mkFlake {inherit inputs;} {
@@ -85,45 +80,19 @@
           config.allowBroken = true;
         };
       in {
-        devenv = import ./devenv.nix {inherit pkgs;};
+        devenv = import ./lib/devenv.nix {inherit pkgs;};
       };
 
-      flake = {
+      flake = let
+        lib = import ./lib/mkSystem.nix {inherit inputs;};
+      in {
         nixosConfigurations = {
-          fae = nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            specialArgs = {inherit inputs;};
-            modules = [
-              disko.nixosModules.disko
-              home-manager.nixosModules.home-manager
-              stylix.nixosModules.stylix
-              ./hosts/fae/configuration.nix
-            ];
-          };
+          fae = lib.mkNixos {hostname = "fae";};
         };
 
         darwinConfigurations = {
-          # macbook pro
-          ein = darwin.lib.darwinSystem {
-            system = "aarch64-darwin";
-            specialArgs = {inherit inputs;};
-            modules = [
-              home-manager.darwinModules.home-manager
-              stylix.darwinModules.stylix
-              nix-homebrew.darwinModules.nix-homebrew
-              ./hosts/ein/configuration.nix
-            ];
-          };
-          spike = darwin.lib.darwinSystem {
-            system = "aarch64-darwin";
-            specialArgs = {inherit inputs;};
-            modules = [
-              home-manager.darwinModules.home-manager
-              stylix.darwinModules.stylix
-              nix-homebrew.darwinModules.nix-homebrew
-              ./hosts/spike/configuration.nix
-            ];
-          };
+          ein = lib.mkDarwin {hostname = "ein";};
+          spike = lib.mkDarwin {hostname = "spike";};
         };
       };
     };
