@@ -1,27 +1,30 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    bat
-    btop
+    alejandra # Nix code formatter
+    bat # Cat with syntax highlighting
+    btop # Resource monitor (CPU/RAM/disk)
     curl
     cmake
-    eza
-    fzf
+    deadnix # Remove unused Nix code
+    eza # Modern ls replacement
+    fzf # Fuzzy finder for files/history
     gcc
-    gh
+    gh # GitHub CLI
     git
-    glow
+    glow # Markdown viewer for terminal
     gnumake
-    jq
-    krabby
-    manix
-    nil
-    ninja
-    nixd
-    nix-output-monitor
-    nix-tree
+    jq # JSON processor
+    krabby # Pokemon in terminal
+    manix # Fast Nix documentation search
+    nil # Nix language server
+    ninja # Fast build system
+    nixd # Nix language server
+    nix-output-monitor # Pretty Nix build output
+    nix-tree # Browse Nix dependency trees
     pkg-config
-    ripgrep
-    tldr
+    ripgrep # Fast recursive search tool
+    statix # Nix linter
+    tldr # Simplified man pages
     unzip
     xz
     wget
