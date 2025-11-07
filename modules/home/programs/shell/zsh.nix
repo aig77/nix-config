@@ -3,12 +3,41 @@
   lib,
   config,
   ...
-}: {
+}: let
+  inherit (config.lib.stylix) colors;
+in {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
+
+    syntaxHighlighting.styles = {
+      # Variables
+      variable = "fg=#${colors.base0C}";
+      assign = "fg=#${colors.base0C}";
+
+      # Commands
+      command = "fg=#${colors.base0D}";
+      builtin = "fg=#${colors.base0D}";
+      function = "fg=#${colors.base0D}";
+      alias = "fg=#${colors.base0D}";
+
+      # Strings
+      single-quoted-argument = "fg=#${colors.base0B}";
+      double-quoted-argument = "fg=#${colors.base0B}";
+
+      # Paths
+      path = "fg=#${colors.base0A},underline";
+
+      # Options/flags
+      single-hyphen-option = "fg=#${colors.base09}";
+      double-hyphen-option = "fg=#${colors.base09}";
+
+      # Errors
+      unknown-token = "fg=#${colors.base08}";
+      command-not-found = "fg=#${colors.base08}";
+    };
 
     shellAliases = {
       ll = "ls -l";
@@ -60,6 +89,9 @@
       zstyle ':fzf-tab:*' use-fzf-default-opts yes
       # switch group using `<` and `>`
       zstyle ':fzf-tab:*' switch-group '<' '>'
+
+      # Autosuggestion styling - darker gray for better visibility
+      ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#${colors.base03},bold"
 
       # direnv setup
       #eval "$(direnv hook zsh)"
