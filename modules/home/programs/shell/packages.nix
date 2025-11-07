@@ -26,6 +26,5 @@
     xz
     wget
     zip
-    zoxide
   ];
 }
