@@ -1,8 +1,8 @@
 {config, ...}: {
   imports = [
-    ../../modules/nixos/darwin.nix
-    ../../modules/nixos/home-manager.nix
-    ../../modules/nixos/nix.nix
+    ../../../modules/darwin
+    ../../../modules/nixos/home-manager.nix
+    #../../../modules/nixos/nix.nix
     ./variables.nix
     ./theme.nix
   ];
@@ -31,5 +31,5 @@
   };
 
   system.primaryUser = config.var.username;
-  home-manager.users.arturo = import ./home.nix;
+  home-manager.users.${config.var.username} = import ./home.nix;
 }

@@ -20,7 +20,7 @@
           inputs.disko.nixosModules.disko
           inputs.home-manager.nixosModules.home-manager
           inputs.stylix.nixosModules.stylix
-          ../hosts/${hostname}/configuration.nix
+          ../hosts/nixos/${hostname}/configuration.nix
         ]
         ++ extraModules;
     };
@@ -48,7 +48,7 @@
           inputs.home-manager.darwinModules.home-manager
           inputs.stylix.darwinModules.stylix
           inputs.nix-homebrew.darwinModules.nix-homebrew
-          ../hosts/${hostname}/configuration.nix
+          ../hosts/darwin/${hostname}/configuration.nix
         ]
         ++ extraModules;
     };
