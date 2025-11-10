@@ -1,22 +1,22 @@
 {config, ...}: {
   imports = [
     # Mostly system related configuration
-    ../../modules/nixos/audio.nix
-    ../../modules/nixos/avahi.nix
-    ../../modules/nixos/boot.nix
-    ../../modules/nixos/docker.nix
-    ../../modules/nixos/home-manager.nix
-    ../../modules/nixos/networking.nix
-    ../../modules/nixos/nix.nix
-    ../../modules/nixos/users.nix
-    ../../modules/nixos/utils.nix
+    ../../../modules/nixos/audio.nix
+    ../../../modules/nixos/avahi.nix
+    ../../../modules/nixos/boot.nix
+    ../../../modules/nixos/docker.nix
+    ../../../modules/nixos/home-manager.nix
+    ../../../modules/nixos/networking.nix
+    ../../../modules/nixos/nix.nix
+    ../../../modules/nixos/users.nix
+    ../../../modules/nixos/utils.nix
 
-    #../../modules/nixos/hyprland.nix
-    #../../modules/nixos/sddm.nix
-    ../../modules/nixos/gnome.nix
+    #../../../modules/nixos/hyprland.nix
+    #../../../modules/nixos/sddm.nix
+    ../../../modules/nixos/gnome.nix
     #../../modules/nixos/nvidia.nix
-    ../../modules/nixos/amdgpu.nix
-    ../../modules/nixos/gaming.nix
+    ../../../modules/nixos/amdgpu.nix
+    ../../../modules/nixos/gaming.nix
 
     ./disko-config.nix
     ./hardware-configuration.nix

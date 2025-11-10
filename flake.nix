@@ -73,6 +73,7 @@
 
       perSystem = {pkgs, ...}: {
         devShells.default = import ./lib/shell.nix {inherit pkgs;};
+        formatter = pkgs.alejandra;
         pre-commit = import ./lib/pre-commit.nix;
       };
 

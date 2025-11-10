@@ -1,6 +1,7 @@
-{pkgs, ...}:
+{pkgs}:
 pkgs.mkShell {
-  packages = with pkgs; [
+  nativeBuildInputs = with pkgs; [
+    git
     neovim
     nixd
   ];
