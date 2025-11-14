@@ -7,7 +7,7 @@ in {
     age.keyFile = "${config.users.users.${config.var.username}.home}/.config/sops/age/keys.txt";
 
     secrets = {
-      github-email = {};
+      git-email = {};
     };
   };
 }

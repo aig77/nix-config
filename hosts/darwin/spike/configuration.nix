@@ -2,9 +2,9 @@
   modulesPath = ../../../modules;
 in {
   imports = [
-    (modulesPath + ./darwin)
-    (modulesPath + common/home-manager.nix)
-    (modulesPath + common/sops.nix)
+    (modulesPath + /darwin)
+    (modulesPath + /common/home-manager.nix)
+    (modulesPath + /common/sops.nix)
     ./theme.nix
     ./variables.nix
   ];

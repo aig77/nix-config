@@ -9,11 +9,6 @@
     hostname = "spike";
     pokemonSprite = "umbreon -s";
 
-    git = {
-      username = "aig77";
-      email = "";
-    };
-
     shell = "zsh";
     terminal = "ghostty";
     browser = "zen";
