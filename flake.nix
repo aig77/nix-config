@@ -27,6 +27,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     git-hooks-nix = {
       url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -72,7 +77,7 @@
       systems = ["x86_64-linux" "aarch64-darwin"];
 
       perSystem = {pkgs, ...}: {
-        devShells.default = import ./lib/shell.nix {inherit pkgs;};
+        devShells.default = import ./shell.nix {inherit pkgs;};
         formatter = pkgs.alejandra;
         pre-commit = import ./lib/pre-commit.nix;
       };

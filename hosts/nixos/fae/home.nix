@@ -58,6 +58,7 @@
     sessionVariables = {
       EDITOR = "nvim";
       WALLPAPERS = "$HOME/Pictures/Wallpapers";
+      XDG_CONFIG_HOME = "$HOME/.config";
     };
 
     file = {};

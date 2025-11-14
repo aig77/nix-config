@@ -1,4 +1,8 @@
-{lib, ...}: {
+{
+  config,
+  lib,
+  ...
+}: {
   options.var = lib.mkOption {
     type = lib.types.attrs;
     default = {};
@@ -11,7 +15,7 @@
 
     git = {
       username = "aig77";
-      email = "";
+      email = config.sops.secrets.github-email.path;
     };
 
     shell = "zsh";
