@@ -3,6 +3,7 @@
     ../../../modules/darwin
     ../../../modules/nixos/home-manager.nix
     #../../../modules/nixos/nix.nix
+    ../../../modules/nixos/sops.nix
     ./variables.nix
     ./theme.nix
   ];
