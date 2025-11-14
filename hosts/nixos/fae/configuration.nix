@@ -1,28 +1,28 @@
 {config, ...}: let
-  modules = ../../../modules;
+  modulesPath = ../../../modules;
 in {
   imports = [
     # Mostly system related configuration
-    (modules + /nixos/audio.nix)
-    (modules + /nixos/avahi.nix)
-    (modules + /nixos/boot.nix)
-    (modules + /nixos/docker.nix)
-    (modules + /nixos/networking.nix)
-    (modules + /nixos/nix.nix)
-    (modules + /nixos/users.nix)
-    (modules + /nixos/utils.nix)
+    (modulesPath + /nixos/audio.nix)
+    (modulesPath + /nixos/avahi.nix)
+    (modulesPath + /nixos/boot.nix)
+    (modulesPath + /nixos/docker.nix)
+    (modulesPath + /nixos/networking.nix)
+    (modulesPath + /nixos/nix.nix)
+    (modulesPath + /nixos/users.nix)
+    (modulesPath + /nixos/utils.nix)
 
     # WM
-    #../../../modules/nixos/hyprland.nix
-    #../../../modules/nixos/sddm.nix
-    (modules + /nixos/gnome.nix)
+    #(modulesPath + /nixos/hyprland.nix)
+    #(modulesPath + /nixos/sddm.nix)
+    (modulesPath + /nixos/gnome.nix)
 
     # Gaming
-    (modules + /nixos/amdgpu.nix)
-    (modules + /nixos/gaming.nix)
+    (modulesPath + /nixos/amdgpu.nix)
+    (modulesPath + /nixos/gaming.nix)
 
-    (modules + /common/home-manager.nix)
-    (modules + /common/sops.nix)
+    (modulesPath + /common/home-manager.nix)
+    (modulesPath + /common/sops.nix)
 
     ./disko-config.nix
     ./hardware-configuration.nix

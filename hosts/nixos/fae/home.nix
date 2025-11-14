@@ -3,33 +3,36 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  modulesPath = ../../../modules;
+in {
   imports = [
     # Programs
-    ../../../modules/home/programs/email
-    ../../../modules/home/programs/fetch
-    ../../../modules/home/programs/ghostty
-    ../../../modules/home/programs/git
-    ../../../modules/home/programs/lazygit
-    ../../../modules/home/programs/neovim
-    ../../../modules/home/programs/nixcord
-    ../../../modules/home/programs/shell
-    ../../../modules/home/programs/spotify
-    ../../../modules/home/programs/thunar
-    ../../../modules/home/programs/vim
-    ../../../modules/home/programs/zen
+    (modulesPath + /home/programs/email)
+    (modulesPath + /home/programs/fetch)
+    (modulesPath + /home/programs/ghostty)
+    (modulesPath + /home/programs/git)
+    (modulesPath + /home/programs/lazygit)
+    (modulesPath + /home/programs/neovim)
+    (modulesPath + /home/programs/nixcord)
+    (modulesPath + /home/programs/obsidian)
+    (modulesPath + /home/programs/shell)
+    (modulesPath + /home/programs/spotify)
+    (modulesPath + /home/programs/thunar)
+    (modulesPath + /home/programs/vim)
+    (modulesPath + /home/programs/zen)
 
     # System
-    #../../../modules/home/system/hyprland
-    #../../../modules/home/system/rofi
-    #../../../modules/home/system/hyprpanel
-    #../../../modules/home/system/waybar
-    #../../../modules/home/system/wlogout
-    #../../../modules/home/system/dunst
-    ../../../modules/home/system/gnome-extensions
+    #(modulesPath + /home/system/hyprland)
+    #(modulesPath + /home/system/rofi)
+    #(modulesPath + /home/system/hyprpanel)
+    #(modulesPath + /home/system/waybar)
+    #(modulesPath + /home/system/wlogout)
+    #(modulesPath + /home/system/dunst)
+    (modulesPath + /home/system/gnome-extensions)
 
     # Scripts
-    ../../../modules/home/scripts/screenshot
+    (modulesPath + /home/scripts/screenshot)
 
     ./variables.nix
   ];
