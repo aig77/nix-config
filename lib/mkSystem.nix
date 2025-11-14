@@ -46,6 +46,7 @@
             nixpkgs.overlays = overlays;
           }
           inputs.home-manager.darwinModules.home-manager
+          inputs.sops-nix.darwinModules.sops
           inputs.stylix.darwinModules.stylix
           inputs.nix-homebrew.darwinModules.nix-homebrew
           ../hosts/darwin/${hostname}/configuration.nix
