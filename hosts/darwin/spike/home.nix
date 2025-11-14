@@ -1,6 +1,7 @@
 {
-  pkgs,
+  inputs,
   config,
+  pkgs,
   ...
 }: {
   imports = [
@@ -12,7 +13,6 @@
     ../../../modules/home/programs/neovim
     ../../../modules/home/programs/shell
     ../../../modules/home/programs/vim
-
     ./variables.nix
   ];
 

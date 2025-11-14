@@ -1,4 +1,8 @@
-{lib, ...}: {
+{
+  lib,
+  config,
+  ...
+}: {
   options = {
     var = lib.mkOption {
       type = lib.types.attrs;
@@ -14,11 +18,6 @@
     inherit username hostname configPath;
     profileImagePath = configPath + "/themes/profilepics/ein.jpg";
     pokemonSprite = "umbreon -s";
-
-    git = {
-      username = "aig77";
-      email = "";
-    };
 
     monitors = {
       main = "ASUSTek COMPUTER INC XG27AQMR SALMTF054549";

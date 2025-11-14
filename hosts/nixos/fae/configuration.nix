@@ -22,6 +22,7 @@ in {
     (modules + /nixos/gaming.nix)
 
     (modules + /common/home-manager.nix)
+    (modules + /common/sops.nix)
 
     ./disko-config.nix
     ./hardware-configuration.nix
