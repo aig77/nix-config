@@ -1,18 +1,19 @@
 {
-  inputs,
   config,
   pkgs,
   ...
-}: {
+}: let
+  modulesPath = ../../../modules;
+in {
   imports = [
     # Programs
-    ../../../modules/home/programs/fetch
-    ../../../modules/home/programs/ghostty
-    ../../../modules/home/programs/git
-    ../../../modules/home/programs/lazygit
-    ../../../modules/home/programs/neovim
-    ../../../modules/home/programs/shell
-    ../../../modules/home/programs/vim
+    (modulesPath + /home/programs/fetch)
+    (modulesPath + /home/programs/ghostty)
+    (modulesPath + /home/programs/git)
+    (modulesPath + /home/programs/lazygit)
+    (modulesPath + /home/programs/neovim)
+    (modulesPath + /home/programs/shell)
+    (modulesPath + /home/programs/vim)
     ./variables.nix
   ];
 
