@@ -1,0 +1,11 @@
+keys:
+  - &ein age10u04nxg32r7t257vlcvgs4chz4jjd9nava4afxva2fa8yqe6zckq0xj5gc
+  - &fae age1k0lzl7e8ha8v3t458mdkypjuvglry9u5eqgv38pswfewm9nes3mqrn0856
+  - &spike age1rp45v5s8mlnk4zf382u69gqksfjn94ssq7ykdfr62pxk23sluv7qed7kgj 
+creation_rules:
+  - path_regex: secrets/.*\.yaml$
+    key_groups:
+      - age:
+        - *ein
+        - *fae
+        - *spike
