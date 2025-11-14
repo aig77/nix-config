@@ -1,11 +1,12 @@
-{config, ...}: {
+{config, ...}: let
+  modulesPath = ../../../modules;
+in {
   imports = [
-    ../../../modules/darwin
-    ../../../modules/nixos/home-manager.nix
-    #../../../modules/nixos/nix.nix
-    ../../../modules/nixos/sops.nix
-    ./variables.nix
+    (modulesPath + /darwin)
+    (modulesPath + /common/home-manager.nix)
+    (modulesPath + /common/sops.nix)
     ./theme.nix
+    ./variables.nix
   ];
 
   homebrew = {
