@@ -1,27 +1,32 @@
-{config, ...}: {
+{config, ...}: let
+  modules = ../../../modules;
+in {
   imports = [
     # Mostly system related configuration
-    ../../../modules/nixos/audio.nix
-    ../../../modules/nixos/avahi.nix
-    ../../../modules/nixos/boot.nix
-    ../../../modules/nixos/docker.nix
-    ../../../modules/nixos/home-manager.nix
-    ../../../modules/nixos/networking.nix
-    ../../../modules/nixos/nix.nix
-    ../../../modules/nixos/users.nix
-    ../../../modules/nixos/utils.nix
+    (modules + /nixos/audio.nix)
+    (modules + /nixos/avahi.nix)
+    (modules + /nixos/boot.nix)
+    (modules + /nixos/docker.nix)
+    (modules + /nixos/networking.nix)
+    (modules + /nixos/nix.nix)
+    (modules + /nixos/users.nix)
+    (modules + /nixos/utils.nix)
 
+    # WM
     #../../../modules/nixos/hyprland.nix
     #../../../modules/nixos/sddm.nix
-    ../../../modules/nixos/gnome.nix
-    #../../modules/nixos/nvidia.nix
-    ../../../modules/nixos/amdgpu.nix
-    ../../../modules/nixos/gaming.nix
+    (modules + /nixos/gnome.nix)
+
+    # Gaming
+    (modules + /nixos/amdgpu.nix)
+    (modules + /nixos/gaming.nix)
+
+    (modules + /common/home-manager.nix)
 
     ./disko-config.nix
     ./hardware-configuration.nix
-    ./variables.nix
     ./theme.nix
+    ./variables.nix
   ];
 
   home-manager.users.${config.var.username} = import ./home.nix;
