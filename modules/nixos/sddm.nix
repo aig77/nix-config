@@ -14,19 +14,16 @@ in {
   services.displayManager = {
     sddm = {
       enable = true;
+      wayland.enable = true;
       package = pkgs.kdePackages.sddm;
       extraPackages = [sddm-astronaut];
       theme = "sddm-astronaut-theme";
-      wayland.enable = true;
       settings = {
         Wayland.SessionDir = "${
-          inputs.hyprland.packages."${pkgs.system}".hyprland
+          inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
         }/share/wayland-sessions";
       };
     };
   };
   environment.systemPackages = [sddm-astronaut];
-
-  # To prevent getting stuck at shutdown
-  systemd.extraConfig = "DefaultTimeoutStopSec=10s";
 }

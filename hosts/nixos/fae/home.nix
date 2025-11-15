@@ -15,6 +15,7 @@ in {
     (modulesPath + /home/programs/lazygit)
     (modulesPath + /home/programs/neovim)
     (modulesPath + /home/programs/nixcord)
+    (modulesPath + /home/programs/obs)
     (modulesPath + /home/programs/obsidian)
     (modulesPath + /home/programs/shell)
     (modulesPath + /home/programs/spotify)
@@ -23,13 +24,8 @@ in {
     (modulesPath + /home/programs/zen)
 
     # System
-    #(modulesPath + /home/system/hyprland)
-    #(modulesPath + /home/system/rofi)
-    #(modulesPath + /home/system/hyprpanel)
-    #(modulesPath + /home/system/waybar)
-    #(modulesPath + /home/system/wlogout)
-    #(modulesPath + /home/system/dunst)
-    (modulesPath + /home/system/gnome-extensions)
+    (modulesPath + /home/system/hyprland)
+    # (modulesPath + /home/system/gnome-extensions)
 
     # Scripts
     (modulesPath + /home/scripts/screenshot)
@@ -44,14 +40,15 @@ in {
     packages = with pkgs; [
       bitwarden-desktop
       brave
-      inputs.claude-desktop.packages.${pkgs.system}.claude-desktop-with-fhs # claude
+      cava
+      inputs.claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop-with-fhs # claude
       feh # cli image viewer
       httpie
       kitty
       lmstudio
       mission-center
       networkmanagerapplet
-      obs-studio
+      # obs-studio
       opencode
       pavucontrol # volume control
       qpwgraph # pipewire graph manager

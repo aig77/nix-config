@@ -1,8 +1,4 @@
-{
-  lib,
-  config,
-  ...
-}: {
+{lib, ...}: {
   options = {
     var = lib.mkOption {
       type = lib.types.attrs;
@@ -16,7 +12,6 @@
     configPath = "/home/${username}/.config/nix-config";
   in {
     inherit username hostname configPath;
-    profileImagePath = configPath + "/themes/profilepics/ein.jpg";
     pokemonSprite = "umbreon -s";
 
     monitors = {
@@ -29,5 +24,6 @@
     launcher = "rofi -show drun";
     browser = "zen";
     file-manager = "thunar";
+    lock = "hyprlock";
   };
 }

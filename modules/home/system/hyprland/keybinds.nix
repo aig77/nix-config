@@ -9,6 +9,11 @@
       "SUPER SHIFT, L, exec, ${config.var.lock}"
       #"SUPER, X, exec, ${config.var.logout}"
 
+      # Screenshots
+      ", PRINT, exec, screenshot-area"
+      "SHIFT, PRINT, exec, screenshot-screen"
+      "CTRL, PRINT, exec, screenshot-window"
+
       # Hypr binds
       "SUPER, W, killactive"
       "SUPER SHIFT, Q, exit"
