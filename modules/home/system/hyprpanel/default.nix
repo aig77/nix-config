@@ -42,7 +42,7 @@
           margin_top = "0.2em";
           margin_bottom = "0.2em";
           margin_sides = "0em";
-          layer = "overlay";
+          layer = "top";
           opacity = 95;
           buttons.radius = "1em";
         };

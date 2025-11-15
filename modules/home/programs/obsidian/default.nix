@@ -1,15 +1,4 @@
 {
-  programs.obsidian = {
-    enable = true;
-
-    vaults = {
-      obsidian = {
-        target = "Documents/obsidian";
-
-        settings = {
-          app.vimMode = true;
-        };
-      };
-    };
-  };
+  programs.obsidian.enable = true;
+  stylix.targets.obsidian.enable = false;
 }
