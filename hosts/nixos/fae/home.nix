@@ -16,7 +16,6 @@ in {
     (modulesPath + /home/programs/neovim)
     (modulesPath + /home/programs/nixcord)
     (modulesPath + /home/programs/obs)
-    (modulesPath + /home/programs/obsidian)
     (modulesPath + /home/programs/shell)
     (modulesPath + /home/programs/spotify)
     (modulesPath + /home/programs/thunar)
@@ -48,7 +47,7 @@ in {
       lmstudio
       mission-center
       networkmanagerapplet
-      # obs-studio
+      obsidian
       opencode
       pavucontrol # volume control
       qpwgraph # pipewire graph manager
