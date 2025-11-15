@@ -1,7 +1,6 @@
 {
-  pkgs,
-  lib,
   config,
+  lib,
   ...
 }: let
   inherit (config.lib.stylix) colors;
@@ -12,36 +11,30 @@
   };
   inactive-border-color = colors.base03;
 in {
-  imports = [./keybinds.nix ./monitors.nix ./polkitagent.nix ../hyprlock ../hypridle];
-
-  home.packages = with pkgs; [
-    qt5.qtwayland
-    qt6.qtwayland
-    libsForQt5.qt5ct
-    libsForQt5.xwaylandvideobridge
-    qt6ct
-    imv
-    wf-recorder
-    wlr-randr
-    wl-clipboard
-    dconf
+  imports = [
+    ./keybinds.nix
+    ./monitors.nix
+    ./polkitagent.nix
+    ../hyprlock
+    ../hypridle
+    # ../dunst
+    ../hyprpanel
+    ../rofi
+    # ../wlogout
   ];
 
   wayland.windowManager.hyprland = {
     enable = true;
     package = null;
     portalPackage = null;
+    systemd.variables = ["--all"];
 
     settings = {
-      exec-once = [
-        "dbus-update-activation-environment --systemd --all"
-        "hypridle"
-        "xwaylandvideobridge"
-      ];
+      exec-once = ["hypridle"];
 
       env = [
-        "MOZ_ENABLE_WAYLAND,1"
         "NIXOS_OZONE_WL,1"
+        "MOZ_ENABLE_WAYLAND,1"
         "XDG_SESSION_TYPE,wayland"
         "XDG_SESSION_DESKTOP,Hyprland"
         "T_QPA_PLATFORM,wayland"
@@ -97,8 +90,7 @@ in {
       };
 
       misc = {
-        force_default_wallpaper =
-          0; # Set to 0 to disable the anime mascot wallpapers
+        force_default_wallpaper = 0; # Set to 0 to disable the anime mascot wallpapers
         disable_hyprland_logo = true;
         focus_on_activate = true;
       };

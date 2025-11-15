@@ -8,7 +8,7 @@
 
   programs.hyprpanel = {
     enable = true;
-    package = inputs.hyprpanel.packages.${pkgs.system}.default;
+    package = inputs.hyprpanel.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
     settings = {
       bar.layouts = {
@@ -43,8 +43,8 @@
           margin_bottom = "0.2em";
           margin_sides = "0em";
           layer = "overlay";
-          buttons.radius = "1em";
           opacity = 95;
+          buttons.radius = "1em";
         };
         menus.menu.dashboard.profile = {
           size = "10em";
@@ -56,7 +56,7 @@
         launcher.icon = "";
         workspaces = {
           show_icons = false;
-          show_numbered = true;
+          show_numbered = false;
           monitorSpecific = false;
           workspaces = 8;
         };
@@ -64,7 +64,6 @@
 
       menus = {
         dashboard = {
-          powermenu.avatar.image = config.var.profileImagePath;
           directories.enabled = false;
           shortcuts.left.shortcut1 = {
             icon = "󰖟";
@@ -77,4 +76,6 @@
       };
     };
   };
+
+  home.file.".face.icon".source = ../../../../hosts/nixos/${config.var.hostname}/icon.jpg;
 }
