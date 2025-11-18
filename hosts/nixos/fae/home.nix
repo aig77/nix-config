@@ -42,6 +42,7 @@ in {
       cava
       inputs.claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop-with-fhs # claude
       feh # cli image viewer
+      gnome-calculator
       httpie
       kitty
       lmstudio
