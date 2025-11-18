@@ -1,15 +1,12 @@
 {
   config,
   lib,
+  inputs,
+  pkgs,
   ...
 }: let
-  inherit (config.lib.stylix) colors;
-  active-border-color = {
-    a = colors.base0C;
-    b = colors.base0D;
-    c = colors.base05;
-  };
-  inactive-border-color = colors.base03;
+  # darker gray, blue, magenta
+  inherit (config.lib.stylix.colors) base02 base0D base0E;
 in {
   imports = [
     ./keybinds.nix
@@ -28,6 +25,9 @@ in {
     package = null;
     portalPackage = null;
     systemd.variables = ["--all"];
+    plugins = with inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}; [
+      hyprfocus
+    ];
 
     settings = {
       exec-once = ["hypridle"];
@@ -41,6 +41,8 @@ in {
         "GDK_BACKEND,wayland"
         "ELECTRON_OZONE_PLATFORM_HINT,auto"
       ];
+
+      plugins.hyprfocus.enable = "yes";
 
       input = {
         kb_layout = "us";
@@ -63,8 +65,8 @@ in {
         border_size = 2;
         "col.active_border" =
           lib.mkForce
-          "rgb(${active-border-color.a}) rgb(${active-border-color.b}) rgb(${active-border-color.c}) 45deg";
-        "col.inactive_border" = lib.mkForce "rgb(${inactive-border-color})";
+          "rgb(${base0D}) rgb(${base0E}) rgb(${base0D}) 45deg";
+        "col.inactive_border" = lib.mkForce "rgb(${base02})";
 
         layout = "dwindle";
 
@@ -98,33 +100,32 @@ in {
       animations = {
         enabled = true;
         bezier = [
-          "wind, 0.05, 0.9, 0.1, 1.05"
-          "winIn, 0.1, 1.1, 0.1, 1.1"
-          "winOut, 0.3, -0.3, 0, 1"
-          "linear, 1, 1, 1, 1"
+          "easeOutQuint, 0.22, 1, 0.36, 1"
+          "easeInOutCubic, 0.65, 0, 0.35, 1"
+          "linear, 0, 0, 1, 1"
         ];
-
         animation = [
-          "windows, 1, 6, wind, slide"
-          "windowsIn, 1, 6, winIn, slide"
-          "windowsOut, 1, 5, winOut, slide"
-          "windowsMove, 1, 5, wind, slide"
-          "border, 1, 1, linear"
-          #"borderangle, 1, 1, 30, linear, loop"
-          #"fade, 1, 10, default"
-          "workspaces, 1, 5, wind"
-          "layers, 1, 9, wind, slide top"
+          "windows, 1, 4, easeOutQuint, slide"
+          "windowsIn, 1, 4, easeOutQuint, popin 90%"
+          "windowsOut, 1, 4, easeInOutCubic, popin 90%"
+          "windowsMove, 1, 4, easeOutQuint, slide"
+          "border, 1, 5, easeInOutCubic"
+          "fade, 1, 3, easeInOutCubic"
+          "workspaces, 1, 3, easeOutQuint, slide"
+          "layers, 1, 4, easeOutQuint, slide"
         ];
       };
 
       windowrulev2 = [
-        # replaces nomaximizerequest, class:.* # You'll probably like this.
-        #"windowrulev2 = suppressevent maximize, class:.*"
-        #"windowrulev2 = forceinput, class:.*"
         "float, class:^(org.pulseaudio.pavucontrol)$"
         "float, class:^(nm-connection-editor)$"
         "float, class:^(.blueman-manager-wrapped)$"
         "float, title:^(.*Bitwarden Password Manager.*)$"
+        "float, title:Calculator"
+
+        # idle inhibit while watching videos
+        "idleinhibit focus, class:^(zen)$, title:^(.*YouTube.*)$"
+        "idleinhibit fullscreen, class:^(zen)$"
 
         # xwaylandvideobridge
         "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
@@ -135,16 +136,11 @@ in {
       ];
 
       layerrule = [
-        "blur, waybar"
         "blur, rofi"
         "dimaround, rofi"
         "ignorezero, rofi"
+        "blur, waybar"
         "blur, wlogout"
-
-        # hyprpanel
-        "blur, bar-0"
-        "blur, bar-1"
-        "blur, bar-3"
       ];
     };
   };
