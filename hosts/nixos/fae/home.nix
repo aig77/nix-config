@@ -8,6 +8,7 @@
 in {
   imports = [
     # Programs
+    (modulesPath + /home/programs/cava)
     (modulesPath + /home/programs/email)
     (modulesPath + /home/programs/fetch)
     (modulesPath + /home/programs/ghostty)
@@ -39,7 +40,6 @@ in {
     packages = with pkgs; [
       bitwarden-desktop
       brave
-      cava
       inputs.claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop-with-fhs # claude
       feh # cli image viewer
       gnome-calculator
