@@ -9,7 +9,7 @@ in {
   imports = [
     # Programs
     (modulesPath + /home/programs/cava)
-    (modulesPath + /home/programs/email)
+    # (modulesPath + /home/programs/email)
     (modulesPath + /home/programs/fetch)
     (modulesPath + /home/programs/ghostty)
     (modulesPath + /home/programs/git)
@@ -21,6 +21,7 @@ in {
     (modulesPath + /home/programs/spotify)
     (modulesPath + /home/programs/thunar)
     (modulesPath + /home/programs/vim)
+    (modulesPath + /home/programs/zathura)
     (modulesPath + /home/programs/zen)
 
     # System
