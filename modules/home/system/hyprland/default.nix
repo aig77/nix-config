@@ -78,7 +78,7 @@ in {
 
         blur = {
           enabled = true;
-          size = 4;
+          size = 8;
           passes = 4;
           new_optimizations = true;
           ignore_opacity = true;
@@ -123,9 +123,16 @@ in {
         "float, title:^(.*Bitwarden Password Manager.*)$"
         "float, title:Calculator"
 
+        "opacity 0.8 0.8, class:^(discord)$"
+        "opacity 0.8 0.8, class:^(obsidian)$"
+        "opacity 0.8 0.8, class:^(spotify)$"
+        "opacity 0.8 0.8, class:^(steam)$"
+        "opacity 0.8 0.8, class:^(thunar)$"
+        "opacity 0.8 0.8, class:^(org.pwmt.zathura)$"
+
         # idle inhibit while watching videos
-        "idleinhibit focus, class:^(zen)$, title:^(.*YouTube.*)$"
-        "idleinhibit fullscreen, class:^(zen)$"
+        "idleinhibit focus, class:^(zen*)$, title:^(.*YouTube.*)$"
+        "idleinhibit fullscreen, class:^(zen*)$"
 
         # xwaylandvideobridge
         "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
