@@ -98,7 +98,7 @@
         lib = import ./lib/mkSystem.nix {inherit inputs;};
       in {
         nixosConfigurations = {
-          fae = lib.mkNixos {hostname = "fae";};
+          faye = lib.mkNixos {hostname = "faye";};
         };
 
         darwinConfigurations = {

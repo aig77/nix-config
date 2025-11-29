@@ -4,7 +4,7 @@
     options = {
       recolor = true;
       recolor-keephue = true;
-      guioptions = "v";
+      guioptions = "sv";
       adjust-open = "width";
       statusbar-basename = true;
       render-loading = false;
