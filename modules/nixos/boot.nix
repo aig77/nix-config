@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest; # Latest stable kernel
-    # kernelPackages = pkgs.linuxPackages_zen;
+    # kernelPackages = pkgs.linuxPackages_latest; # Latest stable kernel
+    kernelPackages = pkgs.linuxPackages_zen;
 
     loader = {
       grub = {
