@@ -1,5 +1,5 @@
 /*
-Disko configuration for fae desktop
+Disko configuration for faye desktop
 
 INSTALLATION WITH NIXOS-ANYWHERE:
 
@@ -16,9 +16,9 @@ ip a
 cd ~/.config/nix-config
 
 nix run github:nix-community/nixos-anywhere -- \
-  --flake .#fae \
+  --flake .#faye \
   --target-host nixos@<ip> \
-  --generate-hardware-config nixos-generate-config ./hosts/fae/hardware-configuration.nix
+  --generate-hardware-config nixos-generate-config ./hosts/faye/hardware-configuration.nix
 
 3. Done! The system will reboot automatically with your full config applied.
 Set root password on first boot:

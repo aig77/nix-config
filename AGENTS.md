@@ -2,13 +2,13 @@
 
 ## Build/Deploy Commands
 - `nix develop` - Enter development shell with tools
-- `nixos-rebuild switch --flake .#<hostname>` - Deploy NixOS config (spike, fae)
+- `nixos-rebuild switch --flake .#<hostname>` - Deploy NixOS config (spike, faye)
 - `darwin-rebuild switch --flake .#ein` - Deploy macOS config
 - `nix flake check` - Validate flake syntax and dependencies
 - `nix build .#nixosConfigurations.<hostname>.config.system.build.toplevel` - Build without deploying
 
 ## Fresh NixOS Installation (Remote via nixos-anywhere)
-For fresh NixOS installations on machines like 'fae', use nixos-anywhere to install remotely from your Mac:
+For fresh NixOS installations on machines like 'faye', use nixos-anywhere to install remotely from your Mac:
 
 ### Quick Start
 1. **On target machine**: Boot NixOS installer ISO, enable SSH, get IP
@@ -20,13 +20,13 @@ For fresh NixOS installations on machines like 'fae', use nixos-anywhere to inst
 
 2. **From your Mac**: Run the install script
    ```bash
-   ./hosts/fae/install.sh <target-ip> /dev/nvme0n1
+   ./hosts/faye/install.sh <target-ip> /dev/nvme0n1
    ```
 
 ### Manual nixos-anywhere Command
 ```bash
 nix run github:nix-community/nixos-anywhere -- \
-  --flake .#fae \
+  --flake .#faye \
   --disk-device /dev/nvme0n1 \
   root@<target-ip>
 ```
@@ -36,7 +36,7 @@ This will:
 - Install NixOS with your flake configuration
 - Automatically reboot into the configured system
 
-See `hosts/fae/disko.nix` for detailed installation instructions.
+See `hosts/faye/disko.nix` for detailed installation instructions.
 
 ## Code Quality
 - `alejandra .` - Format all Nix files (pre-commit hook enabled)
