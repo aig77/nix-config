@@ -4,7 +4,7 @@
   m2 = "desc: ${config.var.monitors.secondary}";
 in {
   wayland.windowManager.hyprland =
-    if (host == "fae")
+    if (host == "faye")
     then {
       settings = {
         monitor = [
