@@ -7,7 +7,6 @@ in {
     (modulesPath + /nixos/avahi.nix)
     (modulesPath + /nixos/boot.nix)
     (modulesPath + /nixos/docker.nix)
-    (modulesPath + /nixos/networking.nix)
     (modulesPath + /nixos/nix.nix)
     (modulesPath + /nixos/users.nix)
     (modulesPath + /nixos/utils.nix)
