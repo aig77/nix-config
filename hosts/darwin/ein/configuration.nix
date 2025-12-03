@@ -10,21 +10,23 @@ in {
   ];
 
   homebrew = {
-    # not available in nixpkgs for darwin
+    # install desktop apps here
     casks = [
+      "brave-browser"
       "claude"
       "discord"
-      "docker"
+      "docker-desktop"
       "ghostty"
-      "raycast"
+      "httpie-desktop"
       "lm-studio"
+      "raycast"
       "steam"
       "whatsapp"
 
       # experiencing issues
       # https://github.com/0xc000022070/zen-browser-flake/issues/128
       # https://nixpk.gs/pr-tracker.html?pr=449689
-      "zen-browser"
+      "zen"
     ];
 
     masApps = {
