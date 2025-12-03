@@ -23,8 +23,8 @@ in {
     inherit (config.var) username;
     homeDirectory = "/Users/" + config.var.username;
 
+    # Can't be installed with brew
     packages = with pkgs; [
-      brave
       opencode
     ];
 
