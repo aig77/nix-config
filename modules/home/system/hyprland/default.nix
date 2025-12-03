@@ -130,8 +130,9 @@ in {
         "opacity 0.8 0.8, class:^(thunar)$"
         "opacity 0.8 0.8, class:^(org.pwmt.zathura)$"
 
-        # Force steam games to be fullscreen
+        # Force games to be fullscreen
         "fullscreen, class:^(steam_app_.*)$"
+        "fullscreen, class:^(gamescope)$"
 
         # idle inhibit while watching videos
         "idleinhibit focus, class:^(zen*)$, title:^(.*YouTube.*)$"
