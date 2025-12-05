@@ -44,7 +44,7 @@ in {
       inputs.claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop-with-fhs # claude
       feh # cli image viewer
       gnome-calculator
-      httpie
+      httpie-desktop
       kitty
       lmstudio
       mission-center
