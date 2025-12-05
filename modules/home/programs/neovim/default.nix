@@ -9,7 +9,6 @@ in {
     enable = true;
     defaultEditor = true;
     viAlias = true;
-    vimAlias = true;
   };
 
   stylix.targets.neovim.enable = false;
