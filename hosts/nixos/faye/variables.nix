@@ -20,9 +20,10 @@
     };
 
     shell = "zsh"; # zsh or fish
-    terminal = "ghostty";
-    launcher = "rofi -show drun";
+    terminal = "alacritty";
     browser = "zen";
+
+    launcher = "rofi -show drun";
     file-manager = "thunar";
     lock = "hyprlock";
   };
