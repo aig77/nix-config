@@ -19,13 +19,13 @@ in {
       ls = "eza --icons=always --no-quotes";
       tree = "eza --icons=always --tree --no-quotes";
       cat = "bat --theme=base16 --color=always --wrap=never";
+      fetch = "${pkgs.krabby}/bin/krabby name umbreon -s --no-title | ${pkgs.fastfetch}/bin/fastfetch --file-raw -";
     };
 
     interactiveShellInit = ''
-      # Greeting: krabby piped into fastfetch
       set -g fish_greeting ""
       function fish_greeting
-        fetch
+        ${pkgs.krabby}/bin/krabby name umbreon -s --no-title | ${pkgs.fastfetch}/bin/fastfetch --file-raw -
       end
 
       # Vi mode

@@ -14,7 +14,6 @@
     glow # Markdown viewer for terminal
     gnumake
     jq # JSON processor
-    krabby # Pokemon in terminal
     manix # Fast Nix documentation search
     nil # Nix language server
     ninja # Fast build system

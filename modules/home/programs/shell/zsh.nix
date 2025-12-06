@@ -44,6 +44,7 @@ in {
       ls = "eza --icons=always --no-quotes";
       tree = "eza --icons=always --tree --no-quotes";
       cat = "bat --theme=base16 --color=always --wrap=never";
+      fetch = "${pkgs.krabby}/bin/krabby name umbreon -s --no-title | ${pkgs.fastfetch}/bin/fastfetch --file-raw -";
     };
 
     history = {
@@ -59,7 +60,7 @@ in {
     };
 
     initContent = lib.mkBefore ''
-      fetch
+      ${pkgs.krabby}/bin/krabby name umbreon -s --no-title | ${pkgs.fastfetch}/bin/fastfetch --file-raw -
 
       # Keybindings
       bindkey -e
