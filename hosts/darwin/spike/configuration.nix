@@ -6,7 +6,7 @@ in {
     (modulesPath + /darwin)
     (modulesPath + /common/home-manager.nix)
     (modulesPath + /common/sops.nix)
-    (themesPath + /catppuccin_darwin.nix)
+    (themesPath + /catppuccin-darwin.nix)
     ./variables.nix
   ];
 

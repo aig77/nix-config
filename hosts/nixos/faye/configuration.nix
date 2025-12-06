@@ -23,7 +23,7 @@ in {
     (modulesPath + /common/home-manager.nix)
     (modulesPath + /common/sops.nix)
 
-    (themesPath + /catppuccin_linux.nix)
+    (themesPath + /catppuccin-linux.nix)
 
     ./disko-config.nix
     ./hardware-configuration.nix
