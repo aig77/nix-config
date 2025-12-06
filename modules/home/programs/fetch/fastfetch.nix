@@ -1,4 +1,10 @@
-{
+{pkgs, ...}: let
+  fetch = pkgs.writeShellScriptBin "fetch" ''
+    ${pkgs.krabby}/bin/krabby name umbreon -s --no-title | ${pkgs.fastfetch}/bin/fastfetch --file-raw -
+  '';
+in {
+  home.packages = [fetch];
+
   programs.fastfetch = {
     enable = true;
     settings = {
@@ -18,7 +24,7 @@
           type = "os";
           key = "";
           keyColor = "red";
-          format = "{2}";
+          format = "{2} {8}";
         }
         {
           type = "kernel";
@@ -61,6 +67,7 @@
           key = "";
           keyColor = "blue";
           format = "{2}";
+          hideType = "integrated";
         }
         {
           type = "memory";

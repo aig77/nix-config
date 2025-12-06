@@ -59,7 +59,7 @@ in {
     };
 
     initContent = lib.mkBefore ''
-      krabby name ${config.var.pokemonSprite} --no-title | fastfetch --file-raw -
+      fetch
 
       # Keybindings
       bindkey -e

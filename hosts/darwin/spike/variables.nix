@@ -7,7 +7,6 @@
   config.var = {
     username = "arturo";
     hostname = "spike";
-    pokemonSprite = "umbreon -s";
 
     shell = "zsh";
     terminal = "ghostty";
