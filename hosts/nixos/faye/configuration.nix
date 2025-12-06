@@ -1,5 +1,6 @@
 {config, ...}: let
   modulesPath = ../../../modules;
+  themesPath = ../../../themes;
 in {
   imports = [
     # Mostly system related configuration
@@ -22,11 +23,11 @@ in {
     (modulesPath + /common/home-manager.nix)
     (modulesPath + /common/sops.nix)
 
+    (themesPath + /catppuccin_linux.nix)
+
     ./disko-config.nix
     ./hardware-configuration.nix
     ./variables.nix
-
-    ../../../themes/catppuccin.nix
   ];
 
   home-manager.users.${config.var.username} = import ./home.nix;
