@@ -25,7 +25,7 @@ in {
       # Greeting: krabby piped into fastfetch
       set -g fish_greeting ""
       function fish_greeting
-        krabby name ${config.var.pokemonSprite} --no-title | fastfetch --file-raw -
+        fetch
       end
 
       # Vi mode

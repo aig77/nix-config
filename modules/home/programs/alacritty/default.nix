@@ -14,7 +14,7 @@
         opacity = lib.mkForce (
           if pkgs.stdenv.isDarwin
           then 1.0
-          else 0.85
+          else 0.80
         );
       };
     };

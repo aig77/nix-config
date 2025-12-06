@@ -12,7 +12,6 @@
     configPath = "/home/${username}/.config/nix-config";
   in {
     inherit username hostname configPath;
-    pokemonSprite = "umbreon -s";
 
     monitors = {
       main = "ASUSTek COMPUTER INC XG27AQMR SALMTF054549";
