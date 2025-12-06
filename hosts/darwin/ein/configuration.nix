@@ -5,8 +5,9 @@ in {
     (modulesPath + /darwin)
     (modulesPath + /common/home-manager.nix)
     (modulesPath + /common/sops.nix)
-    ./theme.nix
     ./variables.nix
+
+    ../../../themes/catpuccin.nix
   ];
 
   homebrew = {

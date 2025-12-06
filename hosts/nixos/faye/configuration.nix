@@ -24,8 +24,9 @@ in {
 
     ./disko-config.nix
     ./hardware-configuration.nix
-    ./theme.nix
     ./variables.nix
+
+    ../../../themes/catppuccin.nix
   ];
 
   home-manager.users.${config.var.username} = import ./home.nix;
