@@ -1,10 +1,4 @@
-{pkgs, ...}: let
-  fetch = pkgs.writeShellScriptBin "fetch" ''
-    ${pkgs.krabby}/bin/krabby name umbreon -s --no-title | ${pkgs.fastfetch}/bin/fastfetch --file-raw -
-  '';
-in {
-  home.packages = [fetch];
-
+{
   programs.fastfetch = {
     enable = true;
     settings = {
