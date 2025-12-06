@@ -1,11 +1,12 @@
 {config, ...}: let
   modulesPath = ../../../modules;
+  themesPath = ../../../themes;
 in {
   imports = [
     (modulesPath + /darwin)
     (modulesPath + /common/home-manager.nix)
     (modulesPath + /common/sops.nix)
-    ./theme.nix
+    (themesPath + /catppuccin_darwin.nix)
     ./variables.nix
   ];
 
