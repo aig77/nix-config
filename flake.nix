@@ -40,8 +40,7 @@
 
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
 
-    # Hyprland
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.url = "github:hyprwm/Hyprland/";
 
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";

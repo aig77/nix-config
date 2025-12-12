@@ -5,7 +5,6 @@ in {
   imports = [
     # Mostly system related configuration
     (modulesPath + /nixos/audio.nix)
-    (modulesPath + /nixos/avahi.nix)
     (modulesPath + /nixos/boot.nix)
     (modulesPath + /nixos/docker.nix)
     (modulesPath + /nixos/nix.nix)
