@@ -28,4 +28,6 @@
     openssh.enable = true;
     printing.enable = true;
   };
+
+  security.polkit.enable = true;
 }

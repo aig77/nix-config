@@ -42,7 +42,8 @@ in {
         "ELECTRON_OZONE_PLATFORM_HINT,auto"
       ];
 
-      plugins.hyprfocus.enable = "yes";
+      # Stopped working after upgrading to 26.05 12/12/2025
+      # plugins.hyprfocus.enable = "yes";
 
       input = {
         kb_layout = "us";
@@ -146,12 +147,13 @@ in {
         "noblur,class:^(xwaylandvideobridge)$"
       ];
 
+      # Stopped working after upgrading to 26.05 12/12/2025
       layerrule = [
-        "blur, rofi"
-        "dimaround, rofi"
-        "ignorezero, rofi"
-        "blur, waybar"
-        "blur, wlogout"
+        # "blur, rofi"
+        # "dimaround, rofi"
+        # "ignorezero, rofi"
+        # "blur, waybar"
+        # "blur, wlogout"
       ];
     };
   };
