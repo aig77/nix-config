@@ -27,6 +27,8 @@
     gnome.gnome-keyring.enable = true;
     openssh.enable = true;
     printing.enable = true;
+    udisks2.enable = true;
+    gvfs.enable = true;
   };
 
   security.polkit.enable = true;

@@ -14,7 +14,7 @@ in {
     ${username} = {
       isNormalUser = true;
       initialPassword = "";
-      extraGroups = ["wheel" "networkmanager" "seat" "audio" "video" "input"];
+      extraGroups = ["wheel" "networkmanager"];
       shell = pkgs.${shell}; # fish or zsh
     };
   };
