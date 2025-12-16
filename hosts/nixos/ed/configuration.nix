@@ -1,6 +1,5 @@
 {
   config,
-  lib,
   pkgs,
   ...
 }: let
@@ -10,7 +9,6 @@ in {
     # Mostly system related configuration
     (modulesPath + /nixos/nix.nix)
     (modulesPath + /nixos/users.nix)
-    (modulesPath + /nixos/utils.nix)
 
     (modulesPath + /server/dns.nix)
     (modulesPath + /common/sops.nix)
@@ -19,24 +17,39 @@ in {
     ./variables.nix
   ];
 
-  # System monitoring and utilities
-  environment.systemPackages = with pkgs; [
-    btop
-  ];
-
-  # Raspberry Pi dedicated DNS server - auto-boot and auto-login
   boot = {
-    kernelPackages = lib.mkForce pkgs.linuxPackages;
-    loader = lib.mkForce {
-      generic-extlinux-compatible.enable = true;
+    kernelPackages = pkgs.linuxPackages;
+    loader = {
       grub.enable = false;
+      generic-extlinux-compatible.enable = true;
     };
+    # Auto-expand root partition on first boot
+    growPartition = true;
+    # keeps /tmp writes off the SD
+    useTmpfs = true;
     # Auto-boot after power loss
     kernelParams = ["boot.shell_on_fail"];
   };
 
-  # Auto-login to prevent interactive boot
-  services.getty.autologinUser = config.var.username;
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-label/NIXOS_SD";
+      fsType = "ext4";
+      options = ["noatime"];
+    };
+  };
+
+  services = {
+    # Auto-login to prevent interactive boot
+    getty.autologinUser = config.var.username;
+    openssh.enable = true;
+  };
+
+  hardware.enableRedistributableFirmware = true;
+
+  environment.systemPackages = with pkgs; [
+    htop
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
