@@ -64,6 +64,7 @@
         enable = true;
         port = 9100;
       };
+      retentionTime = "7d";
     };
 
     grafana = {
