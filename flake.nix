@@ -97,7 +97,23 @@
         lib = import ./lib/mkSystem.nix {inherit inputs;};
       in {
         nixosConfigurations = {
-          faye = lib.mkNixos {hostname = "faye";};
+          faye = lib.mkNixos {
+            hostname = "faye";
+            system = "x86_64-linux";
+            extraModules = [
+              inputs.disko.nixosModules.disko
+              inputs.home-manager.nixosModules.home-manager
+              inputs.sops-nix.nixosModules.sops
+              inputs.stylix.nixosModules.stylix
+            ];
+          };
+          ed = lib.mkNixos {
+            hostname = "ed";
+            system = "aarch64-linux";
+            extraModules = [
+              inputs.sops-nix.nixosModules.sops
+            ];
+          };
         };
 
         darwinConfigurations = {

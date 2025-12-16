@@ -17,10 +17,6 @@
             };
             nixpkgs.overlays = overlays;
           }
-          inputs.disko.nixosModules.disko
-          inputs.home-manager.nixosModules.home-manager
-          inputs.sops-nix.nixosModules.sops
-          inputs.stylix.nixosModules.stylix
           ../hosts/nixos/${hostname}/configuration.nix
         ]
         ++ extraModules;
@@ -47,9 +43,9 @@
             nixpkgs.overlays = overlays;
           }
           inputs.home-manager.darwinModules.home-manager
+          inputs.nix-homebrew.darwinModules.nix-homebrew
           inputs.sops-nix.darwinModules.sops
           inputs.stylix.darwinModules.stylix
-          inputs.nix-homebrew.darwinModules.nix-homebrew
           ../hosts/darwin/${hostname}/configuration.nix
         ]
         ++ extraModules;

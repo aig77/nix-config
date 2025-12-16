@@ -8,6 +8,7 @@ in {
 
     secrets = {
       git-email = {};
+      grafana-admin-password = {};
     };
   };
 }

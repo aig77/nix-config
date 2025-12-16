@@ -12,5 +12,7 @@
       };
       efi.canTouchEfiVariables = true;
     };
+
+    binfmt.emulatedSystems = ["aarch64-linux"];
   };
 }
