@@ -16,6 +16,8 @@ in {
     ./variables.nix
   ];
 
+  networking.hostName = config.var.hostname;
+
   boot = {
     kernelPackages = pkgs.linuxPackages;
     loader = {
