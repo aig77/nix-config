@@ -13,7 +13,6 @@ in {
     (modulesPath + /server/dns.nix)
     (modulesPath + /common/sops.nix)
 
-    ./hardware-configuration.nix
     ./variables.nix
   ];
 
@@ -26,7 +25,7 @@ in {
     # Auto-expand root partition on first boot
     growPartition = true;
     # keeps /tmp writes off the SD
-    useTmpfs = true;
+    tmp.useTmpfs = true;
     # Auto-boot after power loss
     kernelParams = ["boot.shell_on_fail"];
   };

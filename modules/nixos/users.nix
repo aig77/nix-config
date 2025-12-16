@@ -9,11 +9,10 @@ in {
   environment.shells = with pkgs; [fish zsh];
   programs.${shell}.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users = {
     ${username} = {
       isNormalUser = true;
-      initialPassword = "";
+      initialPassword = "password"; # change with passwd
       extraGroups = ["wheel" "networkmanager"];
       shell = pkgs.${shell}; # fish or zsh
     };
