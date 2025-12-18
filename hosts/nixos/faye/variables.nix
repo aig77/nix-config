@@ -13,6 +13,8 @@
   in {
     inherit username hostname configPath;
 
+    location = "Miami";
+
     shell = "zsh"; # zsh or fish
     terminal = "ghostty";
     browser = "zen";

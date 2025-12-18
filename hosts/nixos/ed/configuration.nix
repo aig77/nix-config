@@ -28,9 +28,19 @@ in {
     growPartition = true;
     # keeps /tmp writes off the SD
     tmp.useTmpfs = true;
-    # Auto-boot after power loss
-    kernelParams = ["boot.shell_on_fail"];
+    # Auto-reboot on kernel panic after 10 seconds
+    kernelParams = [
+      "panic=10"
+      "boot.shell_on_fail"
+    ];
   };
+
+  # Hardware watchdog for auto-reboot if system hangs
+  systemd.settings.Manager = {
+    RebootWatchdogSec = "10min";
+    RuntimeWatchdogSec = "60s";
+  };
+  boot.kernelModules = ["bcm2835_wdt"];
 
   fileSystems = {
     "/" = {
