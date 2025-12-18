@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   services = {
     blocky = {
       enable = true;
@@ -7,16 +11,32 @@
           dns = 53;
           http = 4000; # Metrics
         };
-        upstream.default = ["127.0.0.1:5335"];
-        blocking = {
-          denylists.ads = [
-            "https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt"
-            "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
-          ];
-          clientGroupsBlock.default = ["ads"];
+
+        upstreams.groups.default = [
+          "https://one.one.one.one/dns-query" # Using Cloudflare's DNS over HTTPS server for resolving queries.
+        ];
+
+        # Use external DNS for Blocky's own queries (downloading lists)
+        bootstrapDns = {
+          upstream = "https://one.one.one.one/dns-query";
+          ips = ["1.1.1.1" "1.0.0.1"];
         };
-        customDNS.mapping = {
-          # "example.local" = "192.168.1.100"
+
+        # upstream.default = ["127.0.0.1:5335"];
+
+        blocking = {
+          denylists = {
+            ads = ["https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"];
+          };
+          clientGroupsBlock = {
+            default = ["ads"];
+          };
+        };
+
+        # Enable prometheus metrics
+        prometheus = {
+          enable = true;
+          path = "/metrics";
         };
       };
     };
@@ -70,9 +90,59 @@
     grafana = {
       enable = true;
       settings = {
-        server.http_port = 3000;
+        server = {
+          http_addr = "0.0.0.0";
+          http_port = 3000;
+        };
         security.admin_password_path = "${config.sops.secrets.grafana-admin-password.path}";
       };
+
+      provision = {
+        enable = true;
+
+        # Add Prometheus datasource
+        datasources.settings.datasources = [
+          {
+            name = "Prometheus";
+            type = "prometheus";
+            url = "http://127.0.0.1:9090";
+            isDefault = true;
+          }
+        ];
+
+        # Add prebuilt dashboards
+        dashboards.settings.providers = [
+          {
+            name = "default";
+            options.path = "/etc/grafana-dashboards";
+          }
+        ];
+      };
     };
+  };
+
+  # Create directory with dashboards
+  # This one doesn't. Import blocky manually with 13768 code
+  # environment.etc."grafana-dashboards/blocky.json".source = pkgs.fetchurl {
+  #   url = "https://grafana.com/api/dashboards/13768/revisions/1/download";
+  #   sha256 = "sha256-CYVHUZcwXZjJ+IUiEQ7Ssozstp1UTpP6odEdOATE1zg=";
+  # };
+
+  # This one works
+  environment.etc."grafana-dashboards/node-exporter.json".source = pkgs.fetchurl {
+    url = "https://grafana.com/api/dashboards/1860/revisions/37/download";
+    sha256 = "sha256-1DE1aaanRHHeCOMWDGdOS1wBXxOF84UXAjJzT5Ek6mM=";
+  };
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [
+      53 # DNS (TCP)
+      3000 # Grafana
+      9090 # Prometheus
+    ];
+    allowedUDPPorts = [
+      53 # DNS (UDP)
+    ];
   };
 }
