@@ -13,13 +13,13 @@
         "0" = {
           "left" = [
             "dashboard"
+            "workspaces"
             "windowtitle"
           ];
           "middle" = [
-            "workspaces"
+            "systray"
           ];
           "right" = [
-            "systray"
             "volume"
             "clock"
             "notifications"

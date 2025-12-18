@@ -85,7 +85,7 @@
         inputs.git-hooks-nix.flakeModule
       ];
 
-      systems = ["x86_64-linux" "aarch64-darwin"];
+      systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
 
       perSystem = {pkgs, ...}: {
         devShells.default = import ./shell.nix {inherit pkgs;};
