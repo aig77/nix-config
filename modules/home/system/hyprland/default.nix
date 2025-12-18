@@ -9,16 +9,18 @@
   inherit (config.lib.stylix.colors) base02 base0D base0E;
 in {
   imports = [
-    ./keybinds.nix
-    ./monitors.nix
-    ./polkitagent.nix
-    ../hyprlock
-    ../hypridle
     # ../dunst
+    ../hypridle
+    ../hyprlock
     ../hyprpanel
+    # ./keybinds.nix
+    # ./monitors.nix
+    # ./polkitagent.nix
     ../rofi
     # ../wlogout
   ];
+
+  home.packages = with pkgs; [hyprpolkitagent];
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -30,7 +32,7 @@ in {
     ];
 
     settings = {
-      exec-once = ["hypridle"];
+      exec-once = ["systemctl --user start hyprpolkitagent"];
 
       env = [
         "NIXOS_OZONE_WL,1"
@@ -42,8 +44,58 @@ in {
         "ELECTRON_OZONE_PLATFORM_HINT,auto"
       ];
 
-      # Stopped working after upgrading to 26.05 12/12/2025
-      # plugins.hyprfocus.enable = "yes";
+      monitor = [",preferred,auto,auto"];
+
+      bind = [
+        # Shortcuts
+        "SUPER, RETURN, exec, ${config.var.terminal}"
+        "SUPER, SPACE, exec, ${config.var.launcher}"
+        "SUPER, E, exec, ${config.var.file-manager}"
+        "SUPER, I, exec, ${config.var.browser}"
+        "SUPER SHIFT, L, exec, ${config.var.lock}"
+        #"SUPER, X, exec, ${config.var.logout}"
+
+        # Screenshots
+        ", PRINT, exec, screenshot-area"
+        "SHIFT, PRINT, exec, screenshot-screen"
+        "CTRL, PRINT, exec, screenshot-window"
+
+        # Hypr binds
+        "SUPER, W, killactive"
+        "SUPER SHIFT, Q, exit"
+        "SUPER, T, togglefloating"
+        "SUPER, P, pseudo"
+        "SUPER, O, togglesplit"
+        "SUPER, F, fullscreen, 0"
+        "SUPER SHIFT, F, fullscreen, 1"
+        "SUPER, H, movefocus, l"
+        "SUPER, J, movefocus, d"
+        "SUPER, K, movefocus, u"
+        "SUPER, L, movefocus, r"
+        "SUPER, tab, cyclenext"
+        "SUPER, 1, workspace, 1"
+        "SUPER, 2, workspace, 2"
+        "SUPER, 3, workspace, 3"
+        "SUPER, 4, workspace, 4"
+        "SUPER, 5, workspace, 5"
+        "SUPER, 6, workspace, 6"
+        "SUPER, 7, workspace, 7"
+        "SUPER, 8, workspace, 8"
+        "SUPER SHIFT, 1, movetoworkspace, 1"
+        "SUPER SHIFT, 2, movetoworkspace, 2"
+        "SUPER SHIFT, 3, movetoworkspace, 3"
+        "SUPER SHIFT, 4, movetoworkspace, 4"
+        "SUPER SHIFT, 5, movetoworkspace, 5"
+        "SUPER SHIFT, 6, movetoworkspace, 6"
+        "SUPER SHIFT, 7, movetoworkspace, 7"
+        "SUPER SHIFT, 8, movetoworkspace, 8"
+        "SUPER, S, togglespecialworkspace, magic"
+        "SUPER SHIFT, S, movetoworkspace, special:magic"
+        "SUPER, mouse_down, workspace, e+1"
+        "SUPER, mouse_up, workspace, e-1"
+      ];
+
+      bindm = ["SUPER, mouse:272, movewindow" "SUPER, mouse:273, resizewindow"];
 
       input = {
         kb_layout = "us";
