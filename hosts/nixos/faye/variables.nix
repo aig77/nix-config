@@ -14,7 +14,7 @@
     inherit username hostname configPath;
 
     shell = "zsh"; # zsh or fish
-    terminal = "alacritty";
+    terminal = "ghostty";
     browser = "zen";
 
     launcher = "rofi -show drun";
