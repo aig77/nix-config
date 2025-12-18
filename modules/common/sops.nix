@@ -9,8 +9,17 @@ in {
     secrets = {
       git-email = {};
       grafana-admin-password = {};
-      hyprpanel-weather-location = {};
       openweather-api-key = {};
+      weatherapi-key = {};
+    };
+
+    templates."weatherapi.json" = {
+      content = builtins.toJSON {
+        weather_api_key = config.sops.placeholder."weatherapi-key";
+      };
+      mode = "0444";
+      owner = config.users.users.${config.var.username}.name;
+      inherit (config.users.users.${config.var.username}) group;
     };
   };
 }

@@ -69,14 +69,14 @@
             command = config.var.browser;
             tooltip = "Browser";
           };
-          clock = {
-            military = true;
-            weather = {
-              enabled = false;
-              location = sops.secrets.hyprpanel-weather-location.path;
-              key = sops.secrets.openweather-api-key.path;
-              unit = "metric";
-            };
+        };
+        clock = {
+          military = true;
+          weather = {
+            enabled = true;
+            inherit (config.var) location;
+            key = sops.templates."weatherapi.json".path;
+            unit = "metric";
           };
         };
       };
