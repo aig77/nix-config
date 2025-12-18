@@ -9,6 +9,8 @@ in {
     secrets = {
       git-email = {};
       grafana-admin-password = {};
+      hyprpanel-weather-location = {};
+      openweather-api-key = {};
     };
   };
 }

@@ -39,18 +39,19 @@ in {
     homeDirectory = "/home/" + config.var.username;
 
     packages = with pkgs; [
-      bitwarden-desktop
-      brave
-      claude-code
+      amdgpu_top # amd gpu monitoring
+      bitwarden-desktop # password manager
+      brave # backup browser
+      claude-code # claude tui
       inputs.claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop-with-fhs # claude
-      feh # cli image viewer
+      feh # image viewer
       gnome-calculator
-      httpie-desktop
-      lmstudio
-      mission-center
-      networkmanagerapplet
-      obsidian
-      opencode
+      httpie-desktop # api testing client
+      lmstudio # local llms
+      mission-center # system monitor
+      networkmanagerapplet # gui network manager
+      obsidian # note taking tool
+      opencode # oss llm tui
       pavucontrol # volume control
       qpwgraph # pipewire graph manager
       vlc # video player
