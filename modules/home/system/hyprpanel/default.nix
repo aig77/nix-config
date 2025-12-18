@@ -2,6 +2,7 @@
   inputs,
   pkgs,
   config,
+  sops,
   ...
 }: {
   programs.hyprpanel = {
@@ -68,8 +69,15 @@
             command = config.var.browser;
             tooltip = "Browser";
           };
-          stats.enable_gpu = true;
-          clock.weather.enabled = false;
+          clock = {
+            military = true;
+            weather = {
+              enabled = false;
+              location = sops.secrets.hyprpanel-weather-location.path;
+              key = sops.secrets.openweather-api-key.path;
+              unit = "metric";
+            };
+          };
         };
       };
     };
