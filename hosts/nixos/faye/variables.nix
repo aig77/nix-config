@@ -13,11 +13,6 @@
   in {
     inherit username hostname configPath;
 
-    monitors = {
-      main = "ASUSTek COMPUTER INC XG27AQMR SALMTF054549";
-      secondary = "LG Electronics LG ULTRAGEAR 107NTZN78013";
-    };
-
     shell = "zsh"; # zsh or fish
     terminal = "alacritty";
     browser = "zen";

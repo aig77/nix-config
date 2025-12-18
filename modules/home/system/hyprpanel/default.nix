@@ -4,15 +4,13 @@
   config,
   ...
 }: {
-  wayland.windowManager.hyprland.settings.exec-once = ["hyprpanel"];
-
   programs.hyprpanel = {
     enable = true;
     package = inputs.hyprpanel.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
     settings = {
       bar.layouts = {
-        "*" = {
+        "0" = {
           "left" = [
             "dashboard"
             "windowtitle"
@@ -78,4 +76,6 @@
   };
 
   home.file.".face.icon".source = ../../../../hosts/nixos/${config.var.hostname}/icon.jpg;
+
+  wayland.windowManager.hyprland.settings.exec-once = ["hyprpanel"];
 }
