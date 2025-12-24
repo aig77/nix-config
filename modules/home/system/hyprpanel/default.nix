@@ -18,10 +18,13 @@
             "windowtitle"
           ];
           "middle" = [
-            "systray"
+            "media"
           ];
           "right" = [
+            "systray"
             "volume"
+            "network"
+            "bluetooth"
             "clock"
             "notifications"
           ];
