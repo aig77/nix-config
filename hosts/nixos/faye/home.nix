@@ -39,22 +39,39 @@ in {
     homeDirectory = "/home/" + config.var.username;
 
     packages = with pkgs; [
+      # Desktop
       amdgpu_top # amd gpu monitoring
       bitwarden-desktop # password manager
       brave # backup browser
-      claude-code # claude tui
       inputs.claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop-with-fhs # claude
-      feh # image viewer
       gnome-calculator
       httpie-desktop # api testing client
       lmstudio # local llms
       mission-center # system monitor
       networkmanagerapplet # gui network manager
       obsidian # note taking tool
-      opencode # oss llm tui
       pavucontrol # volume control
       qpwgraph # pipewire graph manager
       vlc # video player
+
+      # CLI
+      claude-code # claude tui
+      feh # image viewer
+      opencode # oss llm tui
+
+      # Programming
+      rustc
+      cargo
+      rust-analyzer
+      clippy
+      rustfmt
+
+      python3
+      uv
+
+      go
+      gopls
+      golangci-lint
     ];
 
     sessionVariables = {
