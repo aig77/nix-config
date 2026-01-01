@@ -1,4 +1,9 @@
-{config, ...}: let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   secretsDir = ../../secrets;
 in {
   sops = {
@@ -13,13 +18,15 @@ in {
       weatherapi-key = {};
     };
 
-    templates."weatherapi.json" = {
-      content = builtins.toJSON {
-        weather_api_key = config.sops.placeholder."weatherapi-key";
+    templates = lib.mkIf pkgs.stdenv.isLinux {
+      "weatherapi.json" = {
+        content = builtins.toJSON {
+          weather_api_key = config.sops.placeholder."weatherapi-key";
+        };
+        mode = "0444";
+        owner = config.users.users.${config.var.username}.name;
+        inherit (config.users.users.${config.var.username}) group;
       };
-      mode = "0444";
-      owner = config.users.users.${config.var.username}.name;
-      inherit (config.users.users.${config.var.username}) group;
     };
   };
 }
