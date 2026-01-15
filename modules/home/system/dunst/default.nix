@@ -6,7 +6,7 @@
   colors = config.lib.stylix.colors.withHashtag;
   font = config.stylix.fonts.monospace.name;
 in {
-  services.dunst = {
+  services.dunst = lib.mkIf (config.var.desktop == "niri") {
     enable = true;
     settings = {
       global = {

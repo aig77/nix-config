@@ -1,12 +1,13 @@
 {
-  inputs,
-  pkgs,
   config,
+  inputs,
+  lib,
+  pkgs,
   sops,
   ...
 }: {
   programs.hyprpanel = {
-    enable = true;
+    enable = lib.mkIf (config.var.desktop == "hyprland") true;
     package = inputs.hyprpanel.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
     settings = {

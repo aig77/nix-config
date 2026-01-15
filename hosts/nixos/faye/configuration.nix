@@ -3,6 +3,10 @@
   themesPath = ../../../themes;
 in {
   imports = [
+    ./disko-config.nix
+    ./hardware-configuration.nix
+    ./variables.nix
+
     # Mostly system related configuration
     (modulesPath + /nixos/audio.nix)
     (modulesPath + /nixos/boot.nix)
@@ -11,10 +15,10 @@ in {
     (modulesPath + /nixos/users.nix)
     (modulesPath + /nixos/utils.nix)
 
-    # WM
+    # Desktop
     # (modulesPath + /nixos/gnome.nix)
-    # (modulesPath + /nixos/hyprland.nix)
-    (modulesPath + /nixos/niri.nix)
+    (modulesPath + /nixos/hyprland.nix)
+    # (modulesPath + /nixos/niri.nix)
 
     # Gaming
     (modulesPath + /nixos/amdgpu.nix)
@@ -24,10 +28,6 @@ in {
     (modulesPath + /common/sops.nix)
 
     (themesPath + /catppuccin-linux.nix)
-
-    ./disko-config.nix
-    ./hardware-configuration.nix
-    ./variables.nix
   ];
 
   home-manager.users.${config.var.username} = import ./home.nix;
