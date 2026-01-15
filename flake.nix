@@ -1,15 +1,21 @@
 {
   inputs = {
-    # Essentials
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    stylix.url = "github:danth/stylix";
+    hyprland.url = "github:hyprwm/Hyprland/";
+    niri.url = "github:sodiboo/niri-flake";
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # NixOS
-    stylix.url = "github:danth/stylix";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     disko = {
       url = "github:nix-community/disko";
@@ -22,25 +28,15 @@
       inputs.disko.follows = "disko";
     };
 
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     git-hooks-nix = {
       url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Darwin
     darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
-
-    hyprland.url = "github:hyprwm/Hyprland/";
 
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
@@ -52,7 +48,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Apps
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -100,6 +95,7 @@
           faye = lib.mkNixos {
             hostname = "faye";
             system = "x86_64-linux";
+            overlays = [inputs.niri.overlays.niri];
             extraModules = [
               inputs.disko.nixosModules.disko
               inputs.home-manager.nixosModules.home-manager

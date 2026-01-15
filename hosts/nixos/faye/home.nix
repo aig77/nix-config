@@ -25,8 +25,9 @@ in {
     (modulesPath + /home/programs/zen)
 
     # System
-    (modulesPath + /home/system/hyprland)
     # (modulesPath + /home/system/gnome-extensions)
+    # (modulesPath + /home/system/hyprland)
+    (modulesPath + /home/system/niri)
 
     # Scripts
     (modulesPath + /home/scripts/screenshot)
