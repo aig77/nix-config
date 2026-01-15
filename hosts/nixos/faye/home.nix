@@ -7,6 +7,8 @@
   modulesPath = ../../../modules;
 in {
   imports = [
+    ./variables.nix
+
     # Programs
     (modulesPath + /home/programs/alacritty)
     (modulesPath + /home/programs/cava)
@@ -26,13 +28,11 @@ in {
 
     # System
     # (modulesPath + /home/system/gnome-extensions)
-    # (modulesPath + /home/system/hyprland)
-    (modulesPath + /home/system/niri)
+    (modulesPath + /home/system/hyprland)
+    # (modulesPath + /home/system/niri)
 
     # Scripts
     (modulesPath + /home/scripts/screenshot)
-
-    ./variables.nix
   ];
 
   home = {
