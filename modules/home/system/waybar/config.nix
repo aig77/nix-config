@@ -1,10 +1,4 @@
-{config, ...}: let
-  desktop-monitors = {
-    # Change multi-monitor desktop setup here
-    DP-1 = [1 2 3 4];
-    DP-2 = [5 6 7 8];
-  };
-in {
+{
   imports = [./style.nix];
 
   programs.waybar = {
@@ -18,54 +12,13 @@ in {
 
         modules-center = [];
 
-        modules-right =
-          if (config.var.configName == "desktop")
-          then [
-            "clock"
-            "group/hardware"
-            "wireplumber"
-            "custom/exit"
-          ]
-          else [
-            "clock"
-            "group/hardware"
-            "group/systray"
-            "wireplumber"
-            "custom/exit"
-          ];
-
-        "group/navigation" = {
-          orientation = "horizontal";
-          modules = ["hyprland/workspaces" "hyprland/window"];
-        };
-
-        "hyprland/workspaces" = {
-          persistent-workspaces =
-            if (config.var.configName == "desktop")
-            then desktop-monitors
-            else {
-              eDP-1 = [1 2 3 4];
-            };
-          on-click = "activate";
-          sort-by-number = true;
-          format = "{icon}";
-          format-icons = {
-            "1" = "";
-            "2" = "";
-            "3" = "";
-            "4" = "";
-            "5" = "";
-            "6" = "";
-            "7" = "";
-            "8" = "";
-          };
-        };
-
-        "hyprland/window" = {
-          format = " {title}";
-          max-length = 50;
-          separate-outputs = true;
-        };
+        modules-right = [
+          "clock"
+          "group/hardware"
+          "group/systray"
+          "wireplumber"
+          "custom/exit"
+        ];
 
         "wlr/taskbar" = {
           format = "{icon}";

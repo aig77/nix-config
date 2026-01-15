@@ -13,7 +13,8 @@ in {
 
     # WM
     # (modulesPath + /nixos/gnome.nix)
-    (modulesPath + /nixos/hyprland.nix)
+    # (modulesPath + /nixos/hyprland.nix)
+    (modulesPath + /nixos/niri.nix)
 
     # Gaming
     (modulesPath + /nixos/amdgpu.nix)
