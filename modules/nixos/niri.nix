@@ -1,39 +1,36 @@
 {
   config,
   inputs,
-  lib,
   pkgs,
   ...
 }: {
   imports = [inputs.niri.nixosModules.niri];
 
-  config = lib.mkIf (config.var.desktop == "niri") {
-    nixpkgs.overlays = [inputs.niri.overlays.niri];
+  nixpkgs.overlays = [inputs.niri.overlays.niri];
 
-    programs.niri = {
+  programs.niri = {
+    enable = true;
+    package = pkgs.niri-unstable;
+  };
+
+  services.displayManager = {
+    gdm = {
       enable = true;
-      package = pkgs.niri-unstable;
+      wayland = true;
     };
-
-    services.displayManager = {
-      gdm = {
-        enable = true;
-        wayland = true;
-      };
-      sessionPackages = [
-        config.home-manager.users.${config.var.username}.programs.niri.package
-      ];
-    };
-
-    environment.pathsToLink = [
-      "/share/applications"
-      "/share/xdg-desktop-portal"
+    sessionPackages = [
+      config.home-manager.users.${config.var.username}.programs.niri.package
     ];
+  };
 
-    xdg.portal = {
-      enable = true;
-      extraPortals = [pkgs.xdg-desktop-portal-gnome];
-      config.common.default = "gtk";
-    };
+  environment.pathsToLink = [
+    "/share/applications"
+    "/share/xdg-desktop-portal"
+  ];
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [pkgs.xdg-desktop-portal-gnome];
+    config.common.default = "gtk";
   };
 }

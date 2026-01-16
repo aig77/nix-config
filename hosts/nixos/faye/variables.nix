@@ -5,7 +5,6 @@
         username = lib.mkOption {type = lib.types.str;};
         hostname = lib.mkOption {type = lib.types.str;};
         location = lib.mkOption {type = lib.types.str;};
-        desktop = lib.mkOption {type = lib.types.enum ["gnome" "hyprland" "niri" "none"];};
         shell = lib.mkOption {type = lib.types.enum ["zsh" "fish"];};
         terminal = lib.mkOption {type = lib.types.enum ["alacritty" "ghostty"];};
         browser = lib.mkOption {type = lib.types.enum ["zen"];};
@@ -23,7 +22,6 @@
     hostname = "faye";
     location = "Miami";
 
-    desktop = "hyprland";
     shell = "zsh";
 
     terminal = "ghostty";

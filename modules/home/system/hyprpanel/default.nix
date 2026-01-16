@@ -1,13 +1,12 @@
 {
   config,
   inputs,
-  lib,
   pkgs,
   sops,
   ...
 }: {
   programs.hyprpanel = {
-    enable = lib.mkIf (config.var.desktop == "hyprland") true;
+    enable = true;
     package = inputs.hyprpanel.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
     settings = {
@@ -28,8 +27,8 @@
               "volume"
               "network"
               "bluetooth"
-              "clock"
               "notifications"
+              "clock"
             ];
           };
         }
@@ -45,13 +44,15 @@
             ];
             "right" = [
               "systray"
-              "clock"
-              "cava"
               "volume"
               "notifications"
+              "clock"
             ];
           };
         };
+
+      # Don't let hyprpanel handle wallpaper
+      wallpaper.enable = false;
 
       theme = {
         font = {
@@ -85,7 +86,7 @@
           workspaces = 8;
         };
         clock = {
-          format = "%H:%M";
+          format = "%a, %b %d · %H:%M";
           showIcon = false;
         };
         volume.label = false;
@@ -93,6 +94,8 @@
 
       menus = {
         dashboard = {
+          profile.enabled = false;
+          quote.enabled = false;
           directories.enabled = false;
           shortcuts.left.shortcut1 = {
             icon = "󰖟";
