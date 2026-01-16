@@ -11,15 +11,16 @@
   launcherCommand =
     if config.var.launcher == "rofi"
     then "rofi -show drun"
-    else "";
+    else config.var.launcher;
 
   view-binds = import ./view-binds.nix {inherit pkgs config;};
 in {
   imports = [
+    ../fuzzel
     ../hypridle
     ../hyprlock
     ../hyprpanel
-    ../rofi
+    ../wlogout
   ];
 
   config = lib.mkIf (config.var.desktop == "hyprland") {
@@ -71,13 +72,11 @@ in {
           "SUPER, F, Fullscreen (Internal), fullscreen, 0"
           "SUPER SHIFT, F, Fullscreen (Global), fullscreen, 1"
 
-          # Vim-style Navigation
+          # Navigation
           "SUPER, H, Move Focus Left, movefocus, l"
           "SUPER, J, Move Focus Down, movefocus, d"
           "SUPER, K, Move Focus Up, movefocus, u"
           "SUPER, L, Move Focus Right, movefocus, r"
-
-          # Vim-style Window Movement
           "SUPER SHIFT, H, Move Window Left, movewindow, l"
           "SUPER SHIFT, J, Move Window Down, movewindow, d"
           "SUPER SHIFT, K, Move Window Up, movewindow, u"
@@ -85,15 +84,25 @@ in {
 
           "SUPER, tab, Cycle Next Window, cyclenext"
 
-          # Workspaces (example for 1 and 2, repeat for others)
+          # Workspaces
           "SUPER, 1, Switch to Workspace 1, workspace, 1"
           "SUPER, 2, Switch to Workspace 2, workspace, 2"
-          # ... and so on
-
+          "SUPER, 3, Switch to Workspace 3, workspace, 3"
+          "SUPER, 4, Switch to Workspace 4, workspace, 4"
+          "SUPER, 5, Switch to Workspace 5, workspace, 5"
+          "SUPER, 6, Switch to Workspace 6, workspace, 6"
+          "SUPER, 7, Switch to Workspace 7, workspace, 7"
+          "SUPER, 8, Switch to Workspace 8, workspace, 8"
           "SUPER SHIFT, 1, Move to Workspace 1, movetoworkspace, 1"
           "SUPER SHIFT, 2, Move to Workspace 2, movetoworkspace, 2"
-          # ... and so on
+          "SUPER SHIFT, 3, Move to Workspace 3, movetoworkspace, 3"
+          "SUPER SHIFT, 4, Move to Workspace 4, movetoworkspace, 4"
+          "SUPER SHIFT, 5, Move to Workspace 5, movetoworkspace, 5"
+          "SUPER SHIFT, 6, Move to Workspace 6, movetoworkspace, 6"
+          "SUPER SHIFT, 7, Move to Workspace 7, movetoworkspace, 7"
+          "SUPER SHIFT, 8, Move to Workspace 8, movetoworkspace, 8"
 
+          # Other
           "SUPER, S, Toggle Special Workspace, togglespecialworkspace, magic"
           "SUPER SHIFT, S, Move to Special Workspace, movetoworkspace, special:magic"
           "SUPER, mouse_down, Next Workspace, workspace, e+1"
@@ -152,8 +161,8 @@ in {
           blur = {
             enabled = true;
 
-            size = 10;
-            passes = 3;
+            size = 8;
+            passes = 4;
 
             noise = 0.01;
             contrast = 0.8;
@@ -223,18 +232,20 @@ in {
         };
 
         windowrulev2 = [
+          # Floating windows
           "float, class:^(org.pulseaudio.pavucontrol)$"
           "float, class:^(nm-connection-editor)$"
           "float, class:^(.blueman-manager-wrapped)$"
           "float, title:^(.*Bitwarden Password Manager.*)$"
           "float, title:Calculator"
 
-          "opacity 0.8 0.8, class:^(discord)$"
-          "opacity 0.8 0.8, class:^(obsidian)$"
-          "opacity 0.8 0.8, class:^(spotify)$"
-          "opacity 0.8 0.8, class:^(steam)$"
-          "opacity 0.8 0.8, class:^(thunar)$"
-          "opacity 0.8 0.8, class:^(org.pwmt.zathura)$"
+          # Opacity
+          # "opacity 0.8 0.8, class:^(discord)$"
+          # "opacity 0.8 0.8, class:^(obsidian)$"
+          # "opacity 0.8 0.8, class:^(spotify)$"
+          # "opacity 0.8 0.8, class:^(steam)$"
+          # "opacity 0.8 0.8, class:^(thunar)$"
+          # "opacity 0.8 0.8, class:^(org.pwmt.zathura)$"
 
           # Force games to be fullscreen
           "fullscreen, class:^(steam_app_.*)$"
@@ -243,6 +254,9 @@ in {
           # idle inhibit while watching videos
           "idleinhibit focus, class:^(zen*)$, title:^(.*YouTube.*)$"
           "idleinhibit fullscreen, class:^(zen*)$"
+
+          # Hide during screenshare
+          "no_screen_share, title:^(.*Bitwarden Password Manager.*)$"
 
           # xwaylandvideobridge
           "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
@@ -254,11 +268,10 @@ in {
 
         # Stopped working after upgrading to 26.05 12/12/2025
         layerrule = [
-          # "blur, rofi"
-          # "dimaround, rofi"
-          # "ignorezero, rofi"
-          # "blur, waybar"
-          # "blur, wlogout"
+          "blur on, match:namespace rofi"
+          "ignore_alpha 0.5, match:namespace rofi"
+          "blur on, match:namespace launcher"
+          "ignore_alpha 0.5, match:namespace launcher"
         ];
       };
     };

@@ -26,13 +26,11 @@ in
         --y-margin 40 \
         --border-width 2 \
         --border-radius 12 \
-        --background-color ${colors.base00}ff \
+        --background-color ${colors.base00}dd \
         --text-color ${colors.base05}ff \
         --selection-color ${colors.base02}ff \
         --selection-text-color ${colors.base0D}ff \
         --border-color ${colors.base0D}ff \
         --input-color ${colors.base01}ff \
         --hide-prompt \
-        --placeholder "Keybinds" \
-        --
   ''
