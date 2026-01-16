@@ -9,7 +9,7 @@
         terminal = lib.mkOption {type = lib.types.enum ["alacritty" "ghostty"];};
         browser = lib.mkOption {type = lib.types.enum ["zen"];};
         launcher = lib.mkOption {type = lib.types.enum ["rofi" "fuzzel"];};
-        fileManager = lib.mkOption {type = lib.types.enum ["thunar"];};
+        fileManager = lib.mkOption {type = lib.types.enum ["nautilus"];};
         lock = lib.mkOption {type = lib.types.enum ["hyprlock"];};
         logout = lib.mkOption {type = lib.types.enum ["wlogout"];};
       };
@@ -27,7 +27,7 @@
     terminal = "ghostty";
     browser = "zen";
     launcher = "fuzzel";
-    fileManager = "thunar";
+    fileManager = "nautilus";
     lock = "hyprlock";
     logout = "wlogout";
   };

@@ -11,7 +11,6 @@ in {
 
     # Programs
     (modulesPath + /home/programs/alacritty)
-    # (modulesPath + /home/programs/cava)
     (modulesPath + /home/programs/fetch)
     (modulesPath + /home/programs/ghostty)
     (modulesPath + /home/programs/git)
@@ -21,7 +20,6 @@ in {
     (modulesPath + /home/programs/obs)
     (modulesPath + /home/programs/shell)
     (modulesPath + /home/programs/spotify)
-    (modulesPath + /home/programs/thunar)
     (modulesPath + /home/programs/vim)
     (modulesPath + /home/programs/zathura)
     (modulesPath + /home/programs/zen)
@@ -45,20 +43,22 @@ in {
       bitwarden-desktop # password manager
       brave # backup browser
       inputs.claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop-with-fhs # claude
+      nautilus # file manager
       gnome-calculator
       httpie-desktop # api testing client
+      imv # image viewer
       lmstudio # local llms
       mission-center # system monitor
-      networkmanagerapplet # gui network manager
+      networkmanagerapplet # network manager gui
       obsidian # note taking tool
       pavucontrol # volume control
       qpwgraph # pipewire graph manager
       vlc # video player
 
       # CLI
-      claude-code # claude tui
-      feh # image viewer
-      opencode # oss llm tui
+      claude-code
+      opencode # oss coding agent
+      yazi # file manager
 
       # Programming
       rustc
