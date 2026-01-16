@@ -1,10 +1,14 @@
-{
+{config, ...}: {
   programs.fastfetch = {
     enable = true;
     settings = {
       schema = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
-      display = {separator = "  ";};
+      display = {
+        separator = "  │ ";
+        color.separator = 245;
+      };
       modules = [
+        "break"
         {
           type = "title";
           color = {
@@ -70,7 +74,10 @@
           format = "{1} / {2}";
         }
         "break"
-        "colors"
+        {
+          type = "colors";
+          symbol = "circle";
+        }
       ];
     };
   };
