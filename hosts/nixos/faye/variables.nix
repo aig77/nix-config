@@ -12,6 +12,7 @@
         launcher = lib.mkOption {type = lib.types.enum ["rofi" "fuzzel"];};
         fileManager = lib.mkOption {type = lib.types.enum ["thunar"];};
         lock = lib.mkOption {type = lib.types.enum ["hyprlock"];};
+        logout = lib.mkOption {type = lib.types.enum ["wlogout"];};
       };
     };
     default = {};
@@ -30,5 +31,6 @@
     launcher = "fuzzel";
     fileManager = "thunar";
     lock = "hyprlock";
+    logout = "wlogout";
   };
 }

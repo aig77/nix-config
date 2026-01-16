@@ -20,7 +20,7 @@ in {
     ../hypridle
     ../hyprlock
     ../hyprpanel
-    ../waybar/hyprland.nix
+    ../waybar/test
     ../wlogout
   ];
 
@@ -61,6 +61,7 @@ in {
           "SUPER, RETURN, Open Terminal, exec, ${config.var.terminal}"
           "SUPER, SPACE, Open Launcher, exec, ${launcherCommand}"
           "SUPER, C, Lock Screen, exec, ${config.var.lock}"
+          "SUPER, P, Logout, exec, ${config.var.logout}"
 
           # Screenshots
           ", PRINT, Screenshot Area, exec, screenshot-area"
@@ -193,10 +194,6 @@ in {
           enabled = true;
 
           bezier = [
-            # "easeOutQuint, 0.22, 1, 0.36, 1"
-            # "easeInOutCubic, 0.65, 0, 0.35, 1"
-            # "linear, 0, 0, 1, 1"
-
             "smoothOut, 0.36, 0, 0.66, -0.56"
             "smoothIn, 0.25, 1, 0.5, 1"
             "overshot, 0.05, 0.9, 0.1, 1.05"
@@ -205,15 +202,6 @@ in {
           ];
 
           animation = [
-            # "windows, 1, 4, easeOutQuint, slide"
-            # "windowsIn, 1, 4, easeOutQuint, popin 90%"
-            # "windowsOut, 1, 4, easeInOutCubic, popin 90%"
-            # "windowsMove, 1, 4, easeOutQuint, slide"
-            # "border, 1, 5, easeInOutCubic"
-            # "fade, 1, 3, easeInOutCubic"
-            # "workspaces, 1, 3, easeOutQuint, slide"
-            # "layers, 1, 4, easeOutQuint, slide"
-
             "windows, 1, 5, overshot, popin 80%"
             "windowsIn, 1, 5, overshot, popin 80%"
             "windowsOut, 1, 4, smoothOut, popin 90%"
@@ -235,47 +223,33 @@ in {
           ];
         };
 
-        windowrulev2 = [
+        windowrule = [
           # Floating windows
-          "float, class:^(org.pulseaudio.pavucontrol)$"
-          "float, class:^(nm-connection-editor)$"
-          "float, class:^(.blueman-manager-wrapped)$"
-          "float, title:^(.*Bitwarden Password Manager.*)$"
-          "float, title:Calculator"
-
-          # Opacity
-          # "opacity 0.8 0.8, class:^(discord)$"
-          # "opacity 0.8 0.8, class:^(obsidian)$"
-          # "opacity 0.8 0.8, class:^(spotify)$"
-          # "opacity 0.8 0.8, class:^(steam)$"
-          # "opacity 0.8 0.8, class:^(thunar)$"
-          # "opacity 0.8 0.8, class:^(org.pwmt.zathura)$"
+          "match:class ^(org.pulseaudio.pavucontrol)$, float on"
+          "match:class ^(nm-connection-editor)$, float on"
+          "match:class ^(.blueman-manager-wrapped)$, float on"
+          "match:title ^(.*Bitwarden Password Manager.*)$, float on"
+          "match:title Calculator, float on"
 
           # Force games to be fullscreen
-          "fullscreen, class:^(steam_app_.*)$"
-          "fullscreen, class:^(gamescope)$"
+          "match:class ^(steam_app_.*)$, fullscreen on"
+          "match:class ^(gamescope)$, fullscreen on"
 
           # idle inhibit while watching videos
-          "idleinhibit focus, class:^(zen*)$, title:^(.*YouTube.*)$"
-          "idleinhibit fullscreen, class:^(zen*)$"
+          "match:class ^(zen*)$, match:title ^(.*YouTube.*)$, idle_inhibit focus"
+          "match:class ^(zen*)$, idle_inhibit fullscreen"
 
           # Hide during screenshare
-          "no_screen_share, title:^(.*Bitwarden Password Manager.*)$"
-
-          # xwaylandvideobridge
-          "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
-          "noanim,class:^(xwaylandvideobridge)$"
-          "noinitialfocus,class:^(xwaylandvideobridge)$"
-          "maxsize 1 1,class:^(xwaylandvideobridge)$"
-          "noblur,class:^(xwaylandvideobridge)$"
+          "match:title ^(.*Bitwarden Password Manager.*)$, no_screen_share on"
         ];
 
         # Stopped working after upgrading to 26.05 12/12/2025
         layerrule = [
-          "blur on, match:namespace rofi"
-          "ignore_alpha 0.5, match:namespace rofi"
+          "blur on, match:namespace bar-0" # hyprpanel
           "blur on, match:namespace launcher"
           "ignore_alpha 0.5, match:namespace launcher"
+          "blur on, match:namespace rofi"
+          "ignore_alpha 0.5, match:namespace rofi"
         ];
       };
     };

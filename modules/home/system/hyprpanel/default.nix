@@ -11,26 +11,47 @@
     package = inputs.hyprpanel.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
     settings = {
-      bar.layouts = {
-        "0" = {
-          "left" = [
-            "dashboard"
-            "workspaces"
-            "windowtitle"
-          ];
-          "middle" = [
-            "media"
-          ];
-          "right" = [
-            "systray"
-            "volume"
-            "network"
-            "bluetooth"
-            "clock"
-            "notifications"
-          ];
+      bar.layouts =
+        if (config.var.hostname != "faye")
+        then {
+          "0" = {
+            "left" = [
+              "dashboard"
+              "workspaces"
+              "windowtitle"
+            ];
+            "middle" = [
+              "media"
+            ];
+            "right" = [
+              "systray"
+              "volume"
+              "network"
+              "bluetooth"
+              "clock"
+              "notifications"
+            ];
+          };
+        }
+        else {
+          "0" = {
+            "left" = [
+              "dashboard"
+              "workspaces"
+              "windowtitle"
+            ];
+            "middle" = [
+              "media"
+            ];
+            "right" = [
+              "systray"
+              "clock"
+              "cava"
+              "volume"
+              "notifications"
+            ];
+          };
         };
-      };
 
       theme = {
         font = {
@@ -63,6 +84,11 @@
           monitorSpecific = false;
           workspaces = 8;
         };
+        clock = {
+          format = "%H:%M";
+          showIcon = false;
+        };
+        volume.label = false;
       };
 
       menus = {
