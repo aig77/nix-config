@@ -11,7 +11,7 @@ in {
 
     # Programs
     (modulesPath + /home/programs/alacritty)
-    (modulesPath + /home/programs/cava)
+    # (modulesPath + /home/programs/cava)
     (modulesPath + /home/programs/fetch)
     (modulesPath + /home/programs/ghostty)
     (modulesPath + /home/programs/git)

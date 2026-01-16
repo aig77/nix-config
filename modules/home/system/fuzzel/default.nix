@@ -20,8 +20,7 @@
         launch-prefix = "";
         line-height = 25;
         filter-desktop = true;
-        prompt = " ";
-        placeholder = "fuzzel";
+        prompt = ''"󰍉 "'';
       };
 
       # colors = {

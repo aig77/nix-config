@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   stylix = {
     enable = true;
     polarity = "dark";
@@ -33,8 +29,8 @@
     };
 
     image = pkgs.fetchurl {
-      url = "https://raw.githubusercontent.com/orangci/walls-catppuccin-mocha/master/minimalist-black-hole.png";
-      sha256 = "sha256-UetLf/3ustmNAXTSoNjqAJKug+ZeMnyf2DMTr+h+eU4=";
+      url = "https://raw.githubusercontent.com/orangci/walls-catppuccin-mocha/master/hollow-knight.jpg";
+      sha256 = "sha256-dX3Xtf/Ma9UCzLfmRxnxLMHNL+IBjT2U06ruPmj5rHw=";
     };
 
     cursor = {
@@ -43,21 +39,9 @@
       size = 24;
     };
 
-    iconTheme.enable = false;
-
-    opacity = {
-      applications = 0.8;
-      desktop = 0.8;
-      terminal = 0.8;
-      popups = 0.8;
+    icons = {
+      dark = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
     };
-  };
-
-  home-manager.users.${config.var.username}.gtk.iconTheme = {
-    package = pkgs.catppuccin-papirus-folders.override {
-      flavor = "mocha";
-      accent = "blue";
-    };
-    name = "Papirus-Dark";
   };
 }
