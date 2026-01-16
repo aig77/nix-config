@@ -3,7 +3,9 @@
   pkgs,
   lib,
   ...
-}: {
+}: let
+  inherit (config.lib.stylix) colors;
+in {
   programs.fuzzel = {
     enable = true;
     settings = {
@@ -23,15 +25,15 @@
         prompt = ''"󰍉 "'';
       };
 
-      # colors = {
-      #   background = "${colors.base00}dd"; # base background + opacity
-      #   text = "${colors.base05}ff"; # text
-      #   match = "${colors.base08}ff"; # red/accent for matches
-      #   selection = "${colors.base02}ff"; # surface0/selection bg
-      #   selection-text = "${colors.base05}ff";
-      #   selection-match = "${colors.base08}ff";
-      #   border = "${colors.base0D}ff"; # blue accent
-      # };
+      colors = {
+        background = lib.mkForce "${colors.base00}99";
+        #   text = "${colors.base05}ff"; # text
+        #   match = "${colors.base08}ff"; # red/accent for matches
+        #   selection = "${colors.base02}ff"; # surface0/selection bg
+        #   selection-text = "${colors.base05}ff";
+        #   selection-match = "${colors.base08}ff";
+        #   border = "${colors.base0D}ff"; # blue accent
+      };
 
       border = {
         width = 2;
