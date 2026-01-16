@@ -20,6 +20,7 @@ in {
     ../hypridle
     ../hyprlock
     ../hyprpanel
+    ../waybar/hyprland.nix
     ../wlogout
   ];
 
@@ -36,7 +37,10 @@ in {
       ];
 
       settings = {
-        exec-once = ["systemctl --user start hyprpolkitagent"];
+        exec-once = [
+          "systemctl --user start hyprpolkitagent"
+          # "waybar"
+        ];
 
         env = [
           "NIXOS_OZONE_WL,1"

@@ -88,6 +88,8 @@ in {
         color: @textcolor2;
     }
 
+
+
     #hardware {
         background: transparent;
         margin: 4px 5px 4px 5px;
