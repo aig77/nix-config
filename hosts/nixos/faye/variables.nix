@@ -9,7 +9,7 @@
         shell = lib.mkOption {type = lib.types.enum ["zsh" "fish"];};
         terminal = lib.mkOption {type = lib.types.enum ["alacritty" "ghostty"];};
         browser = lib.mkOption {type = lib.types.enum ["zen"];};
-        launcher = lib.mkOption {type = lib.types.enum ["rofi"];};
+        launcher = lib.mkOption {type = lib.types.enum ["rofi" "fuzzel"];};
         fileManager = lib.mkOption {type = lib.types.enum ["thunar"];};
         lock = lib.mkOption {type = lib.types.enum ["hyprlock"];};
       };
@@ -27,7 +27,7 @@
 
     terminal = "ghostty";
     browser = "zen";
-    launcher = "rofi";
+    launcher = "fuzzel";
     fileManager = "thunar";
     lock = "hyprlock";
   };

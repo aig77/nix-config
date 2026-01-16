@@ -1,11 +1,14 @@
-{config, ...}: let
+{
+  config,
+  pkgs,
+  ...
+}: let
   colors = config.lib.stylix.colors.withHashtag;
   backgrounddark = colors.base00;
   backgroundlight = colors.base06;
   textcolor1 = colors.base07;
   highlighted = colors.base0A;
   font = config.stylix.fonts.monospace.name;
-  iconPath = "/home/arturo/nix/modules/home/wlogout/icons";
 in {
   programs.wlogout = {
     enable = true;
@@ -59,6 +62,7 @@ in {
           background-image: none;
           transition: 20ms;
       }
+
       window {
           background-color: rgba(0,0,0,0.7);
           /*filter: blur(2px);*/
@@ -85,27 +89,27 @@ in {
       }
 
       #lock {
-          background-image: image(url("${iconPath}/lock.svg"));
-      }
-
-      #logout {
-          background-image: image(url("${iconPath}/logout.svg"));
-      }
-
-      #suspend {
-          background-image: image(url("${iconPath}/suspend.svg"));
+        background-image: image(url("${pkgs.wlogout}/share/wlogout/icons/lock.png"));
       }
 
       #hibernate {
-          background-image: image(url("${iconPath}/hibernate.svg"));
+        background-image: image(url("${pkgs.wlogout}/share/wlogout/icons/hibernate.png"));
+      }
+
+      #logout {
+        background-image: image(url("${pkgs.wlogout}/share/wlogout/icons/logout.png"));
       }
 
       #shutdown {
-          background-image: image(url("${iconPath}/shutdown.svg"));
+        background-image: image(url("${pkgs.wlogout}/share/wlogout/icons/shutdown.png"));
+      }
+
+      #suspend {
+        background-image: image(url("${pkgs.wlogout}/share/wlogout/icons/suspend.png"));
       }
 
       #reboot {
-          background-image: image(url("${iconPath}/reboot.svg"));
+        background-image: image(url("${pkgs.wlogout}/share/wlogout/icons/reboot.png"));
       }
     '';
   };

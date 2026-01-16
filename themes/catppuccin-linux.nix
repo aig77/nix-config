@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   stylix = {
     enable = true;
     polarity = "dark";
@@ -39,11 +43,21 @@
       size = 24;
     };
 
+    iconTheme.enable = false;
+
     opacity = {
       applications = 0.8;
       desktop = 0.8;
       terminal = 0.8;
       popups = 0.8;
     };
+  };
+
+  home-manager.users.${config.var.username}.gtk.iconTheme = {
+    package = pkgs.catppuccin-papirus-folders.override {
+      flavor = "mocha";
+      accent = "blue";
+    };
+    name = "Papirus-Dark";
   };
 }
