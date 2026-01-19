@@ -36,6 +36,7 @@ in {
     systemd.variables = ["--all"];
     plugins = with inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}; [
       hyprfocus
+      # hyprscrolling
     ];
 
     settings = {
@@ -55,6 +56,18 @@ in {
       ];
 
       monitor = [",preferred,auto,auto"];
+
+      plugin = {
+        hyprfocus = {
+          mode = "slide";
+          slide_height = 10;
+        };
+
+        # hyprscrolling = {
+        #   column_width = 0.5;
+        #   full_screen_on_one_column = true;
+        # };
+      };
 
       bindd = [
         "SUPER, slash, View Keybinds, exec, view-binds"
@@ -233,9 +246,11 @@ in {
         "match:title ^(.*Bitwarden Password Manager.*)$, float on"
         "match:title Calculator, float on"
 
-        # Force games to be fullscreen
+        # Game settings
         "match:class ^(steam_app_.*)$, fullscreen on"
+        "match:class ^(steam_app_.*)$, workspace 8"
         "match:class ^(gamescope)$, fullscreen on"
+        "match:class ^(gamescope)$, workspace 8"
 
         # idle inhibit while watching videos
         "match:class ^(zen*)$, match:title ^(.*YouTube.*)$, idle_inhibit focus"
