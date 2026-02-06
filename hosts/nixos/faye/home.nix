@@ -43,7 +43,7 @@ in {
       bitwarden-desktop # password manager
       brave # backup browser
       inputs.claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop-with-fhs # claude
-      nautilus # file manager
+      thunar
       gnome-calculator
       httpie-desktop # api testing client
       imv # image viewer
