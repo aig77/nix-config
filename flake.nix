@@ -49,12 +49,12 @@
     };
 
     zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
+      url = "github:0xc000022070/zen-browser-flake/708e0f10aba5de7d0f55883d06fa08aa6a7cd462";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     firefox-addons = {
-      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      url = "gitlab:rycee/nur-expressions/02ae5ccdcbe8defe6047840a7b46e67e215bef69?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
