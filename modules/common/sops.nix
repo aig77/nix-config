@@ -13,7 +13,14 @@ in {
 
     secrets = {
       git-email = {};
-      grafana-admin-password = {};
+      grafana-admin-password = {
+        owner = "grafana";
+        group = "grafana";
+      };
+      grafana-secret-key = {
+        owner = "grafana";
+        group = "grafana";
+      };
       openweather-api-key = {};
       weatherapi-key = {};
     };
