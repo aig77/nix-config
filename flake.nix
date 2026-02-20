@@ -2,18 +2,20 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    stylix.url = "github:danth/stylix";
+
+    grub2-themes.url = "github:vinceliuice/grub2-themes";
     hyprland.url = "github:hyprwm/Hyprland/";
     niri.url = "github:sodiboo/niri-flake";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    stylix.url = "github:danth/stylix";
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
+    claude-desktop = {
+      url = "github:k3d3/claude-desktop-linux-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
+    darwin = {
+      url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -22,10 +24,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-anywhere = {
-      url = "github:nix-community/nixos-anywhere";
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions/02ae5ccdcbe8defe6047840a7b46e67e215bef69?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.disko.follows = "disko";
     };
 
     git-hooks-nix = {
@@ -33,8 +34,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    darwin = {
-      url = "github:LnL7/nix-darwin";
+    home-manager = {
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -48,19 +49,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake/708e0f10aba5de7d0f55883d06fa08aa6a7cd462";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    firefox-addons = {
-      url = "gitlab:rycee/nur-expressions/02ae5ccdcbe8defe6047840a7b46e67e215bef69?dir=pkgs/firefox-addons";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nixcord = {
       url = "github:kaylorben/nixcord";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixos-anywhere = {
+      url = "github:nix-community/nixos-anywhere";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.disko.follows = "disko";
     };
 
     spicetify-nix = {
@@ -68,8 +65,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    claude-desktop = {
-      url = "github:k3d3/claude-desktop-linux-flake";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake/708e0f10aba5de7d0f55883d06fa08aa6a7cd462";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
