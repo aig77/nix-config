@@ -58,10 +58,7 @@ in {
       monitor = [",preferred,auto,auto"];
 
       plugin = {
-        hyprfocus = {
-          mode = "slide";
-          slide_height = 10;
-        };
+        hyprfocus.enabled = "yes";
 
         # hyprscrolling = {
         #   column_width = 0.5;
