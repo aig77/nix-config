@@ -94,7 +94,10 @@
           http_addr = "0.0.0.0";
           http_port = 3000;
         };
-        security.admin_password_path = "${config.sops.secrets.grafana-admin-password.path}";
+        security = {
+          admin_password_path = "${config.sops.secrets.grafana-admin-password.path}";
+          secret_key = "$__file{${config.sops.secrets.grafana-secret-key.path}}";
+        };
       };
 
       provision = {
