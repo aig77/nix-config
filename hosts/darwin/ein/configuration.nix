@@ -22,12 +22,13 @@ in {
       "lm-studio"
       "raycast"
       "steam"
+      "tailscale"
       "whatsapp"
 
       # experiencing issues
       # https://github.com/0xc000022070/zen-browser-flake/issues/128
       # https://nixpk.gs/pr-tracker.html?pr=449689
-      "zen"
+      # "zen"
     ];
 
     masApps = {

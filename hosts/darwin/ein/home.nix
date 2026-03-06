@@ -16,6 +16,7 @@ in {
     (modulesPath + /home/programs/shell)
     (modulesPath + /home/programs/spotify)
     (modulesPath + /home/programs/vim)
+    (modulesPath + /home/programs/zen)
     ./variables.nix
   ];
 
