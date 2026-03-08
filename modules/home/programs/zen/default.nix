@@ -84,9 +84,7 @@
       };
 
       spacesForce = true;
-      spaces = let
-        inherit (config.programs.zen-browser.profiles.${config.var.username}) containers;
-      in {
+      spaces = {
         "Space" = {
           id = "c6de089c-410d-4206-961d-ab11f988d40a";
           position = 1000;

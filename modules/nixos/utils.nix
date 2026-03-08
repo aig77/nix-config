@@ -28,7 +28,8 @@
     openssh.enable = true;
     printing.enable = true;
     udisks2.enable = true;
-    gvfs.enable = true;
+    gvfs.enable = true; # trash, mount, remote filesystems
+    tumbler.enable = true; # thumbnails
   };
 
   security.polkit.enable = true;
