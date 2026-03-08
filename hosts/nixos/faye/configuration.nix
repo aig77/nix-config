@@ -12,6 +12,8 @@ in {
     (modulesPath + /nixos/boot.nix)
     (modulesPath + /nixos/docker.nix)
     (modulesPath + /nixos/nix.nix)
+    (modulesPath + /nixos/tailscale.nix)
+    (modulesPath + /nixos/thunar.nix)
     (modulesPath + /nixos/users.nix)
     (modulesPath + /nixos/utils.nix)
 
