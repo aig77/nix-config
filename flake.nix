@@ -2,6 +2,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
 
     grub2-themes.url = "github:vinceliuice/grub2-themes";
     hyprland.url = "github:hyprwm/Hyprland/";
@@ -70,11 +71,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # zen-browser = {
-    #   url = "github:youwen5/zen-browser-flake";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -82,52 +78,6 @@
   };
 
   outputs = inputs @ {flake-parts, ...}:
-    flake-parts.lib.mkFlake {inherit inputs;} {
-      imports = [
-        inputs.git-hooks-nix.flakeModule
-      ];
-
-      systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
-
-      perSystem = {pkgs, ...}: {
-        devShells.default = import ./shell.nix {inherit pkgs;};
-        formatter = pkgs.alejandra;
-        pre-commit = import ./lib/pre-commit.nix;
-      };
-
-      flake = let
-        builders = import ./lib/builders.nix {inherit inputs;};
-      in {
-        nixosConfigurations = {
-          faye = builders.mkNixos {
-            hostname = "faye";
-            system = "x86_64-linux";
-            overlays = [inputs.niri.overlays.niri];
-            extraModules = [
-              inputs.disko.nixosModules.disko
-              inputs.home-manager.nixosModules.home-manager
-              inputs.stylix.nixosModules.stylix
-            ];
-          };
-          ed = builders.mkNixos {
-            hostname = "ed";
-            system = "aarch64-linux";
-          };
-        };
-
-        packages.aarch64-linux = {
-          ed-sdimage = builders.mkSdImage {
-            hostname = "ed";
-            extraModules = [
-              inputs.sops-nix.nixosModules.sops
-            ];
-          };
-        };
-
-        darwinConfigurations = {
-          ein = builders.mkDarwin {hostname = "ein";};
-          spike = builders.mkDarwin {hostname = "spike";};
-        };
-      };
-    };
+    flake-parts.lib.mkFlake {inherit inputs;}
+    (inputs.import-tree ./parts);
 }
