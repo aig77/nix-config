@@ -32,7 +32,8 @@
     inputs.darwin.lib.darwinSystem {
       inherit system;
       specialArgs = {
-        inherit inputs hostname;
+        inputs = builtins.removeAttrs inputs ["self"];
+        inherit hostname;
       };
       modules =
         [
