@@ -17,6 +17,7 @@ in {
       "discord"
       "ghostty"
       "lm-studio"
+      "proton-mail-bridge"
       "raycast"
       "zen-browser"
     ];
