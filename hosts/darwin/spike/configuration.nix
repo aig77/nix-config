@@ -19,6 +19,7 @@ in {
       "lm-studio"
       "proton-mail-bridge"
       "raycast"
+      "tailscale"
       "zen-browser"
     ];
 
