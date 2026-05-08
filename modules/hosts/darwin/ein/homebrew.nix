@@ -8,6 +8,7 @@ _: {
       "helium-browser"
       "httpie-desktop"
       "lm-studio"
+      "protonvpn"
       "raycast"
       "steam"
       "tailscale-app"
