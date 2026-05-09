@@ -5,6 +5,7 @@
       desktop
       amdgpu
       htpc
+      no-rgb
     ];
   };
 }
