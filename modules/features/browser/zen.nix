@@ -61,6 +61,7 @@ _: {
           bitwarden
           darkreader
           ublock-origin
+          catppuccin-mocha-mauve
         ];
 
         settings = {

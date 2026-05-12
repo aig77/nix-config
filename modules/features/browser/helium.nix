@@ -1,4 +1,8 @@
 _: {
+  flake.modules.nixos.desktop = _: {
+    stylix.targets.chromium.enable = false;
+  };
+
   flake.modules.homeManager.gui = {
     lib,
     config,
@@ -14,14 +18,6 @@ _: {
 
     config = lib.mkIf (config.programs.helium.enable && pkgs.stdenv.isLinux) {
       home.packages = [inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default];
-
-      home.file.".config/net.imput.helium/policies/managed/extensions.json".text = builtins.toJSON {
-        ExtensionInstallForcelist = [
-          "nngceckbapebfimnlniiiahkandclblb;https://clients2.google.com/service/update2/crx" # bitwarden
-          "bkkmolkhemgaeaeggcmfbghljjjoofoh;https://clients2.google.com/service/update2/crx" # catppuccin mocha theme
-          "eimadpbcbfnmbkopoojfekhnkhdbieeh;https://clients2.google.com/service/update2/crx" # dark reader
-        ];
-      };
     };
   };
 }

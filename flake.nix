@@ -32,7 +32,7 @@
     grub2-themes.url = "github:vinceliuice/grub2-themes";
 
     helium = {
-      url = "github:AlvaroParker/helium-nix";
+      url = "github:schembriaiden/helium-browser-nix-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -42,11 +42,6 @@
     };
 
     hyprland.url = "github:hyprwm/Hyprland";
-
-    # hyprland-plugins = {
-    #   url = "github:hyprwm/hyprland-plugins";
-    #   inputs.hyprland.follows = "hyprland";
-    # };
 
     hyprpanel = {
       url = "github:Jas-SinghFSU/HyprPanel";
