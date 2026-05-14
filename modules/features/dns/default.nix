@@ -1,5 +1,5 @@
 _: {
-  flake.modules.nixos.server = {
+  flake.modules.nixos.dns = {
     config,
     pkgs,
     ...

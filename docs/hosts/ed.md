@@ -34,7 +34,7 @@ Handles network services. No GUI, no desktop. Just DNS and monitoring running qu
 imports = with config.flake.modules.nixos; [
   base
   tailscale
-  server
+  dns
 ];
 nixpkgs.hostPlatform = "aarch64-linux";
 ```

@@ -932,6 +932,36 @@
         "type": "github"
       }
     },
+    "invidious": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1778642017,
+        "narHash": "sha256-hiLhNto2ODFehnGJBJ4RG1UbyeC4sQ8YtobJ416qKPs=",
+        "owner": "iv-org",
+        "repo": "invidious",
+        "rev": "529fc8a8a37744111f0c229cf89fa410a65115fe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "iv-org",
+        "ref": "master",
+        "repo": "invidious",
+        "type": "github"
+      }
+    },
+    "invidious-companion": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1777361764,
+        "narHash": "sha256-Pksmr5Lq5agP2wHZmgbLQZ3MpPG9od9vSitps9AXQDY=",
+        "type": "tarball",
+        "url": "https://github.com/iv-org/invidious-companion/releases/download/release-master/invidious_companion-x86_64-unknown-linux-gnu.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/iv-org/invidious-companion/releases/download/release-master/invidious_companion-x86_64-unknown-linux-gnu.tar.gz"
+      }
+    },
     "jovian-nixos": {
       "inputs": {
         "nix-github-actions": "nix-github-actions",
@@ -1396,6 +1426,8 @@
         "hyprland": "hyprland",
         "hyprpanel": "hyprpanel",
         "import-tree": "import-tree",
+        "invidious": "invidious",
+        "invidious-companion": "invidious-companion",
         "jovian-nixos": "jovian-nixos",
         "niri": "niri",
         "nix-homebrew": "nix-homebrew",
