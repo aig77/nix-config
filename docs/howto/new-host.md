@@ -60,7 +60,7 @@ _: {
 
 ### 5. `hardware.nix`
 
-Copy from faye and adjust kernel modules, CPU microcode, and hostPlatform. Or use nixos-facter (preferred):
+Copy from spike and adjust kernel modules, CPU microcode, and hostPlatform. Or use nixos-facter (preferred):
 
 ```nix
 _: {
@@ -72,7 +72,7 @@ _: {
 
 ### 6. `disko.nix`
 
-Copy from faye and adjust the disk device and layout. Include a comment with the nixos-anywhere install command.
+Copy from spike and adjust the disk device and layout. Include a comment with the nixos-anywhere install command.
 
 ### 7. `home.nix`
 

@@ -10,10 +10,11 @@ A declarative, multi-platform system configuration built with Nix Flakes and fla
 
 | Host | Platform | Role |
 |------|----------|------|
-| [Faye](docs/hosts/faye.md) | x86_64 NixOS | Desktop workstation: Hyprland, AMD GPU, gaming, full dev environment |
+| [Spike](docs/hosts/spike.md) | x86_64 NixOS | Desktop workstation: Hyprland, AMD GPU, gaming, full dev environment |
+| [Faye](docs/hosts/faye.md) | x86_64 NixOS | HTPC: media playback, AMD GPU |
 | [Ed](docs/hosts/ed.md) | aarch64 NixOS | Headless Raspberry Pi: DNS, ad-blocking, monitoring |
 | [Ein](docs/hosts/ein.md) | aarch64 Darwin | MacBook, full configuration with Homebrew casks |
-| [Spike](docs/hosts/spike.md) | aarch64 Darwin | Mac Mini (server), lean configuration |
+| [Jet](docs/hosts/jet.md) | aarch64 Darwin | Mac Mini (server), lean configuration |
 
 ---
 

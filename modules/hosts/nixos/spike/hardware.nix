@@ -1,5 +1,5 @@
 _: {
-  configurations.nixos.julia.module = {
+  configurations.nixos.spike.module = {
     config,
     lib,
     modulesPath,

@@ -6,18 +6,19 @@ This file provides guidance to AI coding agents when working with code in this r
 
 ## What This Is
 
-**Bebop** is a Nix Flakes + flake-parts system configuration managing four machines from a single repo: two NixOS machines (x86_64 desktop, aarch64 server) and two macOS machines (aarch64-darwin).
+**Bebop** is a Nix Flakes + flake-parts system configuration managing five machines from a single repo: three NixOS machines (x86_64 desktop, x86_64 HTPC, aarch64 RPi server) and two macOS machines (aarch64-darwin).
 
 ## Build and Deploy
 
 ```bash
 # Apply NixOS configuration
+sudo nixos-rebuild switch --flake .#spike
 sudo nixos-rebuild switch --flake .#faye
 sudo nixos-rebuild switch --flake .#ed
 
 # Apply macOS configuration
 darwin-rebuild switch --flake .#ein
-darwin-rebuild switch --flake .#spike
+darwin-rebuild switch --flake .#jet
 
 # Validate all modules (runs pre-commit hooks: alejandra, statix, deadnix)
 nix flake check
@@ -70,9 +71,9 @@ All three namespaces use `deferredModule`. Multiple files can contribute to the 
 Hosts import named profiles in their `imports.nix`. Modules never import hosts.
 
 ```nix
-# modules/hosts/nixos/faye/imports.nix
+# modules/hosts/nixos/spike/imports.nix
 {config, ...}: {
-  configurations.nixos.faye.module = {
+  configurations.nixos.spike.module = {
     imports = with config.flake.modules.nixos; [
       base desktop hyprland-quickshell amdgpu gaming docker tailscale volt
     ];
@@ -181,5 +182,5 @@ _: {
 - [Aspects](docs/modules/aspects.md): foundational system modules reference
 - [Features](docs/modules/features.md): opt-in capability modules reference
 - [Flake-Parts Infrastructure](docs/flake-parts.md): output builders, bridges, dev shell
-- [Hosts](docs/hosts/): per-machine details (faye, ed, ein, spike)
+- [Hosts](docs/hosts/): per-machine details (spike, ein, faye, jet, ed)
 - [How-To Guides](docs/howto/): deploying, adding modules/hosts, secrets, age keys, inputs

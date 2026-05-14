@@ -12,7 +12,7 @@ _: {
 
       settings = {
         bar.layouts =
-          if (var.hostname != "faye")
+          if (var.hostname != "spike")
           then {
             "0" = {
               "left" = ["dashboard" "workspaces" "windowtitle"];

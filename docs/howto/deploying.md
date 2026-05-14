@@ -14,6 +14,7 @@
 ## NixOS Hosts
 
 ```bash
+sudo nixos-rebuild switch --flake .#spike
 sudo nixos-rebuild switch --flake .#faye
 sudo nixos-rebuild switch --flake .#ed
 ```
@@ -24,7 +25,7 @@ sudo nixos-rebuild switch --flake .#ed
 
 ```bash
 darwin-rebuild switch --flake .#ein
-darwin-rebuild switch --flake .#spike
+darwin-rebuild switch --flake .#jet
 ```
 
 ---
@@ -42,9 +43,10 @@ nix flake check
 ```bash
 # Darwin - fully builds locally
 nix build .#darwinConfigurations.ein.system
-nix build .#darwinConfigurations.spike.system
+nix build .#darwinConfigurations.jet.system
 
 # NixOS - evaluate only (can't build Linux on Mac without a remote builder)
+nix eval .#nixosConfigurations.spike.config.system.build.toplevel.drvPath
 nix eval .#nixosConfigurations.faye.config.system.build.toplevel.drvPath
 nix eval .#nixosConfigurations.ed.config.system.build.toplevel.drvPath
 ```

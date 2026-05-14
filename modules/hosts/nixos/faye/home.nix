@@ -2,7 +2,6 @@ _: {
   configurations.nixos.faye.module = {
     config,
     pkgs,
-    inputs,
     ...
   }: {
     home-manager.users.${config.var.username} = {
@@ -12,29 +11,11 @@ _: {
         packages = with pkgs; [
           amdgpu_top
           bitwarden-desktop
-          inputs.claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop-fhs
-          gnome-calculator
-          httpie-desktop
-          imv
-          lmstudio
           mission-center
           networkmanagerapplet
-          obsidian
-          opencode
           pavucontrol
           qpwgraph
           vlc
-          yazi
-          rustc
-          cargo
-          rust-analyzer
-          clippy
-          rustfmt
-          python3
-          uv
-          go
-          gopls
-          golangci-lint
         ];
         sessionVariables = {
           EDITOR = "nvim";

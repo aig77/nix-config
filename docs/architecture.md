@@ -74,7 +74,7 @@ All three use `deferredModule`, so multiple files can contribute to the same pro
 | `docker` | Needs containers | Docker daemon, docker group |
 | `tailscale` | Connected to Tailnet | Tailscale service, firewall port |
 | `server` | Headless servers | DNS (Blocky + Unbound), Prometheus |
-| `volt` | Faye only | Pins Volt 476 audio interface to stereo profile |
+| `volt` | Spike only | Pins Volt 476 audio interface to stereo profile |
 
 ### Darwin profiles
 
@@ -166,7 +166,7 @@ NixOS profiles don't directly import HM profiles. Each feature that spans both s
 | `amdgpu` | `hm.btopAmd` | `features/amdgpu/default.nix` |
 | `nvidia` | `hm.btopNvidia` | `features/nvidia/default.nix` |
 
-### Full profile stack for faye
+### Full profile stack for spike
 
 ```
 nixos.base              -> nix, users, networking, secrets
@@ -264,7 +264,7 @@ let inherit (config.lib.stylix) colors; in
 
 ## Secrets
 
-SOPS + age handles secret management. All four machines' age keys can decrypt `modules/aspects/secrets/secrets.yaml`.
+SOPS + age handles secret management. All machines with age keys (spike, ein, jet, ed) can decrypt `modules/aspects/secrets/secrets.yaml`.
 
 Secrets are declared in `modules/aspects/secrets/default.nix` and decrypted at activation time. At runtime they live at `/run/secrets/<name>`.
 

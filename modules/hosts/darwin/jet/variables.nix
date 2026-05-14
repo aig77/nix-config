@@ -1,8 +1,8 @@
 _: {
-  configurations.darwin.spike.module = {
+  configurations.darwin.jet.module = {
     var = {
       username = "arturo";
-      hostname = "spike";
+      hostname = "jet";
       shell = "zsh";
       terminal = "ghostty";
       browser = "zen";

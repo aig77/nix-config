@@ -5,30 +5,59 @@
 ## Contents
 
 - [Overview](#overview)
+- [Hardware](#hardware)
 - [Profiles Selected](#profiles-selected)
 - [Variables](#variables)
-- [Homebrew Casks](#homebrew-casks)
 - [Host-Specific Files](#host-specific-files)
 
 ---
 
 ## Overview
 
-**Platform:** aarch64 Darwin (Apple Silicon)
-**Role:** MacBook, lean configuration
+**Platform:** x86_64 NixOS
+**Role:** Daily driver desktop workstation
 
-Same foundation as Ein with a trimmer app set. Same shell, same dev tools, same theming.
+Full-featured desktop with Hyprland on Wayland, AMD GPU, gaming, and development tooling. Catppuccin Mocha everywhere.
+
+- Hyprland compositor with custom animations, blur, and rounded corners
+- Quickshell bar, SwayNC notification center, Fuzzel launcher, Hyprlock lock screen, Wlogout
+- Gaming: Steam with Proton, Heroic, Bottles, GameMode, MangoHud
+- Ghostty terminal, Zen browser, Neovim, Tmux
+- Spotify (Spicetify), Discord (Nixcord), Obsidian, OBS
+- Declarative disk partitioning via Disko (btrfs with subvolumes)
+
+---
+
+## Hardware
+
+- **CPU:** AMD (x86_64)
+- **GPU:** AMD (ROCm, Vulkan)
+- **Boot:** systemd-boot with EFI
+- **Disk:** GPT, 1G ESP + btrfs root with `@`, `@home`, `@nix`, `@snapshots`, `@log`, `@cache` subvolumes
+- **Kernel modules:** nvme, xhci_pci, ahci, usbhid, usb_storage, sd_mod, kvm-amd
+- **Audio interface:** Universal Audio Volt 476 (pinned to stereo profile via `volt` aspect)
 
 ---
 
 ## Profiles Selected
 
 ```nix
-# modules/hosts/darwin/spike/imports.nix
-imports = with config.flake.modules.darwin; [base];
+# modules/hosts/nixos/spike/imports.nix
+imports = with config.flake.modules.nixos; [
+  base
+  desktop
+  hyprland-quickshell
+  amdgpu
+  gaming
+  docker
+  tailscale
+  volt              # pins Volt 476 to stereo profile on connect
+];
 ```
 
-No `eyecandy` profile. Spike is the leaner of the two Mac configurations.
+HM profiles activated automatically via the bridge:
+
+`hm.shell` + `hm.gui` + `hm.hyprland` + `hm.fuzzel` + `hm.hyprlock` + `hm.hypridle` + `hm.screenshot` + `hm.gaming`
 
 ---
 
@@ -36,21 +65,16 @@ No `eyecandy` profile. Spike is the leaner of the two Mac configurations.
 
 ```nix
 var = {
-  username = "arturo";
-  hostname = "spike";
-  shell    = "zsh";
-  terminal = "ghostty";
-  browser  = "zen";
+  username      = "arturo";
+  hostname      = "spike";
+  location      = "Miami";       # used by weather widget
+  shell         = "zsh";
+  terminal      = "ghostty";
+  browser       = "zen";
+  fileManager   = "thunar";
+  lock          = "hyprlock";
+  wallpaperEngine = "awww";
 };
-```
-
----
-
-## Homebrew Casks
-
-```
-claude, discord, docker-desktop, ghostty, lm-studio,
-proton-mail-bridge, raycast, tailscale-app, zen-browser
 ```
 
 ---
@@ -60,7 +84,12 @@ proton-mail-bridge, raycast, tailscale-app, zen-browser
 | File | Purpose |
 |------|---------|
 | `imports.nix` | Profile selection |
-| `variables.nix` | `var.*` values |
-| `hostname.nix` | Sets `networking.hostName` and `networking.computerName` |
-| `homebrew.nix` | macOS-only Homebrew casks |
-| `home.nix` | Spike-specific HM packages (opencode) |
+| `variables.nix` | All `var.*` values |
+| `hardware.nix` | Kernel modules, AMD microcode, hostPlatform |
+| `disko.nix` | Disk layout for fresh installs (nixos-anywhere) |
+| `home.nix` | Spike-specific HM packages: rustc, go, python3, bitwarden, lmstudio, etc. |
+| `state-version.nix` | `system.stateVersion = "25.05"` |
+
+### Fresh install
+
+See the comment block at the top of `disko.nix` for the full `nixos-anywhere` command. Running it with `--generate-hardware-config nixos-facter` will partition the disk, install NixOS, and generate `facter.json`. After that, `hardware.nix` can be replaced by `facter.nix` + `facter.json`.

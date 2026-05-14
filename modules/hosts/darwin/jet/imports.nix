@@ -1,5 +1,5 @@
 {config, ...}: {
-  configurations.darwin.spike.module = {
+  configurations.darwin.jet.module = {
     imports = with config.flake.modules.darwin; [base];
   };
 }

@@ -1,5 +1,5 @@
 _: {
-  configurations.darwin.spike.module = {
+  configurations.darwin.jet.module = {
     config,
     pkgs,
     ...

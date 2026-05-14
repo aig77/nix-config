@@ -28,7 +28,7 @@ WARNING: This will DESTROY ALL DATA on the specified device!
       disk = {
         main = {
           type = "disk";
-          device = "/dev/nvme0n1";
+          device = "/dev/sda";
           content = {
             type = "gpt";
             partitions = {
@@ -45,34 +45,9 @@ WARNING: This will DESTROY ALL DATA on the specified device!
               root = {
                 size = "100%";
                 content = {
-                  type = "btrfs";
-                  extraArgs = ["-f" "-L nixos"];
-                  subvolumes = {
-                    "@" = {
-                      mountpoint = "/";
-                      mountOptions = ["compress=zstd" "noatime"];
-                    };
-                    "@home" = {
-                      mountpoint = "/home";
-                      mountOptions = ["compress=zstd" "noatime"];
-                    };
-                    "@nix" = {
-                      mountpoint = "/nix";
-                      mountOptions = ["compress=zstd" "noatime"];
-                    };
-                    "@snapshots" = {
-                      mountpoint = "/.snapshots";
-                      mountOptions = ["compress=zstd" "noatime"];
-                    };
-                    "@log" = {
-                      mountpoint = "/var/log";
-                      mountOptions = ["compress=zstd" "noatime"];
-                    };
-                    "@cache" = {
-                      mountpoint = "/var/cache";
-                      mountOptions = ["compress=zstd" "noatime"];
-                    };
-                  };
+                  type = "filesystem";
+                  format = "ext4";
+                  mountpoint = "/";
                 };
               };
             };

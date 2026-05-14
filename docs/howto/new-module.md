@@ -27,9 +27,9 @@ _: {
 
 Add the profile name to the host's `imports.nix`:
 ```nix
-# modules/hosts/nixos/faye/imports.nix
+# modules/hosts/nixos/spike/imports.nix
 {config, ...}: {
-  configurations.nixos.faye.module = {
+  configurations.nixos.spike.module = {
     imports = with config.flake.modules.nixos; [
       base desktop hyprland-quickshell amdgpu gaming docker tailscale volt
       myfeature  # add here

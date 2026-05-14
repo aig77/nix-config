@@ -1,5 +1,5 @@
 _: {
-  configurations.nixos.julia.module = {
+  configurations.nixos.spike.module = {
     system.stateVersion = "25.05";
   };
 }

@@ -41,7 +41,7 @@ These live in `modules/flake/` rather than `aspects/` because they are flake-par
 | `owner` | `flake/owner/` | `flake.meta.owner.username`, the single place to set the primary username |
 | home-manager bridges | `flake/home-manager/` | Wires NixOS/Darwin profiles to Home Manager profiles |
 
-### Faye-specific
+### Spike-specific
 
 | Aspect | Path | Profile | Description |
 |--------|------|---------|-------------|
