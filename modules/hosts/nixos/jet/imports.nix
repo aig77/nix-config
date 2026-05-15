@@ -10,6 +10,7 @@
         tailscale
         invidious
         n8n
+        uptime-kuma
       ]);
     nixpkgs.hostPlatform = "x86_64-linux";
   };

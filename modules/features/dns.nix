@@ -106,6 +106,7 @@ _: {
             admin_password_path = "${config.sops.secrets.grafana-admin-password.path}";
             secret_key = "$__file{${config.sops.secrets.grafana-secret-key.path}}";
           };
+          panels.disable_sanitize_html = true;
         };
 
         provision = {
@@ -138,6 +139,7 @@ _: {
       allowedTCPPorts = [
         53
         3000
+        4000
         9090
       ];
       allowedUDPPorts = [

@@ -48,7 +48,7 @@
 
     programs.nix-ld.enable = true;
 
-    networking.firewall.interfaces.tailscale0.allowedTCPPorts = [3000];
+    networking.firewall.allowedTCPPorts = [3000];
 
     systemd = {
       services = {

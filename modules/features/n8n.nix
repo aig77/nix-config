@@ -18,7 +18,7 @@ _: {
       };
     };
 
-    networking.firewall.interfaces.tailscale0.allowedTCPPorts = [5678];
+    networking.firewall.allowedTCPPorts = [5678];
 
     systemd.services.n8n.serviceConfig.EnvironmentFile =
       config.sops.templates."n8n.env".path;
