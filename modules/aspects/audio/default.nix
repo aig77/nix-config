@@ -1,5 +1,5 @@
 _: {
-  flake.modules.nixos.desktop = _: {
+  flake.modules.nixos.audio = _: {
     security.rtkit.enable = true;
     services = {
       dbus.enable = true;

@@ -16,7 +16,7 @@
 Create a `.nix` file in `modules/features/` (or `modules/aspects/` if it's a foundational concern), then `git add` it.
 
 ```nix
-# modules/features/myfeature/default.nix
+# modules/features/myfeature.nix
 _: {
   flake.modules.nixos.myfeature = {pkgs, ...}: {
     environment.systemPackages = [pkgs.something];

@@ -1,5 +1,5 @@
-_: let
-  hyprlandNixos = {
+_: {
+  flake.modules.nixos.hyprland = {
     inputs,
     pkgs,
     ...
@@ -13,12 +13,5 @@ _: let
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
       portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     };
-  };
-in {
-  flake.modules.nixos = {
-    hyprland = hyprlandNixos;
-    hyprland-custom = hyprlandNixos;
-    hyprland-hyprpanel = hyprlandNixos;
-    hyprland-quickshell = hyprlandNixos;
   };
 }

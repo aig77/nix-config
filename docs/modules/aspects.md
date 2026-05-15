@@ -13,7 +13,7 @@ Aspects are foundational system concerns applied broadly. They define what the s
 
 Aspects live in `modules/aspects/` and contribute to the `base` and `desktop` NixOS profiles, or to profiles that represent hardware reality rather than an optional capability.
 
-See [Features](features.md) for opt-in capabilities.
+See [Features](features.md) for atomic capabilities and the Bundles section in the repo for curated feature groups.
 
 ---
 
@@ -25,11 +25,11 @@ See [Features](features.md) for opt-in capabilities.
 | `users` | `aspects/users/` | `nixos.base` | Primary user account from `var.username`, shell enablement, groups (networkmanager, audio, video, etc.), sudo |
 | `networking` | `aspects/networking/` | `nixos.base` | NetworkManager, firewall with ports 22/80/443 open |
 | `secrets` | `aspects/secrets/` | `nixos.base` | sops-nix: `defaultSopsFile = ./secrets.yaml`, age key at `~/.config/sops/age/keys.txt`, secret declarations, weatherapi.json template (Linux only) |
-| `boot` | `aspects/boot/` | `nixos.desktop` | systemd-boot with EFI, GRUB2 theme, Plymouth boot splash |
-| `audio` | `aspects/audio/` | `nixos.desktop` | PipeWire with PulseAudio compatibility, rtkit for real-time audio, dbus |
-| `bluetooth` | `aspects/bluetooth/` | `nixos.desktop` | `services.bluetooth` enabled, `blueman` applet |
-| `theme` | `aspects/theme/` | `nixos.desktop` / `darwin.base` | Stylix: Catppuccin Mocha, JetBrains Mono Nerd Font, DejaVu Sans/Serif, Noto Color Emoji, catppuccin-mocha-light cursors, Papirus Dark icons. Wallpaper is not managed here; it's set at runtime by waypaper + awww |
-| `desktop` (HM wiring) | `aspects/desktop/home.nix` | `nixos.desktop` | Wires `hm.shell`, `hm.gui`, `hm.eyecandyNixos` into the desktop profile. Separated from the system-level desktop aspects since `desktop` has no single owning directory. |
+| `boot` | `aspects/boot/` | `nixos.boot` | GRUB2 with EFI, Plymouth boot splash, kernel params for quiet boot |
+| `audio` | `aspects/audio/` | `nixos.audio` | PipeWire with PulseAudio compatibility, rtkit for real-time audio, dbus |
+| `bluetooth` | `aspects/bluetooth/` | `nixos.bluetooth` | `services.bluetooth` enabled, `blueman` applet |
+| `theme` | `aspects/theme/` | `nixos.theme` / `darwin.base` | Stylix: Catppuccin Mocha, JetBrains Mono Nerd Font, DejaVu Sans/Serif, Noto Color Emoji, catppuccin cursors, Papirus Dark icons. Wallpaper is not managed here; it's set at runtime by waypaper + awww |
+| `darwin` | `aspects/darwin.nix` | `darwin.base` | macOS system config: Dock, Finder, keyboard remapping, dark mode, Homebrew, user shell, sops-nix secrets |
 
 ### Flake-level infrastructure
 

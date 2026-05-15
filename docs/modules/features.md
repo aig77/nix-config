@@ -13,11 +13,11 @@
 
 ## What Are Features
 
-Features are opt-in capabilities that a host explicitly selects in its `imports.nix`. They represent things a machine chooses to have: a desktop environment, a set of applications, a system service.
+Features are atomic apps and services that a host explicitly selects in its `imports.nix`. They represent single, self-contained concerns: an app, a service, a component. Features are the building blocks that profiles compose together.
 
-Features live in `modules/features/` and contribute to named profiles that hosts import. A feature directory can contain multiple files contributing to different profiles (e.g., `hyprland/nixos.nix` for `nixos.hyprland` and `hyprland/home.nix` for `homeManager.hyprland`).
+Features live in `modules/features/` and contribute to named profiles that hosts import. A feature file is usually a single `.nix` file, but can be a directory with multiple files when a concept genuinely spans multiple files (e.g., `hyprland/nixos.nix` for `nixos.hyprland` and `hyprland/home.nix` for `homeManager.hyprland`).
 
-See [Aspects](aspects.md) for foundational system concerns.
+See [Aspects](aspects.md) for foundational system concerns. Bundles in `modules/bundles/` compose features into higher-level profiles for easy reuse.
 
 ---
 
@@ -30,7 +30,7 @@ Full compositor/WM setups. Each owns its system-level enablement and HM configur
 | Hyprland (base) | `features/hyprland/` | `nixos.hyprland`, `hm.hyprland` | System enablement + portals (nixos.nix), keybinds/animations/window rules (home.nix). Uses `var.*` for terminal, browser, launcher, lock, logout. Not used directly; hosts import one of the variant profiles below |
 | Hyprland + Quickshell | `features/hyprland/quickshell.nix` | `nixos.hyprland-quickshell` | Hyprland with Quickshell as bar/launcher. Activates `hm.hyprland`, `hm.quickshell`, `hm.screenshot`. Sets `var.launcher = "quickshell"` |
 | Hyprland + HyprPanel | `features/hyprland/hyprpanel.nix` | `nixos.hyprland-hyprpanel` | Hyprland with HyprPanel bar. Activates `hm.hyprland`, `hm.hyprpanelShell`, `hm.screenshot` |
-| Hyprland + Custom | `features/hyprland/custom.nix` | `nixos.hyprland-custom` | Hyprland with Waybar + SwayNC. Activates `hm.hyprland`, `hm.customDesktopShell`, `hm.screenshot` |
+| Hyprland + Custom | `profiles/hyprland/custom.nix` | `nixos.hyprland-custom` | Hyprland with Waybar + SwayNC. Activates `hm.hyprland`, `hm.waybarShell`, `hm.screenshot` |
 | Niri | `features/niri/` | `nixos.niri`, `hm.niri` | GDM + Niri session (nixos.nix), keybinds/rules/wallpaper (home.nix), niri-specific Waybar (waybar.nix) |
 | GNOME | `features/gnome/` | `nixos.gnome`, `hm.gnome` | GDM + GNOME packages (nixos.nix), shell extensions via dconf (extensions.nix) |
 

@@ -83,7 +83,7 @@ Hosts import named profiles in their `imports.nix`. Modules never import hosts.
 
 ### NixOS to Home Manager bridge
 
-Each feature that spans both NixOS and HM owns its own wiring. The NixOS-side file in the feature directory contributes to its NixOS profile and adds `home-manager.users.${username}.imports = [hm.myprofile]` directly. For example, `features/hyprland/quickshell.nix` contributes to `nixos.hyprland-quickshell` and wires in `hm.hyprland`, `hm.quickshell`, `hm.screenshot` from there.
+Each module that spans both NixOS and HM owns its own wiring. When a NixOS profile needs HM components, it adds `home-manager.users.${username}.imports = [hm.myprofile]` directly. For example, `features/gaming.nix` declares both `nixos.gaming` (Steam setup) and `hm.gaming` (packages/config), and the NixOS side wires in the HM side directly. Similarly, bundle files in `bundles/hyprland/` import NixOS aspects and wire HM shells.
 
 `modules/flake/home-manager/nixos.nix` is infrastructure only: it sets up the home-manager NixOS module (useGlobalPkgs, extraSpecialArgs, backupFileExtension) and activates `hm.base` for every user. It does not map profiles.
 
@@ -103,13 +103,18 @@ config.programs.zsh.enable             # HM option
 modules/
 ├── flake/      # Flake-parts infrastructure: output builders, HM bridges, var schema, dev shell
 ├── hosts/      # Per-machine definitions (nixos/ and darwin/)
-├── aspects/    # Foundational system concerns applied broadly (nix, users, networking, boot, audio, etc.)
-└── features/   # Opt-in capabilities selected per host (desktop envs, apps, services)
+├── aspects/    # Foundational system concerns applied to all hosts of a type (nix, users, networking, boot, audio, etc.)
+├── bundles/    # Curated bundles of features (shell, gui, desktop, hyprland, desktopShells)
+└── features/   # Atomic app and service configs - flat .nix files by default, directories only when a concept spans multiple files
 ```
 
+The 4-tier hierarchy: features are composed into bundles, bundles are assembled into aspects, hosts select from all tiers directly.
+
 Where new code belongs:
-- New aspect (broadly-applied system concern): `modules/aspects/<name>/`
-- New feature (opt-in capability): `modules/features/<name>/`
+- New feature (single app or service): `modules/features/<name>.nix`
+- New feature spanning NixOS + HM: `modules/features/<name>/` with `nixos.nix`, `home.nix` etc.
+- New bundle (group of features): `modules/bundles/<name>.nix`
+- New aspect (foundational concern): `modules/aspects/<name>/`
 - New host: `modules/hosts/nixos/<hostname>/` or `modules/hosts/darwin/<hostname>/`
 - Flake-parts infrastructure: `modules/flake/`
 
