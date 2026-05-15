@@ -7,7 +7,7 @@ in {
     imports = [nixos.hyprland];
     home-manager.users.${username}.imports = [
       hm.hyprland
-      hm.hyprpanelShell
+      hm.hyprpanel-shell
       hm.screenshot
       {wayland.windowManager.hyprland.settings.exec-once = ["hyprpanel"];}
     ];

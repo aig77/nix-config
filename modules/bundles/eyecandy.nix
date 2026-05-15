@@ -3,7 +3,7 @@
   hm = config.flake.modules.homeManager;
 in {
   flake.modules = {
-    homeManager.eyecandyBase = {pkgs, ...}: {
+    homeManager.eyecandy-base = {pkgs, ...}: {
       imports = with hm; [fastfetch fetchGreeting];
       home.packages = with pkgs; [
         krabby
@@ -18,7 +18,7 @@ in {
       ];
     };
 
-    homeManager.eyecandyNixos = {pkgs, ...}: {
+    homeManager.eyecandy-nixos = {pkgs, ...}: {
       imports = with hm; [fastfetch fetchGreeting cava];
       home.packages = with pkgs; [
         krabby
@@ -35,7 +35,7 @@ in {
     };
 
     darwin.eyecandy = _: {
-      home-manager.users.${username}.imports = [hm.eyecandyBase];
+      home-manager.users.${username}.imports = [hm.eyecandy-base];
     };
   };
 }

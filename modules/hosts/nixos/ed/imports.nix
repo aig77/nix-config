@@ -2,6 +2,7 @@
   configurations.nixos.ed.module = {
     imports = with config.flake.modules.nixos; [
       base
+      server
       tailscale
       dns
     ];

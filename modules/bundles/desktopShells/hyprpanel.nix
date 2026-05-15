@@ -1,5 +1,5 @@
 {config, ...}: {
-  flake.modules.homeManager.hyprpanelShell = {
+  flake.modules.homeManager.hyprpanel-shell = {
     imports = let
       hm = config.flake.modules.homeManager;
     in [

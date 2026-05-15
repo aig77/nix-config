@@ -1,5 +1,5 @@
 _: {
-  flake.modules.nixos.boot = {
+  flake.modules.nixos.grub = {
     inputs,
     pkgs,
     ...

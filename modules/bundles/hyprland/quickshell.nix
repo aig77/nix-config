@@ -8,7 +8,7 @@ in {
     var.launcher = "quickshell";
     home-manager.users.${username}.imports = [
       hm.hyprland
-      hm.quickshellShell
+      hm.quickshell-shell
       hm.screenshot
       {
         wayland.windowManager.hyprland.settings.exec-once = ["quickshell"];

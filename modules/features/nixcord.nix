@@ -7,7 +7,7 @@ _: {
     imports = [inputs.nixcord.homeModules.nixcord];
 
     programs.nixcord = {
-      enable = false;
+      enable = true;
       discord.settings = {
         MINIMIZE_TO_TRAY = false;
       };

@@ -25,16 +25,6 @@ _: {
           qpwgraph
           vlc
           yazi
-          rustc
-          cargo
-          rust-analyzer
-          clippy
-          rustfmt
-          python3
-          uv
-          go
-          gopls
-          golangci-lint
         ];
         sessionVariables = {
           EDITOR = "nvim";

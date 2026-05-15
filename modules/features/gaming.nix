@@ -62,7 +62,7 @@ in {
       };
     };
 
-    nixos.htpc = {inputs, ...}: {
+    nixos.steamos = {inputs, ...}: {
       imports = [inputs.jovian-nixos.nixosModules.default];
 
       services.desktopManager.plasma6.enable = true;

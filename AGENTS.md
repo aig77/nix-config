@@ -83,7 +83,7 @@ Hosts import named profiles in their `imports.nix`. Modules never import hosts.
 
 ### NixOS to Home Manager bridge
 
-Each module that spans both NixOS and HM owns its own wiring. When a NixOS profile needs HM components, it adds `home-manager.users.${username}.imports = [hm.myprofile]` directly. For example, `features/gaming.nix` declares both `nixos.gaming` (Steam setup) and `hm.gaming` (packages/config), and the NixOS side wires in the HM side directly. Similarly, bundle files in `bundles/hyprland/` import NixOS aspects and wire HM shells.
+Each module that spans both NixOS and HM owns its own wiring. When a NixOS profile needs HM components, it adds `home-manager.users.${username}.imports = [hm.myprofile]` directly. For example, `features/gaming.nix` declares both `nixos.gaming` (Steam setup) and `hm.gaming` (packages/config), and the NixOS side wires in the HM side directly. Similarly, bundle files in `bundles/hyprland/` import NixOS features and wire HM shells.
 
 `modules/flake/home-manager/nixos.nix` is infrastructure only: it sets up the home-manager NixOS module (useGlobalPkgs, extraSpecialArgs, backupFileExtension) and activates `hm.base` for every user. It does not map profiles.
 
@@ -103,12 +103,12 @@ config.programs.zsh.enable             # HM option
 modules/
 ├── flake/      # Flake-parts infrastructure: output builders, HM bridges, var schema, dev shell
 ├── hosts/      # Per-machine definitions (nixos/ and darwin/)
-├── aspects/    # Foundational system concerns applied to all hosts of a type (nix, users, networking, boot, audio, etc.)
-├── bundles/    # Curated bundles of features (shell, gui, desktop, hyprland, desktopShells)
+├── aspects/    # Foundational system concerns always active for a machine type (nix, users, networking, secrets, darwin)
+├── bundles/    # Curated compositions of features (machines, shells, gui, hyprland variants, desktopShells)
 └── features/   # Atomic app and service configs - flat .nix files by default, directories only when a concept spans multiple files
 ```
 
-The 4-tier hierarchy: features are composed into bundles, bundles are assembled into aspects, hosts select from all tiers directly.
+The 4-tier hierarchy: aspects are always-on foundational concerns, features are atomic opt-in capabilities, bundles compose features into machine-type or desktop profiles, hosts select from all tiers directly.
 
 Where new code belongs:
 - New feature (single app or service): `modules/features/<name>.nix`

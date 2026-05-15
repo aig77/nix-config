@@ -1,17 +1,12 @@
 {config, ...}: let
   hm = config.flake.modules.homeManager;
 in {
-  flake.modules.homeManager.gui = {
-    imports = with hm; [
-      zen
-      helium
-      ghostty
-      alacritty
-      discord
-      spotify
-      obs
-      obsidian
-      zathura
-    ];
+  flake.modules.homeManager.gui = {var, ...}: {
+    imports =
+      [hm.${var.terminal}]
+      ++ (with hm; [
+        discord
+        helium
+      ]);
   };
 }

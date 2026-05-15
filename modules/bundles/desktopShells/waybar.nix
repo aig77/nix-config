@@ -1,5 +1,5 @@
 {config, ...}: {
-  flake.modules.homeManager.waybarShell = {
+  flake.modules.homeManager.waybar-shell = {
     imports = let
       hm = config.flake.modules.homeManager;
     in [

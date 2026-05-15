@@ -1,5 +1,5 @@
 {config, ...}: {
-  flake.modules.homeManager.quickshellShell = {
+  flake.modules.homeManager.quickshell-shell = {
     imports = let
       hm = config.flake.modules.homeManager;
     in [

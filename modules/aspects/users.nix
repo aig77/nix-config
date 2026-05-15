@@ -4,7 +4,6 @@ _: {
     pkgs,
     ...
   }: {
-    environment.shells = with pkgs; [fish zsh];
     programs.${config.var.shell}.enable = true;
     users.users.${config.var.username} = {
       isNormalUser = true;

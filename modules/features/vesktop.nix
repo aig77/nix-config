@@ -1,7 +1,7 @@
 _: {
   flake.modules.homeManager.vesktop = _: {
     programs.vesktop = {
-      enable = false;
+      enable = true;
       settings = {
         minimizeToTray = false;
         hardwareAcceleration = true;

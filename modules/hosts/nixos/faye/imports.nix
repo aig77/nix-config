@@ -2,9 +2,9 @@
   configurations.nixos.faye.module = {
     imports = with config.flake.modules.nixos; [
       base
-      desktop
       amdgpu
       htpc
+      steamos
       no-rgb
     ];
   };

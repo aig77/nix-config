@@ -1,7 +1,7 @@
 {
   flake.modules.homeManager.brave = {pkgs, ...}: {
     programs.chromium = {
-      enable = false;
+      enable = true;
       package = pkgs.brave;
       extensions = [
         {id = "nngceckbapebfimnlniiiahkandclblb";} # bitwarden
