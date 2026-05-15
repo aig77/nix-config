@@ -10,6 +10,7 @@ in {
       [hm.${var.shell}]
       ++ (with hm; [
         claude
+        direnv
         fzf
         git
         lazygit

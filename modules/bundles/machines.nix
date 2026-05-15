@@ -29,9 +29,10 @@ in {
       home-manager.users.${username}.imports = with hm; [gui shell-lite];
     };
 
-    server = _: {
-      services.getty.autologinUser = config.var.username;
+    server = {lib, ...}: {
+      services.getty.autologinUser = username;
       home-manager.users.${username}.imports = [hm.shell-lite];
+      sops.age.keyFile = lib.mkForce "/etc/sops/age/keys.txt";
     };
 
     desktop-extras = _: {
