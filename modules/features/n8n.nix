@@ -2,9 +2,12 @@ _: {
   flake.modules.nixos.n8n = {config, ...}: {
     sops.secrets.discord-token = {};
 
-    sops.templates."n8n.env".content = ''
-      DISCORD_TOKEN=${config.sops.placeholder."discord-token"}
-    '';
+    sops.templates."n8n.env" = {
+      mode = "0444";
+      content = ''
+        DISCORD_TOKEN=${config.sops.placeholder."discord-token"}
+      '';
+    };
 
     services.n8n = {
       enable = true;
