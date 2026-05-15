@@ -11,7 +11,7 @@
 
 ### 1. Create the host directory
 
-```
+```text
 modules/hosts/nixos/myhostname/
 ├── imports.nix
 ├── variables.nix
@@ -93,6 +93,7 @@ git add modules/hosts/nixos/myhostname/
 nix eval .#nixosConfigurations.myhostname.config.system.build.toplevel.drvPath
 ```
 
+
 ### Fresh install via nixos-anywhere
 
 ```bash
@@ -108,7 +109,7 @@ nix run github:nix-community/nixos-anywhere -- \
 
 ### 1. Create the host directory
 
-```
+```text
 modules/hosts/darwin/mymac/
 ├── imports.nix
 ├── variables.nix
@@ -188,3 +189,4 @@ _: {
 git add modules/hosts/darwin/mymac/
 nix build .#darwinConfigurations.mymac.system
 ```
+

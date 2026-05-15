@@ -3,6 +3,7 @@
 ## Contents
 
 - [What Are Bundles](#what-are-bundles)
+- [When to Use a Bundle vs. a Feature vs. an Aspect](#when-to-use-a-bundle-vs-a-feature-vs-an-aspect)
 - [Machine Bundles](#machine-bundles)
 - [Shell Bundles](#shell-bundles)
 - [GUI Bundle](#gui-bundle)
@@ -20,6 +21,20 @@ Bundles live in `modules/bundles/` and can be single `.nix` files or directories
 
 ---
 
+## When to Use a Bundle vs. a Feature vs. an Aspect
+
+| Situation | Use |
+|-----------|-----|
+| Group of features that always appear together for a machine type or desktop | Bundle |
+| Single app or service that hosts opt into individually | Feature |
+| System concern that every machine of a platform type must always have | Aspect |
+
+Use a bundle when the same combination of features appears in multiple host `imports.nix` files. Extracting them into a bundle reduces repetition and gives the combination a name that communicates intent. Do not create a bundle for a single feature or for combinations that only appear on one host - a feature or direct host import is simpler in those cases.
+
+See [Features](features.md) for the full list of atomic capabilities. See [Aspects](aspects.md) for foundational concerns.
+
+---
+
 ## Machine Bundles
 
 `bundles/machines.nix` defines machine-type profiles. Each profile composes the right features and wires in the appropriate HM shell for that machine category.
@@ -29,7 +44,7 @@ Bundles live in `modules/bundles/` and can be single `.nix` files or directories
 | `nixos.desktop` | `hm.shell` | audio, bluetooth, grub, desktop-extras, theme, thunar | eyecandy-nixos, gui, obs, obsidian, spotify, zathura, zen |
 | `nixos.laptop` | `hm.shell` | audio, bluetooth, grub, desktop-extras, theme, thunar | eyecandy-nixos, gui |
 | `nixos.htpc` | `hm.shell-lite` | audio, bluetooth, grub, desktop-extras, theme, thunar | gui |
-| `nixos.server` | `hm.shell-lite` | (none -- server has no desktop stack) | |
+| `nixos.server` | `hm.shell-lite` | (none - server has no desktop stack) | |
 | `nixos.desktop-extras` | | xserver/xkb, gnome-keyring, printing, polkit | |
 
 `nixos.desktop-extras` is a helper profile imported by all desktop-type machines. It is not used directly by hosts.
@@ -49,7 +64,7 @@ Bundles live in `modules/bundles/` and can be single `.nix` files or directories
 
 ## GUI Bundle
 
-`bundles/gui.nix` -- `hm.gui`
+`bundles/gui.nix` - `hm.gui`
 
 Terminal selected dynamically via `hm.${var.terminal}`, plus discord and helium. Machine-specific GUI apps (zen, obs, obsidian, spotify, zathura) are wired directly in `machines.nix` per machine type.
 
@@ -77,7 +92,7 @@ Complete NixOS+HM desktop configurations for different window managers.
 | Hyprland + HyprPanel | `bundles/hyprland/hyprpanel.nix` | `nixos.hyprland-hyprpanel` | Hyprland with HyprPanel bar. Imports `nixos.hyprland`, wires `hm.hyprland`, `hm.hyprpanel-shell`, `hm.screenshot` |
 | Hyprland + Quickshell | `bundles/hyprland/quickshell.nix` | `nixos.hyprland-quickshell` | Hyprland with Quickshell bar/launcher. Imports `nixos.hyprland`, wires `hm.hyprland`, `hm.quickshell-shell`, `hm.screenshot`, sets `var.launcher = "quickshell"` |
 
-Note: The base `nixos.hyprland` and `hm.hyprland` profiles live in `features/hyprland/` -- the bundles above compose them with a desktop shell.
+Note: The base `nixos.hyprland` and `hm.hyprland` profiles live in `features/hyprland/`. The bundles above compose them with a desktop shell.
 
 ---
 
@@ -95,7 +110,7 @@ Bundles that compose desktop environment components (bar, lock, idle, wallpaper)
 
 ## Wallpaper Bundle
 
-`bundles/wallpaper.nix` -- `hm.wallpaperManager`
+`bundles/wallpaper.nix` - `hm.wallpaperManager`
 
 waypaper GTK picker + swww daemon. Conditionally includes swww if `var.wallpaperEngine == "swww"`.
 
@@ -103,7 +118,7 @@ waypaper GTK picker + swww daemon. Conditionally includes swww if `var.wallpaper
 
 ## Composition Example
 
-```
+```text
 Host (spike) imports:
   - nixos.base (aspects: nix + users + networking + secrets)
   - nixos.desktop (bundle: audio + bluetooth + grub + desktop-extras + theme + thunar + HM wiring)

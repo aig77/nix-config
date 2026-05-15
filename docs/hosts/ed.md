@@ -16,7 +16,7 @@
 **Platform:** aarch64 NixOS
 **Role:** Headless Raspberry Pi server
 
-Handles network services. No GUI, no desktop. Just DNS and monitoring running quietly.
+Handles network services. No GUI, no desktop stack. Runs DNS and monitoring only.
 
 - Blocky DNS server with ad-blocking (StevenBlack hosts list)
 - Unbound recursive resolver with DNSSEC
@@ -33,13 +33,17 @@ Handles network services. No GUI, no desktop. Just DNS and monitoring running qu
 # modules/hosts/nixos/ed/imports.nix
 imports = with config.flake.modules.nixos; [
   base
+  server
   tailscale
   dns
 ];
 nixpkgs.hostPlatform = "aarch64-linux";
+nix.settings.filter-syscalls = false;
 ```
 
-Platform is set inline in `imports.nix`. No separate `hardware.nix` needed for a server without complex hardware config.
+`server` activates autologin and wires `hm.shell-lite`. It also overrides `sops.age.keyFile` to `/etc/sops/age/keys.txt`.
+
+`nix.settings.filter-syscalls = false` is required on aarch64 Raspberry Pi kernels, which do not fully support the seccomp syscall filtering used by the Nix sandbox.
 
 ---
 
@@ -59,8 +63,8 @@ var = {
 
 | File | Purpose |
 |------|---------|
-| `imports.nix` | Profile selection + `nixpkgs.hostPlatform` |
+| `imports.nix` | Profile selection, `nixpkgs.hostPlatform`, `filter-syscalls` |
 | `variables.nix` | `var.*` values |
-| `config.nix` | SSH settings, firewall, OpenSSH configuration |
-| `home.nix` | Minimal server packages |
+| `hardware.nix` | Boot loader (generic-extlinux-compatible), grow partition, filesystem, watchdog |
+| `home.nix` | Minimal HM home config (`stateVersion` only) |
 | `state-version.nix` | `system.stateVersion = "25.05"` |

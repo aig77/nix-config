@@ -137,7 +137,7 @@ The outer function receives flake-parts context. The inner function receives Nix
 
 ### Repository layout
 
-```
+```text
 modules/
 ├── flake/      # Flake-parts infrastructure (builders, bridges, var schema, dev shell)
 ├── hosts/      # Per-machine definitions (nixos/ and darwin/)
@@ -168,7 +168,7 @@ NixOS profiles don't directly import HM profiles. Each feature that spans both s
 
 ### Full profile stack for spike
 
-```
+```text
 nixos.base              -> nix, users, networking, secrets
   hm.base               -> (empty, harmless no-op)
 
@@ -207,7 +207,7 @@ config.programs.zsh.enable             # HM option
 
 ## Darwin ↔ Home Manager Bridge
 
-`modules/flake/home-manager/darwin.nix` is infrastructure: it sets up the home-manager Darwin module and activates `hm.base`, `hm.gui`, and `hm.shell` for every Darwin user. All Mac machines get these unconditionally since there are no headless Darwin configs here.
+`modules/flake/home-manager/darwin.nix` is infrastructure: it sets up the home-manager Darwin module and activates `hm.base`, `hm.gui`, and `hm.shell` for every Darwin user. All Darwin machines in this configuration are GUI machines, so these profiles are applied unconditionally.
 
 Darwin also passes `var` and `inputs` into HM's `extraSpecialArgs` so HM modules can access `var.*` directly.
 

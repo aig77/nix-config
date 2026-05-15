@@ -30,7 +30,7 @@ Same foundation as Ein with a trimmer app set. Same shell, same dev tools, same 
 imports = with config.flake.modules.darwin; [base];
 ```
 
-No `eyecandy` profile. Jet is the leaner of the two Mac configurations.
+This host imports only `base`. The `eyecandy` profile is not selected.
 
 ---
 
@@ -50,7 +50,7 @@ var = {
 
 ## Homebrew Casks
 
-```
+```text
 claude, discord, docker-desktop, ghostty, lm-studio,
 proton-mail-bridge, raycast, tailscale-app, zen-browser
 ```

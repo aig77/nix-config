@@ -26,12 +26,18 @@ Living room media machine. AMD GPU, Hyprland desktop, configured for media playb
 # modules/hosts/nixos/faye/imports.nix
 imports = with config.flake.modules.nixos; [
   base
-  desktop
   amdgpu
   htpc
+  steamos
   no-rgb
 ];
 ```
+
+`htpc` activates audio, bluetooth, grub, desktop-extras, theme, and thunar, and wires `hm.gui` and `hm.shell-lite`.
+
+`steamos` enables Jovian NixOS SteamOS mode for a Steam Deck-style gaming interface.
+
+`no-rgb` disables OpenRGB and related RGB lighting services.
 
 ---
 
@@ -56,7 +62,7 @@ var = {
 |------|---------|
 | `imports.nix` | Profile selection |
 | `variables.nix` | All `var.*` values |
-| `hardware.nix` | Kernel modules, AMD microcode, hostPlatform |
+| `hardware.nix` | Kernel modules (nvme, xhci_pci, ahci, usbhid, usb_storage, sd_mod, kvm-amd), AMD microcode, hostPlatform |
 | `disko.nix` | Disk layout for fresh installs (nixos-anywhere) |
-| `home.nix` | Faye-specific HM packages |
+| `home.nix` | Faye-specific HM packages: amdgpu_top, bitwarden-desktop, mission-center, networkmanagerapplet, pavucontrol, qpwgraph, vlc |
 | `state-version.nix` | `system.stateVersion = "25.05"` |

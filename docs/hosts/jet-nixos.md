@@ -19,16 +19,16 @@
 ## Overview
 
 **Platform:** x86_64 NixOS
-**Role:** Homelab server -- self-hosted services on the public internet via Cloudflare
+**Role:** Homelab server - self-hosted services on the public internet via Cloudflare
 
 Replaces the darwin jet mac mini. Runs Invidious, n8n, and Caddy as native NixOS services,
 exposed publicly through Cloudflare-proxied subdomains with TLS handled by Caddy.
 
-- Invidious (YouTube frontend) -- login-only, no public registration
-- Invidious-companion -- PO token acquisition for video playback
-- PostgreSQL -- managed locally by `services.invidious`
-- n8n -- workflow automation with Discord integration
-- Caddy -- reverse proxy with Cloudflare DNS plugin for TLS
+- Invidious (YouTube frontend) - login-only, no public registration
+- Invidious-companion - PO token acquisition for video playback
+- PostgreSQL - managed locally by `services.invidious`
+- n8n - workflow automation with Discord integration
+- Caddy - reverse proxy with Cloudflare DNS plugin for TLS
 
 ---
 
@@ -58,9 +58,9 @@ var = {
 
 Two NVMe drives in mdadm RAID1 with BTRFS on top. One drive can fail and be swapped
 with no data loss. GRUB is installed to both drives declaratively via
-`boot.loader.grub.mirroredBoots` -- every `nixos-rebuild switch` keeps both in sync.
+`boot.loader.grub.mirroredBoots` ensures every `nixos-rebuild switch` keeps both drives in sync.
 
-```
+```text
 /dev/nvme0n1
   nvme0n1p1  1G   vfat    /boot          (primary EFI)
   nvme0n1p2  rest mdadm   \

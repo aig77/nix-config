@@ -9,11 +9,11 @@
 
 ## What Are Aspects
 
-Aspects are foundational system concerns applied to every machine of a given type. They define what the system is at a base level -- things every NixOS or Darwin machine always has, regardless of what optional capabilities it uses.
+Aspects are foundational system concerns applied to every machine of a given type. They define what the system is at a base level: things every NixOS or Darwin machine always has, regardless of what optional capabilities it uses.
 
-Aspects live in `modules/aspects/` and contribute to `nixos.base` or `darwin.base`. They are not optional -- every host of their category imports them.
+Aspects live in `modules/aspects/` and contribute to `nixos.base` or `darwin.base`. They are not optional - every host of their category imports them.
 
-Desktop-specific concerns (audio, bluetooth, theming, boot) are **not** aspects -- they live in `features/` and are composed into machine bundles.
+Desktop-specific concerns (audio, bluetooth, theming, boot) are **not** aspects. They live in `features/` and are composed into machine bundles.
 
 See [Features](features.md) for atomic opt-in capabilities and [Bundles](bundles.md) for curated feature groups.
 

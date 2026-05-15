@@ -18,7 +18,7 @@
 
 Everything in `modules/flake/` defines the shape and wiring of the flake itself, not system configuration. These modules are not profiles and are not imported by hosts.
 
-```
+```text
 modules/flake/
 ├── flake-parts.nix           # Enables flake.modules.* option namespace
 ├── nixosConfigurations.nix   # NixOS system builder
@@ -84,7 +84,7 @@ Profile-to-HM wiring is not centralised here. Each feature that spans NixOS and 
 
 ### `flake/home-manager/darwin.nix`
 
-Infrastructure only. Sets up the home-manager Darwin module and activates `hm.base`, `hm.gui`, and `hm.shell` for every Darwin user (all Darwin machines are GUI machines). Also passes `var` and `inputs` into HM's `extraSpecialArgs`.
+Infrastructure only. Sets up the home-manager Darwin module and activates `hm.base`, `hm.gui`, and `hm.shell` for every Darwin user. All Darwin machines in this configuration are GUI machines, so these profiles are unconditional. Also passes `var` and `inputs` into HM's `extraSpecialArgs`.
 
 ---
 

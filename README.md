@@ -52,6 +52,7 @@ A declarative, multi-platform system configuration built with Nix Flakes and fla
 - [Managing Secrets](docs/howto/secrets.md): adding and using sops-nix secrets
 - [Managing Age Keys](docs/howto/age-keys.md): adding new machines, rotating keys
 - [Flake Inputs](docs/howto/flake-inputs.md): adding and updating flake inputs
+- [Troubleshooting](docs/howto/troubleshooting.md): common errors and how to fix them
 
 ---
 

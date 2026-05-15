@@ -3,6 +3,7 @@
 ## Contents
 
 - [What Are Features](#what-are-features)
+- [When to Use a Feature vs. a Bundle vs. an Aspect](#when-to-use-a-feature-vs-a-bundle-vs-an-aspect)
 - [Desktop Environments](#desktop-environments)
 - [Desktop Components](#desktop-components)
 - [System Services](#system-services)
@@ -15,9 +16,23 @@
 
 Features are atomic apps and services that a host explicitly selects. They represent single, self-contained concerns: an app, a service, a component. Features are the building blocks that bundles compose together.
 
-Features live in `modules/features/` and contribute to named profiles that hosts or bundles import. A feature file is usually a single `.nix` file, but can be a directory with multiple files when a concept genuinely spans multiple files.
+Features live in `modules/features/` and contribute to named profiles that hosts or bundles import. A feature file is usually a single `.nix` file, but can be a directory with multiple files when a concept genuinely spans multiple files (for example, a NixOS-side file and a Home Manager-side file for the same program).
 
 See [Aspects](aspects.md) for foundational system concerns. See [Bundles](bundles.md) for curated feature groups.
+
+---
+
+## When to Use a Feature vs. a Bundle vs. an Aspect
+
+| Situation | Use |
+|-----------|-----|
+| Single app or service that hosts opt into individually | Feature |
+| Group of features that always appear together for a machine type or desktop | Bundle |
+| System concern that every machine of a platform type must always have | Aspect |
+
+A feature is the right choice when the capability is independently meaningful and some hosts want it without the others. A bundle is the right choice when combining several features into a single named profile simplifies host configuration. An aspect is the right choice only when the concern is truly universal for a platform - things like the Nix daemon, user accounts, or timezone settings.
+
+When in doubt, start with a feature. Bundles are an optimization applied once you see a repeated pattern across host `imports.nix` files.
 
 ---
 

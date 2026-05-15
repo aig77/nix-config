@@ -48,9 +48,9 @@ var = {
 
 ## Homebrew Casks
 
-```
-brave-browser, claude, discord, docker-desktop, ghostty,
-httpie-desktop, lm-studio, raycast, steam, tailscale-app, utm, whatsapp
+```text
+claude, discord, docker-desktop, ghostty, helium-browser,
+httpie-desktop, lm-studio, protonvpn, raycast, steam, tailscale-app, utm, whatsapp
 ```
 
 ---
@@ -63,4 +63,4 @@ httpie-desktop, lm-studio, raycast, steam, tailscale-app, utm, whatsapp
 | `variables.nix` | `var.*` values |
 | `hostname.nix` | Sets `networking.hostName` and `networking.computerName` |
 | `homebrew.nix` | macOS-only Homebrew casks |
-| `home.nix` | Ein-specific HM packages (claude-code, opencode) |
+| `home.nix` | Ein-specific HM packages (opencode, session variables) |
