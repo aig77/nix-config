@@ -10,6 +10,11 @@ in {
       starship
       zoxide
       direnv
+      neovim
+      vim
+      git
+      lazygit
+      claude
     ];
 
     home.packages = with pkgs; [
