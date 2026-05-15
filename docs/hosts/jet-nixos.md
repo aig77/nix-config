@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://tenor.com/tV8BwYt2pDI.gif" alt="Jet" width="300"/>
+  <img src="https://media1.tenor.com/m/5lFKTvSNpaQAAAAd/jet-black-jet-black-laugh.gif" alt="Jet" width="300"/>
 </p>
 
 ## Contents

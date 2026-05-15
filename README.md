@@ -14,7 +14,8 @@ A declarative, multi-platform system configuration built with Nix Flakes and fla
 | [Faye](docs/hosts/faye.md) | x86_64 NixOS | HTPC: media playback, AMD GPU |
 | [Ed](docs/hosts/ed.md) | aarch64 NixOS | Headless Raspberry Pi: DNS, ad-blocking, monitoring |
 | [Ein](docs/hosts/ein.md) | aarch64 Darwin | MacBook, full configuration with Homebrew casks |
-| [Jet](docs/hosts/jet.md) | aarch64 Darwin | Mac Mini (server), lean configuration |
+| [Jet (NixOS)](docs/hosts/jet-nixos.md) | x86_64 NixOS | Homelab server: Invidious, n8n, Uptime Kuma |
+| [Jet (Darwin)](docs/hosts/jet-darwin.md) | aarch64 Darwin | Mac Mini - deprecated, being replaced by NixOS jet |
 
 ---
 
