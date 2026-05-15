@@ -54,6 +54,14 @@ A declarative, multi-platform system configuration built with Nix Flakes and fla
 
 ---
 
+## Acknowledgements
+
+- [vimjoyer](https://www.youtube.com/@vimjoyer/videos) - YouTube channel that started this journey
+- [anotherhadi/nixy](https://github.com/anotherhadi/nixy) - first configuration that made the structure click
+- [mightyiam/infra](https://github.com/mightyiam/infra) - source of the dendritic pattern used throughout this repo
+
+---
+
 <p align="center">
     <i>See you space cowboy...</i>
 </p>
