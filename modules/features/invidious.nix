@@ -17,28 +17,40 @@
   in {
     sops.secrets = {
       invidious-hmac-key = {};
-      invidious-extra-settings = {};
-      invidious-companion-env = {};
+      # Plain value; templates below render it into the formats each service needs.
+      invidious-companion-key = {};
     };
+
+    sops.templates."invidious-companion-settings.yaml" = {
+      owner = "invidious";
+      group = "invidious";
+      content = ''
+        invidious_companion_key: ${config.sops.placeholder."invidious-companion-key"}
+      '';
+    };
+
+    sops.templates."invidious-companion.env".content = ''
+      SERVER_SECRET_KEY=${config.sops.placeholder."invidious-companion-key"}
+    '';
 
     services.invidious = {
       enable = true;
-      package = pkgs.invidious.overrideAttrs (_: {src = inputs.invidious;});
+      package = pkgs.invidious.overrideAttrs (_: {src = inputs.invidious; doCheck = false;});
       database.createLocally = true;
-      address = "127.0.0.1";
+      address = "0.0.0.0";
       port = 3000;
       hmacKeyFile = config.sops.secrets.invidious-hmac-key.path;
       settings = {
         login_only = true;
         registration_enabled = false;
         invidious_companion = [
-          {
-            private_url = "http://127.0.0.1:8282";
-          }
+          {private_url = "http://127.0.0.1:8282";}
         ];
       };
-      extraSettingsFile = config.sops.secrets.invidious-extra-settings.path;
+      extraSettingsFile = config.sops.templates."invidious-companion-settings.yaml".path;
     };
+
+    networking.firewall.interfaces.tailscale0.allowedTCPPorts = [3000];
 
     systemd = {
       services = {
@@ -48,7 +60,7 @@
           after = ["network.target"];
           serviceConfig = {
             ExecStart = "${companion}/bin/invidious_companion";
-            EnvironmentFile = config.sops.secrets.invidious-companion-env.path;
+            EnvironmentFile = config.sops.templates."invidious-companion.env".path;
             Restart = "on-failure";
             DynamicUser = true;
           };
@@ -60,7 +72,7 @@
           description = "Daily invidious rebuild from latest flake";
           serviceConfig = {
             Type = "oneshot";
-            ExecStart = "/run/current-system/sw/bin/nixos-rebuild switch --flake github:<your-github-user>/bebop#jet";
+            ExecStart = "/run/current-system/sw/bin/nixos-rebuild switch --flake github:aig77/bebop#jet";
           };
         };
       };

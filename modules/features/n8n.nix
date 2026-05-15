@@ -1,6 +1,10 @@
 _: {
   flake.modules.nixos.n8n = {config, ...}: {
-    sops.secrets.n8n-discord-token-env = {};
+    sops.secrets.discord-token = {};
+
+    sops.templates."n8n.env".content = ''
+      DISCORD_TOKEN=${config.sops.placeholder."discord-token"}
+    '';
 
     services.n8n = {
       enable = true;
@@ -11,7 +15,9 @@ _: {
       };
     };
 
+    networking.firewall.interfaces.tailscale0.allowedTCPPorts = [5678];
+
     systemd.services.n8n.serviceConfig.EnvironmentFile =
-      config.sops.secrets.n8n-discord-token-env.path;
+      config.sops.templates."n8n.env".path;
   };
 }

@@ -30,6 +30,7 @@ in {
     };
 
     server = _: {
+      services.getty.autologinUser = config.var.username;
       home-manager.users.${username}.imports = [hm.shell-lite];
     };
 

@@ -1,9 +1,10 @@
 _: {
-  flake.modules.homeManager.git = {var, ...}: {
+  flake.modules.homeManager.git = _: {
     programs.git = {
       enable = true;
       settings = {
-        user.name = var.username;
+        user.email = "git.lunchroom670@simplelogin.com";
+        user.name = "Arturo";
       };
     };
   };

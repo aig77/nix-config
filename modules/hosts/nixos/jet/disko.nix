@@ -10,6 +10,7 @@
         grub = {
           enable = true;
           efiSupport = true;
+          timeout = 1;
           mirroredBoots = [
             {
               devices = ["nodev"];
@@ -24,7 +25,10 @@
           ];
         };
       };
-      initrd.kernelModules = ["dm-mod" "md-mod" "raid1"];
+      initrd = {
+        kernelModules = ["dm-mod" "md-mod" "raid1"];
+        supportedFilesystems = ["btrfs"];
+      };
       # Keep mdadm array config in sync so the initrd can assemble it at boot.
       swraid.mdadmConf = ''
         MAILADDR root

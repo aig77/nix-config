@@ -60,7 +60,6 @@ _: {
       defaultSopsFormat = "yaml";
       age.keyFile = "${config.users.users.${config.var.username}.home}/.config/sops/age/keys.txt";
       secrets = {
-        git-email = {};
         openweather-api-key = {};
         weatherapi-key = {};
       };

@@ -1,7 +1,8 @@
 keys:
   - &spike age1k0lzl7e8ha8v3t458mdkypjuvglry9u5eqgv38pswfewm9nes3mqrn0856
   - &ein age10u04nxg32r7t257vlcvgs4chz4jjd9nava4afxva2fa8yqe6zckq0xj5gc
-  - &jet age1rp45v5s8mlnk4zf382u69gqksfjn94ssq7ykdfr62pxk23sluv7qed7kgj
+  - &jet-darwin age1rp45v5s8mlnk4zf382u69gqksfjn94ssq7ykdfr62pxk23sluv7qed7kgj
+  - &jet age1cfvgw9qjx4mpxf28f2ataahclcfx9hmqfvpr9sckz7w6ez2px5gs8kjf00
   - &ed age18fwqt6s9vkgpl3ha68gxkg4gg4esty4u32kju6juqjcmeyzy2gnqwf767l
 creation_rules:
   - path_regex: modules/aspects/secrets/.*\.yaml$
@@ -9,5 +10,6 @@ creation_rules:
       - age:
         - *spike
         - *ein
+        - *jet-darwin
         - *jet
         - *ed

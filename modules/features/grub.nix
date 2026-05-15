@@ -1,9 +1,5 @@
-_: {
-  flake.modules.nixos.grub = {
-    inputs,
-    pkgs,
-    ...
-  }: {
+{pkgs, ...}: {
+  flake.modules.nixos.grub = {inputs, ...}: {
     imports = [inputs.grub2-themes.nixosModules.default];
 
     boot = {
@@ -50,5 +46,17 @@ _: {
 
     stylix.targets.grub.enable = false;
     stylix.targets.plymouth.enable = false;
+  };
+
+  flake.modules.nixos.grub-server = _: {
+    boot = {
+      kernelPackages = pkgs.linuxPackages; # LTS
+      loader.grub = {
+        enable = true;
+        efiSupport = true;
+        devices = ["nodev"];
+        timeout = 1;
+      };
+    };
   };
 }
