@@ -63,6 +63,8 @@
       inputs.disko.follows = "disko";
     };
 
+    nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
+
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
 
     spicetify-nix = {

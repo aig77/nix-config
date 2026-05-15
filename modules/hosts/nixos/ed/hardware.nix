@@ -1,13 +1,6 @@
 _: {
-  configurations.nixos.ed.module = {
-    config,
-    pkgs,
-    ...
-  }: {
-    networking.hostName = config.var.hostname;
-
+  configurations.nixos.ed.module = _: {
     boot = {
-      kernelPackages = pkgs.linuxPackages;
       loader = {
         grub.enable = false;
         generic-extlinux-compatible.enable = true;
@@ -18,13 +11,13 @@ _: {
         "panic=10"
         "boot.shell_on_fail"
       ];
+      kernelModules = ["bcm2835_wdt"];
     };
 
     systemd.settings.Manager = {
       RebootWatchdogSec = "10min";
       RuntimeWatchdogSec = "60s";
     };
-    boot.kernelModules = ["bcm2835_wdt"];
 
     fileSystems = {
       "/" = {
@@ -34,15 +27,6 @@ _: {
       };
     };
 
-    services = {
-      getty.autologinUser = config.var.username;
-      openssh.enable = true;
-    };
-
     hardware.enableRedistributableFirmware = true;
-
-    environment.systemPackages = with pkgs; [
-      htop
-    ];
   };
 }
