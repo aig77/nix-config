@@ -5,8 +5,11 @@ _: {
     ...
   }: {
     sops = {
-      secrets.caddy-cloudflare-token = {};
-      secrets.invidious-basic-auth-hash = {};
+      secrets = {
+        caddy-cloudflare-token = {};
+        invidious-basic-auth-hash = {};
+        invidious-basic-auth-user = {};
+      };
       templates."caddy.env" = {
         mode = "0400";
         owner = "caddy";
@@ -22,7 +25,7 @@ _: {
         owner = "caddy";
         content = ''
           basic_auth * {
-            arepa ${config.sops.placeholder."invidious-basic-auth-hash"}
+            ${config.sops.placeholder."invidious-basic-auth-user"} ${config.sops.placeholder."invidious-basic-auth-hash"}
           }
         '';
       };
