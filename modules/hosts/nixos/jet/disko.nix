@@ -6,11 +6,7 @@
 
     boot = {
       loader = {
-        efi.canTouchEfiVariables = true;
         grub = {
-          enable = true;
-          efiSupport = true;
-          timeout = 1;
           mirroredBoots = [
             {
               devices = ["nodev"];

@@ -3,7 +3,7 @@
   hm = config.flake.modules.homeManager;
   inherit (config.flake.modules) nixos;
 in {
-  flake.modules.nixos.hyprland-hyprpanel = {config, lib, ...}: {
+  flake.modules.nixos.hyprland-hyprpanel = {config, ...}: {
     imports = [nixos.hyprland];
     home-manager.users.${username}.imports = [
       hm.hyprland

@@ -10,20 +10,20 @@ _: {
       kernelPackages = pkgs.linuxPackages_latest;
 
       loader = {
+        timeout = 3;
         grub = {
           enable = true;
           efiSupport = true;
           useOSProber = true;
           devices = ["nodev"];
+          extraConfig = ''
+            terminal_input console
+            terminal_output console
+            set timeout_style=hidden
+          '';
         };
         grub2-theme.enable = false;
         efi.canTouchEfiVariables = true;
-        timeout = 3;
-        grub.extraConfig = ''
-          terminal_input console
-          terminal_output console
-          set timeout_style=hidden
-        '';
       };
 
       plymouth = {
@@ -55,11 +55,14 @@ _: {
   flake.modules.nixos.grub-server = {pkgs, ...}: {
     boot = {
       kernelPackages = pkgs.linuxPackages; # LTS
-      loader.grub = {
-        enable = true;
-        efiSupport = true;
-        devices = ["nodev"];
+      loader = {
+        efi.canTouchEfiVariables = true;
         timeout = 1;
+        grub = {
+          enable = true;
+          efiSupport = true;
+          devices = ["nodev"];
+        };
       };
     };
   };
