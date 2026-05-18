@@ -83,7 +83,9 @@ NixOS-level opt-in services.
 | Gaming | `features/gaming.nix` | `nixos.gaming`, `hm.pcGaming`, `nixos.steamos` | Steam + Proton + GameMode (nixos.gaming), Lutris/Bottles/Heroic/Protonplus (hm.pcGaming), Jovian NixOS SteamOS mode (nixos.steamos) |
 | Docker | `features/docker/` | `nixos.docker` | Docker daemon, adds user to `docker` group |
 | Tailscale | `features/tailscale/` | `nixos.tailscale` | Tailscale VPN service, opens firewall UDP 41641 |
-| Server / DNS | `features/server/dns.nix` | `nixos.dns` | Blocky DNS with ad-blocking + Unbound recursive resolver, Prometheus metrics |
+| Invidious | `features/invidious.nix` | `nixos.invidious` | YouTube frontend + invidious-companion, auto-updates daily. See [server modules](server.md) |
+| Caddy | `features/caddy.nix` | `nixos.caddy` | Reverse proxy with Cloudflare DNS plugin for ACME TLS, basic auth. See [server modules](server.md) |
+| DNS | `features/dns.nix` | `nixos.dns` | Blocky ad-blocking DNS + Unbound recursive resolver, Prometheus + Grafana. See [server modules](server.md) |
 | Volt | `features/volt.nix` | `nixos.volt` | WirePlumber rule that pins the Universal Audio Volt 476 to `analog-surround-40` on connect (spike-specific) |
 
 ---
