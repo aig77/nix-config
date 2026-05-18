@@ -45,9 +45,17 @@ _: {
       '';
       virtualHosts."invidious.${config.var.domain}" = {
         extraConfig = ''
-          import ${config.sops.templates."caddy-invidious-auth".path}
-          reverse_proxy localhost:3000 {
-            header_up -X-Forwarded-For
+          @authapi path /api/v1/auth/*
+          handle @authapi {
+            reverse_proxy localhost:3000 {
+              header_up -X-Forwarded-For
+            }
+          }
+          handle {
+            import ${config.sops.templates."caddy-invidious-auth".path}
+            reverse_proxy localhost:3000 {
+              header_up -X-Forwarded-For
+            }
           }
         '';
       };
