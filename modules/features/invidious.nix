@@ -17,38 +17,37 @@
       '';
     };
   in {
-    sops.secrets.invidious-companion-key = {};
+    sops = {
+      secrets.invidious-companion-key = {};
 
-    sops.templates."invidious-companion-settings.json" = {
-      mode = "0444";
-      content = ''
-        {"invidious_companion":[{"private_url":"http://127.0.0.1:8282/companion"}],"invidious_companion_key":"${config.sops.placeholder."invidious-companion-key"}"}
-      '';
-    };
+      templates."invidious-companion-settings.json" = {
+        mode = "0444";
+        content = ''
+          {"invidious_companion":[{"private_url":"http://127.0.0.1:8282/companion"}],"invidious_companion_key":"${config.sops.placeholder."invidious-companion-key"}"}
+        '';
+      };
 
-    sops.templates."invidious-companion.env" = {
-      mode = "0444";
-      content = ''
-        SERVER_SECRET_KEY=${config.sops.placeholder."invidious-companion-key"}
-      '';
+      templates."invidious-companion.env" = {
+        mode = "0444";
+        content = ''
+          SERVER_SECRET_KEY=${config.sops.placeholder."invidious-companion-key"}
+        '';
+      };
     };
 
     services.invidious = {
       enable = true;
-      package = pkgs.invidious.overrideAttrs (_: {src = inputs.invidious; doCheck = false;});
+      package = pkgs.invidious.overrideAttrs (_: {
+        src = inputs.invidious;
+        doCheck = false;
+      });
       database.createLocally = true;
-      address = "0.0.0.0";
+      address = "127.0.0.1";
       port = 3000;
-      settings = {
-        login_only = true;
-        registration_enabled = false;
-      };
       extraSettingsFile = config.sops.templates."invidious-companion-settings.json".path;
     };
 
     programs.nix-ld.enable = true;
-
-    networking.firewall.allowedTCPPorts = [3000];
 
     systemd = {
       services = {

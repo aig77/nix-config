@@ -4,6 +4,7 @@ _: {
       username = "arturo";
       hostname = "jet";
       shell = "zsh";
+      domain = "turboguac.cc";
     };
   };
 }

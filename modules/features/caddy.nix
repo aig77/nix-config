@@ -1,45 +1,60 @@
-# The Cloudflare DNS plugin version and hash must be filled in before deploying.
-# To find them:
-#   nix shell nixpkgs#xcaddy
-#   xcaddy build --with github.com/caddy-dns/cloudflare
-# Then use the version from go.sum and compute the hash:
-#   nix run nixpkgs#nix-prefetch-github -- caddy-dns cloudflare
-#
-# Or check: https://github.com/caddy-dns/cloudflare/releases
-{lib, ...}: {
+_: {
   flake.modules.nixos.caddy = {
     config,
     pkgs,
     ...
   }: {
-    sops.secrets.caddy-cloudflare-env = {};
+    sops = {
+      secrets.caddy-cloudflare-token = {};
+      secrets.invidious-basic-auth-hash = {};
+      templates."caddy.env" = {
+        mode = "0400";
+        owner = "caddy";
+        content = ''
+          CLOUDFLARE_API_TOKEN=${config.sops.placeholder."caddy-cloudflare-token"}
+        '';
+      };
+      # Caddyfile snippet imported by the invidious vhost. Using a template
+      # embeds the raw bcrypt hash directly into Caddyfile syntax, avoiding
+      # the base64 encoding required by Caddy's JSON/env-var path.
+      templates."caddy-invidious-auth" = {
+        mode = "0400";
+        owner = "caddy";
+        content = ''
+          basic_auth * {
+            arepa ${config.sops.placeholder."invidious-basic-auth-hash"}
+          }
+        '';
+      };
+    };
 
     services.caddy = {
       enable = true;
       package = pkgs.caddy.withPlugins {
         plugins = [
-          # Replace <version> with the actual module version tag, e.g.:
-          # "github.com/caddy-dns/cloudflare@v0.0.0-20250111044524-c07fada72a9a"
-          "github.com/caddy-dns/cloudflare@<version>"
+          # To update: nix run nixpkgs#nix-prefetch-github -- caddy-dns cloudflare
+          # Then get the version: nix shell nixpkgs#go --command go list -m github.com/caddy-dns/cloudflare@<rev>
+          "github.com/caddy-dns/cloudflare@v0.2.4"
         ];
-        # Replace with: nix hash to-sri --type sha256 $(nix-prefetch-url --unpack <tarball>)
-        hash = lib.fakeHash;
+        # Hash is for the combined caddy+plugin source. To update: set hash = lib.fakeHash,
+        # build, and copy the "got:" value from the hash mismatch error.
+        hash = "sha256-Olz4W84Kiyldy+JtbIicVCL7dAYl4zq+2rxEOUTObxA=";
       };
       globalConfig = ''
         acme_dns cloudflare {env.CLOUDFLARE_API_TOKEN}
       '';
-      virtualHosts = {
-        "invidious.yourdomain.com" = {
-          extraConfig = "reverse_proxy localhost:3000";
-        };
-        "n8n.yourdomain.com" = {
-          extraConfig = "reverse_proxy localhost:5678";
-        };
+      virtualHosts."invidious.${config.var.domain}" = {
+        extraConfig = ''
+          import ${config.sops.templates."caddy-invidious-auth".path}
+          reverse_proxy localhost:3000 {
+            header_up -X-Forwarded-For
+          }
+        '';
       };
     };
 
     systemd.services.caddy.serviceConfig.EnvironmentFile =
-      config.sops.secrets.caddy-cloudflare-env.path;
+      config.sops.templates."caddy.env".path;
 
     networking.firewall.allowedTCPPorts = [80 443];
   };

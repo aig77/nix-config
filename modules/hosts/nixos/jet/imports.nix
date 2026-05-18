@@ -11,6 +11,7 @@
         invidious
         n8n
         uptime-kuma
+        caddy
       ]);
     nixpkgs.hostPlatform = "x86_64-linux";
   };
