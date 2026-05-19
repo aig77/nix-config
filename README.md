@@ -54,6 +54,10 @@ A declarative, multi-platform system configuration built with Nix Flakes and fla
 - [Flake Inputs](docs/howto/flake-inputs.md): adding and updating flake inputs
 - [Troubleshooting](docs/howto/troubleshooting.md): common errors and how to fix them
 
+### Service Guides
+
+- [Yattee](docs/services/yattee.md): ad-free YouTube on iPhone, iPad, and Apple TV via Invidious
+
 ---
 
 ## Acknowledgements

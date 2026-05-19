@@ -30,12 +30,14 @@ protecting it. Embed credentials directly in the instance URL so Yattee sends th
 1. Open Yattee
 2. Go to **Settings -> Locations**
 3. Tap **+** to add a new location
-4. Set the URL to:
-   ```
-   https://<username>:<password>@invidious.turboguac.cc
-   ```
-   Replace `<username>` and `<password>` with the basic auth credentials from your password manager.
+4. Set the URL 
 5. Save and set it as the active location
+
+If using basic auth when setting the URL
+```
+https://<username>:<password>@<domain>
+```
+Replace `<username>` and `<password>` with the basic auth credentials from your password manager.
 
 ---
 
@@ -49,3 +51,9 @@ Logging in gives you access to your subscriptions and watch history.
 4. Tap **Sign in**
 
 Your subscription feed will appear in the **Subscriptions** tab once logged in.
+
+---
+
+## Crashes
+
+Yattee is in beta and frequently crashes. When this happens, close the application tab and reopen.

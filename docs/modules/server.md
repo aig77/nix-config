@@ -125,6 +125,7 @@ handle {
 
 See [Yattee HTTP basic auth wiki](https://github.com/yattee/yattee/wiki/HTTP-basic-access-authentication)
 for the recommended approach (nginx example, same principle applies to Caddy).
+See [Yattee setup guide](../services/yattee.md) for connecting a client to this instance.
 
 ### Secrets
 
