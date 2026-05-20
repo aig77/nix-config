@@ -45,6 +45,10 @@
             type = lib.types.str;
             default = "";
           };
+          ip = lib.mkOption {
+            type = lib.types.str;
+            default = "";
+          };
         };
       };
       default = {};

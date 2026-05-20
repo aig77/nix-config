@@ -8,10 +8,13 @@
         server
         grub-server
         tailscale
+        caddy
+        gatus
+        glance
+        grafana
         invidious
         n8n
-        uptime-kuma
-        caddy
+        prometheus
       ]);
     nixpkgs.hostPlatform = "x86_64-linux";
   };

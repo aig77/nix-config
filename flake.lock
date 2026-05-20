@@ -935,11 +935,11 @@
     "invidious": {
       "flake": false,
       "locked": {
-        "lastModified": 1778642017,
-        "narHash": "sha256-hiLhNto2ODFehnGJBJ4RG1UbyeC4sQ8YtobJ416qKPs=",
+        "lastModified": 1779051589,
+        "narHash": "sha256-/E1g3Ys44lhhGVXsS7FmAk8qVUS88Fcp014/V/HTuG4=",
         "owner": "iv-org",
         "repo": "invidious",
-        "rev": "529fc8a8a37744111f0c229cf89fa410a65115fe",
+        "rev": "103f80e617ed26e7be42c890bb6e837cbebbf7e6",
         "type": "github"
       },
       "original": {

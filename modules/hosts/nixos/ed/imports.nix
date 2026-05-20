@@ -4,6 +4,7 @@
       base
       server
       tailscale
+      prometheus-client
       dns
     ];
     nixpkgs.hostPlatform = "aarch64-linux";

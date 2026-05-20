@@ -13,12 +13,12 @@ _: {
       enable = true;
       environment = {
         GENERIC_TIMEZONE = "America/New_York";
-        N8N_PORT = "5678";
+        N8N_PORT = toString config.ports.n8n;
         N8N_SECURE_COOKIE = "false";
       };
     };
 
-    networking.firewall.allowedTCPPorts = [5678];
+    networking.firewall.allowedTCPPorts = [config.ports.n8n];
 
     systemd.services.n8n.serviceConfig.EnvironmentFile =
       config.sops.templates."n8n.env".path;

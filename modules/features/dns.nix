@@ -1,27 +1,15 @@
 _: {
   flake.modules.nixos.dns = {
     config,
-    pkgs,
     ...
   }: {
-    sops.secrets = {
-      grafana-admin-password = {
-        owner = "grafana";
-        group = "grafana";
-      };
-      grafana-secret-key = {
-        owner = "grafana";
-        group = "grafana";
-      };
-    };
-
     services = {
       blocky = {
         enable = true;
         settings = {
           ports = {
             dns = 53;
-            http = 4000;
+            http = config.ports.blockyHttp;
           };
 
           upstreams.groups.default = [
@@ -74,77 +62,13 @@ _: {
         };
         settings.remote-control.control-enable = false;
       };
-
-      prometheus = {
-        enable = true;
-        port = 9090;
-        scrapeConfigs = [
-          {
-            job_name = "prometheus";
-            static_configs = [{targets = ["127.0.0.1:9090"];}];
-          }
-          {
-            job_name = "node";
-            static_configs = [{targets = ["127.0.0.1:9100"];}];
-          }
-          {
-            job_name = "blocky";
-            static_configs = [{targets = ["127.0.0.1:4000"];}];
-          }
-        ];
-        exporters.node = {
-          enable = true;
-          port = 9100;
-        };
-        retentionTime = "7d";
-      };
-
-      grafana = {
-        enable = true;
-        settings = {
-          server = {
-            http_addr = "0.0.0.0";
-            http_port = 3000;
-          };
-          security = {
-            admin_password_path = "${config.sops.secrets.grafana-admin-password.path}";
-            secret_key = "$__file{${config.sops.secrets.grafana-secret-key.path}}";
-          };
-          panels.disable_sanitize_html = true;
-        };
-
-        provision = {
-          enable = true;
-          datasources.settings.datasources = [
-            {
-              name = "Prometheus";
-              type = "prometheus";
-              url = "http://127.0.0.1:9090";
-              isDefault = true;
-            }
-          ];
-          dashboards.settings.providers = [
-            {
-              name = "default";
-              options.path = "/etc/grafana-dashboards";
-            }
-          ];
-        };
-      };
-    };
-
-    environment.etc."grafana-dashboards/node-exporter.json".source = pkgs.fetchurl {
-      url = "https://grafana.com/api/dashboards/1860/revisions/37/download";
-      sha256 = "sha256-1DE1aaanRHHeCOMWDGdOS1wBXxOF84UXAjJzT5Ek6mM=";
     };
 
     networking.firewall = {
       enable = true;
       allowedTCPPorts = [
         53
-        3000
-        4000
-        9090
+        config.ports.blockyHttp
       ];
       allowedUDPPorts = [
         53

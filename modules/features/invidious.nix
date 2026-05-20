@@ -23,7 +23,7 @@
       templates."invidious-companion-settings.json" = {
         mode = "0444";
         content = ''
-          {"invidious_companion":[{"private_url":"http://127.0.0.1:8282/companion"}],"invidious_companion_key":"${config.sops.placeholder."invidious-companion-key"}"}
+          {"invidious_companion":[{"private_url":"http://127.0.0.1:${toString config.ports.invidiousCompanion}/companion"}],"invidious_companion_key":"${config.sops.placeholder."invidious-companion-key"}"}
         '';
       };
 
@@ -31,6 +31,7 @@
         mode = "0444";
         content = ''
           SERVER_SECRET_KEY=${config.sops.placeholder."invidious-companion-key"}
+          PORT=${toString config.ports.invidiousCompanion}
         '';
       };
     };
@@ -43,7 +44,7 @@
       });
       database.createLocally = true;
       address = "127.0.0.1";
-      port = 3000;
+      port = config.ports.invidious;
       extraSettingsFile = config.sops.templates."invidious-companion-settings.json".path;
     };
 

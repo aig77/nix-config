@@ -50,13 +50,13 @@ _: {
         extraConfig = ''
           @authapi path /api/v1/auth/*
           handle @authapi {
-            reverse_proxy localhost:3000 {
+            reverse_proxy localhost:${toString config.ports.invidious} {
               header_up -X-Forwarded-For
             }
           }
           handle {
             import ${config.sops.templates."caddy-invidious-auth".path}
-            reverse_proxy localhost:3000 {
+            reverse_proxy localhost:${toString config.ports.invidious} {
               header_up -X-Forwarded-For
             }
           }
