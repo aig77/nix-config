@@ -87,7 +87,7 @@ basic_auth * {
 ```
 
 The snippet is loaded with Caddy's `import` directive. This avoids the base64 encoding
-that Caddy's JSON config path requires -- the Caddyfile path accepts the raw `$2a$...` hash.
+that Caddy's JSON config path requires. The Caddyfile path accepts the raw `$2a$...` hash.
 
 ### Updating the password
 
@@ -109,7 +109,7 @@ Caddy's `basic_auth` consumes the `Authorization` header. Invidious API clients 
 send their session token in the same header, so it never reaches invidious.
 
 The fix: bypass basic auth for `/api/v1/auth/*` routes, which carry the session token.
-Invidious's own auth protects those endpoints -- a valid session token is still required.
+Invidious's own auth protects those endpoints (a valid session token is still required).
 All other routes (UI, public API) still require basic auth.
 
 ```
@@ -181,7 +181,7 @@ This is already enabled in the module.
 ### Local DNS override
 
 The `customDNS.mapping` in blocky resolves public service hostnames to the server's LAN IP.
-This is necessary because home routers typically do not support hairpin NAT -- LAN
+This is necessary because home routers typically do not support hairpin NAT. LAN
 devices cannot reach a local server via its public IP through the router.
 
 ```nix
@@ -214,7 +214,7 @@ Full request path for an external client:
 Client
   -> Cloudflare (proxy, TLS termination at edge)
   -> server:443 (Caddy, re-terminates TLS with its own cert)
-  -> basic auth check (Caddy) -- skipped for /api/v1/auth/*
+  -> basic auth check (Caddy, skipped for /api/v1/auth/*)
   -> localhost:3000 (Invidious)
   -> localhost:8282 (invidious-companion, for video URLs)
 ```

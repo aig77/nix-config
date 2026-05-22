@@ -105,7 +105,7 @@ All Home Manager modules.
 | FZF | `features/fzf.nix` | `hm.fzf` | Fuzzy finder with shell integration |
 | Zoxide | `features/zoxide.nix` | `hm.zoxide` | Smart `cd` replacement |
 | Tmux | `features/tmux.nix` | `hm.tmux` | Tmux with Catppuccin theme |
-| Neovim | `features/editor/neovim.nix` | `hm.neovim` | LSP, treesitter, mini.nvim, mason |
+| Neovim | `features/neovim/` | `hm.neovim` | LSP, treesitter, mini.nvim, mason. Config lives in `features/neovim/nvim/` and is symlinked to `~/.config/nvim` at build time via `mkOutOfStoreSymlink`. Edits take effect immediately without a rebuild. Symlink target is derived from `var.repoPath`. |
 | Vim | `features/editor/vim.nix` | `hm.vim` | Minimal vim config as fallback |
 | Git | `features/git/git.nix` | `hm.git` | Username from `var.username`, email from sops secret at runtime |
 | Lazygit | `features/git/lazygit.nix` | `hm.lazygit` | Lazygit TUI with Catppuccin theme |
@@ -135,3 +135,25 @@ All Home Manager modules.
 |---------|------|---------|-------------|
 | Eyecandy (base) | `features/eyecandy/` | `hm.eyecandy-base` | fastfetch, fetchGreeting, ASCII art packages |
 | Eyecandy (NixOS) | `features/eyecandy/` | `hm.eyecandy-nixos` | eyecandy-base + cava + tty-clock |
+
+---
+
+## Using Config Files Without NixOS
+
+Some config directories in this repo (e.g. `modules/features/neovim/nvim/`) are usable standalone on any machine without deploying the full NixOS config. Use sparse checkout to clone only what you need:
+
+```bash
+git clone --no-checkout --filter=blob:none https://github.com/aig77/bebop ~/.config/bebop
+cd ~/.config/bebop
+git sparse-checkout init --cone
+git sparse-checkout set modules/features/neovim/nvim
+git checkout main
+```
+
+Then symlink manually:
+
+```bash
+ln -s ~/.config/bebop/modules/features/neovim/nvim ~/.config/nvim
+```
+
+On a managed NixOS host the symlink is created automatically at rebuild time. The manual step is only needed on unmanaged machines.
