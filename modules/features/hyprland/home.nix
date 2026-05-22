@@ -260,17 +260,18 @@ _: {
           "match:class Bitwarden, size 1000 750"
           "match:class Bitwarden, no_screen_share on"
 
-          "match:class .blueman-manager-wrapped, float on"
-          "match:class .blueman-manager-wrapped, size 800 600"
+          "match:class .*blueman.*, float on"
+          "match:class .*blueman.*, size 800 600"
 
-          "match:class org.pulseaudio.pavucontrol, float on"
-          "match:class org.pulseaudio.pavucontrol, size 800 600"
+          "match:class .*pavucontrol.*, float on"
+          "match:class .*pavucontrol.*, size 800 600"
 
           "match:class nm-connection-editor, float on"
 
-          "match:class steam_app_*, fullscreen on"
-          "match:class steam_app_*, workspace ${toString gameWorkspace}"
-
+          "match:class steam_app_.*, fullscreen on"
+          "match:class steam_app_.*, workspace ${toString gameWorkspace}"
+          "match:content game, fullscreen on"
+          "match:content game, workspace ${toString gameWorkspace}"
           "match:class gamescope, fullscreen on"
           "match:class gamescope, workspace ${toString gameWorkspace}"
 
