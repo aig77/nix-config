@@ -7,6 +7,8 @@
         neovim
         nixd
         sops
+        lua
+        stylua
       ];
       EDITOR = "nvim";
     };
