@@ -14,7 +14,16 @@ _: {
     stylix.targets.neovim.enable = false;
 
     # new nvim-treesitter rewrite builds parses from source using tree-sitter CLI
-    home.packages = [pkgs.tree-sitter];
+    home.packages = with pkgs; [
+      tree-sitter
+      # LSPs -- Mason is disabled on NixOS so these are provided directly
+      lua-language-server
+      nixd
+      rust-analyzer
+      pyright
+      gopls
+      qt6.qtdeclarative # qmlls
+    ];
 
     programs.neovim = {
       enable = true;

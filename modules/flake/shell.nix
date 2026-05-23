@@ -9,6 +9,7 @@
         sops
         lua
         stylua
+        qt6.qtdeclarative
       ];
       EDITOR = "nvim";
     };
