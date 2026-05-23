@@ -41,57 +41,38 @@ _: {
           inherit font;
         };
 
-        # Loaded by Appearance.qml when colorSource = "matugen".
-        # Maps the base16 Stylix palette to Material Design 3 roles.
-        # Regenerated on every rebuild.
-        ".cache/stylix/Appearance.colors.qml".text = ''
-          import QtQuick
-
-          QtObject {
-              id: m3
-
-              property color m3primary: "${colors.base0D}"             // blue
-              property color m3onPrimary: "${colors.base00}"           // bg
-
-              property color m3primaryContainer: "${colors.base02}"    // surface
-              property color m3onPrimaryContainer: "${colors.base05}"  // fg
-
-              property color m3secondary: "${colors.base0E}"           // purple
-              property color m3onSecondary: "${colors.base00}"         // bg
-
-              property color m3secondaryContainer: "${colors.base03}"  // muted
-              property color m3onSecondaryContainer: "${colors.base05}" // fg
-
-              property color m3background: "${colors.base00}"          // bg
-              property color m3onBackground: "${colors.base05}"        // fg
-
-              property color m3surface: "${colors.base00}"             // bg
-
-              property color m3surfaceContainerLow: "${colors.base01}"  // mantle
-              property color m3surfaceContainer: "${colors.base02}"     // surface
-              property color m3surfaceContainerHigh: "${colors.base03}" // muted
-              property color m3surfaceContainerHighest: "${colors.base04}" // subtle
-
-              property color m3onSurface: "${colors.base05}"           // fg
-
-              property color m3surfaceVariant: "${colors.base02}"      // surface
-              property color m3onSurfaceVariant: "${colors.base05}"    // fg
-
-              property color m3inverseSurface: "${colors.base05}"      // fg
-              property color m3inverseOnSurface: "${colors.base00}"    // bg
-
-              property color m3outline: "${colors.base03}"             // muted
-              property color m3outlineVariant: "${colors.base02}"      // surface
-
-              property color m3shadow: "#000000"
-          }
-        '';
-
-        # Consumed by Config.qml to set colorSource and font for the overview.
+        # Consumed by Config.qml to set colorSource, font, and MD3 colors for the overview.
+        # Colors embedded here so Appearance.qml can read them via the already-working
+        # Config process (which uses $HOME) rather than relative QML URL resolution.
         # Regenerated on every rebuild.
         ".cache/stylix/config.json".text = builtins.toJSON {
           appearance = {
             colorSource = "matugen";
+            matugenColors = {
+              m3primary = colors.base0D; # blue
+              m3onPrimary = colors.base00; # bg
+              m3primaryContainer = colors.base02; # surface
+              m3onPrimaryContainer = colors.base05; # fg
+              m3secondary = colors.base0E; # purple
+              m3onSecondary = colors.base00; # bg
+              m3secondaryContainer = colors.base03; # muted
+              m3onSecondaryContainer = colors.base05; # fg
+              m3background = colors.base00; # bg
+              m3onBackground = colors.base05; # fg
+              m3surface = colors.base00; # bg
+              m3surfaceContainerLow = colors.base01; # mantle
+              m3surfaceContainer = colors.base02; # surface
+              m3surfaceContainerHigh = colors.base03; # muted
+              m3surfaceContainerHighest = colors.base04; # subtle
+              m3onSurface = colors.base05; # fg
+              m3surfaceVariant = colors.base02; # surface
+              m3onSurfaceVariant = colors.base05; # fg
+              m3inverseSurface = colors.base05; # fg
+              m3inverseOnSurface = colors.base00; # bg
+              m3outline = colors.base03; # muted
+              m3outlineVariant = colors.base02; # surface
+              m3shadow = "#000000";
+            };
             font.family = {
               main = "${font}";
               title = "${font}";
