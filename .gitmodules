@@ -1,0 +1,3 @@
+[submodule "modules/features/neovim/nvim"]
+	path = modules/features/neovim/nvim
+	url = git@github.com:aig77/nvim.git
