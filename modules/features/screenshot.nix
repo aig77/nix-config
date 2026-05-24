@@ -35,5 +35,11 @@ _: {
       screenshot-screen
       screenshot-window
     ];
+
+    home.sessionVariables = {
+      SCREENSHOT_AREA = "screenshot-area";
+      SCREENSHOT_SCREEN = "screenshot-screen";
+      SCREENSHOT_WINDOW = "screenshot-window";
+    };
   };
 }
