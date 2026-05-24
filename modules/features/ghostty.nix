@@ -25,10 +25,11 @@ _: {
           window-padding-y = 16;
           window-padding-balance = true;
           shell-integration-features = "ssh-env,ssh-terminfo";
-          background-opacity =
+          background-opacity = lib.mkForce (
             if isDarwin
             then 1.0
-            else 0.9;
+            else 0.9
+          );
         };
       };
     };
