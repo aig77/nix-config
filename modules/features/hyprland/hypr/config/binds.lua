@@ -57,6 +57,7 @@ end
 -- Shell-specific
 if shell == "quickshell" then
   bind("ALT + tab", exec("qs ipc call overview toggle"), { description = "Workspace Overview" })
+  bind(mod .. " + escape", exec("qs ipc call controlcenter toggle"), { description = "Control Center" })
 end
 
 -- Scratchpad

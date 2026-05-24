@@ -21,6 +21,14 @@ _: {
         # Colors embedded here so Appearance.qml can read them via the already-working
         # Config process (which uses $HOME) rather than relative QML URL resolution.
         # Regenerated on every rebuild.
+        ".cache/bebop/weather.json".text = builtins.toJSON {
+          location = osConfig.var.location;
+          weatherApiKeyPath =
+            if osConfig ? sops && (osConfig.sops.templates ? "weatherapi.json")
+            then osConfig.sops.templates."weatherapi.json".path
+            else "";
+        };
+
         ".cache/stylix/config.json".text = builtins.toJSON {
           appearance = {
             colorSource = "matugen";

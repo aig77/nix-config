@@ -63,16 +63,25 @@ A declarative, multi-platform system configuration built with Nix Flakes and fla
 ## Todo
 
 **Quickshell: keyboard-driven control center (vim binds)**
-- [ ] Clock
+- [x] Clock
 - [ ] Calendar
-- [ ] Weather
+- [ ] Make calendar scrollable between different months up to 5 years later
+- [x] Weather
 - [ ] Notification center
-- [ ] Brightness and volume sliders
-- [ ] System metrics (CPU, GPU, RAM, storage)
-- [ ] Blue light filter toggle
-- [ ] Cava visualizer and media player
-- [ ] Power, Restart, Sleep, Lock buttons 
-- [ ] ...
+- [ ] Add bell icon
+- [ ] Add clear button
+- [ ] Display notifications in the same way that they show up from the notification daemon
+- [x] Brightness and volume sliders
+- [x] System metrics (CPU, GPU, RAM, storage)
+- [x] Blue light filter toggle
+- [x] Idle inhibit toggle
+- [x] Cava visualizer and media player
+- [x] Power, Restart, Sleep, Lock buttons 
+- [ ] Rename Zones and Modules to simple names
+- [ ] Focus - Should be "Zone | Module", ex "Sliders and Toggles" if hovering, "Sliders and Toggles | Volume" if focused
+- [ ] Make some modules not selectable, skippable since there is no interaction. Move them to the top
+- [ ] Add padding under cava so border doesn't bleed into it
+- [ ] Fix extra padding between bottom of control center and border when hovering over Power Center
 
 **Jet: self-hosted services**
 - [ ] Vaultwarden
