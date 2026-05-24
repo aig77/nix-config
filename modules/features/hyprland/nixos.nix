@@ -3,15 +3,22 @@ _: {
     inputs,
     pkgs,
     ...
-  }: {
-    services.displayManager.gdm = {
-      enable = true;
-      wayland = true;
-    };
+  }: let
+    inherit (pkgs.stdenv.hostPlatform) system;
+  in {
     programs.hyprland = {
       enable = true;
-      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-      portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+      xwayland.enable = true;
+      package = inputs.hyprland.packages.${system}.hyprland;
+      portalPackage = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
     };
+
+    stylix.targets.hyprland.enable = false;
+  };
+
+  flake.modules.homeManager.hyprland = {pkgs, ...}: {
+    home.packages = with pkgs; [
+      hyprpolkitagent
+    ];
   };
 }
