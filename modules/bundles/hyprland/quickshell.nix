@@ -10,12 +10,7 @@ in {
       hm.hyprland
       hm.quickshell-shell
       hm.screenshot
-      {
-        wayland.windowManager.hyprland.settings.exec-once = ["quickshell"];
-        wayland.windowManager.hyprland.settings.bindd = [
-          "ALT, tab, Workspace Overview, exec, qs ipc call overview toggle"
-        ];
-      }
+      {home.sessionVariables.HYPR_SHELL = "quickshell";}
     ];
   };
 }

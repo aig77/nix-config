@@ -9,7 +9,7 @@ in {
       hm.hyprland
       hm.waybar-shell
       hm.screenshot
-      {wayland.windowManager.hyprland.settings.exec-once = ["waybar" "playerctld"];}
+      {home.sessionVariables.HYPR_SHELL = "waybar";}
     ];
   };
 }

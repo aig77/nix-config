@@ -9,7 +9,7 @@ in {
       hm.hyprland
       hm.hyprpanel-shell
       hm.screenshot
-      {wayland.windowManager.hyprland.settings.exec-once = ["hyprpanel"];}
+      {home.sessionVariables.HYPR_SHELL = "hyprpanel";}
     ];
     sops.secrets.weatherapi-key = {};
     sops.templates."weatherapi.json" = {
