@@ -4,7 +4,7 @@
   inherit (config.flake.modules) nixos;
 in {
   flake.modules.nixos.hyprland-quickshell = _: {
-    imports = [nixos.gdm nixos.hyprland];
+    imports = [nixos.sddm nixos.hyprland];
     var.launcher = "quickshell";
     home-manager.users.${username}.imports = [
       hm.hyprland

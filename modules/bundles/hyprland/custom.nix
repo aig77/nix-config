@@ -4,7 +4,7 @@
   inherit (config.flake.modules) nixos;
 in {
   flake.modules.nixos.hyprland-custom = _: {
-    imports = [nixos.gdm nixos.hyprland];
+    imports = [nixos.sddm nixos.hyprland];
     home-manager.users.${username}.imports = [
       hm.hyprland
       hm.waybar-shell
