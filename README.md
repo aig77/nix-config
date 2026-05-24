@@ -63,18 +63,23 @@ A declarative, multi-platform system configuration built with Nix Flakes and fla
 ## Todo
 
 **Quickshell: keyboard-driven control center (vim binds)**
-- [ ] Clock and calendar
+- [ ] Clock
+- [ ] Calendar
 - [ ] Weather
 - [ ] Notification center
 - [ ] Brightness and volume sliders
 - [ ] System metrics (CPU, GPU, RAM, storage)
 - [ ] Blue light filter toggle
 - [ ] Cava visualizer and media player
+- [ ] Power, Restart, Sleep, Lock buttons 
 - [ ] ...
 
 **Jet: self-hosted services**
 - [ ] Vaultwarden
 - [ ] Forgejo
+
+**Hardware**
+- [ ] Adjust fan curves
 
 ---
 
