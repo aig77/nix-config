@@ -27,15 +27,9 @@ _: {
 
     home.sessionVariables.CURRENT_WALLPAPER = var.wallpaperPath;
 
-    wayland.windowManager.hyprland.settings.env = [
-      "CURRENT_WALLPAPER,${var.wallpaperPath}"
-    ];
-
     systemd.user.services.awww = {
       Unit = {
         Description = "awww wallpaper daemon";
-        PartOf = ["graphical-session.target"];
-        After = ["graphical-session.target"];
         Wants = ["awww-wallpaper.service"];
       };
       Service = {
@@ -44,7 +38,7 @@ _: {
         Restart = "on-failure";
         RestartSec = "1s";
       };
-      Install.WantedBy = ["graphical-session.target"];
+      Install.WantedBy = ["default.target"];
     };
 
     systemd.user.services.awww-wallpaper = {

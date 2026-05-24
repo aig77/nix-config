@@ -1,5 +1,7 @@
 _: {
   flake.modules.homeManager.hypridle = {pkgs, ...}: {
+    home.packages = [pkgs.hypridle];
+
     services.hypridle = {
       enable = true;
       settings = {
@@ -26,6 +28,6 @@ _: {
         ];
       };
     };
-    wayland.windowManager.hyprland.settings.exec-once = ["hypridle"];
+
   };
 }
