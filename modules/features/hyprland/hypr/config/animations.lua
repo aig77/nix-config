@@ -1,10 +1,11 @@
 hl.config({
-	animations = {
-		enabled = true,
-	},
+  animations = {
+    enabled = true,
+  },
 })
 
 -- Curves and animations, see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
+hl.curve("linear", { type = "bezier", points = { { 0.0, 0.0 }, { 1.0, 1.0 } } })
 hl.curve("smoothOut", { type = "bezier", points = { { 0.36, 0 }, { 0.66, -0.56 } } })
 hl.curve("smoothIn", { type = "bezier", points = { { 0.25, 1 }, { 0.5, 1 } } })
 hl.curve("overshot", { type = "bezier", points = { { 0.05, 0.9 }, { 0.1, 1.05 } } })
@@ -29,3 +30,5 @@ hl.animation({ leaf = "fadeDim", enabled = true, speed = 4, bezier = "smoothIn" 
 hl.animation({ leaf = "fadeDpms", enabled = true, speed = 4, bezier = "smoothIn" })
 hl.animation({ leaf = "workspaces", enabled = true, speed = 5, bezier = "overshot", style = "slide" })
 hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 5, bezier = "overshot", style = "slidevert" })
+hl.animation({ leaf = "border", enabled = true, speed = 5, bezier = "overshot" })
+hl.animation({ leaf = "borderangle", enabled = true, speed = 30, bezier = "linear", style = "loop" })
