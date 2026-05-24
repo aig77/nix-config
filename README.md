@@ -82,6 +82,8 @@ A declarative, multi-platform system configuration built with Nix Flakes and fla
 - [ ] Make some modules not selectable, skippable since there is no interaction. Move them to the top
 - [ ] Add padding under cava so border doesn't bleed into it
 - [ ] Fix extra padding between bottom of control center and border when hovering over Power Center
+- [ ] Changes broke navigation in Overview, fix
+- [ ] Make Overview adaptable to number of workspaces set by hyprland using envar
 
 **Jet: self-hosted services**
 - [ ] Vaultwarden
