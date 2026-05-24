@@ -17,30 +17,6 @@ _: {
       # Generated files are written to ~/.cache/stylix/ to avoid conflicting
       # with the symlinked config directory above.
       file = {
-        # Base16 palette consumed by Colors.qml at runtime.
-        ".cache/stylix/colors.json".text = builtins.toJSON {
-          inherit
-            (colors)
-            base00
-            base01
-            base02
-            base03
-            base04
-            base05
-            base06
-            base07
-            base08
-            base09
-            base0A
-            base0B
-            base0C
-            base0D
-            base0E
-            base0F
-            ;
-          inherit font;
-        };
-
         # Consumed by Config.qml to set colorSource, font, and MD3 colors for the overview.
         # Colors embedded here so Appearance.qml can read them via the already-working
         # Config process (which uses $HOME) rather than relative QML URL resolution.

@@ -1,4 +1,34 @@
 {inputs, ...}: {
+  flake.modules.homeManager.theme = {config, ...}: let
+    colors = config.lib.stylix.colors.withHashtag;
+    font = config.stylix.fonts.monospace.name;
+  in {
+    # Base16 palette written to cache so runtime configs (Hyprland lua, Quickshell)
+    # can read colors without needing build-time substitution.
+    home.file.".cache/stylix/colors.json".text = builtins.toJSON {
+      inherit
+        (colors)
+        base00
+        base01
+        base02
+        base03
+        base04
+        base05
+        base06
+        base07
+        base08
+        base09
+        base0A
+        base0B
+        base0C
+        base0D
+        base0E
+        base0F
+        ;
+      inherit font;
+    };
+  };
+
   flake.modules.nixos.theme = {
     pkgs,
     config,
