@@ -19,8 +19,9 @@
 
 Full-featured desktop with Hyprland on Wayland, AMD GPU, gaming, and development tooling. Catppuccin Mocha everywhere.
 
-- Hyprland compositor with custom animations, blur, and rounded corners
-- Quickshell bar, SwayNC notification center, Fuzzel launcher, Hyprlock lock screen, Wlogout
+- Hyprland compositor with Lua config (animations, binds, rules, env propagation)
+- Quickshell WorkspacePill (transient workspace indicator), Fuzzel launcher, Hyprlock lock screen, Wlogout
+- SDDM display manager with sddm-astronaut theme
 - Gaming: Steam with Proton, Heroic, Bottles, GameMode, MangoHud
 - Ghostty terminal, Zen browser, Neovim, Tmux
 - Spotify (Spicetify), Discord (Nixcord), Obsidian, OBS

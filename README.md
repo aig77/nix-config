@@ -60,6 +60,24 @@ A declarative, multi-platform system configuration built with Nix Flakes and fla
 
 ---
 
+## Todo
+
+**Quickshell: keyboard-driven control center (vim binds)**
+- [ ] Clock and calendar
+- [ ] Weather
+- [ ] Notification center
+- [ ] Brightness and volume sliders
+- [ ] System metrics (CPU, GPU, RAM, storage)
+- [ ] Blue light filter toggle
+- [ ] Cava visualizer and media player
+- [ ] ...
+
+**Jet: self-hosted services**
+- [ ] Vaultwarden
+- [ ] Forgejo
+
+---
+
 ## Acknowledgements
 
 - [vimjoyer](https://www.youtube.com/@vimjoyer/videos) - YouTube channel that started this journey

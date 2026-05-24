@@ -13,6 +13,26 @@
 
 ## NixOS Hosts
 
+`nrs` and `nrt` are shell functions available in zsh and fish. They use `var.repoPath` so they work from any directory, and accept an optional first argument to target a specific host.
+
+```bash
+# Rebuild the current host
+nrs
+
+# Rebuild a specific host
+nrs faye
+
+# Rebuild a remote host
+nrs jet --target-host user@jet --sudo --ask-password
+
+# Print usage
+nrs help
+```
+
+`nrt` has the same interface but runs `nixos-rebuild test` instead of `switch`.
+
+Direct nixos-rebuild invocations also work if needed:
+
 ```bash
 sudo nixos-rebuild switch --flake .#spike
 sudo nixos-rebuild switch --flake .#faye

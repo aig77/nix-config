@@ -62,10 +62,11 @@ All three use `deferredModule`, so multiple files can contribute to the same pro
 |---------|-----------|----------|
 | `base` | Every NixOS machine | nix daemon, users, networking, sops secrets, home-manager wiring |
 | `desktop` | Machines with a display | audio, boot, bluetooth, fileManager, Stylix theme |
-| `hyprland` | Hyprland compositor base | Hyprland system enablement, GDM, portals |
-| `hyprland-quickshell` | Hyprland + Quickshell bar | `nixos.hyprland` + Quickshell as bar/launcher |
-| `hyprland-hyprpanel` | Hyprland + HyprPanel bar | `nixos.hyprland` + HyprPanel as bar |
-| `hyprland-custom` | Hyprland + Waybar | `nixos.hyprland` + Waybar + SwayNC |
+| `hyprland` | Hyprland compositor base | Hyprland system enablement, portals |
+| `hyprland-quickshell` | Hyprland + Quickshell bar | `nixos.sddm` + `nixos.hyprland` + Quickshell as bar/launcher, `HYPR_SHELL=quickshell` |
+| `hyprland-hyprpanel` | Hyprland + HyprPanel bar | `nixos.sddm` + `nixos.hyprland` + HyprPanel as bar, `HYPR_SHELL=hyprpanel` |
+| `hyprland-custom` | Hyprland + Waybar | `nixos.sddm` + `nixos.hyprland` + Waybar + SwayNC, `HYPR_SHELL=custom` |
+| `sddm` | SDDM display manager | sddm-astronaut theme with Stylix colors; wallpaper sync service |
 | `niri` | Niri compositor | Niri system enablement, GDM, portals |
 | `gnome` | GNOME desktop | GDM, GNOME packages |
 | `amdgpu` | AMD GPU machines | AMD drivers, ROCm, Vulkan |
@@ -89,7 +90,7 @@ All three use `deferredModule`, so multiple files can contribute to the same pro
 |---------|----------|
 | `base` | Shell tools (zsh/fish guarded by `var.shell`, starship, direnv, fzf, zoxide, tmux), editors (neovim, vim), git, terminal (ghostty/alacritty guarded by `var.terminal`), btop, common CLI packages |
 | `gui` | Zen browser, Discord, Spotify, Obsidian, Zathura, file manager, OBS (Linux only) |
-| `hyprland` | Hyprland keybinds/rules/animations, polkit agent |
+| `hyprland` | Lua config symlinked to `~/.config/hypr/` (`hyprland.lua` + `config/`), session vars, polkit agent. `stylix.targets.hyprland` disabled. |
 | `quickshell` | Quickshell bar/launcher + hyprlock + hypridle + fuzzel + wallpaper manager |
 | `hyprpanelShell` | HyprPanel bar + hyprlock + hypridle + fuzzel |
 | `customDesktopShell` | Waybar + SwayNC + fuzzel + hyprlock + hypridle + wallpaper manager |
@@ -157,9 +158,9 @@ NixOS profiles don't directly import HM profiles. Each feature that spans both s
 |---------------|-----------------------|-----------------|
 | `base` | `hm.base` | `flake/home-manager/nixos.nix` |
 | `desktop` | `hm.shell`, `hm.gui`, `hm.eyecandyNixos` | `aspects/desktop/home.nix` |
-| `hyprland-quickshell` | `hm.hyprland`, `hm.quickshell`, `hm.screenshot` | `features/hyprland/quickshell.nix` |
-| `hyprland-hyprpanel` | `hm.hyprland`, `hm.hyprpanelShell`, `hm.screenshot` | `features/hyprland/hyprpanel.nix` |
-| `hyprland-custom` | `hm.hyprland`, `hm.customDesktopShell`, `hm.screenshot` | `features/hyprland/custom.nix` |
+| `hyprland-quickshell` | `hm.hyprland`, `hm.quickshell`, `hm.screenshot` | `bundles/hyprland/quickshell.nix` |
+| `hyprland-hyprpanel` | `hm.hyprland`, `hm.hyprpanelShell`, `hm.screenshot` | `bundles/hyprland/hyprpanel.nix` |
+| `hyprland-custom` | `hm.hyprland`, `hm.customDesktopShell`, `hm.screenshot` | `bundles/hyprland/custom.nix` |
 | `niri` | `hm.niri`, `hm.customDesktopShell` | `features/niri/nixos.nix` |
 | `gnome` | `hm.gnome` | `features/gnome/nixos.nix` |
 | `gaming` | `hm.gaming` | `features/gaming/nixos.nix` |
@@ -177,7 +178,7 @@ nixos.desktop           -> audio, boot, bluetooth, theme
   hm.gui                -> browser, discord, spotify, apps
   hm.eyecandyNixos      -> fastfetch, krabby, cava, eye candy packages
 
-nixos.hyprland-quickshell -> Hyprland system, GDM, portals
+nixos.hyprland-quickshell -> Hyprland system, SDDM, portals
   hm.hyprland           -> keybinds, window rules, animations
   hm.quickshell         -> bar/launcher + hyprlock + hypridle + fuzzel + wallpaper
   hm.screenshot         -> screenshot scripts

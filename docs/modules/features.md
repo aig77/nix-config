@@ -42,7 +42,7 @@ Full compositor/WM setups. Each owns its system-level enablement and HM configur
 
 | Feature | Path | Profiles | Description |
 |---------|------|----------|-------------|
-| Hyprland (base) | `features/hyprland/` | `nixos.hyprland`, `hm.hyprland` | System enablement + portals (nixos.nix), keybinds/animations/window rules (home.nix). Not used directly; hosts import one of the variant bundles |
+| Hyprland (base) | `features/hyprland/` | `nixos.hyprland`, `hm.hyprland` | System enablement + portals (`nixos.hyprland`), Lua config symlinked to `hypr/` at build time (`hm.hyprland`). Config entry point is `hyprland.lua`; sub-modules in `hypr/config/` cover animations, autostart, binds, env, general, monitors, permissions, rules. `stylix.targets.hyprland` is disabled to prevent HM generating a conflicting `hyprland.conf`. Not used directly; hosts import one of the variant bundles. |
 | Niri | `features/niri/` | `nixos.niri`, `hm.niri` | GDM + Niri session (nixos.nix), keybinds/rules/wallpaper (home.nix), niri-specific Waybar (waybar.nix) |
 | GNOME | `features/gnome/` | `nixos.gnome`, `hm.gnome` | GDM + GNOME packages (nixos.nix), shell extensions via dconf (extensions.nix) |
 
@@ -75,6 +75,7 @@ NixOS-level opt-in services.
 
 | Feature | Path | Profile | Description |
 |---------|------|---------|-------------|
+| SDDM | `features/sddm.nix` | `nixos.sddm` | SDDM display manager with sddm-astronaut theme, Stylix colors (base0E accent, base00 background), monospace font. Wayland mode disabled (weston crashes on RDNA 4). A system service syncs the current wallpaper to `/var/lib/sddm/` before the display manager starts; a user path unit re-syncs on wallpaper change during the session. |
 | Audio | `features/audio.nix` | `nixos.audio` | PipeWire with PulseAudio compatibility, rtkit, dbus |
 | Bluetooth | `features/bluetooth.nix` | `nixos.bluetooth` | `services.bluetooth` enabled, blueman applet |
 | Boot | `features/grub.nix` | `nixos.grub` | GRUB2 with EFI, Plymouth boot splash, quiet boot kernel params, binfmt aarch64 emulation |

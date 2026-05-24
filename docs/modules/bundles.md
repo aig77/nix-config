@@ -88,11 +88,11 @@ Complete NixOS+HM desktop configurations for different window managers.
 
 | Bundle | Path | Profiles | Description |
 |--------|------|----------|-------------|
-| Hyprland + Custom | `bundles/hyprland/custom.nix` | `nixos.hyprland-custom` | Hyprland with Waybar + SwayNC. Imports `nixos.hyprland`, wires `hm.hyprland`, `hm.waybar-shell`, `hm.screenshot` |
-| Hyprland + HyprPanel | `bundles/hyprland/hyprpanel.nix` | `nixos.hyprland-hyprpanel` | Hyprland with HyprPanel bar. Imports `nixos.hyprland`, wires `hm.hyprland`, `hm.hyprpanel-shell`, `hm.screenshot` |
-| Hyprland + Quickshell | `bundles/hyprland/quickshell.nix` | `nixos.hyprland-quickshell` | Hyprland with Quickshell bar/launcher. Imports `nixos.hyprland`, wires `hm.hyprland`, `hm.quickshell-shell`, `hm.screenshot`, sets `var.launcher = "quickshell"` |
+| Hyprland + Custom | `bundles/hyprland/custom.nix` | `nixos.hyprland-custom` | Hyprland with Waybar + SwayNC. Imports `nixos.sddm`, `nixos.hyprland`, wires `hm.hyprland`, `hm.waybar-shell`, `hm.screenshot`. Sets `HYPR_SHELL = "custom"`. |
+| Hyprland + HyprPanel | `bundles/hyprland/hyprpanel.nix` | `nixos.hyprland-hyprpanel` | Hyprland with HyprPanel bar. Imports `nixos.sddm`, `nixos.hyprland`, wires `hm.hyprland`, `hm.hyprpanel-shell`, `hm.screenshot`. Sets `HYPR_SHELL = "hyprpanel"`. |
+| Hyprland + Quickshell | `bundles/hyprland/quickshell.nix` | `nixos.hyprland-quickshell` | Hyprland with Quickshell bar/launcher. Imports `nixos.sddm`, `nixos.hyprland`, wires `hm.hyprland`, `hm.quickshell-shell`, `hm.screenshot`, sets `var.launcher = "quickshell"`. Sets `HYPR_SHELL = "quickshell"`. |
 
-Note: The base `nixos.hyprland` and `hm.hyprland` profiles live in `features/hyprland/`. The bundles above compose them with a desktop shell.
+Note: The base `nixos.hyprland` and `hm.hyprland` profiles live in `features/hyprland/`. The bundles above compose them with a desktop shell. Each bundle sets the `HYPR_SHELL` session variable, which `autostart.lua` and `binds.lua` read at runtime to decide which shell process to launch and which keybinds to register. All three bundles use `nixos.sddm` as the display manager (GDM was replaced by SDDM with the sddm-astronaut theme).
 
 ---
 
