@@ -27,7 +27,7 @@ _: {
       sort = name
       subfolders = False
       number_of_columns = 4
-      post_command = ln -sf $wallpaper ${var.wallpaperPath}
+      post_command = cp $wallpaper ${var.wallpaperPath}
       EOF
             fi
     '';

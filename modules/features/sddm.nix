@@ -34,8 +34,10 @@ _: {
         description = "Sync desktop wallpaper to SDDM";
         before = ["display-manager.service"];
         wantedBy = ["display-manager.service"];
+        after = ["local-fs.target"];
         serviceConfig = {
           Type = "oneshot";
+          ExecCondition = "${pkgs.coreutils}/bin/test -f /home/${config.var.username}/.cache/bebop/current-wallpaper";
           ExecStart = "${pkgs.coreutils}/bin/cp /home/${config.var.username}/.cache/bebop/current-wallpaper /var/lib/sddm/wallpaper";
         };
       };

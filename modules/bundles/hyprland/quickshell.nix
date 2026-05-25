@@ -4,7 +4,7 @@
   inherit (config.flake.modules) nixos;
 in {
   flake.modules.nixos.hyprland-quickshell = {config, ...}: {
-    imports = [nixos.sddm nixos.hyprland];
+    imports = [nixos.ly nixos.hyprland];
     var.launcher = "quickshell";
     sops.secrets.weatherapi-key = {};
     sops.templates."weatherapi.json" = {
