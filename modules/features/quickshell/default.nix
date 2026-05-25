@@ -63,6 +63,9 @@ _: {
               expressive = "${font}";
             };
           };
+          overview = {
+            hideEmptyRows = false;
+          };
         };
       };
     };

@@ -85,7 +85,8 @@ A declarative, multi-platform system configuration built with Nix Flakes and fla
 - [x] Fix extra padding between bottom of control center and border when hovering over Power Center
 - [ ] Changes broke navigation in Overview, fix
 - [x] Make Overview adaptable to number of workspaces set by hyprland using envar
-- [ ] Install and wire blue light filter and idle inhibiter
+- [x] Install and wire blue light filter
+- [x] Install and wire idle inhibiter
 
 **Jet: self-hosted services**
 - [ ] Vaultwarden
