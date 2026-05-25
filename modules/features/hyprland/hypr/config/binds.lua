@@ -79,7 +79,7 @@ end
 -- Shell-specific
 if shell == "quickshell" then
   bind(a("tab"), exec("qs ipc call overview toggle"), d("Workspace Overview"))
-  bind(m("escape"), exec("qs ipc call controlcenter toggle"), d("Control Center"))
+  bind(m("C"), exec("qs ipc call controlcenter toggle"), d("Control Center"))
 end
 
 -- Scratchpad
