@@ -64,26 +64,28 @@ A declarative, multi-platform system configuration built with Nix Flakes and fla
 
 **Quickshell: keyboard-driven control center (vim binds)**
 - [x] Clock
-- [ ] Calendar
-- [ ] Make calendar scrollable between different months up to 5 years later
+- [x] Calendar
+- [x] Make calendar scrollable between different months up to 5 years later
 - [x] Weather
-- [ ] Notification center
-- [ ] Add bell icon
-- [ ] Add clear button
-- [ ] Display notifications in the same way that they show up from the notification daemon
+- [x] Notification center
+- [x] Add bell icon
+- [x] Add clear button
+- [x] Display notifications in the same way that they show up from the notification daemon
 - [x] Brightness and volume sliders
 - [x] System metrics (CPU, GPU, RAM, storage)
 - [x] Blue light filter toggle
 - [x] Idle inhibit toggle
 - [x] Cava visualizer and media player
 - [x] Power, Restart, Sleep, Lock buttons 
-- [ ] Rename Zones and Modules to simple names
-- [ ] Focus - Should be "Zone | Module", ex "Sliders and Toggles" if hovering, "Sliders and Toggles | Volume" if focused
-- [ ] Make some modules not selectable, skippable since there is no interaction. Move them to the top
-- [ ] Add padding under cava so border doesn't bleed into it
-- [ ] Fix extra padding between bottom of control center and border when hovering over Power Center
+- [x] Add new mode - View - where there is no border around any Zone. Enter when pressing a direction or Enter. Assumes you start on the first always.
+- [x] Rename Zones and Modules to simple names
+- [x] Focus - Should be "Zone | Module", ex "Sliders and Toggles" if hovering, "Sliders and Toggles | Volume" if focused
+- [x] Make some modules not selectable, skippable since there is no interaction. Move them to the top
+- [x] Add padding under cava so border doesn't bleed into it
+- [x] Fix extra padding between bottom of control center and border when hovering over Power Center
 - [ ] Changes broke navigation in Overview, fix
-- [ ] Make Overview adaptable to number of workspaces set by hyprland using envar
+- [x] Make Overview adaptable to number of workspaces set by hyprland using envar
+- [ ] Install and wire blue light filter and idle inhibiter
 
 **Jet: self-hosted services**
 - [ ] Vaultwarden
