@@ -7,6 +7,7 @@
       hm.fuzzel
       hm.hyprlock
       hm.hypridle
+      hm.wlsunset
       hm.wallpaperManager
     ];
   };
