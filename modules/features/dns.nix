@@ -1,8 +1,5 @@
 _: {
-  flake.modules.nixos.dns = {
-    config,
-    ...
-  }: {
+  flake.modules.nixos.dns = {config, ...}: {
     services = {
       blocky = {
         enable = true;

@@ -2,7 +2,6 @@ _: {
   flake.modules.nixos.grafana = {
     config,
     pkgs,
-    lib,
     ...
   }: {
     services.grafana = {

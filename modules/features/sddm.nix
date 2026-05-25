@@ -1,6 +1,4 @@
-{config, ...}: let
-  inherit (config.flake.meta.owner) username;
-in {
+_: {
   flake.modules.nixos.sddm = {
     pkgs,
     config,
@@ -14,7 +12,7 @@ in {
         Background = "/var/lib/sddm/wallpaper";
         PartialBlur = "true";
         BlurRadius = "50";
-        FormPosition = "left";
+        FormPosition = "center";
         AccentColor = colors.base0E;
         BackgroundColor = colors.base00;
         Font = font;
@@ -31,35 +29,38 @@ in {
     environment.systemPackages = [sddmTheme];
 
     # System service syncs wallpaper before SDDM starts at boot
-    systemd.services.sddm-wallpaper-sync = {
-      description = "Sync desktop wallpaper to SDDM";
-      before = ["display-manager.service"];
-      wantedBy = ["display-manager.service"];
-      serviceConfig = {
-        Type = "oneshot";
-        ExecStart = "${pkgs.coreutils}/bin/cp /home/${config.var.username}/.cache/bebop/current-wallpaper /var/lib/sddm/wallpaper";
+    systemd = {
+      services.sddm-wallpaper-sync = {
+        description = "Sync desktop wallpaper to SDDM";
+        before = ["display-manager.service"];
+        wantedBy = ["display-manager.service"];
+        serviceConfig = {
+          Type = "oneshot";
+          ExecStart = "${pkgs.coreutils}/bin/cp /home/${config.var.username}/.cache/bebop/current-wallpaper /var/lib/sddm/wallpaper";
+        };
       };
-    };
 
-    # User path unit re-syncs when wallpaper changes during a session
-    systemd.user.services.sddm-wallpaper-sync = {
-      description = "Sync desktop wallpaper to SDDM";
-      serviceConfig = {
-        Type = "oneshot";
-        ExecStart = "${pkgs.coreutils}/bin/cp %h/.cache/bebop/current-wallpaper /var/lib/sddm/wallpaper";
+      # User path unit re-syncs when wallpaper changes during a session
+      user = {
+        services.sddm-wallpaper-sync = {
+          description = "Sync desktop wallpaper to SDDM";
+          serviceConfig = {
+            Type = "oneshot";
+            ExecStart = "${pkgs.coreutils}/bin/cp %h/.cache/bebop/current-wallpaper /var/lib/sddm/wallpaper";
+          };
+        };
+
+        paths.sddm-wallpaper-sync = {
+          description = "Watch desktop wallpaper for changes";
+          pathConfig.PathChanged = "%h/.cache/bebop/current-wallpaper";
+          wantedBy = ["default.target"];
+        };
       };
+
+      tmpfiles.rules = [
+        "d /var/lib/sddm 0755 sddm sddm -"
+        "f /var/lib/sddm/wallpaper 0666 root root -"
+      ];
     };
-
-    systemd.user.paths.sddm-wallpaper-sync = {
-      description = "Watch desktop wallpaper for changes";
-      pathConfig.PathChanged = "%h/.cache/bebop/current-wallpaper";
-      wantedBy = ["default.target"];
-    };
-
-    systemd.tmpfiles.rules = [
-      "d /var/lib/sddm 0755 sddm sddm -"
-      "f /var/lib/sddm/wallpaper 0666 root root -"
-    ];
-
   };
 }
