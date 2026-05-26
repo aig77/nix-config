@@ -55,3 +55,13 @@ hl.layer_rule({ name = "launcher-blur", match = { namespace = "launcher" }, blur
 hl.layer_rule({ name = "launcher-alpha", match = { namespace = "launcher" }, ignore_alpha = 0.5 })
 hl.layer_rule({ name = "qs-launcher-blur", match = { namespace = "^(quickshell:launcher)$" }, blur = true })
 hl.layer_rule({ name = "qs-launcher-alpha", match = { namespace = "^(quickshell:launcher)$" }, ignore_alpha = 0.1 })
+
+-- Disable Hyprland layer animations for all quickshell surfaces so the
+-- layersOut slide does not ghost after the session lock releases.
+hl.layer_rule({ name = "qs-cc-noanim",            match = { namespace = "^(quickshell:controlcenter)$"            }, no_anim = true })
+hl.layer_rule({ name = "qs-cc-scrim-noanim",      match = { namespace = "^(quickshell:controlcenter:scrim)$"       }, no_anim = true })
+hl.layer_rule({ name = "qs-cc-popup-noanim",      match = { namespace = "^(quickshell:controlcenter:notifdetail)$" }, no_anim = true })
+hl.layer_rule({ name = "qs-cc-power-noanim",      match = { namespace = "^(quickshell:controlcenter:powerconfirm)$"}, no_anim = true })
+hl.layer_rule({ name = "qs-pill-noanim",          match = { namespace = "^(quickshell:workspacepill)$"            }, no_anim = true })
+hl.layer_rule({ name = "qs-notifications-noanim", match = { namespace = "^(quickshell:notifications)$"            }, no_anim = true })
+hl.layer_rule({ name = "qs-overview-noanim",      match = { namespace = "^(quickshell:overview)$"                 }, no_anim = true })
