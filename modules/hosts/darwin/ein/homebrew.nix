@@ -10,6 +10,7 @@ _: {
       "lm-studio"
       "protonvpn"
       "raycast"
+      "spotify"
       "steam"
       "tailscale-app"
       "utm"

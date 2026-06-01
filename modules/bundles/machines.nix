@@ -27,6 +27,10 @@ in {
     htpc = _: {
       imports = with nixos; [audio bluetooth desktop-extras grub theme thunar];
       home-manager.users.${username}.imports = with hm; [gui shell-lite];
+
+      # USB keyboard+touchpad combo support (e.g. Rii mini); libinput explicit for Jovian Wayland
+      boot.kernelModules = ["hid_generic"];
+      services.libinput.enable = true;
     };
 
     server = {lib, ...}: {

@@ -70,6 +70,9 @@ A declarative, multi-platform system configuration built with Nix Flakes and fla
 **Hardware**
 - [ ] Adjust fan curves
 
+**Nix**
+- [ ] Move tailscale from per-host imports into base so all machines get it automatically
+
 ---
 
 ## Acknowledgements

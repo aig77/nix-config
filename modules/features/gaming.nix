@@ -82,9 +82,23 @@ in {
         hardware.has.amd.gpu = true;
       };
 
+      # Steam/gamescope don't always shut down cleanly -- cap wait time
+      systemd.settings.Manager.DefaultTimeoutStopSec = "10s";
+
       # Allows power on from sleep with controller
       hardware.xone.enable = true;
       users.users.${username}.extraGroups = ["input"]; # Required for previous option
+
+      # Required for Decky Loader to appear in the Steam overlay
+      systemd.services.steam-cef-debug = {
+        description = "Create Steam CEF debugging file for Decky Loader";
+        serviceConfig = {
+          Type = "oneshot";
+          User = username;
+          ExecStart = "/bin/sh -c 'mkdir -p ~/.steam/steam && [ ! -f ~/.steam/steam/.cef-enable-remote-debugging ] && touch ~/.steam/steam/.cef-enable-remote-debugging || true'";
+        };
+        wantedBy = ["multi-user.target"];
+      };
 
       home-manager.users.${username}.imports = [hm.gaming];
     };
