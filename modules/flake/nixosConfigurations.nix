@@ -23,6 +23,12 @@
               nixpkgs.config = {
                 allowUnfree = true;
                 allowBroken = true;
+                # bitwarden-desktop hardcodes electron_39 in nixpkgs despite upstream
+                # having moved to electron 34+. Remove once nixpkgs updates the package.
+                # Track: https://github.com/NixOS/nixpkgs/issues/526914
+                permittedInsecurePackages = [
+                  "electron-39.8.10"
+                ];
               };
             }
             inputs.sops-nix.nixosModules.sops

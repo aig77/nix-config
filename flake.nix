@@ -5,7 +5,9 @@
     import-tree.url = "github:vic/import-tree";
 
     claude-desktop = {
-      url = "github:aaddrick/claude-desktop-debian";
+      # Pinned to fix PR for addTrustedFolder anchor failure in 1.9659.2
+      # TODO: unpin once https://github.com/aaddrick/claude-desktop-debian/pull/674 merges
+      url = "github:aaddrick/claude-desktop-debian/refs/pull/674/head";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

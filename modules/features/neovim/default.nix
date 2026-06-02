@@ -1,7 +1,7 @@
 _: {
   flake.modules.homeManager.neovim = {
     pkgs,
-    # lib,
+    lib,
     config,
     osConfig,
     ...
@@ -29,8 +29,11 @@ _: {
       enable = true;
       defaultEditor = true;
       viAlias = true;
-      withRuby = true;
-      withPython3 = true;
+      # Disable providers to prevent HM generating nvim/init.lua, which would
+      # conflict with the xdg.configFile."nvim" directory symlink below.
+      withRuby = false;
+      withPython3 = false;
+      initLua = lib.mkForce "";
     };
 
     xdg.configFile."nvim".source =
