@@ -9,6 +9,7 @@
         grub-server
         tailscale
         caddy
+        cloudflared
         gatus
         glance
         grafana
