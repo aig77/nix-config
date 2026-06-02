@@ -18,10 +18,6 @@ _: {
             ips = ["1.1.1.1" "1.0.0.1"];
           };
 
-          customDNS.mapping = {
-            "invidious.turboguac.cc" = "192.168.68.100";
-          };
-
           blocking = {
             denylists = {
               ads = ["https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"];
