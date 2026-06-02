@@ -1,33 +1,94 @@
 _: {
   flake.modules.nixos.caddy = {
     config,
+    lib,
     pkgs,
     ...
-  }: {
+  }: let
+    publicServices = lib.filter (s: s.public) (lib.attrValues config.var.services);
+    domain = config.sops.placeholder."cloudflare/service-domain";
+
+    mkVhost = svc: ''
+      ${svc.subdomain}.${domain} {
+        reverse_proxy localhost:${toString svc.port} {
+          header_up -X-Forwarded-For
+        }
+      }
+    '';
+
+    mkAuthVhost = svc: ''
+      ${svc.subdomain}.${domain} {
+        handle {
+          import ${config.sops.templates."caddy-basic-auth".path}
+          reverse_proxy localhost:${toString svc.port} {
+            header_up -X-Forwarded-For
+          }
+        }
+      }
+    '';
+
+    invidiousVhost = lib.optionalString (config.var.services ? invidious) ''
+      invidious.${domain} {
+        @authapi path /api/v1/auth/*
+        handle @authapi {
+          reverse_proxy localhost:${toString config.ports.invidious} {
+            header_up -X-Forwarded-For
+          }
+        }
+        handle {
+          import ${config.sops.templates."caddy-basic-auth".path}
+          reverse_proxy localhost:${toString config.ports.invidious} {
+            header_up -X-Forwarded-For
+          }
+        }
+      }
+    '';
+
+    otherVhosts = lib.concatMapStrings (
+      svc:
+        if svc.auth
+        then mkAuthVhost svc
+        else mkVhost svc
+    ) (lib.filter (s: s.subdomain != "invidious") publicServices);
+  in {
     sops = {
       secrets = {
-        caddy-cloudflare-token = {};
-        invidious-basic-auth-hash = {};
-        invidious-basic-auth-user = {};
+        "cloudflare/caddy-token" = {};
+        "cloudflare/service-domain" = {};
+        "caddy/basic-auth-hash" = {};
+        "caddy/basic-auth-user" = {};
       };
-      templates."caddy.env" = {
-        mode = "0400";
-        owner = "caddy";
-        content = ''
-          CLOUDFLARE_API_TOKEN=${config.sops.placeholder."caddy-cloudflare-token"}
-        '';
-      };
-      # Caddyfile snippet imported by the invidious vhost. Using a template
-      # embeds the raw bcrypt hash directly into Caddyfile syntax, avoiding
-      # the base64 encoding required by Caddy's JSON/env-var path.
-      templates."caddy-invidious-auth" = {
-        mode = "0400";
-        owner = "caddy";
-        content = ''
-          basic_auth * {
-            ${config.sops.placeholder."invidious-basic-auth-user"} ${config.sops.placeholder."invidious-basic-auth-hash"}
-          }
-        '';
+      templates = {
+        "caddy.env" = {
+          mode = "0400";
+          owner = "caddy";
+          content = ''
+            CLOUDFLARE_API_TOKEN=${config.sops.placeholder."cloudflare/caddy-token"}
+          '';
+        };
+        # Using a template embeds the raw bcrypt hash directly into Caddyfile syntax,
+        # avoiding the base64 encoding required by Caddy's JSON/env-var path.
+        "caddy-basic-auth" = {
+          mode = "0400";
+          owner = "caddy";
+          content = ''
+            basic_auth * {
+              ${config.sops.placeholder."caddy/basic-auth-user"} ${config.sops.placeholder."caddy/basic-auth-hash"}
+            }
+          '';
+        };
+        "Caddyfile" = {
+          mode = "0400";
+          owner = "caddy";
+          content = ''
+            {
+              acme_dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+            }
+
+            ${invidiousVhost}
+            ${otherVhosts}
+          '';
+        };
       };
     };
 
@@ -41,32 +102,14 @@ _: {
         ];
         # Hash is for the combined caddy+plugin source. To update: set hash = lib.fakeHash,
         # build, and copy the "got:" value from the hash mismatch error.
-        hash = "sha256-Olz4W84Kiyldy+JtbIicVCL7dAYl4zq+2rxEOUTObxA=";
+        hash = "sha256-bzMqxWTqrJ1skZmRTXyEMCKStXpljbqe5r0Ve2cnBfM=";
       };
-      globalConfig = ''
-        acme_dns cloudflare {env.CLOUDFLARE_API_TOKEN}
-      '';
-      virtualHosts."invidious.${config.var.domain}" = {
-        extraConfig = ''
-          @authapi path /api/v1/auth/*
-          handle @authapi {
-            reverse_proxy localhost:${toString config.ports.invidious} {
-              header_up -X-Forwarded-For
-            }
-          }
-          handle {
-            import ${config.sops.templates."caddy-invidious-auth".path}
-            reverse_proxy localhost:${toString config.ports.invidious} {
-              header_up -X-Forwarded-For
-            }
-          }
-        '';
-      };
+      configFile = config.sops.templates."Caddyfile".path;
     };
 
     systemd.services.caddy.serviceConfig.EnvironmentFile =
       config.sops.templates."caddy.env".path;
 
-    networking.firewall.allowedTCPPorts = [80 443];
+    # Ports 80/443 stay closed externally -- cloudflared reaches Caddy on localhost
   };
 }
