@@ -1,5 +1,29 @@
 _: {
-  flake.modules.nixos.glance = {config, ...}: {
+  flake.modules.nixos.glance = {
+    config,
+    lib,
+    ...
+  }: {
+    var.services.glance = {
+      subdomain = "glance";
+      port = config.ports.glance;
+      public = false;
+      auth = false;
+    };
+
+    sops = {
+      secrets = {
+        "tailscale/tailnet" = {};
+        "cloudflare/service-domain" = {};
+      };
+      templates."glance.env" = {
+        content = ''
+          TAILSCALE_HOST=${config.var.hostname}.${config.sops.placeholder."tailscale/tailnet"};
+          SERVICE_DOMAIN=${config.sops.placeholder."cloudflare/service-domain"}
+        '';
+      };
+    };
+
     services.glance = {
       enable = true;
       settings = {
@@ -18,32 +42,36 @@ _: {
                     type = "bookmarks";
                     groups = [
                       {
-                        title = "Monitoring";
+                        title = "Private";
                         links = [
                           {
                             title = "Grafana";
-                            url = "http://${config.var.ip}:${toString config.ports.grafana}";
+                            description = "Metrics and dashboards";
+                            url = "http://\${TAILSCALE_HOST}:${toString config.ports.grafana}";
                             icon = "si:grafana";
                           }
                           {
                             title = "Gatus";
-                            url = "http://${config.var.ip}:${toString config.ports.gatus}";
+                            description = "Service uptime monitor";
+                            url = "http://\${TAILSCALE_HOST}:${toString config.ports.gatus}";
                             icon = "si:statuspage";
+                          }
+                          {
+                            title = "n8n";
+                            description = "Workflow automation";
+                            url = "http://\${TAILSCALE_HOST}:${toString config.ports.n8n}";
+                            icon = "si:n8n";
                           }
                         ];
                       }
                       {
-                        title = "Services";
+                        title = "Public";
                         links = [
                           {
                             title = "Invidious";
-                            url = "https://invidious.${config.var.domain}";
+                            description = "Privacy-friendly YouTube frontend";
+                            url = "https://invidious.\${SERVICE_DOMAIN}";
                             icon = "si:youtube";
-                          }
-                          {
-                            title = "n8n";
-                            url = "http://${config.var.ip}:${toString config.ports.n8n}";
-                            icon = "si:n8n";
                           }
                         ];
                       }
@@ -56,6 +84,8 @@ _: {
         ];
       };
     };
+
+    systemd.services.glance.serviceConfig.EnvironmentFile = lib.mkForce config.sops.templates."glance.env".path;
 
     networking.firewall.allowedTCPPorts = [config.ports.glance];
   };

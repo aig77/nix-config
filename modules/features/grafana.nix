@@ -4,6 +4,13 @@ _: {
     pkgs,
     ...
   }: {
+    var.services.grafana = {
+      subdomain = "grafana";
+      port = config.ports.grafana;
+      public = false;
+      auth = false;
+    };
+
     services.grafana = {
       enable = true;
       settings = {

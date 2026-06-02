@@ -1,5 +1,12 @@
 _: {
   flake.modules.nixos.prometheus = {config, ...}: {
+    var.services.prometheus = {
+      subdomain = "prometheus";
+      port = config.ports.prometheus;
+      public = false;
+      auth = false;
+    };
+
     services.prometheus = {
       enable = true;
       port = config.ports.prometheus;

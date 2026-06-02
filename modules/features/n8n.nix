@@ -1,11 +1,18 @@
 _: {
   flake.modules.nixos.n8n = {config, ...}: {
-    sops.secrets.discord-token = {};
+    var.services.n8n = {
+      subdomain = "n8n";
+      port = config.ports.n8n;
+      public = false;
+      auth = false;
+    };
+
+    sops.secrets."discord/daily-stoic-bot-token" = {};
 
     sops.templates."n8n.env" = {
       mode = "0444";
       content = ''
-        DISCORD_TOKEN=${config.sops.placeholder."discord-token"}
+        DISCORD_TOKEN=${config.sops.placeholder."discord/daily-stoic-bot-token"}
       '';
     };
 
