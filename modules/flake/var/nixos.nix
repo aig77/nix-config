@@ -45,13 +45,22 @@
             type = lib.types.str;
             default = "$HOME/.cache/bebop/current-wallpaper";
           };
-          domain = lib.mkOption {
-            type = lib.types.str;
-            default = "";
-          };
-          ip = lib.mkOption {
-            type = lib.types.str;
-            default = "";
+          services = lib.mkOption {
+            type = lib.types.attrsOf (lib.types.submodule {
+              options = {
+                subdomain = lib.mkOption {type = lib.types.str;};
+                port = lib.mkOption {type = lib.types.port;};
+                public = lib.mkOption {
+                  type = lib.types.bool;
+                  default = false;
+                };
+                auth = lib.mkOption {
+                  type = lib.types.bool;
+                  default = false;
+                };
+              };
+            });
+            default = {};
           };
         };
       });

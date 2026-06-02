@@ -13,6 +13,10 @@
         type = lib.types.port;
         default = 3011;
       };
+      invidiousStatus = lib.mkOption {
+        type = lib.types.port;
+        default = 3012;
+      };
       n8n = lib.mkOption {
         type = lib.types.port;
         default = 3020;
