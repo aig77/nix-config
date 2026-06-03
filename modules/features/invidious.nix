@@ -132,8 +132,6 @@
       '';
     };
 
-    networking.firewall.allowedTCPPorts = [config.ports.invidiousStatus];
-
     systemd = {
       services = {
         invidious-companion = {
