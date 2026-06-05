@@ -5,7 +5,7 @@
 in {
   flake.modules.nixos = {
     desktop = _: {
-      imports = with nixos; [audio bluetooth desktop-extras grub theme thunar];
+      imports = with nixos; [audio bluetooth desktop-extras git grub theme thunar];
       home-manager.users.${username}.imports = with hm; [
         eyecandy-nixos
         gui
@@ -20,7 +20,7 @@ in {
     };
 
     laptop = _: {
-      imports = with nixos; [audio bluetooth desktop-extras grub theme thunar];
+      imports = with nixos; [audio bluetooth desktop-extras git grub theme thunar];
       home-manager.users.${username}.imports = with hm; [eyecandy-nixos gui shell];
     };
 
