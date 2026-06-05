@@ -5,6 +5,21 @@
         options = {
           username = lib.mkOption {type = lib.types.str;};
           hostname = lib.mkOption {type = lib.types.str;};
+          git = lib.mkOption {
+            type = lib.types.submodule {
+              options = {
+                name = lib.mkOption {
+                  type = lib.types.str;
+                  default = "";
+                };
+                email = lib.mkOption {
+                  type = lib.types.str;
+                  default = "";
+                };
+              };
+            };
+            default = {};
+          };
           repoPath = lib.mkOption {
             type = lib.types.str;
             default = "/Users/${config.username}/.config/bebop";

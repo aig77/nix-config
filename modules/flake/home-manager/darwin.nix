@@ -5,10 +5,8 @@
 }: let
   inherit (config.flake.meta.owner) username;
   hm = config.flake.modules.homeManager;
-  darwin = config.flake.modules.darwin;
 in {
   flake.modules.darwin.base = {config, ...}: {
-    imports = [darwin.git];
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;

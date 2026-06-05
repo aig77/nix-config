@@ -10,6 +10,10 @@ _: {
       fileManager = "thunar";
       lock = "hyprlock";
       wallpaperEngine = "awww";
+      git = {
+        name = "Arturo";
+        email = "29128253+aig77@users.noreply.github.com";
+      };
     };
   };
 }
