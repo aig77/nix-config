@@ -57,7 +57,7 @@ _: {
             nrs() {
               [[ "$1" == "help" ]] && { echo "Usage: nrs [host] [args]"; echo "  nrs        rebuild current host"; echo "  nrs ein    rebuild ein"; return; }
               local h=$1; shift 2>/dev/null
-              darwin-rebuild switch --flake "${var.repoPath}''${h:+#$h}" "$@"
+              sudo darwin-rebuild switch --flake "${var.repoPath}''${h:+#$h}" "$@"
             }
           '')
           (lib.mkIf pkgs.stdenv.isLinux ''

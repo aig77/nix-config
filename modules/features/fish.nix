@@ -28,7 +28,7 @@ _: {
               end
               set h $argv[1]; set rest $argv[2..]
               set flake "${var.repoPath}"; test -n "$h"; and set flake "${var.repoPath}#$h"
-              darwin-rebuild switch --flake $flake $rest
+              sudo darwin-rebuild switch --flake $flake $rest
             '';
           }
           // lib.optionalAttrs pkgs.stdenv.isLinux {

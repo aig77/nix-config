@@ -49,6 +49,9 @@ _: {
         autoUpdate = true;
         upgrade = true;
         cleanup = "zap";
+        # TODO: brew bundle --cleanup now requires --force since Homebrew bumped the CLI
+        # remove once nix-darwin passes it automatically
+        extraFlags = ["--force"];
       };
       extraConfig = ''
         cask_args appdir: "~/Applications"
