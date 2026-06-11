@@ -39,8 +39,8 @@ hl.config({
     follow_mouse = 1,
 
     sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
-    force_no_accel = true,
     accel_profile = "flat",
+    -- force_no_accel = true,
 
     touchpad = {
       natural_scroll = true,
@@ -48,8 +48,17 @@ hl.config({
     },
   },
 
+  cursor = {
+    inactive_timeout = 3,
+  },
+
+  ecosystem = {
+    no_update_news = true,
+    no_donation_nag = true,
+  },
+
   misc = {
-    force_default_wallpaper = 0,  -- Set to 0 or 1 to disable the anime mascot wallpapers
+    force_default_wallpaper = 0, -- Set to 0 or 1 to disable the anime mascot wallpapers
     disable_hyprland_logo = true, -- If true disables the random hyprland logo / anime girl background. :(
     focus_on_activate = true,
   },
