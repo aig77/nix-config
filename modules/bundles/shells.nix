@@ -23,6 +23,7 @@ in {
 
     home.packages = with pkgs; [
       alejandra
+      atac
       bat
       curl
       cmake

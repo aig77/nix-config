@@ -14,13 +14,11 @@ _: {
           bitwarden-desktop
           inputs.claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop-fhs
           gnome-calculator
-          httpie-desktop
           imv
           lmstudio
           mission-center
           networkmanagerapplet
           obsidian
-          opencode
           pavucontrol
           qpwgraph
           vlc
