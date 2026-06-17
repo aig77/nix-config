@@ -18,7 +18,7 @@ _: {
       };
       templates."glance.env" = {
         content = ''
-          TAILSCALE_HOST=${config.var.hostname}.${config.sops.placeholder."tailscale/tailnet"};
+          TAILSCALE_HOST=${config.var.hostname}.${config.sops.placeholder."tailscale/tailnet"}
           SERVICE_DOMAIN=${config.sops.placeholder."cloudflare/service-domain"}
         '';
       };
