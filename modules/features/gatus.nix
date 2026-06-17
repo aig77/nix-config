@@ -142,6 +142,15 @@
                 - type: discord
                   failure-threshold: 2
                   success-threshold: 1
+            - name: Daily Stoic
+              url: http://localhost:${toString config.ports.dailyStoic}/health
+              interval: 5m
+              conditions:
+                - "[STATUS] == 200"
+              alerts:
+                - type: discord
+                  failure-threshold: 2
+                  success-threshold: 1
             - name: Blocky DNS
               url: tcp://192.168.68.101:53
               interval: 1m

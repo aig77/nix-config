@@ -16,6 +16,7 @@
         invidious
         n8n
         prometheus
+        daily-stoic
       ]);
     nixpkgs.hostPlatform = "x86_64-linux";
   };

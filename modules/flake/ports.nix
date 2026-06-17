@@ -37,6 +37,10 @@
         type = lib.types.port;
         default = 3051;
       };
+      dailyStoic = lib.mkOption {
+        type = lib.types.port;
+        default = 3060;
+      };
       blockyHttp = lib.mkOption {
         type = lib.types.port;
         default = 4000;

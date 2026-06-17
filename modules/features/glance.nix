@@ -68,6 +68,12 @@ _: {
                         title = "Public";
                         links = [
                           {
+                            title = "Daily Stoic";
+                            description = "Daily stoic quote delivery";
+                            url = "https://stoic.\${SERVICE_DOMAIN}";
+                            icon = "si:bookstack";
+                          }
+                          {
                             title = "Invidious";
                             description = "Privacy-friendly YouTube frontend";
                             url = "https://invidious.\${SERVICE_DOMAIN}";
