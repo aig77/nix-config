@@ -19,16 +19,27 @@ _: {
 
         functions =
           lib.optionalAttrs pkgs.stdenv.isDarwin {
-            nrs.body = ''
+            drs.body = ''
               if test "$argv[1]" = help
-                echo "Usage: nrs [host] [args]"
-                echo "  nrs        rebuild current host"
-                echo "  nrs ein    rebuild ein"
+                echo "Usage: drs [host] [args]"
+                echo "  drs        rebuild current host"
+                echo "  drs ein    rebuild ein"
                 return
               end
               set h $argv[1]; set rest $argv[2..]
               set flake "${var.repoPath}"; test -n "$h"; and set flake "${var.repoPath}#$h"
               sudo darwin-rebuild switch --flake $flake $rest
+            '';
+            nrs.body = ''
+              if test "$argv[1]" = help
+                echo "Usage: nrs [host] [args]"
+                echo "  nrs spike    rebuild spike"
+                echo "  nrs faye     rebuild faye"
+                return
+              end
+              set h $argv[1]; set rest $argv[2..]
+              set flake "${var.repoPath}"; test -n "$h"; and set flake "${var.repoPath}#$h"
+              sudo nixos-rebuild switch --flake $flake $rest
             '';
           }
           // lib.optionalAttrs pkgs.stdenv.isLinux {

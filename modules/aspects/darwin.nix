@@ -31,7 +31,7 @@ _: {
 
     environment = {
       shells = with pkgs; [fish zsh];
-      systemPackages = with pkgs; [coreutils];
+      systemPackages = with pkgs; [coreutils nixos-rebuild];
       systemPath = ["/usr/local/bin"];
       pathsToLink = ["/Applications"];
     };
