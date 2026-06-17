@@ -174,6 +174,7 @@
         User = "gatus";
         Group = "gatus";
         StateDirectory = "gatus";
+        StateDirectoryMode = "0750";
         Restart = "on-failure";
       };
     };
