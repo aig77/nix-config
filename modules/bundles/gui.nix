@@ -6,7 +6,7 @@ in {
       [hm.${var.terminal}]
       ++ (with hm; [
         discord
-        helium
+        zen
       ]);
   };
 }

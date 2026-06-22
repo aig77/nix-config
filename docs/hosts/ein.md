@@ -49,8 +49,7 @@ var = {
 ## Homebrew Casks
 
 ```text
-claude, discord, docker-desktop, ghostty, helium-browser,
-httpie-desktop, lm-studio, protonvpn, raycast, steam, tailscale-app, utm, whatsapp
+claude, discord, docker-desktop, ghostty, httpie-desktop, lm-studio, protonvpn, raycast, steam, tailscale-app, utm, whatsapp, zen
 ```
 
 ---

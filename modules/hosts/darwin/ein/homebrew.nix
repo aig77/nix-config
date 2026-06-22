@@ -5,7 +5,6 @@ _: {
       "discord"
       "docker-desktop"
       "ghostty"
-      "helium-browser"
       "httpie-desktop"
       "lm-studio"
       "protonvpn"
@@ -15,6 +14,7 @@ _: {
       "tailscale-app"
       "utm"
       "whatsapp"
+      "zen"
     ];
   };
 }

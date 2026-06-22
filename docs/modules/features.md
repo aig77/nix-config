@@ -116,17 +116,14 @@ All Home Manager modules.
 
 | Feature | Path | Profile | Description |
 |---------|------|---------|-------------|
-| Ghostty | `features/terminal/ghostty.nix` | `hm.ghostty` | Ghostty terminal. Active when `var.terminal == "ghostty"` |
-| Alacritty | `features/terminal/alacritty.nix` | `hm.alacritty` | Alacritty as fallback terminal. Active when `var.terminal == "alacritty"` |
-| Zen browser | `features/browser/zen.nix` | `hm.zen` | Privacy-hardened Firefox fork |
-| Brave | `features/brave.nix` | `hm.brave` | Brave browser via chromium module |
-| Helium | `features/browser/helium.nix` | `hm.helium` | Helium browser |
+| Ghostty | `features/ghostty.nix` | `hm.ghostty` | Ghostty terminal. Active when `var.terminal == "ghostty"` |
+| Alacritty | `features/alacritty.nix` | `hm.alacritty` | Alacritty as fallback terminal. Active when `var.terminal == "alacritty"` |
+| Zen browser | `features/zen.nix` | `hm.zen` | Privacy-hardened Firefox fork |
 | Nixcord | `features/nixcord.nix` | `hm.nixcord` | Discord via Nixcord (Vencord-patched) |
-| Vesktop | `features/vesktop.nix` | `hm.vesktop` | Discord via Vesktop |
-| Spotify | `features/media/spotify.nix` | `hm.spotify` | Spotify via spicetify-nix with Catppuccin theme |
-| OBS | `features/media/obs.nix` | `hm.obs` | OBS Studio, Linux only. Includes obs-pipewire-audio-capture |
-| Obsidian | `features/notes/obsidian.nix` | `hm.obsidian` | Obsidian note-taking |
-| Zathura | `features/pdf/zathura.nix` | `hm.zathura` | Zathura PDF viewer |
+| Spotify | `features/spotify.nix` | `hm.spotify` | Spotify via spicetify-nix with Catppuccin theme |
+| OBS | `features/obs.nix` | `hm.obs` | OBS Studio, Linux only. Includes obs-pipewire-audio-capture |
+| Obsidian | `features/obsidian.nix` | `hm.obsidian` | Obsidian note-taking |
+| Zathura | `features/zathura.nix` | `hm.zathura` | Zathura PDF viewer |
 
 ---
 

@@ -66,7 +66,7 @@ See [Features](features.md) for the full list of atomic capabilities. See [Aspec
 
 `bundles/gui.nix` - `hm.gui`
 
-Terminal selected dynamically via `hm.${var.terminal}`, plus discord and helium. Machine-specific GUI apps (zen, obs, obsidian, spotify, zathura) are wired directly in `machines.nix` per machine type.
+Terminal selected dynamically via `hm.${var.terminal}`, plus discord and zen. Machine-specific GUI apps (zen, obs, obsidian, spotify, zathura) are wired directly in `machines.nix` per machine type.
 
 ---
 
