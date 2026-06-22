@@ -163,7 +163,7 @@
           description = "Invidious rebuild from latest flake";
           serviceConfig = {
             Type = "oneshot";
-            ExecStart = "/run/current-system/sw/bin/nixos-rebuild switch --flake github:aig77/bebop#jet";
+            ExecStart = "/run/current-system/sw/bin/nixos-rebuild switch --flake github:aig77/bebop#jet --refresh";
           };
         };
 
