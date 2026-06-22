@@ -54,7 +54,7 @@ _: {
       };
       "grafana-dashboards/blocky.json".source = pkgs.fetchurl {
         url = "https://grafana.com/api/dashboards/13768/revisions/latest/download";
-        sha256 = "sha256-LhAeilDgbDER1OYFmXbkMiICMu10z8NvLunOSUc++cQ=";
+        sha256 = "sha256-gwPOcnVC7BXTlhOCRvENAXZfGdQGVCPEUrLCl4ASkVE=";
       };
     };
 

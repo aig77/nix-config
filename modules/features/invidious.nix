@@ -159,23 +159,60 @@
           };
         };
 
-        # Rebuilds from the GitHub flake daily at 04:00, picking up any updated
-        # invidious/invidious-companion flake inputs committed from the workstation.
         invidious-update = {
-          description = "Daily invidious rebuild from latest flake";
+          description = "Invidious rebuild from latest flake";
           serviceConfig = {
             Type = "oneshot";
             ExecStart = "/run/current-system/sw/bin/nixos-rebuild switch --flake github:aig77/bebop#jet";
           };
         };
+
+        invidious-monitor = {
+          description = "Invidious health monitor - triggers update on extended downtime";
+          serviceConfig = {
+            Type = "oneshot";
+            StateDirectory = "invidious-monitor";
+            ExecStart = pkgs.writeShellScript "invidious-monitor" ''
+              PORT=${toString config.ports.invidious}
+              DOWNTIME_FILE=/var/lib/invidious-monitor/down-since
+
+              stats_ok() {
+                ${pkgs.curl}/bin/curl -sf --max-time 10 \
+                  "http://localhost:$PORT/api/v1/stats" > /dev/null 2>&1
+              }
+
+              trending_ok() {
+                BODY=$(${pkgs.curl}/bin/curl -sf --max-time 10 \
+                  "http://localhost:$PORT/api/v1/trending" 2>/dev/null)
+                [ $? -eq 0 ] && [ "$BODY" != "[]" ] && [ -n "$BODY" ]
+              }
+
+              if stats_ok && trending_ok; then
+                rm -f "$DOWNTIME_FILE"
+              else
+                if [ -f "$DOWNTIME_FILE" ]; then
+                  DOWN_SINCE=$(cat "$DOWNTIME_FILE")
+                  NOW=$(${pkgs.coreutils}/bin/date +%s)
+                  DIFF=$((NOW - DOWN_SINCE))
+                  if [ "$DIFF" -ge 600 ]; then
+                    systemctl --no-block start invidious-update
+                    rm -f "$DOWNTIME_FILE"
+                  fi
+                else
+                  ${pkgs.coreutils}/bin/date +%s > "$DOWNTIME_FILE"
+                fi
+              fi
+            '';
+          };
+        };
       };
 
-      timers.invidious-update = {
-        description = "Daily invidious update timer";
+      timers.invidious-monitor = {
+        description = "Invidious health check every 5 minutes";
         wantedBy = ["timers.target"];
         timerConfig = {
-          OnCalendar = "04:00";
-          Persistent = true;
+          OnBootSec = "5m";
+          OnUnitActiveSec = "5m";
         };
       };
     };
