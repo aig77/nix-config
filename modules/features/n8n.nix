@@ -8,11 +8,15 @@ _: {
     };
 
     sops.secrets."discord/daily-stoic-bot-token" = {};
+    sops.secrets."discord/ein-webhook" = {};
+    sops.secrets."daily-stoic/api-key" = {};
 
     sops.templates."n8n.env" = {
       mode = "0444";
       content = ''
         DISCORD_TOKEN=${config.sops.placeholder."discord/daily-stoic-bot-token"}
+        DISCORD_WEBHOOK=${config.sops.placeholder."discord/ein-webhook"}
+        DAILY_STOIC_API_KEY=${config.sops.placeholder."daily-stoic/api-key"}
       '';
     };
 
@@ -22,6 +26,7 @@ _: {
         GENERIC_TIMEZONE = "America/New_York";
         N8N_PORT = toString config.ports.n8n;
         N8N_SECURE_COOKIE = "false";
+        N8N_BLOCK_ENV_ACCESS_IN_NODE = "false";
       };
     };
 
