@@ -61,6 +61,8 @@ bind(ms("H"), win.swap({ direction = "left" }), d("Move Window Left"))
 bind(ms("J"), win.swap({ direction = "down" }), d("Move Window Down"))
 bind(ms("K"), win.swap({ direction = "up" }), d("Move Window Up"))
 bind(ms("L"), win.swap({ direction = "right" }), d("Move Window Right"))
+bind(m("mouse:272"), win.drag(), d("Drag window", { mouse = true }))
+bind(m("mouse:273"), win.resize(), d("Resize window", { mouse = true }))
 
 -- Scrolling layout
 if LAYOUT == "scrolling" then
