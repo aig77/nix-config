@@ -15,7 +15,6 @@ in {
         obsidian
         spotify
         zathura
-        zen
       ];
     };
 
