@@ -9,6 +9,7 @@
       hm.hypridle
       hm.wlsunset
       hm.wallpaperManager
+      hm.clipboard
     ];
   };
 }

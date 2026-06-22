@@ -82,6 +82,7 @@ end
 if shell == "quickshell" then
   bind(a("tab"), exec("qs ipc call overview toggle"), d("Workspace Overview"))
   bind(m("C"), exec("qs ipc call controlcenter toggle"), d("Control Center"))
+  bind(m("V"), exec("qs ipc call clipboard toggle"), d("Clipboard History"))
 end
 
 -- Scratchpad
