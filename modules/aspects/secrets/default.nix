@@ -1,5 +1,5 @@
 _: {
-  flake.modules.nixos.base = {config, ...}: {
+  flake.modules.nixos.base = _: {
     sops = {
       defaultSopsFile = ./secrets.yaml;
       defaultSopsFormat = "yaml";

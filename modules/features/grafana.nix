@@ -9,6 +9,7 @@ _: {
       port = config.ports.grafana;
       public = false;
       auth = false;
+      backup.paths = ["/var/lib/grafana"];
     };
 
     services.grafana = {

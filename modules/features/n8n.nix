@@ -5,19 +5,24 @@ _: {
       port = config.ports.n8n;
       public = false;
       auth = false;
+      backup.paths = ["/var/lib/n8n"];
     };
 
-    sops.secrets."discord/daily-stoic-bot-token" = {};
-    sops.secrets."discord/ein-webhook" = {};
-    sops.secrets."daily-stoic/api-key" = {};
+    sops = {
+      secrets = {
+        "discord/daily-stoic-bot-token" = {};
+        "discord/ein-webhook" = {};
+        "daily-stoic/api-key" = {};
+      };
 
-    sops.templates."n8n.env" = {
-      mode = "0444";
-      content = ''
-        DISCORD_TOKEN=${config.sops.placeholder."discord/daily-stoic-bot-token"}
-        DISCORD_WEBHOOK=${config.sops.placeholder."discord/ein-webhook"}
-        DAILY_STOIC_API_KEY=${config.sops.placeholder."daily-stoic/api-key"}
-      '';
+      templates."n8n.env" = {
+        mode = "0444";
+        content = ''
+          DISCORD_TOKEN=${config.sops.placeholder."discord/daily-stoic-bot-token"}
+          DISCORD_WEBHOOK=${config.sops.placeholder."discord/ein-webhook"}
+          DAILY_STOIC_API_KEY=${config.sops.placeholder."daily-stoic/api-key"}
+        '';
+      };
     };
 
     services.n8n = {

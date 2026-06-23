@@ -17,6 +17,7 @@
         n8n
         prometheus
         daily-stoic
+        backup
       ]);
     nixpkgs.hostPlatform = "x86_64-linux";
   };

@@ -1,4 +1,4 @@
-{inputs, lib, ...}: {
+{inputs, ...}: {
   flake.modules.nixos.invidious = {
     config,
     pkgs,
@@ -33,6 +33,13 @@
         port = config.ports.invidious;
         public = true;
         auth = true;
+        backup = {
+          paths = ["/var/lib/backups/invidious.sql"];
+          prepareCommand = ''
+            mkdir -p /var/lib/backups
+            runuser -u postgres -- pg_dump invidious > /var/lib/backups/invidious.sql
+          '';
+        };
       };
       invidious-status = {
         subdomain = "invidious-status";

@@ -73,6 +73,20 @@
                   type = lib.types.bool;
                   default = false;
                 };
+                backup = lib.mkOption {
+                  type = lib.types.nullOr (lib.types.submodule {
+                    options = {
+                      paths = lib.mkOption {
+                        type = lib.types.listOf lib.types.str;
+                      };
+                      prepareCommand = lib.mkOption {
+                        type = lib.types.nullOr lib.types.str;
+                        default = null;
+                      };
+                    };
+                  });
+                  default = null;
+                };
               };
             });
             default = {};
