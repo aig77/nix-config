@@ -25,6 +25,7 @@ _: {
     # Example: [ "github\\.com" "reddit\\.com" ]
     styluxExclude = [
       "monkeytype\\.com"
+      "cloudflare\\.com"
     ];
     styluxExcludeRegexp = lib.concatStringsSep "|" styluxExclude;
   in {
