@@ -48,7 +48,7 @@
       templates."invidious-companion-settings.json" = {
         mode = "0444";
         content = ''
-          {"invidious_companion":[{"private_url":"http://127.0.0.1:${toString config.ports.invidiousCompanion}/companion"}],"invidious_companion_key":"${config.sops.placeholder."invidious/companion-key"}"}
+          {"invidious_companion":[{"private_url":"http://127.0.0.1:${toString config.ports.invidiousCompanion}/companion"}],"invidious_companion_key":"${config.sops.placeholder."invidious/companion-key"}","https_only":true,"domain":"invidious.${config.sops.placeholder."cloudflare/service-domain"}"}
         '';
       };
 
