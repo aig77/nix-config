@@ -2,6 +2,7 @@ _: {
   flake.modules.nixos.daily-stoic = {
     config,
     inputs,
+    pkgs,
     ...
   }: {
     imports = [inputs.daily-stoic.nixosModules.default];
@@ -11,7 +12,14 @@ _: {
       port = config.ports.dailyStoic;
       public = true;
       auth = false;
-      backup.paths = ["/var/lib/daily-stoic"];
+      backup = {
+        paths = ["/var/lib/backups/daily-stoic" "/var/lib/daily-stoic/database.json"];
+        prepareCommand = ''
+          mkdir -p /var/lib/backups/daily-stoic
+          ${pkgs.sqlite}/bin/sqlite3 /var/lib/daily-stoic/stoic.db \
+            ".backup '/var/lib/backups/daily-stoic/stoic.db'"
+        '';
+      };
     };
 
     sops = {
