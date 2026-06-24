@@ -79,6 +79,12 @@ _: {
                             url = "https://invidious.\${SERVICE_DOMAIN}";
                             icon = "si:youtube";
                           }
+                          {
+                            title = "Vaultwarden";
+                            description = "Password manager";
+                            url = "https://vault.\${SERVICE_DOMAIN}";
+                            icon = "si:bitwarden";
+                          }
                         ];
                       }
                     ];

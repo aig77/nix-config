@@ -41,6 +41,10 @@
         type = lib.types.port;
         default = 3060;
       };
+      vaultwarden = lib.mkOption {
+        type = lib.types.port;
+        default = 3070;
+      };
       blockyHttp = lib.mkOption {
         type = lib.types.port;
         default = 4000;
