@@ -13,9 +13,9 @@ _: {
         paths = ["/var/lib/backups/vaultwarden"];
         prepareCommand = ''
           mkdir -p /var/lib/backups/vaultwarden
-          ${pkgs.sqlite}/bin/sqlite3 /var/lib/bitwarden_rs/db.sqlite3 \
+          ${pkgs.sqlite}/bin/sqlite3 /var/lib/vaultwarden/db.sqlite3 \
             ".backup '/var/lib/backups/vaultwarden/db.sqlite3'"
-          cp -r /var/lib/bitwarden_rs/attachments \
+          cp -r /var/lib/vaultwarden/attachments \
             /var/lib/backups/vaultwarden/ 2>/dev/null || true
         '';
       };
