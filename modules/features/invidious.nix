@@ -37,7 +37,7 @@
           paths = ["/var/lib/backups/invidious.sql"];
           prepareCommand = ''
             mkdir -p /var/lib/backups
-            runuser -u postgres -- pg_dump invidious > /var/lib/backups/invidious.sql
+            ${pkgs.util-linux}/bin/runuser -u postgres -- ${pkgs.postgresql}/bin/pg_dump invidious > /var/lib/backups/invidious.sql
           '';
         };
       };
