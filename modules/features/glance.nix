@@ -45,6 +45,12 @@ _: {
                         title = "Private";
                         links = [
                           {
+                            title = "Actual Budget";
+                            description = "Personal finance manager";
+                            url = "http://\${TAILSCALE_HOST}:${toString config.ports.actualBudget}";
+                            icon = "si:actualbudget";
+                          }
+                          {
                             title = "Grafana";
                             description = "Metrics and dashboards";
                             url = "http://\${TAILSCALE_HOST}:${toString config.ports.grafana}";

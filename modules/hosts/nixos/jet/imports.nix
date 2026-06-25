@@ -18,6 +18,7 @@
         prometheus
         daily-stoic
         vaultwarden
+        actual-budget
         backup
       ]);
     nixpkgs.hostPlatform = "x86_64-linux";

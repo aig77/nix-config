@@ -45,6 +45,10 @@
         type = lib.types.port;
         default = 3070;
       };
+      actualBudget = lib.mkOption {
+        type = lib.types.port;
+        default = 3080;
+      };
       blockyHttp = lib.mkOption {
         type = lib.types.port;
         default = 4000;
