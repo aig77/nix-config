@@ -15,7 +15,7 @@ in {
         inherit inputs;
         inherit (config) var;
       };
-      users.${username}.imports = [hm.base hm.gui hm.shell];
+      users.${username}.imports = [hm.base hm.shell];
     };
   };
 }

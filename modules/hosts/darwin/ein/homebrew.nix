@@ -14,7 +14,6 @@ _: {
       "tailscale-app"
       "utm"
       "whatsapp"
-      "zen"
     ];
   };
 }

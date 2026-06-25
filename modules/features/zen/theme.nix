@@ -2,8 +2,13 @@ _: {
   flake.modules.homeManager.zen = {
     config,
     lib,
+    pkgs,
     ...
   }: let
+    zenChromePath =
+      if pkgs.stdenv.isDarwin
+      then "Library/Application Support/Zen/Profiles/default/chrome"
+      else ".config/zen/default/chrome";
     c = config.lib.stylix.colors.withHashtag;
 
     # Accent/highlight color for the browser chrome.
@@ -186,7 +191,7 @@ _: {
       '';
 
       # Stylix palette as CSS custom properties for Stylus styles to reference.
-      # One-time setup: open file:///home/arturo/.local/share/bebop/stylix-global.user.css in Zen,
+      # One-time setup: open file://~/.local/share/bebop/stylix-global.user.css in Zen,
       # install via the Stylus popup, then enable it in the Stylus extension manager.
       # CSS uses var(--sz-*) so it stays theme-aware without reinstalling when Stylix changes.
       userContent = ''
@@ -328,7 +333,7 @@ _: {
 
     home.file =
       lib.optionalAttrs (icon != null) {
-        ".config/zen/default/chrome/zen-logo.svg".text = ''
+        "${zenChromePath}/zen-logo.svg".text = ''
           <svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_15_9)">
               <rect width="1024" height="1024" rx="225" fill="${c.base00}"/>

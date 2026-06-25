@@ -2,6 +2,7 @@ _: {
   flake.modules.homeManager.zen = {
     pkgs,
     inputs,
+    lib,
     ...
   }: {
     imports = [inputs.zen-browser.homeModules.beta];
@@ -156,5 +157,19 @@ _: {
         };
       };
     };
+
+    # Added due to this Darwin specific issue
+    # https://github.com/0xc000022070/zen-browser-flake/issues/285
+    home.activation.zenUnlockProfilesIni = lib.mkIf pkgs.stdenv.isDarwin (
+      lib.hm.dag.entryAfter ["writeBoundary"] ''
+        profilesIni="$HOME/Library/Application Support/Zen/profiles.ini"
+        if [ -L "$profilesIni" ]; then
+          src="$(readlink "$profilesIni")"
+          rm "$profilesIni"
+          cp "$src" "$profilesIni"
+          chmod 644 "$profilesIni"
+        fi
+      ''
+    );
   };
 }
