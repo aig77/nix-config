@@ -29,13 +29,13 @@ _: {
       enable = true;
       environment = {
         GENERIC_TIMEZONE = "America/New_York";
+        N8N_HOST = "127.0.0.1";
         N8N_PORT = toString config.ports.n8n;
         N8N_SECURE_COOKIE = "false";
         N8N_BLOCK_ENV_ACCESS_IN_NODE = "false";
       };
     };
 
-    networking.firewall.allowedTCPPorts = [config.ports.n8n];
 
     systemd.services.n8n.serviceConfig.EnvironmentFile =
       config.sops.templates."n8n.env".path;

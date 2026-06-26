@@ -16,7 +16,7 @@ _: {
       enable = true;
       settings = {
         server = {
-          http_addr = "0.0.0.0";
+          http_addr = "127.0.0.1";
           http_port = config.ports.grafana;
         };
         # NixOS 26.05 removed the default secret_key. Since auth is disabled and
@@ -59,6 +59,5 @@ _: {
       };
     };
 
-    networking.firewall.allowedTCPPorts = [config.ports.grafana];
   };
 }

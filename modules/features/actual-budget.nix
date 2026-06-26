@@ -10,8 +10,10 @@ _: {
 
     services.actual = {
       enable = true;
-      openFirewall = true;
-      settings.port = config.ports.actualBudget;
+      settings = {
+        port = config.ports.actualBudget;
+        hostname = "127.0.0.1";
+      };
     };
   };
 }

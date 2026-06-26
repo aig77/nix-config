@@ -36,6 +36,7 @@
         owner = "gatus";
         content = ''
           web:
+            address: 127.0.0.1
             port: ${toString config.ports.gatus}
           storage:
             type: sqlite
@@ -52,7 +53,7 @@
               default: https://www.vhv.rs/viewpic/hoobhxi_swordfish-png-cowboy-bebop-transparent-png/#
             buttons:
               - name: Home
-                link: http://${config.var.hostname}.${config.sops.placeholder."tailscale/tailnet"}:${toString config.ports.glance}
+                link: https://${config.var.hostname}.${config.sops.placeholder."tailscale/tailnet"}
               - name: GitHub
                 link: https://github.com/aig77/bebop
             custom-css: |
@@ -187,6 +188,5 @@
       };
     };
 
-    networking.firewall.allowedTCPPorts = [config.ports.gatus];
   };
 }
