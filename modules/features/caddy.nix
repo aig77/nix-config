@@ -50,10 +50,18 @@ _: {
         then mkAuthVhost svc
         else mkVhost svc
     ) (lib.filter (s: s.subdomain != "invidious") publicServices);
+
+    tailscaleVhost = ''
+      http://${config.var.hostname} {
+        reverse_proxy localhost:${toString config.ports.glance} {
+          header_up -X-Forwarded-For
+        }
+      }
+    '';
   in {
     sops = {
       secrets = {
-        "cloudflare/caddy-token" = {};
+        "cloudflare/acme-token" = {};
         "cloudflare/service-domain" = {};
         "caddy/basic-auth-hash" = {};
         "caddy/basic-auth-user" = {};
@@ -63,7 +71,7 @@ _: {
           mode = "0400";
           owner = "caddy";
           content = ''
-            CLOUDFLARE_API_TOKEN=${config.sops.placeholder."cloudflare/caddy-token"}
+            CLOUDFLARE_API_TOKEN=${config.sops.placeholder."cloudflare/acme-token"}
           '';
         };
         # Using a template embeds the raw bcrypt hash directly into Caddyfile syntax,
@@ -80,6 +88,7 @@ _: {
         "Caddyfile" = {
           mode = "0400";
           owner = "caddy";
+          reloadUnits = ["caddy.service"];
           content = ''
             {
               acme_dns cloudflare {env.CLOUDFLARE_API_TOKEN}
@@ -87,6 +96,7 @@ _: {
 
             ${invidiousVhost}
             ${otherVhosts}
+            ${tailscaleVhost}
           '';
         };
       };
@@ -109,6 +119,8 @@ _: {
 
     systemd.services.caddy.serviceConfig.EnvironmentFile =
       config.sops.templates."caddy.env".path;
+
+    networking.firewall.interfaces.tailscale0.allowedTCPPorts = [80];
 
     # Ports 80/443 stay closed externally -- cloudflared reaches Caddy on localhost
   };
