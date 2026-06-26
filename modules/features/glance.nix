@@ -90,7 +90,11 @@ _: {
                     widgets = [
                       {type = "hacker-news";}
                       {type = "lobsters";}
-                      {type = "reddit"; subreddit = "programming"; "show-thumbnails" = true;}
+                      {
+                        type = "reddit";
+                        subreddit = "programming";
+                        "show-thumbnails" = true;
+                      }
                     ];
                   }
                   {
@@ -106,11 +110,31 @@ _: {
                   {
                     type = "group";
                     widgets = [
-                      {type = "reddit"; subreddit = "selfhosted"; "show-thumbnails" = true;}
-                      {type = "reddit"; subreddit = "nixos"; "show-thumbnails" = true;}
-                      {type = "reddit"; subreddit = "stocks"; "show-thumbnails" = true;}
-                      {type = "reddit"; subreddit = "rust"; "show-thumbnails" = true;}
-                      {type = "reddit"; subreddit = "linux_gaming"; "show-thumbnails" = true;}
+                      {
+                        type = "reddit";
+                        subreddit = "selfhosted";
+                        "show-thumbnails" = true;
+                      }
+                      {
+                        type = "reddit";
+                        subreddit = "nixos";
+                        "show-thumbnails" = true;
+                      }
+                      {
+                        type = "reddit";
+                        subreddit = "stocks";
+                        "show-thumbnails" = true;
+                      }
+                      {
+                        type = "reddit";
+                        subreddit = "rust";
+                        "show-thumbnails" = true;
+                      }
+                      {
+                        type = "reddit";
+                        subreddit = "linux_gaming";
+                        "show-thumbnails" = true;
+                      }
                     ];
                   }
                 ];

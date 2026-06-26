@@ -12,7 +12,7 @@ _: {
         packages = with pkgs; [
           amdgpu_top
           bitwarden-desktop
-          inputs.claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop-fhs
+          inputs.claude-desktop.packages.${pkgs.system}.claude-desktop-fhs
           gnome-calculator
           imv
           lmstudio

@@ -79,7 +79,7 @@ _: {
           "browser.urlbar.suggest.openpage" = false; # suppress "switch to tab" suggestions in URL bar
         };
 
-        extensions.packages = with inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
+        extensions.packages = with inputs.firefox-addons.packages.${pkgs.system}; [
           bitwarden
           darkreader
           stylus

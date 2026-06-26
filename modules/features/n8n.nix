@@ -36,7 +36,6 @@ _: {
       };
     };
 
-
     systemd.services.n8n.serviceConfig.EnvironmentFile =
       config.sops.templates."n8n.env".path;
   };

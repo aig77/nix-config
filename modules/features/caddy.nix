@@ -50,7 +50,6 @@ _: {
         then mkAuthVhost svc
         else mkVhost svc
     ) (lib.filter (s: s.subdomain != "invidious") publicServices);
-
   in {
     sops = {
       secrets = {
