@@ -51,13 +51,6 @@ _: {
         else mkVhost svc
     ) (lib.filter (s: s.subdomain != "invidious") publicServices);
 
-    tailscaleVhost = ''
-      http://${config.var.hostname} {
-        reverse_proxy localhost:${toString config.ports.glance} {
-          header_up -X-Forwarded-For
-        }
-      }
-    '';
   in {
     sops = {
       secrets = {
@@ -96,7 +89,6 @@ _: {
 
             ${invidiousVhost}
             ${otherVhosts}
-            ${tailscaleVhost}
           '';
         };
       };
@@ -119,8 +111,6 @@ _: {
 
     systemd.services.caddy.serviceConfig.EnvironmentFile =
       config.sops.templates."caddy.env".path;
-
-    networking.firewall.interfaces.tailscale0.allowedTCPPorts = [80];
 
     # Ports 80/443 stay closed externally -- cloudflared reaches Caddy on localhost
   };
