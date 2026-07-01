@@ -151,11 +151,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1781669720,
-        "narHash": "sha256-+wr8wbrqJCx/u3RP4TzdgA5zUJ/dhnLLVbGbWIqKvMg=",
+        "lastModified": 1782846648,
+        "narHash": "sha256-36B0AX0BMD4h+T9HDhtxcOjbLvw6ctSjcgkw72aReQM=",
         "owner": "aig77",
         "repo": "daily-stoic",
-        "rev": "0b3dcfc1cc2743501ff0ce2860bcbe880d7938c2",
+        "rev": "fb7c9b80a8c38aeb4d0b3e6e1509b53697b14aa5",
         "type": "github"
       },
       "original": {
