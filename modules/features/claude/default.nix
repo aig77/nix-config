@@ -1,6 +1,14 @@
 _: {
   flake.modules.homeManager.claude = {pkgs, ...}: {
-    home.packages = [pkgs.nodejs pkgs.nixd];
+    home.sessionVariables.CAVEMAN_DEFAULT_MODE = "full";
+
+    home.packages = [
+      pkgs.nodejs
+      pkgs.nixd
+      (pkgs.writeShellScriptBin "ccusage" ''
+        exec ${pkgs.nodejs}/bin/npx ccusage@latest "$@"
+      '')
+    ];
 
     programs.claude-code = {
       enable = true;
