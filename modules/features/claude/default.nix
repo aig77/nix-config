@@ -1,5 +1,7 @@
 _: {
   flake.modules.homeManager.claude = {pkgs, ...}: {
+    home.packages = [pkgs.nodejs pkgs.nixd];
+
     programs.claude-code = {
       enable = true;
       plugins = [
@@ -12,6 +14,18 @@ _: {
         })
       ];
       skills.new-project = ./skills/new-project.md;
+      mcpServers.nixos = {
+        type = "stdio";
+        command = "nix";
+        args = ["run" "github:utensils/mcp-nixos" "--"];
+      };
+      lspServers.nix = {
+        command = "nixd";
+        args = [];
+        extensionToLanguage = {
+          ".nix" = "nix";
+        };
+      };
     };
   };
 }
