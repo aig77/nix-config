@@ -14,7 +14,7 @@ hl.config({
     col = {
       -- Colors sourced from ~/.cache/stylix/colors.json (mauve, lavender, blue gradient)
       active_border = {
-        colors = { "rgb(" .. c.base0E .. ")", "rgb(" .. c.base07 .. ")", "rgb(" .. c.base0D .. ")" },
+        colors = { "rgb(" .. c.base0E .. ")", "rgb(" .. c.base01 .. ")", "rgb(" .. c.base0D .. ")" },
         angle = 45,
       },
       inactive_border = "rgb(" .. c.base02 .. ")",
