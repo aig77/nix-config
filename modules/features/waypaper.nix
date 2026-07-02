@@ -2,7 +2,6 @@ _: {
   flake.modules.homeManager.waypaper = {
     pkgs,
     lib,
-    var,
     ...
   }: let
     wallpaper-picker = pkgs.writeShellScriptBin "wallpaper-picker" ''
@@ -21,13 +20,13 @@ _: {
       [Settings]
       folder = ~/Pictures/Wallpapers
       wallpaper =
-      backend = ${var.wallpaperEngine}
+      backend = awww
       monitors = All
       fill = fill
       sort = name
       subfolders = False
       number_of_columns = 4
-      post_command = cp $wallpaper ${var.wallpaperPath}
+      post_command = cp $wallpaper $HOME/.cache/bebop/current-wallpaper
       EOF
             fi
     '';

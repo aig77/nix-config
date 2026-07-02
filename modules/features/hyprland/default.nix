@@ -57,8 +57,6 @@ _: {
         LAUNCHER = shellCommands.launcher;
         LOCKSCREEN = shellCommands.lock;
         FILE_MANAGER = var.fileManager;
-        WALLPAPER_ENGINE = var.wallpaperEngine;
-        WALLPAPER_PATH = var.wallpaperPath;
         LOCATION = var.location;
         SELECT_WALLPAPER = "wallpaper-picker";
         SCREENSHOT_AREA = "screenshot-area";
@@ -77,8 +75,6 @@ _: {
       LAUNCHER = shellCommands.launcher;
       LOCKSCREEN = shellCommands.lock;
       FILE_MANAGER = var.fileManager;
-      WALLPAPER_ENGINE = var.wallpaperEngine;
-      WALLPAPER_PATH = var.wallpaperPath;
       LOCATION = var.location;
       SELECT_WALLPAPER = "wallpaper-picker";
       SCREENSHOT_AREA = "screenshot-area";

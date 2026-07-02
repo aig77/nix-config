@@ -9,7 +9,6 @@
         hyprland-caelestia
         amdgpu
         gaming
-        wallpaperengine
         docker
         tailscale
         volt

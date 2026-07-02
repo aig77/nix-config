@@ -48,14 +48,6 @@
             type = lib.types.enum ["nautilus" "thunar"];
             default = "thunar";
           };
-          wallpaperEngine = lib.mkOption {
-            type = lib.types.enum ["awww" "wallpaperengine"];
-            default = "awww";
-          };
-          wallpaperPath = lib.mkOption {
-            type = lib.types.str;
-            default = "$HOME/.cache/bebop/current-wallpaper";
-          };
           services = lib.mkOption {
             type = lib.types.attrsOf (lib.types.submodule {
               options = {

@@ -109,7 +109,6 @@ _: {
           mono.family = config.stylix.fonts.monospace.name;
         };
         services.smartScheme = false;
-        background.wallpaperEnabled = false;
       };
     };
 

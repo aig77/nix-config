@@ -1,7 +1,6 @@
 _: {
   flake.modules.homeManager.awww = {
     pkgs,
-    var,
     ...
   }: let
     awww-start = pkgs.writeShellScript "awww-start" ''
@@ -25,7 +24,7 @@ _: {
   in {
     home.packages = [pkgs.awww];
 
-    home.sessionVariables.CURRENT_WALLPAPER = var.wallpaperPath;
+    home.sessionVariables.CURRENT_WALLPAPER = "$HOME/.cache/bebop/current-wallpaper";
 
     systemd.user.services.awww = {
       Unit = {
