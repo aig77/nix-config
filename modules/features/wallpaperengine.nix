@@ -19,7 +19,7 @@
 
     programs.simple-wallpaper-engine = {
       enable = true;
-      xdgAutostart = false;
+      xdgAutostart = true;
     };
   };
 }
