@@ -7,6 +7,20 @@ _: {
     ...
   }: let
     c = config.lib.stylix.colors;
+
+    shellSettings = {
+      general.apps.explorer = ["thunar"];
+      appearance.font = {
+        headline.family = config.stylix.fonts.sansSerif.name;
+        title.family = config.stylix.fonts.sansSerif.name;
+        body.family = config.stylix.fonts.sansSerif.name;
+        label.family = config.stylix.fonts.sansSerif.name;
+        mono.family = config.stylix.fonts.monospace.name;
+      };
+      services.smartScheme = false;
+    };
+    shellJson = pkgs.writeText "caelestia-shell.json" (builtins.toJSON shellSettings);
+
     # Map Stylix base16 to Material Design 3 tokens for caelestia's scheme.json.
     # base0D=blue (primary), base0C=teal (secondary), base0E=purple (tertiary),
     # base08=red (error), base0B=green (success), base00-03=surfaces.
@@ -14,6 +28,7 @@ _: {
       name = "stylix";
       flavour = "dark";
       mode = "dark";
+      variant = "tonalspot";
       colours = {
         primary_paletteKeyColor = c.base0D;
         secondary_paletteKeyColor = c.base0C;
@@ -99,24 +114,30 @@ _: {
     programs.caelestia = {
       enable = true;
       cli.enable = true;
-      settings = {
-        general.apps.explorer = ["thunar"];
-        appearance.font = {
-          headline.family = config.stylix.fonts.sansSerif.name;
-          title.family = config.stylix.fonts.sansSerif.name;
-          body.family = config.stylix.fonts.sansSerif.name;
-          label.family = config.stylix.fonts.sansSerif.name;
-          mono.family = config.stylix.fonts.monospace.name;
-        };
-        services.smartScheme = false;
-      };
+      settings = shellSettings;
     };
 
-    # Write Stylix-derived scheme to caelestia state on each activation.
-    # Uses install -m 644 so caelestia can overwrite at runtime if user changes scheme via UI.
+    # caelestia writes back to shell.json at runtime (e.g. on reload), which fails
+    # against home-manager's normal read-only store symlink. Disable that symlink
+    # and drop in a mutable copy instead, same trick as scheme.json below.
+    xdg.configFile."caelestia/shell.json".enable = false;
+
+    # Write Stylix-derived scheme, and the shell config, to caelestia state on each
+    # activation. Uses install -m 644 so caelestia can overwrite at runtime (e.g. if
+    # the user changes scheme/settings via its own UI); changes are reset to the
+    # Nix-declared values on the next rebuild.
     home.activation.caelestiaScheme = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      mkdir -p "$HOME/.local/state/caelestia"
+      mkdir -p "$HOME/.local/state/caelestia" "$HOME/.config/caelestia"
       install -m 644 ${schemeJson} "$HOME/.local/state/caelestia/scheme.json"
+      install -m 644 ${shellJson} "$HOME/.config/caelestia/shell.json"
     '';
+
+    # Qt's default QImageReader allocation limit is 256MB, which silently rejects
+    # large wallpapers (e.g. a 11664x6689 image decodes to ~312MB) and leaves the
+    # background layer black with no visible error. caelestia-shell is launched
+    # directly by Hyprland (exec-once), not the systemd unit, so both variable
+    # sets are needed depending on how Hyprland itself was started.
+    home.sessionVariables.QT_IMAGEIO_MAXALLOC = "1024";
+    systemd.user.sessionVariables.QT_IMAGEIO_MAXALLOC = "1024";
   };
 }
