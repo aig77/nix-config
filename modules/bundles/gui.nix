@@ -6,6 +6,7 @@ in {
       [hm.${var.terminal}]
       ++ (with hm; [
         discord
+        nixcord
         zen
       ]);
   };

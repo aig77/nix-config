@@ -57,11 +57,6 @@
 
     jovian-nixos.url = "github:Jovian-Experiments/Jovian-NixOS";
 
-    nixcord = {
-      url = "github:kaylorben/nixcord";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nixos-anywhere = {
       url = "github:nix-community/nixos-anywhere";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -72,7 +67,10 @@
 
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
 
-    simple-linux-wallpaperengine-gui.url = "github:Maxnights/simple-linux-wallpaperengine-gui";
+    nixcord = {
+      url = "github:FlameFlag/nixcord";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";

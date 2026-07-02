@@ -10,7 +10,6 @@ in {
         eyecandy-nixos
         gui
         shell
-
         obs
         obsidian
         spotify
