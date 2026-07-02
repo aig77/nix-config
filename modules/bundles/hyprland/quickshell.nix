@@ -5,7 +5,7 @@
 in {
   flake.modules.nixos.hyprland-quickshell = {config, ...}: {
     imports = [nixos.ly nixos.hyprland];
-    var.launcher = "quickshell";
+    var.desktop = "quickshell";
     sops.secrets.weatherapi-key = {};
     sops.templates."weatherapi.json" = {
       content = builtins.toJSON {
@@ -19,7 +19,6 @@ in {
       hm.hyprland
       hm.quickshell-shell
       hm.screenshot
-      {home.sessionVariables.HYPR_SHELL = "quickshell";}
     ];
   };
 }

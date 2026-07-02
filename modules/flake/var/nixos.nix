@@ -40,20 +40,16 @@
             type = lib.types.str;
             default = "";
           };
-          launcher = lib.mkOption {
-            type = lib.types.enum ["fuzzel" "quickshell" "rofi"];
-            default = "fuzzel";
+          desktop = lib.mkOption {
+            type = lib.types.enum ["waybar" "hyprpanel" "quickshell" "caelestia"];
+            default = "waybar";
           };
           fileManager = lib.mkOption {
             type = lib.types.enum ["nautilus" "thunar"];
             default = "thunar";
           };
-          lock = lib.mkOption {
-            type = lib.types.enum ["hyprlock"];
-            default = "hyprlock";
-          };
           wallpaperEngine = lib.mkOption {
-            type = lib.types.enum ["awww"];
+            type = lib.types.enum ["awww" "wallpaperengine"];
             default = "awww";
           };
           wallpaperPath = lib.mkOption {

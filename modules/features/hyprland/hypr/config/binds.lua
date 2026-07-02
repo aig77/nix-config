@@ -6,6 +6,20 @@ local focus = hl.dsp.focus
 local ws = hl.dsp.workspace
 local layout = hl.dsp.layout
 
+-- Resolve shell-specific commands from HYPR_SHELL (not $LAUNCHER/$LOCKSCREEN env vars,
+-- which are stale in sessions that started before the current HM generation).
+local shellLauncher = {
+  caelestia = "caelestia shell drawers toggle launcher",
+  noctalia = "qs -c noctalia-shell ipc call launcher toggle",
+  quickshell = "qs ipc call launcher toggle",
+}
+local shellLock = {
+  caelestia = "caelestia shell lock lock",
+  noctalia = "qs -c noctalia-shell ipc call lockScreen lock",
+}
+local launcher = shellLauncher[shell] or os.getenv("LAUNCHER") or "fuzzel"
+local lockscreen = shellLock[shell] or os.getenv("LOCKSCREEN") or "hyprlock"
+
 local function m(k)
   return "SUPER+" .. k
 end
@@ -32,9 +46,9 @@ end
 
 -- Apps
 bind(m("RETURN"), exec("$TERMINAL"), d("Open Terminal"))
-bind(m("SPACE"), exec("$LAUNCHER"), d("Open Launcher"))
+bind(m("SPACE"), exec(launcher), d("Open Launcher"))
 bind(m("W"), exec("$SELECT_WALLPAPER"), d("Select Wallpaper"))
-bind(ca("L"), exec("$LOCKSCREEN"), d("Lock Screen"))
+bind(ca("L"), exec(lockscreen), d("Lock Screen"))
 
 -- Screenshots
 bind("PRINT", exec("$SCREENSHOT_AREA"), d("Screenshot Area"))
@@ -83,6 +97,9 @@ if shell == "quickshell" then
   bind(a("tab"), exec("qs ipc call overview toggle"), d("Workspace Overview"))
   bind(m("C"), exec("qs ipc call controlcenter toggle"), d("Control Center"))
   bind(m("V"), exec("qs ipc call clipboard toggle"), d("Clipboard History"))
+elseif shell == "caelestia" then
+  bind(m("C"), exec("caelestia shell drawers toggle dashboard"), d("Dashboard"))
+  bind(m("V"), exec("caelestia clipboard"), d("Clipboard History"))
 end
 
 -- Scratchpad

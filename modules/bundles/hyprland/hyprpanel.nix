@@ -5,11 +5,11 @@
 in {
   flake.modules.nixos.hyprland-hyprpanel = {config, ...}: {
     imports = [nixos.sddm nixos.hyprland];
+    var.desktop = "hyprpanel";
     home-manager.users.${username}.imports = [
       hm.hyprland
       hm.hyprpanel-shell
       hm.screenshot
-      {home.sessionVariables.HYPR_SHELL = "hyprpanel";}
     ];
     sops.secrets.weatherapi-key = {};
     sops.templates."weatherapi.json" = {

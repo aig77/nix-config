@@ -16,18 +16,34 @@ _: {
 
   flake.modules.homeManager.hyprland = {
     pkgs,
-    lib,
     var,
     config,
     osConfig,
     ...
   }: let
-    launcherCommand =
-      if var.launcher == "rofi"
-      then "rofi -show drun"
-      else if var.launcher == "quickshell"
-      then "qs ipc call launcher toggle"
-      else var.launcher;
+    # Single source of truth for shell-dependent behavior. Add an entry here whenever
+    # a new hyprland-<shell> bundle is added; the bundle itself only sets var.desktop.
+    shellCommands =
+      {
+        waybar = {
+          launcher = "fuzzel";
+          lock = "hyprlock";
+        };
+        hyprpanel = {
+          launcher = "fuzzel";
+          lock = "hyprlock";
+        };
+        quickshell = {
+          launcher = "qs ipc call launcher toggle";
+          lock = "hyprlock";
+        };
+        caelestia = {
+          launcher = "caelestia shell drawers toggle launcher";
+          lock = "caelestia shell lock lock";
+        };
+      }.${
+        var.desktop
+      };
   in {
     home = {
       packages = with pkgs; [
@@ -38,8 +54,8 @@ _: {
       sessionVariables = {
         TERMINAL = var.terminal;
         BROWSER = var.browser;
-        LAUNCHER = launcherCommand;
-        LOCKSCREEN = var.lock;
+        LAUNCHER = shellCommands.launcher;
+        LOCKSCREEN = shellCommands.lock;
         FILE_MANAGER = var.fileManager;
         WALLPAPER_ENGINE = var.wallpaperEngine;
         WALLPAPER_PATH = var.wallpaperPath;
@@ -49,7 +65,7 @@ _: {
         SCREENSHOT_SCREEN = "screenshot-screen";
         SCREENSHOT_WINDOW = "screenshot-window";
         HYPR_GAME_WORKSPACE = 4;
-        HYPR_SHELL = lib.mkDefault ""; # set when creating desktop shell bundle
+        HYPR_SHELL = var.desktop;
       };
     };
 
@@ -58,8 +74,8 @@ _: {
     systemd.user.sessionVariables = {
       TERMINAL = var.terminal;
       BROWSER = var.browser;
-      LAUNCHER = launcherCommand;
-      LOCKSCREEN = var.lock;
+      LAUNCHER = shellCommands.launcher;
+      LOCKSCREEN = shellCommands.lock;
       FILE_MANAGER = var.fileManager;
       WALLPAPER_ENGINE = var.wallpaperEngine;
       WALLPAPER_PATH = var.wallpaperPath;
@@ -69,7 +85,7 @@ _: {
       SCREENSHOT_SCREEN = "screenshot-screen";
       SCREENSHOT_WINDOW = "screenshot-window";
       HYPR_GAME_WORKSPACE = 4;
-      HYPR_SHELL = lib.mkDefault ""; # set when creating desktop shell bundle
+      HYPR_SHELL = var.desktop;
     };
 
     # Symlink both to prevent conflict with hypridle config

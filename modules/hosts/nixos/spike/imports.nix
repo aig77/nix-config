@@ -6,9 +6,10 @@
       ++ (with config.flake.modules.nixos; [
         base
         desktop
-        hyprland-quickshell
+        hyprland-caelestia
         amdgpu
         gaming
+        wallpaperengine
         docker
         tailscale
         volt

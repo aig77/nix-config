@@ -9,7 +9,7 @@ _: {
     inherit (config.lib.stylix) colors;
   in {
     programs.fuzzel = {
-      enable = var.launcher == "fuzzel";
+      enable = true;
       settings = {
         main = {
           terminal = "${pkgs.${var.terminal}}/bin/${var.terminal}";

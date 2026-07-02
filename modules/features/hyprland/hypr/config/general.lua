@@ -6,10 +6,10 @@ hl.config({ debug = { disable_logs = false } })
 -- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
 hl.config({
   general = {
-    gaps_in = 0,
-    gaps_out = 5,
+    gaps_in = 5,
+    gaps_out = 10,
 
-    border_size = 1,
+    border_size = 2,
 
     col = {
       -- Colors sourced from ~/.cache/stylix/colors.json (mauve, lavender, blue gradient)
@@ -64,7 +64,7 @@ hl.config({
   },
 
   decoration = {
-    rounding = 0,
+    rounding = 20,
     rounding_power = 2,
 
     -- Change transparency of focused and unfocused windows

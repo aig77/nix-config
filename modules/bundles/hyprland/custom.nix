@@ -5,11 +5,11 @@
 in {
   flake.modules.nixos.hyprland-custom = _: {
     imports = [nixos.sddm nixos.hyprland];
+    var.desktop = "waybar";
     home-manager.users.${username}.imports = [
       hm.hyprland
       hm.waybar-shell
       hm.screenshot
-      {home.sessionVariables.HYPR_SHELL = "waybar";}
     ];
   };
 }

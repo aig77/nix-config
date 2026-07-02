@@ -4,6 +4,11 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
 
+    caelestia = {
+      url = "github:caelestia-dots/shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     claude-desktop = {
       # Pinned to fix PR for addTrustedFolder anchor failure in 1.9659.2
       # TODO: unpin once https://github.com/aaddrick/claude-desktop-debian/pull/674 merges
@@ -52,8 +57,6 @@
 
     jovian-nixos.url = "github:Jovian-Experiments/Jovian-NixOS";
 
-    niri.url = "github:sodiboo/niri-flake";
-
     nixcord = {
       url = "github:kaylorben/nixcord";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -68,6 +71,8 @@
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
 
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+
+    simple-linux-wallpaperengine-gui.url = "github:Maxnights/simple-linux-wallpaperengine-gui";
 
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";

@@ -4,7 +4,6 @@
       hm = config.flake.modules.homeManager;
     in [
       hm.quickshell
-      hm.fuzzel
       hm.hyprlock
       hm.hypridle
       hm.wlsunset
