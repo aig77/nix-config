@@ -65,3 +65,13 @@ hl.layer_rule({ name = "qs-cc-power-noanim",      match = { namespace = "^(quick
 hl.layer_rule({ name = "qs-pill-noanim",          match = { namespace = "^(quickshell:workspacepill)$"            }, no_anim = true })
 hl.layer_rule({ name = "qs-notifications-noanim", match = { namespace = "^(quickshell:notifications)$"            }, no_anim = true })
 hl.layer_rule({ name = "qs-overview-noanim",      match = { namespace = "^(quickshell:overview)$"                 }, no_anim = true })
+
+-- noctalia surfaces: blur + no layer animation, per upstream Hyprland integration docs
+hl.layer_rule({
+	name = "noctalia-blur",
+	match = { namespace = "^noctalia-(bar-.+|notification|dock|panel|attached-panel|osd)$" },
+	no_anim = true,
+	ignore_alpha = 0.5,
+	blur = true,
+	blur_popups = true,
+})

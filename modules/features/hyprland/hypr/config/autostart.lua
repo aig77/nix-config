@@ -4,7 +4,7 @@ local shell = os.getenv("HYPR_SHELL") or "quickshell"
 
 hl.on("hyprland.start", function()
   hl.exec_cmd("hyprpolkitagent")
-  if shell ~= "caelestia" then
+  if shell ~= "caelestia" and shell ~= "noctalia" then
     hl.exec_cmd("hypridle")
   end
   hl.exec_cmd("playerctld")
@@ -17,5 +17,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("hyprpanel")
   elseif shell == "caelestia" then
     hl.exec_cmd("caelestia-shell")
+  elseif shell == "noctalia" then
+    hl.exec_cmd("noctalia")
   end
 end)

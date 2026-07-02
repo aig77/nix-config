@@ -6,7 +6,7 @@
       ++ (with config.flake.modules.nixos; [
         base
         desktop
-        hyprland-caelestia
+        hyprland-noctalia
         amdgpu
         gaming
         docker

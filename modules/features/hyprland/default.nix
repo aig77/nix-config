@@ -41,6 +41,10 @@ _: {
           launcher = "caelestia shell drawers toggle launcher";
           lock = "caelestia shell lock lock";
         };
+        noctalia = {
+          launcher = "noctalia msg panel-toggle launcher";
+          lock = "noctalia msg session lock";
+        };
       }.${
         var.desktop
       };

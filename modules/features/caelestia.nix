@@ -4,12 +4,16 @@ _: {
     config,
     pkgs,
     lib,
+    var,
     ...
   }: let
     c = config.lib.stylix.colors;
 
     shellSettings = {
-      general.apps.explorer = ["thunar"];
+      general.apps = {
+        explorer = ["thunar"];
+        terminal = [var.terminal "-e"];
+      };
       appearance.font = {
         headline.family = config.stylix.fonts.sansSerif.name;
         title.family = config.stylix.fonts.sansSerif.name;

@@ -10,12 +10,12 @@ local layout = hl.dsp.layout
 -- which are stale in sessions that started before the current HM generation).
 local shellLauncher = {
   caelestia = "caelestia shell drawers toggle launcher",
-  noctalia = "qs -c noctalia-shell ipc call launcher toggle",
+  noctalia = "noctalia msg panel-toggle launcher",
   quickshell = "qs ipc call launcher toggle",
 }
 local shellLock = {
   caelestia = "caelestia shell lock lock",
-  noctalia = "qs -c noctalia-shell ipc call lockScreen lock",
+  noctalia = "noctalia msg session lock",
 }
 local launcher = shellLauncher[shell] or os.getenv("LAUNCHER") or "fuzzel"
 local lockscreen = shellLock[shell] or os.getenv("LOCKSCREEN") or "hyprlock"
@@ -100,6 +100,11 @@ if shell == "quickshell" then
 elseif shell == "caelestia" then
   bind(m("C"), exec("caelestia shell drawers toggle dashboard"), d("Dashboard"))
   bind(m("V"), exec("caelestia clipboard"), d("Clipboard History"))
+elseif shell == "noctalia" then
+  bind(m("C"), exec("noctalia msg panel-toggle control-center"), d("Control Center"))
+  bind(m("V"), exec("noctalia msg panel-toggle clipboard"), d("Clipboard History"))
+  bind(m("O"), exec("noctalia msg settings-toggle"), d("Noctalia Settings"))
+  bind(m("P"), exec("noctalia msg panel-toggle session"), d("Session Menu"))
 end
 
 -- Scratchpad
