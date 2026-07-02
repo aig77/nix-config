@@ -14,7 +14,6 @@ in {
       hm.hyprland
       hm.caelestia
       hm.screenshot
-      hm.wallpaperManager
     ];
   };
 }
