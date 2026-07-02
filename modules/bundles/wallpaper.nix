@@ -7,7 +7,7 @@
     hm = config.flake.modules.homeManager;
   in {
     imports =
-      [hm.waypaper]
-      ++ lib.optionals (var.wallpaperEngine == "awww") [hm.awww];
+      lib.optionals (var.wallpaperEngine == "awww") [hm.waypaper hm.awww]
+      ++ lib.optionals (var.wallpaperEngine == "wallpaperengine") [hm.wallpaperengine];
   };
 }

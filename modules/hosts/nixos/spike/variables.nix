@@ -8,8 +8,7 @@ _: {
       terminal = "ghostty";
       browser = "zen";
       fileManager = "thunar";
-      lock = "hyprlock";
-      wallpaperEngine = "awww";
+      wallpaperEngine = "wallpaperengine";
       git = {
         name = "Arturo";
         email = "29128253+aig77@users.noreply.github.com";
