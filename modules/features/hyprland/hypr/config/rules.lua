@@ -1,6 +1,11 @@
 -- See https://wiki.hypr.land/Configuring/Basics/Window-Rules/
 -- and https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
 
+-- Persistent workspaces: keep 1-10 alive (and shown in overview/pill) even when empty
+for i = 1, 10 do
+	hl.workspace_rule({ workspace = tostring(i), persistent = true })
+end
+
 hl.window_rule({
 	name = "suppress-maximize-events",
 	match = { class = ".*" },
