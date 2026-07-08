@@ -178,7 +178,6 @@ _: {
 
           #zen-appcontent-navbar-container {
             background-color: ${c.base00} !important;
-            border-bottom: 1px solid ${c.base02} !important;
 
             .toolbarbutton-icon,
             toolbarbutton > image,
