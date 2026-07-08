@@ -10,6 +10,7 @@
         amdgpu
         gaming
         docker
+        sunshine
         tailscale
         volt
       ]);
