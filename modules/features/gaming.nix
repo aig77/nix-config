@@ -56,7 +56,7 @@ in {
           vram = true;
 
           wine = true;
-          toggle_hud = "F12";
+          toggle_hud = "Shift_R+F2";
           position = "top-left";
         };
       };
