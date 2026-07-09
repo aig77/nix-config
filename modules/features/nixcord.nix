@@ -7,7 +7,10 @@ _: {
       discord.enable = false;
       vesktop = {
         enable = true;
-        settings.minimizeToTray = "off";
+        settings = {
+          minimizeToTray = false;
+          tray = false;
+        };
       };
       config = {
         frameless = true;
