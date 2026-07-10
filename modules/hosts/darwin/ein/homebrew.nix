@@ -7,7 +7,6 @@ _: {
       "ghostty"
       "httpie-desktop"
       "lm-studio"
-      "moonlight"
       "protonvpn"
       "raycast"
       "spotify"
