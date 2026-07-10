@@ -27,6 +27,7 @@
           };
         }
         inputs.home-manager.darwinModules.home-manager
+        inputs.mac-app-util.darwinModules.default
         inputs.nix-homebrew.darwinModules.nix-homebrew
         inputs.sops-nix.darwinModules.sops
         inputs.stylix.darwinModules.stylix

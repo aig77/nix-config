@@ -65,6 +65,8 @@
 
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
 
+    mac-app-util.url = "github:hraban/mac-app-util";
+
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
 
     nixcord = {

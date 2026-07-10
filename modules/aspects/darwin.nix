@@ -1,6 +1,7 @@
 _: {
   flake.modules.darwin.base = {
     config,
+    inputs,
     pkgs,
     ...
   }: {
@@ -30,10 +31,9 @@ _: {
     };
 
     environment = {
-      shells = with pkgs; [fish zsh];
+      shells = [pkgs.${config.var.shell}];
       systemPackages = with pkgs; [coreutils nixos-rebuild];
       systemPath = ["/usr/local/bin"];
-      pathsToLink = ["/Applications"];
     };
 
     programs.${config.var.shell}.enable = true;
@@ -43,15 +43,22 @@ _: {
       shell = pkgs.${config.var.shell};
     };
 
+    home-manager.users.${config.var.username}.imports = [
+      inputs.mac-app-util.homeManagerModules.default
+    ];
+
+    nix-homebrew = {
+      enable = true;
+      user = config.var.username;
+      autoMigrate = false; # set to true if you want to migrate from manually installed brew
+    };
+
     homebrew = {
       enable = true;
       onActivation = {
         autoUpdate = true;
         upgrade = true;
-        cleanup = "zap";
-        # TODO: brew bundle --cleanup now requires --force since Homebrew bumped the CLI
-        # remove once nix-darwin passes it automatically
-        extraFlags = ["--force"];
+        cleanup = "none";
       };
       extraConfig = ''
         cask_args appdir: "~/Applications"

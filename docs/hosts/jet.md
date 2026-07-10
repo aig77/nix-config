@@ -21,7 +21,7 @@
 **Platform:** x86_64 NixOS
 **Role:** Homelab server - self-hosted services on the public internet via Cloudflare
 
-Replaces the darwin jet mac mini. Runs Invidious, n8n, and Caddy as native NixOS services,
+Runs Invidious, n8n, and Caddy as native NixOS services,
 exposed publicly through Cloudflare-proxied subdomains with TLS handled by Caddy.
 
 - Invidious (YouTube frontend) - login-only, no public registration
@@ -135,7 +135,7 @@ All secrets live in `modules/aspects/secrets/secrets.yaml` (shared with all host
 
 ## Bootstrapping
 
-The new Linux jet replaces the darwin jet mac mini. Before first deploy:
+Before first deploy:
 
 1. Update `.sops.yaml` with the new machine's age key:
    ```bash

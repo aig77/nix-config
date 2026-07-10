@@ -18,7 +18,6 @@ sudo nixos-rebuild switch --flake .#ed
 
 # Apply macOS configuration
 darwin-rebuild switch --flake .#ein
-darwin-rebuild switch --flake .#jet
 
 # Validate all modules (runs pre-commit hooks: alejandra, statix, deadnix)
 nix flake check

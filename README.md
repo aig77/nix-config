@@ -14,8 +14,7 @@ A declarative, multi-platform system configuration built with Nix Flakes and fla
 | [Faye](docs/hosts/faye.md) | x86_64 NixOS | HTPC: media playback, AMD GPU |
 | [Ed](docs/hosts/ed.md) | aarch64 NixOS | Headless Raspberry Pi: DNS, ad-blocking, monitoring |
 | [Ein](docs/hosts/ein.md) | aarch64 Darwin | MacBook, full configuration with Homebrew casks |
-| [Jet (NixOS)](docs/hosts/jet-nixos.md) | x86_64 NixOS | Homelab server: Invidious, n8n, Uptime Kuma |
-| [Jet (Darwin)](docs/hosts/jet-darwin.md) | aarch64 Darwin | Mac Mini - deprecated, being replaced by NixOS jet |
+| [Jet](docs/hosts/jet-nixos.md) | x86_64 NixOS | Homelab server: Invidious, n8n, Uptime Kuma |
 
 ---
 
@@ -57,21 +56,6 @@ A declarative, multi-platform system configuration built with Nix Flakes and fla
 ### Service Guides
 
 - [Yattee](docs/services/yattee.md): ad-free YouTube on iPhone, iPad, and Apple TV via Invidious
-
----
-
-## Todo
-
-**Jet: self-hosted services**
-- [ ] Vaultwarden
-- [ ] Forgejo
-- [ ] Auto update script when Invidious is down
-
-**Hardware**
-- [ ] Adjust fan curves
-
-**Nix**
-- [ ] Move tailscale from per-host imports into base so all machines get it automatically
 
 ---
 
