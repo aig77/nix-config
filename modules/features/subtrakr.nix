@@ -19,6 +19,9 @@ _: {
       };
     };
 
+    # Unlike docker, podman errors instead of auto-creating a missing bind-mount source dir.
+    systemd.tmpfiles.rules = ["d /var/lib/subtrakr 0755 root root -"];
+
     virtualisation = {
       podman.enable = true;
       oci-containers.containers = {
