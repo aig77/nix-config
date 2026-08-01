@@ -49,6 +49,10 @@
         type = lib.types.port;
         default = 3080;
       };
+      subtrakr = lib.mkOption {
+        type = lib.types.port;
+        default = 3090;
+      };
       blockyHttp = lib.mkOption {
         type = lib.types.port;
         default = 4000;

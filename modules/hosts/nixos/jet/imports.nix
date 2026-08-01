@@ -19,6 +19,7 @@
         daily-stoic
         vaultwarden
         actual-budget
+        subtrakr
         backup
       ]);
     nixpkgs.hostPlatform = "x86_64-linux";

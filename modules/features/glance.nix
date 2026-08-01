@@ -251,6 +251,12 @@ _: {
                         icon = "si:actualbudget";
                       }
                       {
+                        title = "Subtrakr";
+                        url = "https://\${TAILSCALE_HOST}:${toString config.ports.subtrakr}";
+                        "check-url" = "http://localhost:${toString config.ports.subtrakr}/healthz";
+                        icon = "mdi:credit-card-outline";
+                      }
+                      {
                         title = "Gatus";
                         url = "https://\${TAILSCALE_HOST}:${toString config.ports.gatus}";
                         "check-url" = "http://localhost:${toString config.ports.gatus}";
