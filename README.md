@@ -10,11 +10,11 @@ A declarative, multi-platform system configuration built with Nix Flakes and fla
 
 | Host | Platform | Role |
 |------|----------|------|
-| [Spike](docs/hosts/spike.md) | x86_64 NixOS | Desktop workstation: Hyprland, AMD GPU, gaming, full dev environment |
-| [Faye](docs/hosts/faye.md) | x86_64 NixOS | HTPC: media playback, AMD GPU |
+| [Spike](docs/hosts/spike.md) | x86_64 NixOS | Desktop: Hyprland, AMD GPU, gaming, full dev environment |
+| [Faye](docs/hosts/faye.md) | x86_64 NixOS | HTPC / Console PC |
 | [Ed](docs/hosts/ed.md) | aarch64 NixOS | Headless Raspberry Pi: DNS, ad-blocking, monitoring |
-| [Ein](docs/hosts/ein.md) | aarch64 Darwin | MacBook, full configuration with Homebrew casks |
-| [Jet](docs/hosts/jet-nixos.md) | x86_64 NixOS | Homelab server: Invidious, n8n, Uptime Kuma |
+| [Ein](docs/hosts/ein.md) | aarch64 Darwin | MacBook |
+| [Jet](docs/hosts/jet.md) | x86_64 NixOS | Homelab |
 
 ---
 
@@ -62,7 +62,7 @@ A declarative, multi-platform system configuration built with Nix Flakes and fla
 ## Acknowledgements
 
 - [vimjoyer](https://www.youtube.com/@vimjoyer/videos) - YouTube channel that started this journey
-- [anotherhadi/nixy](https://github.com/anotherhadi/nixy) - first configuration that made the structure click
+- [anotherhadi/nixy](https://github.com/anotherhadi/nixy) - first configuration that made Nix click
 - [mightyiam/infra](https://github.com/mightyiam/infra) - source of the dendritic pattern used throughout this repo
 
 ---
