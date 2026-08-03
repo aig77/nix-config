@@ -56,62 +56,6 @@ outputs = inputs @ {flake-parts, ...}:
 
 All three use `deferredModule`, so multiple files can contribute to the same profile name and their contents get merged automatically.
 
-### NixOS profiles
-
-| Profile | Applied to | Contents |
-|---------|-----------|----------|
-| `base` | Every NixOS machine | nix daemon, users, networking, sops secrets, home-manager wiring |
-| `desktop` | Machines with a display | audio, boot, bluetooth, fileManager, Stylix theme |
-| `hyprland` | Hyprland compositor base | Hyprland system enablement, portals |
-| `hyprland-quickshell` | Hyprland + Quickshell bar | `nixos.sddm` + `nixos.hyprland` + Quickshell as bar/launcher, `HYPR_SHELL=quickshell` |
-| `hyprland-hyprpanel` | Hyprland + HyprPanel bar | `nixos.sddm` + `nixos.hyprland` + HyprPanel as bar, `HYPR_SHELL=hyprpanel` |
-| `hyprland-custom` | Hyprland + Waybar | `nixos.sddm` + `nixos.hyprland` + Waybar + SwayNC, `HYPR_SHELL=custom` |
-| `sddm` | SDDM display manager | sddm-astronaut theme with Stylix colors; wallpaper sync service |
-| `niri` | Niri compositor | Niri system enablement, GDM, portals |
-| `gnome` | GNOME desktop | GDM, GNOME packages |
-| `amdgpu` | AMD GPU machines | AMD drivers, ROCm, Vulkan |
-| `nvidia` | NVIDIA GPU machines | Proprietary NVIDIA drivers |
-| `gaming` | Gaming machines | Steam, GameMode, MangoHud, Wine |
-| `docker` | Needs containers | Docker daemon, docker group |
-| `tailscale` | Connected to Tailnet | Tailscale service, firewall port |
-| `server` | Headless servers | DNS (Blocky + Unbound), Prometheus |
-| `volt` | Spike only | Pins Volt 476 audio interface to stereo profile |
-
-### Darwin profiles
-
-| Profile | Contents |
-|---------|----------|
-| `base` | macOS system defaults, homebrew, sops secrets, home-manager wiring, Stylix theme, `var` schema |
-| `eyecandy` | CLI eye candy (fastfetch, cava, aliases) |
-
-### Home Manager profiles
-
-| Profile | Contents |
-|---------|----------|
-| `base` | Shell tools (zsh/fish guarded by `var.shell`, starship, direnv, fzf, zoxide, tmux), editors (neovim, vim), git, terminal (ghostty/alacritty guarded by `var.terminal`), btop, common CLI packages |
-| `gui` | Zen browser, Discord, Spotify, Obsidian, Zathura, file manager, OBS (Linux only) |
-| `hyprland` | Lua config symlinked to `~/.config/hypr/` (`hyprland.lua` + `config/`), session vars, polkit agent. `stylix.targets.hyprland` disabled. |
-| `quickshell` | Quickshell bar/launcher + hyprlock + hypridle + fuzzel + wallpaper manager |
-| `hyprpanelShell` | HyprPanel bar + hyprlock + hypridle + fuzzel |
-| `customDesktopShell` | Waybar + SwayNC + fuzzel + hyprlock + hypridle + wallpaper manager |
-| `niri` | Niri keybinds/rules/wallpaper |
-| `gnome` | GNOME extensions, dconf settings |
-| `gaming` | MangoHud, Heroic, Bottles, ProtonPlus |
-| `eyecandyBase` | fastfetch + krabby fetch alias + eye candy packages |
-| `eyecandyNixos` | `eyecandyBase` + cava audio visualizer + tty-clock |
-| `fastfetch` | fastfetch config |
-| `krabby` | krabby + fastfetch shell aliases and greeting |
-| `eyecandyPackages` | cmatrix, pipes-rs, cbonsai, asciiquarium, etc. |
-| `cava` | cava audio visualizer with Stylix gradient |
-| `fuzzel` | App launcher config |
-| `hyprlock` | Lock screen config |
-| `hypridle` | Idle/suspend daemon |
-| `waybar` | Status bar config |
-| `screenshot` | grimblast scripts, Print key bindings |
-| `wallpaperManager` | waypaper + awww (conditional on `var.wallpaperEngine`) |
-| `btopAmd` | btop with ROCm GPU support |
-| `btopNvidia` | btop with NVML GPU support |
-
 ---
 
 ## Module Anatomy
@@ -154,46 +98,6 @@ NixOS profiles don't directly import HM profiles. Each feature that spans both s
 
 `modules/flake/home-manager/nixos.nix` is infrastructure only: it sets up the home-manager NixOS module and activates `hm.base` for every NixOS user.
 
-| NixOS profile | HM profiles activated | Wiring lives in |
-|---------------|-----------------------|-----------------|
-| `base` | `hm.base` | `flake/home-manager/nixos.nix` |
-| `desktop` | `hm.shell`, `hm.gui`, `hm.eyecandyNixos` | `aspects/desktop/home.nix` |
-| `hyprland-quickshell` | `hm.hyprland`, `hm.quickshell`, `hm.screenshot` | `bundles/hyprland/quickshell.nix` |
-| `hyprland-hyprpanel` | `hm.hyprland`, `hm.hyprpanelShell`, `hm.screenshot` | `bundles/hyprland/hyprpanel.nix` |
-| `hyprland-custom` | `hm.hyprland`, `hm.customDesktopShell`, `hm.screenshot` | `bundles/hyprland/custom.nix` |
-| `niri` | `hm.niri`, `hm.customDesktopShell` | `features/niri/nixos.nix` |
-| `gnome` | `hm.gnome` | `features/gnome/nixos.nix` |
-| `gaming` | `hm.gaming` | `features/gaming/nixos.nix` |
-| `amdgpu` | `hm.btopAmd` | `features/amdgpu/default.nix` |
-| `nvidia` | `hm.btopNvidia` | `features/nvidia/default.nix` |
-
-### Full profile stack for spike
-
-```text
-nixos.base              -> nix, users, networking, secrets
-  hm.base               -> (empty, harmless no-op)
-
-nixos.desktop           -> audio, boot, bluetooth, theme
-  hm.shell              -> shell (var.shell), terminals (var.terminal), editors, git, CLI packages
-  hm.gui                -> browser, discord, spotify, apps
-  hm.eyecandyNixos      -> fastfetch, krabby, cava, eye candy packages
-
-nixos.hyprland-quickshell -> Hyprland system, SDDM, portals
-  hm.hyprland           -> keybinds, window rules, animations
-  hm.quickshell         -> bar/launcher + hyprlock + hypridle + fuzzel + wallpaper
-  hm.screenshot         -> screenshot scripts
-
-nixos.amdgpu            -> AMD drivers, Vulkan, ROCm
-  hm.btopAmd            -> btop with GPU stats
-
-nixos.gaming            -> Steam, GameMode, Wine
-  hm.gaming             -> MangoHud, Heroic, Bottles
-
-nixos.docker            -> Docker daemon
-nixos.tailscale         -> Tailscale VPN
-nixos.volt              -> Volt 476 audio profile pin
-```
-
 ### Accessing NixOS config from Home Manager
 
 Inside a HM module, `osConfig` provides the NixOS configuration. `config` refers to the HM config only:
@@ -212,34 +116,11 @@ config.programs.zsh.enable             # HM option
 
 Darwin also passes `var` and `inputs` into HM's `extraSpecialArgs` so HM modules can access `var.*` directly.
 
-The optional `darwin.eyecandy` profile wires `hm.eyecandyBase`; its wiring lives in `features/eyecandy/darwin.nix`.
-
 ---
 
 ## Variable Schema
 
 Hosts set typed variables; feature modules read them. Never hardcode hostnames, usernames, or paths that vary between hosts.
-
-### NixOS (`modules/flake/var/default.nix`)
-
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `var.username` | str | | System username |
-| `var.hostname` | str | | Machine hostname |
-| `var.shell` | enum | | `"zsh"` or `"fish"` |
-| `var.terminal` | str | `"ghostty"` | Default terminal emulator |
-| `var.browser` | str | `"zen"` | Default browser |
-| `var.location` | str | `""` | City name for weather widgets |
-| `var.launcher` | str | `"fuzzel"` | App launcher (`"fuzzel"`, `"rofi"`, `"quickshell"`) |
-| `var.fileManager` | str | `"nautilus"` | File manager |
-| `var.lock` | str | `"hyprlock"` | Lock screen command |
-| `var.logout` | str | `"wlogout"` | Logout menu command |
-| `var.wallpaperEngine` | str | `"swww"` | Wallpaper backend |
-| `var.wallpaperPath` | str | `"$HOME/.cache/bebop/current-wallpaper"` | Runtime symlink to current wallpaper |
-
-### Darwin (`modules/flake/var/darwin.nix`)
-
-Darwin has a smaller set: `username`, `hostname`, `shell`, `terminal`, `browser`.
 
 ---
 

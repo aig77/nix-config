@@ -7,6 +7,7 @@
 - [Systems](#systems)
 - [Home Manager Bridges](#home-manager-bridges)
 - [Variable Schema](#variable-schema)
+- [Ports](#ports)
 - [Owner Metadata](#owner-metadata)
 - [Dev Shell](#dev-shell)
 - [Pre-Commit Hooks](#pre-commit-hooks)
@@ -26,13 +27,14 @@ modules/flake/
 ├── systems.nix               # Supported platforms
 ├── formatter.nix             # nix fmt (alejandra)
 ├── pre-commit.nix            # Git hooks
+├── ports.nix                 # Central port registry for services
 ├── shell.nix                 # Dev shell
 ├── home-manager/             # NixOS/Darwin to HM bridges
 │   ├── base.nix              # Minimal HM config every user gets
 │   ├── nixos.nix             # Maps nixos profiles to HM profiles
 │   └── darwin.nix            # Maps darwin profiles to HM profiles
 ├── var/                      # Variable schema
-│   ├── default.nix           # NixOS var options
+│   ├── nixos.nix             # NixOS var options
 │   └── darwin.nix            # Darwin var options
 └── owner/
     └── default.nix           # flake.meta.owner.username
@@ -90,13 +92,23 @@ Infrastructure only. Sets up the home-manager Darwin module and activates `hm.ba
 
 ## Variable Schema
 
-### `flake/var/default.nix`
+### `flake/var/nixos.nix`
 
-Contributes `options.var` to `flake.modules.nixos.base`. See [Architecture: Variable Schema](architecture.md#variable-schema) for the full option table.
+Contributes `options.var` to `flake.modules.nixos.base`. The option definitions in `modules/flake/var/nixos.nix` are the source of truth, not a doc table.
 
 ### `flake/var/darwin.nix`
 
 Same, contributed to `flake.modules.darwin.base`. Smaller set: `username`, `hostname`, `shell`, `terminal`, `browser`.
+
+---
+
+## Ports
+
+### `flake/ports.nix`
+
+Contributes `options.ports` to `flake.modules.nixos.base`. Central registry of service port numbers, so a port is assigned in exactly one place and features reference it via `config.ports.<name>` instead of hardcoding. NixOS only, no Darwin equivalent.
+
+The full option list lives in `modules/flake/ports.nix`, not here. New services get a slot added in that file; existing ones are reused. See [Server Services](modules/server.md) for how services consume it.
 
 ---
 

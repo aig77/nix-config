@@ -34,9 +34,7 @@ nrs help
 Direct nixos-rebuild invocations also work if needed:
 
 ```bash
-sudo nixos-rebuild switch --flake .#spike
-sudo nixos-rebuild switch --flake .#faye
-sudo nixos-rebuild switch --flake .#ed
+sudo nixos-rebuild switch --flake .#<hostname>
 ```
 
 ---
@@ -64,9 +62,7 @@ nix flake check
 nix build .#darwinConfigurations.ein.system
 
 # NixOS - evaluate only (can't build Linux on Mac without a remote builder)
-nix eval .#nixosConfigurations.spike.config.system.build.toplevel.drvPath
-nix eval .#nixosConfigurations.faye.config.system.build.toplevel.drvPath
-nix eval .#nixosConfigurations.ed.config.system.build.toplevel.drvPath
+nix eval .#nixosConfigurations.<hostname>.config.system.build.toplevel.drvPath
 ```
 
 ---

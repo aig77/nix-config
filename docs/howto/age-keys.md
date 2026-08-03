@@ -10,7 +10,8 @@
 
 ## How Keys Work
 
-Each machine with an age key pair is listed in `.sops.yaml` and can decrypt `modules/aspects/secrets/secrets.yaml`. Any such machine can rebuild from a fresh clone without needing keys from other machines.
+Each machine with an age key pair is listed in `.sops.yaml` and can decrypt `modules/aspects/secrets/secrets.yaml`.
+Any such machine can rebuild from a fresh clone without needing keys from other machines.
 
 Key location on each machine: `~/.config/sops/age/keys.txt`
 
@@ -32,19 +33,15 @@ Copy the public key printed to stdout.
 
 ```yaml
 keys:
-  - &spike age1...
-  - &ein   age1...
-  - &jet   age1...
-  - &ed    age1...
+  - &machine1 age1...
+  - &machine2 age1...
   - &newmachine age1...   # add here
 creation_rules:
   - path_regex: modules/aspects/secrets/.*\.yaml$
     key_groups:
       - age:
-        - *spike
-        - *ein
-        - *jet
-        - *ed
+        - *machine1
+        - *machine2
         - *newmachine     # add here too
 ```
 

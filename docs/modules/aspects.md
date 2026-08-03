@@ -1,12 +1,5 @@
 # Aspects
 
-## Contents
-
-- [What Are Aspects](#what-are-aspects)
-- [Reference](#reference)
-
----
-
 ## What Are Aspects
 
 Aspects are foundational system concerns applied to every machine of a given type. They define what the system is at a base level: things every NixOS or Darwin machine always has, regardless of what optional capabilities it uses.
@@ -17,24 +10,27 @@ Desktop-specific concerns (audio, bluetooth, theming, boot) are **not** aspects.
 
 See [Features](features.md) for atomic opt-in capabilities and [Bundles](bundles.md) for curated feature groups.
 
----
+## What the Aspects Cover
 
-## Reference
+| Aspect | Contributes to | What it does |
+|--------|----------------|--------------|
+| `nix` | `nixos.base` | Nix daemon settings: flakes, optimise store, auto gc, trusted users, substituters |
+| `users` | `nixos.base` | Primary user account from `var.username`, shell enablement, sudo |
+| `networking` | `nixos.base` | Hostname from `var.hostname`, NetworkManager, timezone, locale, ssh |
+| `secrets` | `nixos.base` | sops-nix wired to `secrets.yaml`, age key location, secret declarations |
+| `darwin` | `darwin.base` | macOS system config: Dock, Finder, keyboard remapping, dark mode, Homebrew, sops-nix |
 
-| Aspect | Path | Profile | Description |
-|--------|------|---------|-------------|
-| `nix` | `aspects/nix.nix` | `nixos.base` | Nix daemon settings: flakes, nix-command, auto-optimise-store, auto-gc, trusted users, substituters (nixos.org + hyprland cache) |
-| `users` | `aspects/users.nix` | `nixos.base` | Primary user account from `var.username`, shell enablement via `programs.${var.shell}.enable`, sudo |
-| `networking` | `aspects/networking.nix` | `nixos.base` | Hostname from `var.hostname`, NetworkManager, timezone (America/New_York), locale (en_US.UTF-8), openssh |
-| `secrets` | `aspects/secrets/` | `nixos.base` | sops-nix: `defaultSopsFile = ./secrets.yaml`, age key at `~/.config/sops/age/keys.txt`, secret declarations |
-| `darwin` | `aspects/darwin.nix` | `darwin.base` | macOS system config: Dock, Finder, keyboard remapping, dark mode, Homebrew, user shell, sops-nix secrets |
+The exact settings live in `modules/aspects/`, so this table stays at the level of what each aspect is responsible for rather than reprinting its contents.
 
 ### Flake-level infrastructure
 
 These live in `modules/flake/` rather than `aspects/` because they are flake-parts plumbing, not system concerns:
 
-| Module | Path | Description |
-|--------|------|-------------|
-| `var` | `flake/var/` | Variable schema definition (`options.var.*`) contributed to base profiles |
-| `owner` | `flake/owner/` | `flake.meta.owner.username`, the single place to set the primary username |
-| home-manager bridges | `flake/home-manager/` | Wires NixOS/Darwin profiles to Home Manager profiles |
+| Module | What it does |
+|--------|--------------|
+| `var` | Variable schema (`options.var.*`), contributed to base profiles |
+| `ports` | Port registry (`options.ports.*`), contributed to `nixos.base` |
+| `owner` | `flake.meta.owner.username`, the single place to set the primary username |
+| home-manager bridges | Wires NixOS/Darwin profiles to Home Manager profiles |
+
+See [Flake-Parts Infrastructure](../flake-parts.md) for details.

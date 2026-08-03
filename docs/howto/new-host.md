@@ -42,7 +42,6 @@ _: {
       username = "arturo";
       hostname = "myhostname";
       shell    = "zsh";
-      location = "Miami";
     };
   };
 }
@@ -96,12 +95,7 @@ nix eval .#nixosConfigurations.myhostname.config.system.build.toplevel.drvPath
 
 ### Fresh install via nixos-anywhere
 
-```bash
-nix run github:nix-community/nixos-anywhere -- \
-  --flake .#myhostname \
-  --target-host nixos@<ip> \
-  --generate-hardware-config nixos-facter ./modules/hosts/nixos/myhostname/facter.json
-```
+[Reference](deploying#fresh-install-nixos-anywhere)
 
 ---
 
@@ -137,8 +131,6 @@ _: {
       username = "arturo";
       hostname = "mymac";
       shell    = "zsh";
-      terminal = "ghostty";
-      browser  = "zen";
     };
   };
 }
@@ -157,17 +149,7 @@ _: {
 }
 ```
 
-### 5. `homebrew.nix`
-
-```nix
-_: {
-  configurations.darwin.mymac.module = {
-    homebrew.casks = ["ghostty" "raycast"];
-  };
-}
-```
-
-### 6. `home.nix`
+### 5. `home.nix`
 
 ```nix
 _: {
@@ -183,10 +165,9 @@ _: {
 }
 ```
 
-### 7. Register and verify
+### 6. Register and verify
 
 ```bash
 git add modules/hosts/darwin/mymac/
 nix build .#darwinConfigurations.mymac.system
 ```
-
