@@ -8,10 +8,10 @@
         server
         grub-server
 
+        backup
         caddy
         cloudflared
-
-        backup
+        tailscale-http
 
         actual-budget
         daily-stoic
