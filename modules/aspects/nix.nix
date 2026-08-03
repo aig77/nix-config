@@ -2,8 +2,6 @@ _: {
   flake.modules.nixos.base = {
     config,
     inputs,
-    lib,
-    pkgs,
     ...
   }: {
     nix = {
@@ -29,12 +27,14 @@ _: {
           "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
         ];
       };
+    };
 
-      gc = lib.mkIf pkgs.stdenv.isLinux {
-        automatic = true;
-        persistent = true;
-        dates = "weekly";
-        options = "--delete-older-than 7d";
+    programs.nh = {
+      enable = true;
+      flake = config.var.repoPath;
+      clean = {
+        enable = true;
+        extraArgs = "--keep-since 7d --keep 5";
       };
     };
   };

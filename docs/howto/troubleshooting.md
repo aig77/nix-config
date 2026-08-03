@@ -24,7 +24,7 @@
 git add modules/features/myfeature.nix
 ```
 
-The file does not need to be committed - staged is sufficient. After `git add`, re-run `nix flake check` or `nixos-rebuild`.
+The file does not need to be committed - staged is sufficient. After `git add`, re-run `nix flake check` or `nh os switch`.
 
 ---
 

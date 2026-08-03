@@ -32,8 +32,9 @@ _: {
 
     environment = {
       shells = [pkgs.${config.var.shell}];
-      systemPackages = with pkgs; [coreutils nixos-rebuild];
+      systemPackages = with pkgs; [coreutils nh];
       systemPath = ["/usr/local/bin"];
+      variables.NH_DARWIN_FLAKE = config.var.repoPath;
     };
 
     programs.${config.var.shell}.enable = true;

@@ -58,7 +58,7 @@ That shared identity is the trade-off: whoever holds `~/.ssh/id_ed25519` can log
 
    ```bash
    git add modules/aspects/secrets/ssh.pub
-   sudo nixos-rebuild switch --flake .#<hostname>
+   nh os switch -H <hostname>
    ```
 
 The old key stops working once hosts are rebuilt, since there's exactly one key in the file.

@@ -67,7 +67,7 @@ To rotate the password:
 ```bash
 nix shell nixpkgs#caddy --command caddy hash-password
 sops modules/aspects/secrets/secrets.yaml   # replace caddy/basic-auth-hash
-sudo nixos-rebuild switch --flake .#<host>
+nh os switch -H <host>
 ```
 
 Invidious gets one extra rule: `/api/v1/auth/*` bypasses basic auth because API clients send their session token in the `Authorization` header, which `basic_auth` would otherwise consume.

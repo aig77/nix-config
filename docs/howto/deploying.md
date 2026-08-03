@@ -13,23 +13,26 @@
 
 ## NixOS Hosts
 
-`nrs` and `nrt` are shell functions available in zsh and fish. They use `var.repoPath` so they work from any directory, and accept an optional first argument to target a specific host.
+`nh os switch` and `nh os test` are provided by the `nh` package. `programs.nh.flake` sets `NH_FLAKE` to the repo path, so no flake path or hostname is needed when targeting the current host.
 
 ```bash
 # Rebuild the current host
-nrs
+nh os switch
+
+# Test without making it the boot default
+nh os test
 
 # Rebuild a specific host
-nrs faye
+nh os switch -H faye
 
 # Rebuild a remote host
-nrs jet --target-host user@jet --sudo --ask-password
+nh os switch -H jet --target-host arturo@jet --build-host arturo@jet
 
-# Print usage
-nrs help
+# Rebuild a NixOS host from a macOS machine (mac can't build Linux, so build on the target)
+nh os switch -H faye --build-host arturo@faye --target-host arturo@faye
 ```
 
-`nrt` has the same interface but runs `nixos-rebuild test` instead of `switch`.
+`nh` self-elevates with sudo and asks for the password itself, so no `--sudo` flags are needed.
 
 Direct nixos-rebuild invocations also work if needed:
 
@@ -42,7 +45,7 @@ sudo nixos-rebuild switch --flake .#<hostname>
 ## Darwin Hosts
 
 ```bash
-darwin-rebuild switch --flake .#ein
+nh darwin switch -H ein
 ```
 
 ---

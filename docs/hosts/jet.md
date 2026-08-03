@@ -32,7 +32,7 @@ __Invidious requires either a complete migration to a docker setup or being drop
 
 Two NVMe drives in mdadm RAID1 with BTRFS on top. One drive can fail and be swapped
 with no data loss. GRUB is installed to both drives declaratively via
-`boot.loader.grub.mirroredBoots` ensures every `nixos-rebuild switch` keeps both drives in sync.
+`boot.loader.grub.mirroredBoots` ensures every `nh os switch` keeps both drives in sync.
 
 ```text
 /dev/nvme0n1

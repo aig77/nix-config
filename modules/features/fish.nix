@@ -17,58 +17,6 @@ _: {
           cat = "bat --theme=base16 --color=always --wrap=never";
         };
 
-        functions =
-          lib.optionalAttrs pkgs.stdenv.isDarwin {
-            drs.body = ''
-              if test "$argv[1]" = help
-                echo "Usage: drs [host] [args]"
-                echo "  drs        rebuild current host"
-                echo "  drs ein    rebuild ein"
-                return
-              end
-              set h $argv[1]; set rest $argv[2..]
-              set flake "${var.repoPath}"; test -n "$h"; and set flake "${var.repoPath}#$h"
-              sudo darwin-rebuild switch --flake $flake $rest
-            '';
-            nrs.body = ''
-              if test "$argv[1]" = help
-                echo "Usage: nrs [host] [args]"
-                echo "  nrs spike    rebuild spike"
-                echo "  nrs faye     rebuild faye"
-                return
-              end
-              set h $argv[1]; set rest $argv[2..]
-              set flake "${var.repoPath}"; test -n "$h"; and set flake "${var.repoPath}#$h"
-              sudo nixos-rebuild switch --flake $flake $rest
-            '';
-          }
-          // lib.optionalAttrs pkgs.stdenv.isLinux {
-            nrs.body = ''
-              if test "$argv[1]" = help
-                echo "Usage: nrs [host] [args]"
-                echo "  nrs                                                      rebuild current host"
-                echo "  nrs faye                                                 rebuild faye locally"
-                echo "  nrs jet --target-host user@jet --sudo --ask-password    rebuild jet remotely"
-                return
-              end
-              set h $argv[1]; set rest $argv[2..]
-              set flake "${var.repoPath}"; test -n "$h"; and set flake "${var.repoPath}#$h"
-              sudo nixos-rebuild switch --flake $flake $rest
-            '';
-            nrt.body = ''
-              if test "$argv[1]" = help
-                echo "Usage: nrt [host] [args]"
-                echo "  nrt                                                      test current host"
-                echo "  nrt faye                                                 test faye locally"
-                echo "  nrt jet --target-host user@jet --sudo --ask-password    test jet remotely"
-                return
-              end
-              set h $argv[1]; set rest $argv[2..]
-              set flake "${var.repoPath}"; test -n "$h"; and set flake "${var.repoPath}#$h"
-              sudo nixos-rebuild test --flake $flake $rest
-            '';
-          };
-
         interactiveShellInit = ''
           set -g fish_greeting ""
 

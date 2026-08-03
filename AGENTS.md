@@ -17,11 +17,11 @@ This file provides guidance to AI coding agents when working with code in this r
 See [Deploying](docs/howto/deploying.md) for the full workflow. The essentials:
 
 ```bash
-sudo nixos-rebuild switch --flake .#<hostname>   # NixOS
-darwin-rebuild switch --flake .#ein              # macOS
-nix flake check                                  # validate all modules
-nix fmt                                          # format all Nix files
-nix develop                                      # dev shell (age, git, neovim, nixd, sops)
+nh os switch                                        # NixOS
+nh darwin switch -H ein                             # macOS
+nix flake check                                     # validate all modules
+nix fmt                                             # format all Nix files
+nix develop                                         # dev shell (age, git, neovim, nixd, sops)
 ```
 
 **Critical:** New `.nix` files must be `git add`ed before Nix can see them. import-tree uses git to discover files.
