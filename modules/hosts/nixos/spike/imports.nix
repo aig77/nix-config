@@ -10,7 +10,6 @@
         amdgpu
         gaming
         docker
-        tailscale
         volt
       ]);
   };

@@ -16,6 +16,8 @@ A declarative, multi-platform system configuration built with Nix Flakes and fla
 | [Ein](docs/hosts/ein.md) | aarch64 Darwin | MacBook |
 | [Jet](docs/hosts/jet.md) | x86_64 NixOS | Homelab |
 
+ Every machine joins the same tailnet.
+
 ---
 
 ## Documentation

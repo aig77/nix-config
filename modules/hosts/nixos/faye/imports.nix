@@ -9,7 +9,6 @@
         htpc
         steamos
         no-rgb
-        tailscale
       ]);
   };
 }

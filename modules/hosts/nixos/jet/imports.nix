@@ -7,7 +7,6 @@
         base
         server
         grub-server
-        tailscale
 
         caddy
         cloudflared

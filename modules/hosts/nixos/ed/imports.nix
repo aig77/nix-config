@@ -3,7 +3,6 @@
     imports = with config.flake.modules.nixos; [
       base
       server
-      tailscale
       prometheus-client
       dns
     ];
