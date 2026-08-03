@@ -19,7 +19,7 @@
         gatus
         glance
         grafana
-        invidious
+        # invidious
         n8n
         open-webui
         prometheus
