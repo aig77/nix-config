@@ -274,6 +274,12 @@ _: {
                         "check-url" = "http://localhost:${toString config.ports.n8n}/healthz";
                         icon = "si:n8n";
                       }
+                      {
+                        title = "Open WebUI";
+                        url = "https://\${TAILSCALE_HOST}:${toString config.ports.open-webui}";
+                        "check-url" = "http://localhost:${toString config.ports.open-webui}/health";
+                        icon = "si:chatbot";
+                      }
                     ];
                   }
                 ];

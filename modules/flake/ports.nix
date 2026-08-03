@@ -53,9 +53,14 @@
         type = lib.types.port;
         default = 3090;
       };
+      # this stays at 4000 no matter what
       blockyHttp = lib.mkOption {
         type = lib.types.port;
         default = 4000;
+      };
+      open-webui = lib.mkOption {
+        type = lib.types.port;
+        default = 4010;
       };
     };
   };
