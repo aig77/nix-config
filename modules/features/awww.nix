@@ -1,8 +1,5 @@
 _: {
-  flake.modules.homeManager.awww = {
-    pkgs,
-    ...
-  }: let
+  flake.modules.homeManager.awww = {pkgs, ...}: let
     awww-start = pkgs.writeShellScript "awww-start" ''
       runtime="''${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
       until [ -S "$runtime/wayland-0" ] || [ -S "$runtime/wayland-1" ]; do
