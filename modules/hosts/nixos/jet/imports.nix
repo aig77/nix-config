@@ -13,7 +13,7 @@
         gatus
         glance
         grafana
-        invidious
+        # invidious # temporarily remove since its down. plan on updating module with docker setup
         n8n
         prometheus
         daily-stoic
