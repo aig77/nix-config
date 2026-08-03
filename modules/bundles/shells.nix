@@ -15,6 +15,7 @@ in {
         git
         lazygit
         neovim
+        opencode
         starship
         tmux
         vim

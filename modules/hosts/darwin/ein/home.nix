@@ -3,7 +3,7 @@
 in {
   configurations.darwin.ein.module = {
     config,
-    pkgs,
+    # pkgs,
     ...
   }: {
     home-manager.users.${config.var.username} = {
@@ -11,7 +11,7 @@ in {
       home = {
         homeDirectory = "/Users/${config.var.username}";
         stateVersion = "24.11";
-        packages = with pkgs; [opencode];
+        # packages = with pkgs; [];
         sessionVariables = {
           EDITOR = "nvim";
           XDG_CONFIG_HOME = "$HOME/.config";
