@@ -8,19 +8,23 @@
         server
         grub-server
         tailscale
+
         caddy
         cloudflared
+
+        backup
+
+        actual-budget
+        daily-stoic
         gatus
         glance
         grafana
         invidious
         n8n
+        open-webui
         prometheus
-        daily-stoic
-        vaultwarden
-        actual-budget
         subtrakr
-        backup
+        vaultwarden
       ]);
     nixpkgs.hostPlatform = "x86_64-linux";
   };
