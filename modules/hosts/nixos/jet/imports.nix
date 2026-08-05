@@ -22,6 +22,7 @@
         n8n
         open-webui
         prometheus
+        searx
         subtrakr
         vaultwarden
       ]);
