@@ -26,8 +26,14 @@ _: {
         server = {
           secret_key = "$SEARX_SECRET_KEY";
           port = config.ports.searx;
-          bind_address = "0.0.0.0";
+          bind_address = "127.0.0.1";
           limiter = false;
+          image_proxy = true;
+        };
+        search = {
+          safe_search = 0;
+          autocomplete = "duckduckgo";
+          formats = ["html" "json"];
         };
       };
     };
