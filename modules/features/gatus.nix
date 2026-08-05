@@ -143,6 +143,15 @@
                 - type: discord
                   failure-threshold: 2
                   success-threshold: 1
+            - name: Vaultwarden
+              url: tcp://localhost:${toString config.ports.vaultwarden}
+              interval: 1m
+              conditions:
+                - "[CONNECTED] == true"
+              alerts:
+                - type: discord
+                  failure-threshold: 1
+                  success-threshold: 1
             - name: Daily Stoic
               url: http://localhost:${toString config.ports.dailyStoic}/health
               interval: 5m
@@ -173,6 +182,16 @@
                   success-threshold: 1
             - name: Open WebUI
               url: http://localhost:${toString config.ports.open-webui}/health
+              interval: 5m
+              conditions:
+                - "[STATUS] == 200"
+                - "[BODY].status == true"
+              alerts:
+                - type: discord
+                  failure-threshold: 2
+                  success-threshold: 1
+            - name: SearX
+              url: http://localhost:${toString config.ports.searx}/healthz
               interval: 5m
               conditions:
                 - "[STATUS] == 200"
