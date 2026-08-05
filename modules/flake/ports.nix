@@ -62,6 +62,10 @@
         type = lib.types.port;
         default = 4010;
       };
+      searx = lib.mkOption {
+        type = lib.types.port;
+        default = 4020;
+      };
     };
   };
 }
