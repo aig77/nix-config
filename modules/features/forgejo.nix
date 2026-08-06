@@ -31,15 +31,15 @@ _: {
 
     sops = {
       secrets = {
-        "resend/api-key" = {};
         "cloudflare/service-domain" = {};
-        "email" = {};
+        "forgejo/bootstrap-admin-email" = {};
+        "forgejo/smtp-password" = {};
       };
 
       templates."forgejo.env" = {
         mode = "0444";
         content = ''
-          FORGEJO_ADMIN_EMAIL=${config.sops.placeholder."email"}
+          FORGEJO_ADMIN_EMAIL=${config.sops.placeholder."forgejo/bootstrap-admin-email"}
         '';
       };
     };
@@ -71,7 +71,7 @@ _: {
         };
         session.COOKIE_SECURE = true;
       };
-      secrets.mailer.PASSWD = config.sops.secrets."resend/api-key".path;
+      secrets.mailer.PASSWD = config.sops.secrets."forgejo/smtp-password".path;
     };
 
     systemd.services.forgejo-admin = {
