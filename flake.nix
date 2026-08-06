@@ -1,6 +1,13 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # TODO(nixpkgs-tracking): per-host nixpkgs selection, two phases.
+    # Phase 1 machine-wide: servers (jet, ed) build from nixos-26.05 stable, desktops
+    # (ein, spike, faye) stay on nixos-unstable. Add nixpkgs-stable input, select per host via
+    # configurations.nixos.<name>.nixpkgs in modules/flake/nixosConfigurations.nix, and enforce
+    # servers -> stable with a role assertion.
+    # Phase 2 per-package: layer targeted unstable overrides (unstablePkgs overlay) on stable
+    # hosts only, for services that need newer than stable.
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
 

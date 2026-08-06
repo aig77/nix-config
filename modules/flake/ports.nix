@@ -1,5 +1,25 @@
 {lib, ...}: {
   flake.modules.nixos.base = {
+    # TODO: make ports a per-host registry instead of a global one.
+    # Replace these per-port mkOptions with:
+    #   options.ports = lib.mkOption {
+    #     type = lib.types.attrsOf lib.types.port;
+    #     default = {};
+    #   };
+    #   config.assertions = [
+    #     {
+    #       assertion =
+    #         lib.unique (lib.attrValues config.ports) == lib.attrValues config.ports;
+    #       message = "Duplicate port values in ports registry: ${toString config.ports}";
+    #     }
+    #   ];
+    # Assertion enforces no dupes in the port map
+    # Then declare values per host: jet/ports.nix (forgejo, vaultwarden,
+    # prometheus, nodeExporter, blockyHttp, etc) and ed/ports.nix
+    # (prometheus, nodeExporter, blockyHttp for prometheus-client).
+    # jet's prometheus feature scrapes ed's exporters, so jet must also
+    # declare nodeExporter + blockyHttp. Missing registration fails loud
+    # at eval instead of silently using a global default.
     options.ports = {
       glance = lib.mkOption {
         type = lib.types.port;

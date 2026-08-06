@@ -48,6 +48,16 @@
             type = lib.types.enum ["nautilus" "thunar"];
             default = "thunar";
           };
+          # TODO: var.services schema improvements:
+          # 1. Exposure-gated config. subdomain/auth only apply when public.
+          #    Replace public/subdomain/auth with an `expose` submodule
+          #    (nullOr { subdomain; auth; }): private services drop dead
+          #    subdomain/auth fields; consumers filter on expose != null.
+          # 2. Typed db backups. Add backup.database submodule
+          #    (enum postgres/sqlite + name/path); backup.nix generates the
+          #    pg_dump/sqlite3 prepareCommand and appends the dump file to
+          #    restic paths. Covers invidious, forgejo (postgres), daily-stoic,
+          #    vaultwarden, subtrakr (sqlite).
           services = lib.mkOption {
             type = lib.types.attrsOf (lib.types.submodule {
               options = {
