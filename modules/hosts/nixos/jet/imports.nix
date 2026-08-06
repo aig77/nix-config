@@ -15,6 +15,7 @@
 
         actual-budget
         daily-stoic
+        forgejo
         gatus
         glance
         grafana

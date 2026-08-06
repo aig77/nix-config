@@ -66,6 +66,10 @@
         type = lib.types.port;
         default = 4020;
       };
+      forgejo = lib.mkOption {
+        type = lib.types.port;
+        default = 4030;
+      };
     };
   };
 }
