@@ -33,6 +33,7 @@ _: {
       };
       templates."cloudflared.yml" = {
         owner = "cloudflared";
+        restartUnits = ["cloudflared.service"];
         content = ''
           tunnel: ${config.sops.placeholder."cloudflare/tunnel-id"}
           credentials-file: ${config.sops.secrets."cloudflare/tunnel-credentials".path}
