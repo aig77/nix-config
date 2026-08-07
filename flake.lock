@@ -577,23 +577,6 @@
         "type": "github"
       }
     },
-    "gatus": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1779234746,
-        "narHash": "sha256-YduXhHra6w7zo1f+brCjiusH7xCSdAzo5uF6aN5uv/A=",
-        "owner": "TwiN",
-        "repo": "gatus",
-        "rev": "ed1107b41a30e22047eecfb6dbc3be5e39829d5a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "TwiN",
-        "repo": "gatus",
-        "rev": "ed1107b41a30e22047eecfb6dbc3be5e39829d5a",
-        "type": "github"
-      }
-    },
     "git-hooks": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -1778,7 +1761,6 @@
         "disko": "disko",
         "firefox-addons": "firefox-addons",
         "flake-parts": "flake-parts_3",
-        "gatus": "gatus",
         "git-hooks-nix": "git-hooks-nix",
         "grub2-themes": "grub2-themes",
         "home-manager": "home-manager",

@@ -106,11 +106,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    gatus = {
-      url = "github:TwiN/gatus/ed1107b41a30e22047eecfb6dbc3be5e39829d5a";
-      flake = false;
-    };
-
     invidious = {
       url = "github:iv-org/invidious/master";
       flake = false;

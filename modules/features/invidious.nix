@@ -4,16 +4,6 @@
     pkgs,
     ...
   }: let
-    # TODO: remove this override once nixpkgs gatus >= 5.36.0 (custom-css support)
-    # When that lands, delete the gatus input in flake.nix, this let block, and
-    # switch ExecStart back to ${pkgs.gatus}/bin/gatus.
-    gatus = pkgs.buildGoModule {
-      pname = "gatus";
-      version = "master";
-      src = inputs.gatus;
-      vendorHash = "sha256-RbFNtojZthf7bKMhGStH/jOkeIR6EHpw2vvAMLEFtKI=";
-      subPackages = ["."];
-    };
     companion = pkgs.stdenv.mkDerivation {
       name = "invidious-companion";
       src = inputs.invidious-companion;
@@ -158,7 +148,7 @@
           wantedBy = ["multi-user.target"];
           after = ["network.target"];
           serviceConfig = {
-            ExecStart = "${gatus}/bin/gatus";
+            ExecStart = "${pkgs.gatus}/bin/gatus";
             Environment = "GATUS_CONFIG_PATH=${config.sops.templates."gatus-invidious.yaml".path}";
             StateDirectory = "gatus-invidious";
             DynamicUser = true;
