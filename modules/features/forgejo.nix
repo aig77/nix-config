@@ -43,6 +43,10 @@ _: {
           FORGEJO_ADMIN_EMAIL=${config.sops.placeholder."forgejo/bootstrap-admin-email"}
         '';
       };
+
+      templates."forgejo-domain".content = "${subdomain}.${domain}";
+      templates."forgejo-root-url".content = "https://${subdomain}.${domain}/";
+      templates."forgejo-mailer-from".content = "forgejo@resend.${domain}";
     };
 
     services.forgejo = {
@@ -51,8 +55,6 @@ _: {
       lfs.enable = true;
       settings = {
         server = {
-          DOMAIN = "${subdomain}.${domain}";
-          ROOT_URL = "https://${subdomain}.${domain}/";
           HTTP_ADDR = "127.0.0.1";
           HTTP_PORT = config.ports.forgejo;
           DISABLE_SSH = true;
@@ -68,11 +70,19 @@ _: {
           SMTP_ADDR = "smtp.resend.com";
           SMTP_PORT = 465;
           USER = "resend";
-          FROM = "forgejo@resend.${domain}";
         };
         session.COOKIE_SECURE = true;
       };
-      secrets.mailer.PASSWD = config.sops.secrets."forgejo/smtp-password".path;
+      secrets = {
+        server = {
+          DOMAIN = config.sops.templates."forgejo-domain".path;
+          ROOT_URL = config.sops.templates."forgejo-root-url".path;
+        };
+        mailer = {
+          PASSWD = config.sops.secrets."forgejo/smtp-password".path;
+          FROM = config.sops.templates."forgejo-mailer-from".path;
+        };
+      };
     };
 
     systemd.services.forgejo-admin = {
