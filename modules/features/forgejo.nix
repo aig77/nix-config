@@ -21,6 +21,7 @@ _: {
           "/var/lib/backups/forgejo.sql"
           "${stateDir}/repositories"
           "${stateDir}/data"
+          customDir
         ];
         prepareCommand = ''
           mkdir -p /var/lib/backups
