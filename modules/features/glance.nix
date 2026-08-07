@@ -226,6 +226,12 @@ _: {
                         icon = "si:bookstack";
                       }
                       {
+                        title = "Forgejo";
+                        url = "https://git.\${SERVICE_DOMAIN}";
+                        "check-url" = "http://localhost:${toString config.ports.forgejo}/api/healthz";
+                        icon = "si:forgejo";
+                      }
+                      {
                         title = "Invidious";
                         url = "https://invidious.\${SERVICE_DOMAIN}";
                         "check-url" = "http://localhost:${toString config.ports.invidious}/api/v1/stats";
@@ -276,7 +282,7 @@ _: {
                         icon = "si:n8n";
                       }
                       {
-                        title = "SearX";
+                        title = "SearXNG";
                         url = "https://\${TAILSCALE_HOST}:${toString config.ports.searx}";
                         "check-url" = "http://localhost:${toString config.ports.searx}/healthz";
                         icon = "si:searxng";

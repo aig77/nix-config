@@ -190,12 +190,22 @@
                 - type: discord
                   failure-threshold: 2
                   success-threshold: 1
-            - name: SearX
+            - name: SearXNG
               url: http://localhost:${toString config.ports.searx}/healthz
               interval: 5m
               conditions:
                 - "[STATUS] == 200"
-                - "[BODY].status == true"
+                - "[BODY] == OK"
+              alerts:
+                - type: discord
+                  failure-threshold: 2
+                  success-threshold: 1
+            - name: Forgejo
+              url: http://localhost:${toString config.ports.forgejo}/api/healthz
+              interval: 5m
+              conditions:
+                - "[STATUS] == 200"
+                - "[BODY].status == pass"
               alerts:
                 - type: discord
                   failure-threshold: 2
