@@ -58,6 +58,13 @@
           #    pg_dump/sqlite3 prepareCommand and appends the dump file to
           #    restic paths. Covers invidious, forgejo (postgres), daily-stoic,
           #    vaultwarden, subtrakr (sqlite).
+          # 3. Cross-machine services. Add a `host` field (default
+          #    "localhost"). caddy.nix's reverse_proxy and cloudflared.nix's
+          #    ingress both hardcode `localhost:${port}`, assuming the
+          #    service is co-located with Caddy; monitor.host (gatus/glance)
+          #    is already overridable but the routing layer isn't. Thread
+          #    `host` through both so a service on a separate VM/host can be
+          #    registered and actually reached, not just health-checked.
           services = lib.mkOption {
             type = lib.types.attrsOf (lib.types.submodule {
               options = {
