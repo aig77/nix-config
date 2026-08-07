@@ -6,6 +6,17 @@ _: {
       public = false;
       auth = false;
       backup.paths = ["/var/lib/open-webui"];
+      monitor = {
+        enable = true;
+        type = "http";
+        path = "/health";
+        conditions = ["[STATUS] == 200" "[BODY].status == true"];
+      };
+      homepage = {
+        enable = true;
+        title = "Open WebUI";
+        icon = "si:chatbot";
+      };
     };
 
     sops = {

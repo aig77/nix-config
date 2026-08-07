@@ -6,6 +6,16 @@ _: {
       public = false;
       auth = false;
       backup.paths = ["/var/lib/n8n"];
+      monitor = {
+        enable = true;
+        type = "http";
+        path = "/healthz";
+      };
+      homepage = {
+        enable = true;
+        title = "n8n";
+        icon = "si:n8n";
+      };
     };
 
     sops = {

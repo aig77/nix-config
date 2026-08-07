@@ -3,7 +3,30 @@ _: {
     config,
     lib,
     ...
-  }: {
+  }: let
+    mkSite = name: svc: let
+      title =
+        if svc.homepage.title != null
+        then svc.homepage.title
+        else lib.toUpper (lib.substring 0 1 name) + lib.substring 1 (-1) name;
+      checkUrl =
+        if svc.monitor.type == "http"
+        then "http://${svc.monitor.host}:${toString svc.port}${svc.monitor.path}"
+        else "http://${svc.monitor.host}:${toString svc.port}";
+    in {
+      inherit title;
+      url =
+        if svc.public
+        then "https://${svc.subdomain}.\${SERVICE_DOMAIN}"
+        else "https://\${TAILSCALE_HOST}:${toString svc.port}";
+      "check-url" = checkUrl;
+      icon = svc.homepage.icon;
+    };
+
+    homepageServices = lib.filterAttrs (_: s: s.homepage.enable) config.var.services;
+    publicSites = lib.mapAttrsToList mkSite (lib.filterAttrs (_: s: s.public) homepageServices);
+    privateSites = lib.mapAttrsToList mkSite (lib.filterAttrs (_: s: !s.public) homepageServices);
+  in {
     var.services.glance = {
       subdomain = "glance";
       port = config.ports.glance;
@@ -218,82 +241,13 @@ _: {
                     type = "monitor";
                     title = "Public Services";
                     cache = "1m";
-                    sites = [
-                      {
-                        title = "Daily Stoic";
-                        url = "https://stoic.\${SERVICE_DOMAIN}";
-                        "check-url" = "http://localhost:${toString config.ports.dailyStoic}/health";
-                        icon = "si:bookstack";
-                      }
-                      {
-                        title = "Forgejo";
-                        url = "https://git.\${SERVICE_DOMAIN}";
-                        "check-url" = "http://localhost:${toString config.ports.forgejo}/api/healthz";
-                        icon = "si:forgejo";
-                      }
-                      {
-                        title = "Invidious";
-                        url = "https://invidious.\${SERVICE_DOMAIN}";
-                        "check-url" = "http://localhost:${toString config.ports.invidious}/api/v1/stats";
-                        icon = "si:youtube";
-                      }
-                      {
-                        title = "Vaultwarden";
-                        url = "https://vault.\${SERVICE_DOMAIN}";
-                        "check-url" = "http://localhost:${toString config.ports.vaultwarden}";
-                        icon = "si:bitwarden";
-                      }
-                    ];
+                    sites = publicSites;
                   }
                   {
                     type = "monitor";
                     title = "Private Services";
                     cache = "1m";
-                    sites = [
-                      {
-                        title = "Actual Budget";
-                        url = "https://\${TAILSCALE_HOST}:${toString config.ports.actualBudget}";
-                        "check-url" = "http://localhost:${toString config.ports.actualBudget}";
-                        icon = "si:actualbudget";
-                      }
-
-                      {
-                        title = "Gatus";
-                        url = "https://\${TAILSCALE_HOST}:${toString config.ports.gatus}";
-                        "check-url" = "http://localhost:${toString config.ports.gatus}";
-                        icon = "si:statuspage";
-                      }
-                      {
-                        title = "Grafana";
-                        url = "https://\${TAILSCALE_HOST}:${toString config.ports.grafana}";
-                        "check-url" = "http://localhost:${toString config.ports.grafana}/api/health";
-                        icon = "si:grafana";
-                      }
-                      {
-                        title = "Open WebUI";
-                        url = "https://\${TAILSCALE_HOST}:${toString config.ports.open-webui}";
-                        "check-url" = "http://localhost:${toString config.ports.open-webui}/health";
-                        icon = "si:chatbot";
-                      }
-                      {
-                        title = "n8n";
-                        url = "https://\${TAILSCALE_HOST}:${toString config.ports.n8n}";
-                        "check-url" = "http://localhost:${toString config.ports.n8n}/healthz";
-                        icon = "si:n8n";
-                      }
-                      {
-                        title = "SearXNG";
-                        url = "https://\${TAILSCALE_HOST}:${toString config.ports.searx}";
-                        "check-url" = "http://localhost:${toString config.ports.searx}/healthz";
-                        icon = "si:searxng";
-                      }
-                      {
-                        title = "Subtrakr";
-                        url = "https://\${TAILSCALE_HOST}:${toString config.ports.subtrakr}";
-                        "check-url" = "http://localhost:${toString config.ports.subtrakr}/healthz";
-                        icon = "mdi:credit-card-outline";
-                      }
-                    ];
+                    sites = privateSites;
                   }
                 ];
               }

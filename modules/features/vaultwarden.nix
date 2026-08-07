@@ -19,6 +19,17 @@ _: {
             /var/lib/backups/vaultwarden/ 2>/dev/null || true
         '';
       };
+      monitor = {
+        enable = true;
+        type = "tcp";
+        interval = "1m";
+        failureThreshold = 1;
+        successThreshold = 1;
+      };
+      homepage = {
+        enable = true;
+        icon = "si:bitwarden";
+      };
     };
 
     sops = {

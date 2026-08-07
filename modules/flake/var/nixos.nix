@@ -58,21 +58,6 @@
           #    pg_dump/sqlite3 prepareCommand and appends the dump file to
           #    restic paths. Covers invidious, forgejo (postgres), daily-stoic,
           #    vaultwarden, subtrakr (sqlite).
-          # 3. Monitoring + homepage registration. Two separate submodules:
-          #    - monitor (nullOr { type = enum ["http" "tcp"]; host default
-          #      "localhost"; path default "/" (http only); conditions
-          #      listOf str, default ["[STATUS] == 200"] for http /
-          #      ["[CONNECTED] == true"] for tcp; }). gatus.nix filters
-          #      services on monitor != null and builds tcp://host:port or
-          #      http://host:port+path off `type`.
-          #    - homepage (nullOr { icon = str; title = nullOr str, default
-          #      null; }). Opt-in to the glance dashboard. glance.nix filters
-          #      on homepage != null (asserting monitor.type == "http", since
-          #      its check-url widget has no tcp probe), reuses `public` to
-          #      pick the group (Public/Private Services) and URL template
-          #      (subdomain.$SERVICE_DOMAIN vs $TAILSCALE_HOST:port), and
-          #      falls back to a capitalized service name when title is null.
-          #    Replaces the hand-written gatus/glance entries per service.
           services = lib.mkOption {
             type = lib.types.attrsOf (lib.types.submodule {
               options = {
@@ -99,6 +84,67 @@
                     };
                   });
                   default = null;
+                };
+                monitor = lib.mkOption {
+                  type = lib.types.submodule ({config, ...}: {
+                    options = {
+                      enable = lib.mkOption {
+                        type = lib.types.bool;
+                        default = false;
+                      };
+                      type = lib.mkOption {
+                        type = lib.types.enum ["http" "tcp"];
+                        default = "http";
+                      };
+                      host = lib.mkOption {
+                        type = lib.types.str;
+                        default = "localhost";
+                      };
+                      path = lib.mkOption {
+                        type = lib.types.str;
+                        default = "/";
+                      };
+                      conditions = lib.mkOption {
+                        type = lib.types.listOf lib.types.str;
+                        default =
+                          if config.type == "http"
+                          then ["[STATUS] == 200"]
+                          else ["[CONNECTED] == true"];
+                      };
+                      interval = lib.mkOption {
+                        type = lib.types.str;
+                        default = "5m";
+                      };
+                      failureThreshold = lib.mkOption {
+                        type = lib.types.int;
+                        default = 2;
+                      };
+                      successThreshold = lib.mkOption {
+                        type = lib.types.int;
+                        default = 1;
+                      };
+                    };
+                  });
+                  default = {};
+                };
+                homepage = lib.mkOption {
+                  type = lib.types.submodule {
+                    options = {
+                      enable = lib.mkOption {
+                        type = lib.types.bool;
+                        default = false;
+                      };
+                      title = lib.mkOption {
+                        type = lib.types.nullOr lib.types.str;
+                        default = null;
+                      };
+                      icon = lib.mkOption {
+                        type = lib.types.str;
+                        default = "";
+                      };
+                    };
+                  };
+                  default = {};
                 };
               };
             });

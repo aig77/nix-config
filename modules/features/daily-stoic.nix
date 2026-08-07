@@ -20,6 +20,16 @@ _: {
             ".backup '/var/lib/backups/daily-stoic/stoic.db'"
         '';
       };
+      monitor = {
+        enable = true;
+        type = "http";
+        path = "/health";
+      };
+      homepage = {
+        enable = true;
+        title = "Daily Stoic";
+        icon = "si:bookstack";
+      };
     };
 
     sops = {

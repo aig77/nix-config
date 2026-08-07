@@ -17,6 +17,16 @@ _: {
             ".backup '/var/lib/backups/subtrakr/subtrakr.db'"
         '';
       };
+      monitor = {
+        enable = true;
+        type = "http";
+        path = "/healthz";
+        conditions = ["[STATUS] == 200" "[BODY].status == healthy"];
+      };
+      homepage = {
+        enable = true;
+        icon = "mdi:credit-card-outline";
+      };
     };
 
     # Unlike docker, podman errors instead of auto-creating a missing bind-mount source dir.

@@ -1,10 +1,65 @@
 _: {
-  flake.modules.nixos.gatus = {config, ...}: {
+  flake.modules.nixos.gatus = {
+    config,
+    lib,
+    ...
+  }: let
+    mkEndpoint = name: svc: let
+      displayName =
+        if svc.homepage.enable && svc.homepage.title != null
+        then svc.homepage.title
+        else lib.toUpper (lib.substring 0 1 name) + lib.substring 1 (-1) name;
+      url =
+        if svc.monitor.type == "http"
+        then "http://${svc.monitor.host}:${toString svc.port}${svc.monitor.path}"
+        else "tcp://${svc.monitor.host}:${toString svc.port}";
+    in {
+      name = displayName;
+      inherit url;
+      interval = svc.monitor.interval;
+      conditions = svc.monitor.conditions;
+      alerts = [
+        {
+          type = "discord";
+          "failure-threshold" = svc.monitor.failureThreshold;
+          "success-threshold" = svc.monitor.successThreshold;
+        }
+      ];
+    };
+
+    generatedEndpoints =
+      lib.mapAttrsToList mkEndpoint
+      (lib.filterAttrs (_: s: s.monitor.enable) config.var.services);
+
+    extraEndpoints = [
+      {
+        name = "Blocky DNS";
+        url = "tcp://192.168.68.101:53";
+        interval = "1m";
+        conditions = ["[CONNECTED] == true"];
+        alerts = [
+          {
+            type = "discord";
+            "failure-threshold" = 2;
+            "success-threshold" = 1;
+          }
+        ];
+      }
+    ];
+  in {
     var.services.gatus = {
       subdomain = "gatus";
       port = config.ports.gatus;
       public = false;
       auth = false;
+      monitor = {
+        enable = true;
+        type = "http";
+      };
+      homepage = {
+        enable = true;
+        icon = "si:statuspage";
+      };
     };
 
     users.users.gatus = {
@@ -85,180 +140,7 @@ _: {
           '';
         };
         alerting.discord."webhook-url" = "\${DISCORD_WEBHOOK_URL}";
-        endpoints = [
-          {
-            name = "Invidious";
-            group = "Invidious";
-            url = "http://localhost:${toString config.ports.invidious}/api/v1/stats";
-            interval = "5m";
-            conditions = ["[STATUS] == 200"];
-            alerts = [
-              {
-                type = "discord";
-                "failure-threshold" = 2;
-                "success-threshold" = 1;
-              }
-            ];
-          }
-          {
-            name = "Companion";
-            group = "Invidious";
-            url = "tcp://localhost:${toString config.ports.invidiousCompanion}";
-            interval = "5m";
-            conditions = ["[CONNECTED] == true"];
-            alerts = [
-              {
-                type = "discord";
-                "failure-threshold" = 2;
-                "success-threshold" = 1;
-              }
-            ];
-          }
-          {
-            name = "YouTube API";
-            group = "Invidious";
-            url = "http://localhost:${toString config.ports.invidious}/api/v1/trending";
-            interval = "15m";
-            conditions = ["[STATUS] == 200" "[BODY] != []"];
-            alerts = [
-              {
-                type = "discord";
-                "failure-threshold" = 1;
-                "success-threshold" = 1;
-              }
-            ];
-          }
-          {
-            name = "Grafana";
-            url = "http://localhost:${toString config.ports.grafana}/api/health";
-            interval = "5m";
-            conditions = ["[STATUS] == 200"];
-            alerts = [
-              {
-                type = "discord";
-                "failure-threshold" = 2;
-                "success-threshold" = 1;
-              }
-            ];
-          }
-          {
-            name = "n8n";
-            url = "http://localhost:${toString config.ports.n8n}/healthz";
-            interval = "5m";
-            conditions = ["[STATUS] == 200"];
-            alerts = [
-              {
-                type = "discord";
-                "failure-threshold" = 2;
-                "success-threshold" = 1;
-              }
-            ];
-          }
-          {
-            name = "Vaultwarden";
-            url = "tcp://localhost:${toString config.ports.vaultwarden}";
-            interval = "1m";
-            conditions = ["[CONNECTED] == true"];
-            alerts = [
-              {
-                type = "discord";
-                "failure-threshold" = 1;
-                "success-threshold" = 1;
-              }
-            ];
-          }
-          {
-            name = "Daily Stoic";
-            url = "http://localhost:${toString config.ports.dailyStoic}/health";
-            interval = "5m";
-            conditions = ["[STATUS] == 200"];
-            alerts = [
-              {
-                type = "discord";
-                "failure-threshold" = 2;
-                "success-threshold" = 1;
-              }
-            ];
-          }
-          {
-            name = "Actual Budget";
-            url = "http://localhost:${toString config.ports.actualBudget}/";
-            interval = "5m";
-            conditions = ["[STATUS] == 200"];
-            alerts = [
-              {
-                type = "discord";
-                "failure-threshold" = 2;
-                "success-threshold" = 1;
-              }
-            ];
-          }
-          {
-            name = "Subtrakr";
-            url = "http://localhost:${toString config.ports.subtrakr}/healthz";
-            interval = "5m";
-            conditions = ["[STATUS] == 200" "[BODY].status == healthy"];
-            alerts = [
-              {
-                type = "discord";
-                "failure-threshold" = 2;
-                "success-threshold" = 1;
-              }
-            ];
-          }
-          {
-            name = "Open WebUI";
-            url = "http://localhost:${toString config.ports.open-webui}/health";
-            interval = "5m";
-            conditions = ["[STATUS] == 200" "[BODY].status == true"];
-            alerts = [
-              {
-                type = "discord";
-                "failure-threshold" = 2;
-                "success-threshold" = 1;
-              }
-            ];
-          }
-          {
-            name = "SearXNG";
-            url = "http://localhost:${toString config.ports.searx}/healthz";
-            interval = "5m";
-            conditions = ["[STATUS] == 200" "[BODY] == OK"];
-            alerts = [
-              {
-                type = "discord";
-                "failure-threshold" = 2;
-                "success-threshold" = 1;
-              }
-            ];
-          }
-          {
-            name = "Forgejo";
-            url = "http://localhost:${toString config.ports.forgejo}/api/healthz";
-            interval = "5m";
-            conditions = ["[STATUS] == 200" "[BODY].status == pass"];
-            alerts = [
-              {
-                type = "discord";
-                "failure-threshold" = 2;
-                "success-threshold" = 1;
-              }
-            ];
-          }
-          {
-            name = "Blocky DNS";
-            url = "tcp://192.168.68.101:53";
-            interval = "1m";
-            conditions = ["[CONNECTED] == true"];
-            alerts = [
-              {
-                type = "discord";
-                "failure-threshold" = 2;
-                "success-threshold" = 1;
-              }
-            ];
-          }
-        ];
+        endpoints = generatedEndpoints ++ extraEndpoints;
       };
     };
   };

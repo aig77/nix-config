@@ -10,6 +10,15 @@ _: {
       public = false;
       auth = false;
       backup.paths = ["/var/lib/grafana"];
+      monitor = {
+        enable = true;
+        type = "http";
+        path = "/api/health";
+      };
+      homepage = {
+        enable = true;
+        icon = "si:grafana";
+      };
     };
 
     services.grafana = {

@@ -28,6 +28,16 @@ _: {
           ${pkgs.util-linux}/bin/runuser -u postgres -- ${pkgs.postgresql}/bin/pg_dump ${config.services.forgejo.database.name} > /var/lib/backups/forgejo.sql
         '';
       };
+      monitor = {
+        enable = true;
+        type = "http";
+        path = "/api/healthz";
+        conditions = ["[STATUS] == 200" "[BODY].status == pass"];
+      };
+      homepage = {
+        enable = true;
+        icon = "si:forgejo";
+      };
     };
 
     sops = {
