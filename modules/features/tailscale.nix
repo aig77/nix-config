@@ -5,6 +5,18 @@ _: {
         services.tailscale.enable = true;
       };
 
+      tailscale-router = {config, ...}: {
+        sops.secrets."tailscale/authkey" = {};
+
+        services.tailscale = {
+          enable = true;
+          useRoutingFeatures = "server";
+          authKeyFile = config.sops.secrets."tailscale/authkey".path;
+          extraUpFlags = ["--advertise-routes=192.168.68.0/24" "--reset"];
+          openFirewall = true;
+        };
+      };
+
       # Server only: serve non-public services over the tailnet with HTTPS
       tailscale-http = {
         config,
