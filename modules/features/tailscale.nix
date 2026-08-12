@@ -37,7 +37,9 @@ _: {
           serviceConfig = {
             Type = "oneshot";
             RemainAfterExit = true;
-            ExecStart = map (svc: "${tailscale} serve --bg --https=${toString svc.port} http://localhost:${toString svc.port}") privateServices;
+            ExecStart =
+              lib.optional (config.var.services ? glance) "${tailscale} serve --bg --https=443 http://localhost:${toString config.ports.glance}"
+              ++ map (svc: "${tailscale} serve --bg --https=${toString svc.port} http://localhost:${toString svc.port}") privateServices;
             ExecStop = "${tailscale} serve reset";
           };
         };
