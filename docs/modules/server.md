@@ -102,7 +102,7 @@ Private services (`public = false`) are served straight over the tailnet. `featu
 tailscale serve --bg --https=<port> http://localhost:<port>
 ```
 
-Each service is reachable at `https://<host>.<tailnet>:<port>`. The one exception is glance, which is special-cased onto 443. No caddy, no cloudflared, no firewall opening needed. `tailscale serve reset` is wired into the service stop so the whole mapping collapses on rebuild.
+Each service is reachable at `https://<host>.<tailnet>:<port>`. No caddy, no cloudflared, no firewall opening needed. `tailscale serve reset` is wired into the service stop so the whole mapping collapses on rebuild.
 
 ## Backups
 
