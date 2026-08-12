@@ -26,10 +26,12 @@ Fields:
 - `public` - `true` for internet-exposed services, `false` for tailnet-only
 - `auth` - gate the public vhost behind basic auth
 - `backup` - optional; `paths` plus an optional `prepareCommand` that stages a consistent snapshot
+- `monitor` - optional; gatus auto-registers a health check (http/tcp, path, thresholds, interval)
+- `homepage` - optional; glance auto-links the service (title, icon)
 
 Ports live in one place, `modules/flake/ports.nix`. Features read them via `config.ports.<name>`; nothing hardcodes a port number.
 
-Four modules consume the registry and react to these flags. None of them know about individual services:
+Six modules consume the registry and react to these flags. None of them know about individual services:
 
 | Module | Reacts to | Effect |
 |--------|-----------|--------|
@@ -37,6 +39,8 @@ Four modules consume the registry and react to these flags. None of them know ab
 | `features/cloudflared.nix` | `public` | Tunnel ingress rule for public services |
 | `features/tailscale.nix` | `!public` | `tailscale serve` for private services |
 | `features/backup.nix` | `backup` | One restic job covering all backed-up services |
+| `features/gatus.nix` | `monitor.enable` | Health-check endpoint on the Bebop dashboard |
+| `features/glance.nix` | `homepage.enable` | Homepage site entry |
 
 ## Adding a service
 
@@ -45,6 +49,7 @@ Four modules consume the registry and react to these flags. None of them know ab
 3. Choose exposure:
    - **Public**: `public = true`. The host needs `caddy` + `cloudflared` imported. Add `auth = true` if it should be behind basic auth.
    - **Private**: `public = false`. The host needs the `server` bundle (it wires in `tailscale-http`). Reachable over the tailnet, no caddy involved.
+   Optionally add a `monitor` block for an automatic gatus health check, and a `homepage` block so glance links the service. Both default to off; see the field list above.
 4. `git add` the new file, run `nix flake check`.
 
 ## Public exposure: Caddy + Cloudflared
