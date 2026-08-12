@@ -27,6 +27,9 @@ _: {
     publicSites = lib.mapAttrsToList mkSite (lib.filterAttrs (_: s: s.public) homepageServices);
     privateSites = lib.mapAttrsToList mkSite (lib.filterAttrs (_: s: !s.public) homepageServices);
   in {
+    # TODO: declare servePort = 443 here and honor servePort in mkSite URLs
+    # (bare https://${TAILSCALE_HOST} when 443, :${servePort} otherwise) so
+    # glance stops double-serving on 3000.
     var.services.glance = {
       subdomain = "glance";
       port = config.ports.glance;

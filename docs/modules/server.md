@@ -107,6 +107,10 @@ Private services (`public = false`) are served straight over the tailnet. `featu
 tailscale serve --bg --https=<port> http://localhost:<port>
 ```
 
+<!-- TODO: once var.services.servePort exists, replace "The one exception is
+glance, which is special-cased onto 443" with a servePort field description
+(glance sets servePort = 443 and no longer double-serves on 3000). Also add
+servePort to the field list in the var.services registry section. -->
 Each service is reachable at `https://<host>.<tailnet>:<port>`. The one exception is glance, which is special-cased onto 443. No caddy, no cloudflared, no firewall opening needed. `tailscale serve reset` is wired into the service stop so the whole mapping collapses on rebuild.
 
 ## Backups
@@ -130,6 +134,8 @@ restic restore latest --target /tmp/restore --path /var/lib/backups/<service>
 
 `features/dns.nix` is the LAN side of the self-hosted stack:
 
+<!-- TODO: the `customDNS.mapping` described here is not actually configured in
+dns.nix; either add it to the blocky settings or correct this paragraph. -->
 - **Blocky** - DNS server with ad blocking, plus a `customDNS.mapping` that resolves public service hostnames to the server's LAN IP. This exists because home routers usually don't do hairpin NAT, so LAN devices can't reach the server through its public IP.
 - **Unbound** - local recursive resolver with DNSSEC; Blocky's primary upstream, so LAN queries resolve locally and stay off the wire.
 - **Cloudflare DoH** - strict-order fallback: Blocky forwards to Unbound first, and only queries `one.one.one.one` when Unbound doesn't respond.

@@ -12,6 +12,8 @@ _: {
           enable = true;
           useRoutingFeatures = "server";
           authKeyFile = config.sops.secrets."tailscale/authkey".path;
+          # TODO: pull subnet from var.network.subnet instead of hardcoding
+          # 192.168.68.0/24.
           extraUpFlags = ["--advertise-routes=192.168.68.0/24" "--reset"];
           openFirewall = true;
         };
@@ -37,6 +39,10 @@ _: {
           serviceConfig = {
             Type = "oneshot";
             RemainAfterExit = true;
+            # TODO: replace the glance special case + generic map with one
+            # uniform serveCmd builder driven by var.services.<name>.servePort
+            # (https port = servePort if set, else svc.port). Assert that
+            # servePort values are unique across services.
             ExecStart =
               lib.optional (config.var.services ? glance) "${tailscale} serve --bg --https=443 http://localhost:${toString config.ports.glance}"
               ++ map (svc: "${tailscale} serve --bg --https=${toString svc.port} http://localhost:${toString svc.port}") privateServices;

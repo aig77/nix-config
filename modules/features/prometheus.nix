@@ -20,6 +20,8 @@ _: {
           job_name = "prometheus";
           static_configs = [{targets = ["127.0.0.1:${toString config.ports.prometheus}"];}];
         }
+        # TODO: use var.network.hosts.ed instead of hardcoded 192.168.68.101
+        # (node exporter + blocky scrape targets, lines below).
         {
           job_name = "node";
           static_configs = [
