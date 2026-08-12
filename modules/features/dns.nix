@@ -9,9 +9,13 @@ _: {
             http = config.ports.blockyHttp;
           };
 
-          upstreams.groups.default = [
-            "https://one.one.one.one/dns-query"
-          ];
+          upstreams = {
+            strategy = "strict";
+            groups.default = [
+              "tcp+udp:127.0.0.1:${toString config.ports.unbound}" # unbound: local recursion + DNSSEC
+              "https://one.one.one.one/dns-query" # cloudflare: strict-order failover
+            ];
+          };
 
           bootstrapDns = {
             upstream = "https://one.one.one.one/dns-query";
@@ -37,7 +41,7 @@ _: {
       unbound = {
         enable = true;
         settings.server = {
-          port = 5335;
+          port = config.ports.unbound;
           interface = "127.0.0.1";
           access-control = [
             "127.0.0.1 allow"
@@ -66,6 +70,11 @@ _: {
       allowedUDPPorts = [
         53
       ];
+    };
+
+    systemd.services.blocky = {
+      after = ["unbound.service"];
+      wants = ["unbound.service"];
     };
   };
 }

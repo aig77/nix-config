@@ -90,6 +90,10 @@
         type = lib.types.port;
         default = 4030;
       };
+      unbound = lib.mkOption {
+        type = lib.types.port;
+        default = 5335;
+      };
     };
   };
 }
