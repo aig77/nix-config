@@ -35,13 +35,12 @@ _: {
       {
         name = "Blocky DNS";
         url = "192.168.68.101:53";
-        type = "dns";
         dns = {
           "query-type" = "A";
           "query-name" = "example.com";
         };
         interval = "1m";
-        conditions = ["[CONNECTED] == true" "[DNS_RCODE] == NOERROR"];
+        conditions = ["[DNS_RCODE] == NOERROR"];
         alerts = [
           {
             type = "discord";
