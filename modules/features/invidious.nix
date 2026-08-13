@@ -69,6 +69,13 @@ _: {
       pkgs,
       ...
     }: {
+      assertions = [
+        {
+          assertion = config.var.services ? invidious;
+          message = "invidious-status requires invidious to be enabled";
+        }
+      ];
+
       var.services.invidious-status = {
         subdomain = "invidious-status";
         port = config.ports.invidiousStatus;
