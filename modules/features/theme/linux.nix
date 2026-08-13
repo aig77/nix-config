@@ -36,9 +36,6 @@
   }: {
     # Scoped to desktop only to avoid breaking server hosts that lack stylix options
     imports = [inputs.stylix.nixosModules.stylix];
-    # stylix kmscon module uses removed NixOS options (extraConfig, fonts); disable it
-    # TODO: remove once fixed upstream - https://github.com/nix-community/stylix/issues/2334
-    disabledModules = ["${inputs.stylix}/modules/kmscon/nixos.nix"];
 
     stylix = {
       enable = true;
