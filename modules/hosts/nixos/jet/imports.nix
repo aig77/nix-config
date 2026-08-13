@@ -7,6 +7,7 @@
         base
         server
         grub-server
+        aarch64-builder
 
         backup
         caddy

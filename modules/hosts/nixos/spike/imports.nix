@@ -6,6 +6,7 @@
       ++ (with config.flake.modules.nixos; [
         base
         desktop
+        aarch64-builder
         hyprland-noctalia
         amdgpu
         gaming
