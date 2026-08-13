@@ -122,6 +122,15 @@ Darwin also passes `var` and `inputs` into HM's `extraSpecialArgs` so HM modules
 
 Hosts set typed variables; feature modules read them. Never hardcode hostnames, usernames, or paths that vary between hosts.
 
+```nix
+var.network = {                  # LAN topology registry
+  subnet = "192.168.68.0/24";
+  hosts.ed = "192.168.68.101";   # each host declares its own IPv4
+};
+```
+
+`var.network` is the LAN address book: `tailscale.nix` advertises the subnet as routes, and `gatus.nix`/`prometheus.nix` reach remote hosts through `hosts.<name>` instead of hardcoded addresses.
+
 ---
 
 ## Theming

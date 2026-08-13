@@ -34,8 +34,7 @@ _: {
     extraEndpoints = [
       {
         name = "Blocky DNS";
-        # TODO: use var.network.hosts.ed instead of hardcoded 192.168.68.101.
-        url = "192.168.68.101:53";
+        url = "${config.var.network.hosts.ed}:53";
         dns = {
           "query-type" = "A";
           "query-name" = "example.com";

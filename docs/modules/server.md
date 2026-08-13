@@ -23,6 +23,7 @@ Fields:
 
 - `subdomain` - hostname under the public domain (or tailnet hostname)
 - `port` - where the service listens on localhost; pull it from the port registry, never invent your own number
+- `servePort` - optional; HTTPS port the tailnet serves a private service on, defaults to `port` (glance sets 443)
 - `public` - `true` for internet-exposed services, `false` for tailnet-only
 - `auth` - gate the public vhost behind basic auth
 - `backup` - optional; `paths` plus an optional `prepareCommand` that stages a consistent snapshot
@@ -41,6 +42,15 @@ Six modules consume the registry and react to these flags. None of them know abo
 | `features/backup.nix` | `backup` | One restic job covering all backed-up services |
 | `features/gatus.nix` | `monitor.enable` | Health-check endpoint on the Bebop dashboard |
 | `features/glance.nix` | `homepage.enable` | Homepage site entry |
+
+## The `var.network` registry
+
+The LAN topology lives in `var.network` (schema in `modules/flake/var/nixos.nix`), so feature modules never hardcode machine addresses:
+
+- `subnet` - the LAN as a CIDR block; declared by the host that advertises routes (ed sets `192.168.68.0/24`)
+- `hosts` - an address book mapping hostname to IPv4; each host declares its own IP in its `variables.nix`
+
+Consumers read the registry instead of literals: `tailscale.nix` advertises `var.network.subnet` as subnet-router routes, and `gatus.nix` + `prometheus.nix` reach ed's DNS, node exporter, and blocky metrics via `var.network.hosts.ed`.
 
 ## Adding a service
 
@@ -101,17 +111,13 @@ Then set `hash = lib.fakeHash`, build, and copy the `got:` value from the hash m
 
 ## Private exposure: Tailscale HTTPS
 
-Private services (`public = false`) are served straight over the tailnet. `features/tailscale.nix` contributes `tailscale-http`, which runs one `tailscale serve` command per private service on its own port:
+Private services (`public = false`) are served straight over the tailnet. `features/tailscale.nix` contributes `tailscale-http`, which runs one `tailscale serve` command per private service:
 
 ```bash
-tailscale serve --bg --https=<port> http://localhost:<port>
+tailscale serve --bg --https=<servePort> http://localhost:<port>
 ```
 
-<!-- TODO: once var.services.servePort exists, replace "The one exception is
-glance, which is special-cased onto 443" with a servePort field description
-(glance sets servePort = 443 and no longer double-serves on 3000). Also add
-servePort to the field list in the var.services registry section. -->
-Each service is reachable at `https://<host>.<tailnet>:<port>`. The one exception is glance, which is special-cased onto 443. No caddy, no cloudflared, no firewall opening needed. `tailscale serve reset` is wired into the service stop so the whole mapping collapses on rebuild.
+The HTTPS port defaults to the service's own `port`; a service can claim a custom one by setting `servePort`. Glance sets `servePort = 443`, so it is reachable at the bare `https://<host>.<tailnet>` with no port suffix. No caddy, no cloudflared, no firewall opening needed. `tailscale serve reset` is wired into the service stop so the whole mapping collapses on rebuild.
 
 ## Backups
 
@@ -134,11 +140,9 @@ restic restore latest --target /tmp/restore --path /var/lib/backups/<service>
 
 `features/dns.nix` is the LAN side of the self-hosted stack:
 
-<!-- TODO: the `customDNS.mapping` described here is not actually configured in
-dns.nix; either add it to the blocky settings or correct this paragraph. -->
-- **Blocky** - DNS server with ad blocking, plus a `customDNS.mapping` that resolves public service hostnames to the server's LAN IP. This exists because home routers usually don't do hairpin NAT, so LAN devices can't reach the server through its public IP.
+- **Blocky** - DNS server with ad blocking ([StevenBlack hosts list](https://github.com/StevenBlack/hosts)), strict-order upstream chain, and prometheus metrics. No `customDNS.mapping` is configured: public hostnames resolve to the Cloudflare edge, so LAN devices reach services through the outbound tunnel with no hairpin NAT required. If LAN-direct paths are ever wanted, add a `customDNS.mapping` fed by `var.network.hosts.ed`.
 - **Unbound** - local recursive resolver with DNSSEC; Blocky's primary upstream, so LAN queries resolve locally and stay off the wire.
 - **Cloudflare DoH** - strict-order fallback: Blocky forwards to Unbound first, and only queries `one.one.one.one` when Unbound doesn't respond.
 - **Prometheus + Grafana** - metrics collection and dashboards, the node exporter dashboard provisioned automatically.
 
-Ports and scrape targets come from the registry and `prometheus.nix`, not from this doc.
+Ports and scrape targets come from the port registry and `var.network`, not from this doc.

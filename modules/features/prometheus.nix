@@ -1,5 +1,7 @@
 _: {
-  flake.modules.nixos.prometheus = {config, ...}: {
+  flake.modules.nixos.prometheus = {config, ...}: let
+    edIp = config.var.network.hosts.ed;
+  in {
     var.services.prometheus = {
       subdomain = "prometheus";
       port = config.ports.prometheus;
@@ -20,17 +22,15 @@ _: {
           job_name = "prometheus";
           static_configs = [{targets = ["127.0.0.1:${toString config.ports.prometheus}"];}];
         }
-        # TODO: use var.network.hosts.ed instead of hardcoded 192.168.68.101
-        # (node exporter + blocky scrape targets, lines below).
         {
           job_name = "node";
           static_configs = [
-            {targets = ["127.0.0.1:${toString config.ports.nodeExporter}" "192.168.68.101:${toString config.ports.nodeExporter}"];}
+            {targets = ["127.0.0.1:${toString config.ports.nodeExporter}" "${edIp}:${toString config.ports.nodeExporter}"];}
           ];
         }
         {
           job_name = "blocky";
-          static_configs = [{targets = ["192.168.68.101:${toString config.ports.blockyHttp}"];}];
+          static_configs = [{targets = ["${edIp}:${toString config.ports.blockyHttp}"];}];
         }
       ];
     };

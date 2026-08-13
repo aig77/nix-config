@@ -48,6 +48,21 @@
             type = lib.types.enum ["nautilus" "thunar"];
             default = "thunar";
           };
+          network = lib.mkOption {
+            type = lib.types.submodule {
+              options = {
+                subnet = lib.mkOption {
+                  type = lib.types.nullOr lib.types.str;
+                  default = null;
+                };
+                hosts = lib.mkOption {
+                  type = lib.types.attrsOf lib.types.str;
+                  default = {};
+                };
+              };
+            };
+            default = {};
+          };
           # TODO: var.services schema improvements:
           # 1. Exposure-gated config. subdomain/auth only apply when public.
           #    Replace public/subdomain/auth with an `expose` submodule
@@ -65,20 +80,15 @@
           #    is already overridable but the routing layer isn't. Thread
           #    `host` through both so a service on a separate VM/host can be
           #    registered and actually reached, not just health-checked.
-          # 4. Per-service servePort. Add `servePort` (nullOr port, default
-          #    null) so a private service can claim a custom HTTPS port for
-          #    tailscale serve (glance uses 443). tailscale.nix drops its
-          #    glance special case for a uniform serveCmd builder; glance.nix's
-          #    URL builder honors servePort.
-          # TODO: LAN topology registry. Add `network` (subnet + per-host
-          # IPv4s, e.g. { subnet = "192.168.68.0/24"; hosts.ed = "..." }) so
-          # gatus.nix, prometheus.nix, and tailscale.nix stop hardcoding
-          # 192.168.68.101. Hosts declare their own IP in variables.nix.
           services = lib.mkOption {
             type = lib.types.attrsOf (lib.types.submodule {
               options = {
                 subdomain = lib.mkOption {type = lib.types.str;};
                 port = lib.mkOption {type = lib.types.port;};
+                servePort = lib.mkOption {
+                  type = lib.types.nullOr lib.types.port;
+                  default = null;
+                };
                 public = lib.mkOption {
                   type = lib.types.bool;
                   default = false;

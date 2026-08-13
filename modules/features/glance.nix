@@ -18,7 +18,11 @@ _: {
       url =
         if svc.public
         then "https://${svc.subdomain}.\${SERVICE_DOMAIN}"
-        else "https://\${TAILSCALE_HOST}:${toString svc.port}";
+        else if svc.servePort == null
+        then "https://\${TAILSCALE_HOST}:${toString svc.port}"
+        else if svc.servePort == 443
+        then "https://\${TAILSCALE_HOST}"
+        else "https://\${TAILSCALE_HOST}:${toString svc.servePort}";
       "check-url" = checkUrl;
       icon = svc.homepage.icon;
     };
@@ -27,12 +31,10 @@ _: {
     publicSites = lib.mapAttrsToList mkSite (lib.filterAttrs (_: s: s.public) homepageServices);
     privateSites = lib.mapAttrsToList mkSite (lib.filterAttrs (_: s: !s.public) homepageServices);
   in {
-    # TODO: declare servePort = 443 here and honor servePort in mkSite URLs
-    # (bare https://${TAILSCALE_HOST} when 443, :${servePort} otherwise) so
-    # glance stops double-serving on 3000.
     var.services.glance = {
       subdomain = "glance";
       port = config.ports.glance;
+      servePort = 443;
       public = false;
       auth = false;
     };

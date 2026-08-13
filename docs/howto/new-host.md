@@ -42,6 +42,10 @@ _: {
       username = "arturo";
       hostname = "myhostname";
       shell    = "zsh";
+      # LAN hosts: declare the subnet (only if this machine advertises routes)
+      # and IPv4 entries here:
+      # network.subnet = "192.168.68.0/24";
+      # network.hosts.myhostname = "192.168.68.x";
     };
   };
 }
