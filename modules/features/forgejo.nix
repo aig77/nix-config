@@ -47,16 +47,18 @@ _: {
         "forgejo/smtp-password" = {};
       };
 
-      templates."forgejo.env" = {
-        mode = "0444";
-        content = ''
-          FORGEJO_ADMIN_EMAIL=${config.sops.placeholder."forgejo/bootstrap-admin-email"}
-        '';
-      };
+      templates = {
+        "forgejo.env" = {
+          mode = "0444";
+          content = ''
+            FORGEJO_ADMIN_EMAIL=${config.sops.placeholder."forgejo/bootstrap-admin-email"}
+          '';
+        };
 
-      templates."forgejo-domain".content = "${subdomain}.${domain}";
-      templates."forgejo-root-url".content = "https://${subdomain}.${domain}/";
-      templates."forgejo-mailer-from".content = "forgejo@resend.${domain}";
+        "forgejo-domain".content = "${subdomain}.${domain}";
+        "forgejo-root-url".content = "https://${subdomain}.${domain}/";
+        "forgejo-mailer-from".content = "forgejo@resend.${domain}";
+      };
     };
 
     services.forgejo = {
