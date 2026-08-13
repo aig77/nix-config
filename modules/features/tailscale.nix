@@ -2,7 +2,10 @@ _: {
   flake.modules = {
     nixos = {
       tailscale = {
-        services.tailscale.enable = true;
+        services.tailscale = {
+          enable = true;
+          extraSetFlags = ["--accept-routes"];
+        };
       };
 
       tailscale-router = {config, ...}: {
@@ -42,6 +45,8 @@ _: {
           serviceConfig = {
             Type = "oneshot";
             RemainAfterExit = true;
+            Restart = "on-failure";
+            RestartSec = "5s";
             ExecStart = map serveCmd privateServices;
             ExecStop = "${tailscale} serve reset";
           };
@@ -58,7 +63,10 @@ _: {
     };
 
     darwin.tailscale = {
-      services.tailscale.enable = true;
+      services.tailscale = {
+        enable = true;
+        extraSetFlags = ["--accept-routes"];
+      };
     };
   };
 }
