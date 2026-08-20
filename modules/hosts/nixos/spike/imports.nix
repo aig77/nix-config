@@ -12,6 +12,7 @@
         gaming
         docker
         volt
+        easyeffects
       ]);
   };
 }
