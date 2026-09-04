@@ -2,7 +2,7 @@ _: {
   configurations.nixos.ein.module = {
     var = {
       username = "arturo";
-      hostname = "spike";
+      hostname = "ein";
       location = "Miami";
       shell = "zsh";
       terminal = "ghostty";
