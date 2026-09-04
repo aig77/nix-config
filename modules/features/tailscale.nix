@@ -63,10 +63,7 @@ _: {
     };
 
     darwin.tailscale = {
-      services.tailscale = {
-        enable = true;
-        extraSetFlags = ["--accept-routes"];
-      };
+      services.tailscale.enable = true;
     };
   };
 }
