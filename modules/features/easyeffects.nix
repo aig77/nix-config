@@ -19,21 +19,6 @@ in {
 
     homeManager.easyeffects = {pkgs, ...}: {
       home.packages = [pkgs.easyeffects];
-
-      systemd.user.services.easyeffects = {
-        Unit = {
-          Description = "Easy Effects - audio effects for input and output";
-          After = ["graphical-session.target"];
-          PartOf = ["graphical-session.target"];
-        };
-        Service = {
-          Type = "simple";
-          ExecStart = "${pkgs.easyeffects}/bin/easyeffects --service-mode";
-          Restart = "on-failure";
-          RestartSec = 5;
-        };
-        Install.WantedBy = ["graphical-session.target"];
-      };
     };
   };
 }
