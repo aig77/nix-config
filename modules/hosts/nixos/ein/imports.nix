@@ -7,6 +7,7 @@
         base
         desktop
         hyprland-noctalia
+        intelgpu
         gaming
         docker
       ]);
