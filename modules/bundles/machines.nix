@@ -24,18 +24,6 @@ in {
       ];
     };
 
-    laptop = _: {
-      imports = with nixos; [
-        audio
-        bluetooth
-        desktop-extras
-        grub
-        theme
-        thunar
-      ];
-      home-manager.users.${username}.imports = with hm; [eyecandy-nixos gui shell];
-    };
-
     htpc = _: {
       imports = with nixos; [
         audio
