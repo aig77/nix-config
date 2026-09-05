@@ -20,5 +20,9 @@ _: {
         nvml_measure_pcie_speeds = true;
       };
     };
+
+    btopIntel = _: {
+      # TODO
+    };
   };
 }

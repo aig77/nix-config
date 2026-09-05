@@ -32,8 +32,25 @@ in {
         grub
         theme
         thunar
+        protonvpn
       ];
-      home-manager.users.${username}.imports = with hm; [eyecandy-nixos gui shell];
+      home-manager.users.${username}.imports = with hm; [
+        eyecandy-nixos
+        gui
+        shell
+        obsidian
+        spotify
+        zathura
+      ];
+      services.keyd = {
+        enable = true;
+        keyboards.default = {
+          ids = ["*"];
+          settings.main = {
+            rightcontrol = "rightmeta";
+          };
+        };
+      };
     };
 
     htpc = _: {
