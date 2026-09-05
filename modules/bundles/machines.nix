@@ -24,6 +24,35 @@ in {
       ];
     };
 
+    laptop = _: {
+      imports = with nixos; [
+        audio
+        bluetooth
+        desktop-extras
+        grub
+        theme
+        thunar
+        protonvpn
+      ];
+      home-manager.users.${username}.imports = with hm; [
+        eyecandy-nixos
+        gui
+        shell
+        obsidian
+        spotify
+        zathura
+      ];
+      services.keyd = {
+        enable = true;
+        keyboards.default = {
+          ids = ["*"];
+          settings.main = {
+            rightcontrol = "rightmeta";
+          };
+        };
+      };
+    };
+
     htpc = _: {
       imports = with nixos; [
         audio

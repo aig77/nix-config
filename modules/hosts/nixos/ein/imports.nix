@@ -5,7 +5,7 @@
       [inputs.nixos-facter-modules.nixosModules.facter]
       ++ (with config.flake.modules.nixos; [
         base
-        desktop
+        laptop
         hyprland-noctalia
         intelgpu
         gaming
