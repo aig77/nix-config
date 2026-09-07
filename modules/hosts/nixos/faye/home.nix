@@ -8,15 +8,7 @@ _: {
       home = {
         homeDirectory = "/home/${config.var.username}";
         stateVersion = "25.05";
-        packages = with pkgs; [
-          amdgpu_top
-          bitwarden-desktop
-          mission-center
-          networkmanagerapplet
-          pavucontrol
-          qpwgraph
-          vlc
-        ];
+        packages = with pkgs; [imv qpwgraph];
         sessionVariables = {
           EDITOR = "nvim";
           WALLPAPERS = "$HOME/Pictures/Wallpapers";

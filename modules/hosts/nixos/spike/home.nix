@@ -1,29 +1,14 @@
-_: {
-  configurations.nixos.spike.module = {
-    config,
-    pkgs,
-    inputs,
-    ...
-  }: {
-    home-manager.users.${config.var.username} = {
+{config, ...}: let
+  inherit (config.flake.meta.owner) username;
+  hm = config.flake.modules.homeManager;
+in {
+  configurations.nixos.spike.module = {pkgs, ...}: {
+    home-manager.users.${username} = {
+      imports = [hm.obs];
       home = {
-        homeDirectory = "/home/${config.var.username}";
+        homeDirectory = "/home/${username}";
         stateVersion = "25.05";
-        packages = with pkgs; [
-          amdgpu_top
-          bitwarden-desktop
-          inputs.claude-desktop.packages.${pkgs.system}.claude-desktop-fhs
-          gnome-calculator
-          imv
-          lmstudio
-          mission-center
-          networkmanagerapplet
-          obsidian
-          pavucontrol
-          qpwgraph
-          vlc
-          yazi
-        ];
+        packages = with pkgs; [lmstudio];
         sessionVariables = {
           EDITOR = "nvim";
           WALLPAPERS = "$HOME/Pictures/Wallpapers";

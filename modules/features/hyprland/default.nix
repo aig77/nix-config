@@ -53,7 +53,7 @@ _: {
       packages = with pkgs; [
         hyprpolkitagent
         playerctl
-	brightnessctl
+        brightnessctl
       ];
 
       sessionVariables = {

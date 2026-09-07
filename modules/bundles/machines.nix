@@ -13,34 +13,16 @@ in {
         theme
         thunar
       ];
-      home-manager.users.${username}.imports = with hm; [
-        eyecandy-nixos
-        gui
-        shell
-        obs
-        obsidian
-        spotify
-        zathura
-      ];
+      home-manager.users.${username} = {
+        imports = with hm; [gui];
+        home.packages = [];
+      };
     };
 
     laptop = _: {
       imports = with nixos; [
-        audio
-        bluetooth
-        desktop-extras
-        grub
-        theme
-        thunar
+        desktop
         protonvpn
-      ];
-      home-manager.users.${username}.imports = with hm; [
-        eyecandy-nixos
-        gui
-        shell
-        obsidian
-        spotify
-        zathura
       ];
       services.keyd = {
         enable = true;
@@ -60,10 +42,13 @@ in {
         desktop-extras
         grub
         theme
-        thunar
       ];
-      home-manager.users.${username}.imports = with hm; [gui shell-lite];
-
+      home-manager.users.${username}.imports = with hm; [
+        bitwarden
+        discord
+        shell-lite
+        zen
+      ];
       # USB keyboard+touchpad combo support (e.g. Rii mini); libinput explicit for Jovian Wayland
       boot.kernelModules = ["hid_generic"];
       services.libinput.enable = true;

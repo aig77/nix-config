@@ -48,6 +48,7 @@ in {
       unzip
       xz
       wget
+      yazi
       zip
 
       cargo
