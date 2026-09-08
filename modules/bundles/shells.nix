@@ -26,6 +26,7 @@ in {
       alejandra
       atac
       bat
+      chezmoi
       curl
       cmake
       deadnix

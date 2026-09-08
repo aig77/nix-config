@@ -1,6 +1,3 @@
-[submodule "modules/features/neovim/nvim"]
-	path = modules/features/neovim/nvim
-	url = git@github.com:aig77/nvim.git
 [submodule "modules/features/quickshell/quickshell"]
 	path = modules/features/quickshell/quickshell
 	url = git@github.com:aig77/quickshell.git

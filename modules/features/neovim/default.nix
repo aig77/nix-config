@@ -1,76 +1,19 @@
 _: {
-  flake.modules.homeManager.neovim = {
-    pkgs,
-    lib,
-    config,
-    osConfig,
-    ...
-  }:
-  # let
-  #   enableStylix = false; # toggle to enable stylix theming
-  #   priority = 900; # set loading priority (themes default at 1000)
-  # in {
-  {
+  flake.modules.homeManager.neovim = {pkgs, ...}: {
     stylix.targets.neovim.enable = false;
 
-    # new nvim-treesitter rewrite builds parses from source using tree-sitter CLI
-    home.packages = with pkgs; [
-      tree-sitter
-      # LSPs -- Mason is disabled on NixOS so these are provided directly
-      lua-language-server
-      nixd
-      rust-analyzer
-      pyright
-      gopls
-      qt6.qtdeclarative # qmlls
-    ];
-
-    programs.neovim = {
-      enable = true;
-      defaultEditor = true;
-      viAlias = true;
-      # Disable providers to prevent HM generating nvim/init.lua, which would
-      # conflict with the xdg.configFile."nvim" directory symlink below.
-      withRuby = false;
-      withPython3 = false;
-      initLua = lib.mkForce "";
+    home = {
+      packages = with pkgs; [
+        neovim
+        tree-sitter
+        lua-language-server
+        nixd
+        rust-analyzer
+        pyright
+        gopls
+        qt6.qtdeclarative # qmlls
+      ];
+      shellAliases.vi = "nvim";
     };
-
-    xdg.configFile."nvim".source =
-      config.lib.file.mkOutOfStoreSymlink "${osConfig.var.repoPath}/modules/features/neovim/nvim";
-
-    # DEPRECATED
-    # for now since its not in use
-    #   # base16 themeing using stylix
-    #   home.file = lib.mkIf enableStylix {
-    #     ".config/nvim/lua/plugins/base16.lua".text = let
-    #       colors = config.lib.stylix.colors.withHashtag;
-    #     in ''
-    #       return {
-    #         "echasnovski/mini.base16",
-    #         priority = ${toString priority},
-    #         config = function()
-    #           require('mini.base16').setup({ palette = {
-    #             base00 = "${colors.base00}",
-    #             base01 = "${colors.base01}",
-    #             base02 = "${colors.base02}",
-    #             base03 = "${colors.base03}",
-    #             base04 = "${colors.base04}",
-    #             base05 = "${colors.base05}",
-    #             base06 = "${colors.base06}",
-    #             base07 = "${colors.base07}",
-    #             base08 = "${colors.base08}",
-    #             base09 = "${colors.base09}",
-    #             base0A = "${colors.base0A}",
-    #             base0B = "${colors.base0B}",
-    #             base0C = "${colors.base0C}",
-    #             base0D = "${colors.base0D}",
-    #             base0E = "${colors.base0E}",
-    #             base0F = "${colors.base0F}",
-    #           }})
-    #         end
-    #       }
-    #     '';
-    #   };
   };
 }
