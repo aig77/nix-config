@@ -56,7 +56,7 @@ A declarative, multi-platform system configuration built with Nix Flakes and fla
 - [Managing Age Keys](docs/howto/age-keys.md): adding new machines, rotating keys
 - [Flake Inputs](docs/howto/flake-inputs.md): adding and updating flake inputs
 - [Troubleshooting](docs/howto/troubleshooting.md): common errors and how to fix them
-- [Chezmoi](docs/howto/chezmoi.md): large dotfile management
+- [Chezmoi](docs/howto/chezmoi.md): dotfile management
 
 ### Service Guides
 
