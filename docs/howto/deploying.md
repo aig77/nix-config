@@ -81,7 +81,7 @@ nix run github:nix-community/nixos-anywhere -- \
   --generate-hardware-config nixos-facter ./modules/hosts/nixos/myhostname/facter.json
 ```
 
-This SSHs to the target, generates `facter.json` (hardware detection), partitions the disk with disko, and installs NixOS. After that, commit `facter.json`, create a `facter.nix`, and remove `hardware.nix`.
+This SSHs to the target, generates `facter.json` (hardware detection), partitions the disk with disko, and installs NixOS. After that, commit `facter.json`, create a `facter.nix`, and remove `hardware.nix`. Once booted, fetch your config files with `chezmoi init --apply`, see [Chezmoi](chezmoi.md).
 
 ### Replacing hardware.nix with nixos-facter
 
