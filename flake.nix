@@ -11,11 +11,6 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
 
-    caelestia = {
-      url = "github:caelestia-dots/shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     claude-desktop = {
       url = "github:aaddrick/claude-desktop-debian";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -54,11 +49,6 @@
     };
 
     hyprland.url = "github:hyprwm/Hyprland";
-
-    hyprpanel = {
-      url = "github:Jas-SinghFSU/HyprPanel";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     jovian-nixos.url = "github:Jovian-Experiments/Jovian-NixOS";
 
