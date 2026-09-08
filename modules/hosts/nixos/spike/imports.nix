@@ -8,6 +8,7 @@
         desktop
         aarch64-builder
         hyprland-noctalia
+        niri
         amdgpu
         gaming
         docker

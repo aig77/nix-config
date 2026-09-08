@@ -7,6 +7,7 @@
         base
         laptop
         hyprland-noctalia
+        niri
         intelgpu
         gaming
         docker
