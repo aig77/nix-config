@@ -33,15 +33,15 @@ in {
         };
 
         binds = {
-          "Mod+Enter".action.spawn = "${var.terminal}";
-          "Mod+Space".action.spawn = "noctalia msg panel-toggle launcher";
-          "Mod+Q".action.close-window = {};
-          "Mod+H".action.focus-column-left = {};
-          "Mod+L".action.focus-column-right = {};
-          "Mod+Shift+H".action.move-column-left = {};
-          "Mod+Shift+L".action.move-column-right = {};
-          "Mod+Shift+V".action.move-window-to-workspace-next = {};
-          "Mod+Shift+Q".action.quit = {};
+          "Mod+Return".spawn = [var.terminal];
+          "Mod+Space".spawn-sh = "noctalia msg panel-toggle launcher";
+          "Mod+Q".close-window = {};
+          "Mod+H".focus-column-left = {};
+          "Mod+L".focus-column-right = {};
+          "Mod+Shift+H".move-column-left = {};
+          "Mod+Shift+L".move-column-right = {};
+          "Mod+Shift+V".move-window-to-workspace-down = {};
+          "Mod+Shift+Q".quit = {};
         };
       };
     };
