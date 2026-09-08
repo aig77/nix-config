@@ -46,6 +46,8 @@ chezmoi verify   # confirm live matches source
 
 Nix installs `chezmoi` as part of the shell. On a new machine, one-time setup:
 
+Prerequisite: the machine needs git access to the repo. For a `git@` URL, that's an SSH key registered with the remote (or your own machine, e.g. [SSH](ssh.md)); for an HTTPS URL, use its credentials.
+
 ```bash
 chezmoi init git@github.com:<user>/<repo>.git --apply
 ```
