@@ -36,7 +36,6 @@ in {
         BROWSER = var.browser;
         FILE_MANAGER = var.fileManager;
         LOCATION = var.location;
-        SELECT_WALLPAPER = "wallpaper-picker";
         SCREENSHOT_AREA = "screenshot-area";
         SCREENSHOT_SCREEN = "screenshot-screen";
         SCREENSHOT_WINDOW = "screenshot-window";
@@ -51,7 +50,6 @@ in {
       BROWSER = var.browser;
       FILE_MANAGER = var.fileManager;
       LOCATION = var.location;
-      SELECT_WALLPAPER = "wallpaper-picker";
       SCREENSHOT_AREA = "screenshot-area";
       SCREENSHOT_SCREEN = "screenshot-screen";
       SCREENSHOT_WINDOW = "screenshot-window";

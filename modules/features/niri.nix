@@ -73,7 +73,6 @@ in {
           # Apps
           "Mod+Return".spawn = [var.terminal];
           "Mod+Space".spawn-sh = "noctalia msg panel-toggle launcher";
-          "Mod+W".spawn = ["wallpaper-picker"];
           "Ctrl+Alt+L".spawn-sh = "noctalia msg session lock";
 
           # Screenshots
