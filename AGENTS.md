@@ -37,7 +37,7 @@ modules/
 ├── flake/      # Flake-parts infrastructure: output builders, HM bridges, var schema, ports, dev shell
 ├── hosts/      # Per-machine definitions (nixos/ and darwin/)
 ├── aspects/    # Foundational system concerns always active for a machine type
-├── bundles/    # Curated compositions of features (machines, shells, gui, hyprland variants, desktopShells)
+├── bundles/    # Curated compositions of features (machines, shells, gui, wallpaper)
 └── features/   # Atomic app and service configs
 ```
 

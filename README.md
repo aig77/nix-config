@@ -10,7 +10,7 @@ A declarative, multi-platform system configuration built with Nix Flakes and fla
 
 | Host | Platform | Role |
 |------|----------|------|
-| [Spike](docs/hosts/spike.md) | x86_64 NixOS | Desktop: Hyprland, AMD GPU, gaming, full dev environment |
+| [Spike](docs/hosts/spike.md) | x86_64 NixOS | Desktop: Hyprland + niri, AMD GPU, gaming, full dev environment |
 | [Ein](docs/hosts/ein_dawrin.md) | aarch64 Darwin | MacBook |
 | [Ein](docs/hosts/ein-nixos.md) | x86_64 NixOS | Framework Pro |
 | [Faye](docs/hosts/faye.md) | x86_64 NixOS | HTPC / Console PC |

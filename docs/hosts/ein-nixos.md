@@ -14,9 +14,9 @@
 **Platform:** x86_64 NixOS
 **Role:** Framework Pro Laptop 
 
-Full-featured desktop with Hyprland on Wayland, AMD GPU, gaming, and development tooling. Catppuccin Mocha everywhere.
+Full-featured desktop with Hyprland and niri on Wayland (switchable via Ly), AMD GPU, gaming, and development tooling. Catppuccin Mocha everywhere.
 
-- Hyprland, Noctalia, Ly
+- Hyprland + niri, Noctalia shell, Ly
 - Gaming: Steam with Proton, Heroic, Bottles, GameMode, MangoHud
 - Ghostty, Neovim, Tmux, Docker
 - Spotify (Spicetify), Discord (Nixcord), Obsidian, OBS, Zen browser
