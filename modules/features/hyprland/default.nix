@@ -31,10 +31,6 @@ _: {
           launcher = "fuzzel";
           lock = "hyprlock";
         };
-        quickshell = {
-          launcher = "qs ipc call launcher toggle";
-          lock = "hyprlock";
-        };
         caelestia = {
           launcher = "caelestia shell drawers toggle launcher";
           lock = "caelestia shell lock lock";

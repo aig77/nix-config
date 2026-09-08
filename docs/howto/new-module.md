@@ -31,7 +31,7 @@ Add the profile name to the host's `imports.nix`:
 {config, ...}: {
   configurations.nixos.spike.module = {
     imports = with config.flake.modules.nixos; [
-      base desktop hyprland-quickshell amdgpu gaming docker tailscale volt
+      base desktop hyprland-noctalia amdgpu gaming docker tailscale volt
       myfeature  # add here
     ];
   };
