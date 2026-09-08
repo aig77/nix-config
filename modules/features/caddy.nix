@@ -84,6 +84,7 @@ _: {
           content = ''
             {
               acme_dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+              default_bind 127.0.0.1 ::1
             }
 
             ${invidiousVhost}
