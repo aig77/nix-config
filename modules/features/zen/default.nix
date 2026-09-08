@@ -1,13 +1,21 @@
 _: {
   flake.modules.homeManager.zen = {
-    pkgs,
     inputs,
+    config,
+    pkgs,
     lib,
     ...
   }: {
     imports = [inputs.zen-browser.homeModules.beta];
 
     stylix.targets.zen-browser.enable = false;
+
+    # Strips strange binary path name
+    home.packages = [
+      (pkgs.writeShellScriptBin "zen" ''
+        exec ${config.programs.zen-browser.package}/bin/${config.programs.zen-browser.package.meta.mainProgram} "$@"
+      '')
+    ];
 
     programs.zen-browser = {
       enable = true;
