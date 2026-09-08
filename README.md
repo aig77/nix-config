@@ -11,10 +11,12 @@ A declarative, multi-platform system configuration built with Nix Flakes and fla
 | Host | Platform | Role |
 |------|----------|------|
 | [Spike](docs/hosts/spike.md) | x86_64 NixOS | Desktop: Hyprland, AMD GPU, gaming, full dev environment |
+| [Ein](docs/hosts/ein_dawrin.md) | aarch64 Darwin | MacBook |
+| [Ein](docs/hosts/ein-nixos.md) | x86_64 NixOS | Framework Pro |
 | [Faye](docs/hosts/faye.md) | x86_64 NixOS | HTPC / Console PC |
-| [Ed](docs/hosts/ed.md) | aarch64 NixOS | Headless Raspberry Pi: DNS, ad-blocking, monitoring |
-| [Ein](docs/hosts/ein.md) | aarch64 Darwin | MacBook |
 | [Jet](docs/hosts/jet.md) | x86_64 NixOS | Homelab |
+| [Ed](docs/hosts/ed.md) | aarch64 NixOS | Headless Raspberry Pi: DNS, ad-blocking, monitoring |
+
 
  Every machine joins the same tailnet.
 
@@ -54,6 +56,7 @@ A declarative, multi-platform system configuration built with Nix Flakes and fla
 - [Managing Age Keys](docs/howto/age-keys.md): adding new machines, rotating keys
 - [Flake Inputs](docs/howto/flake-inputs.md): adding and updating flake inputs
 - [Troubleshooting](docs/howto/troubleshooting.md): common errors and how to fix them
+- [Chezmoi](docs/howto/chezmoi.md): large dotfile management
 
 ### Service Guides
 

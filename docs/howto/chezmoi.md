@@ -3,6 +3,7 @@
 ## Contents
 
 - [Documentation](#documentation)
+- [VS Home Manager](#vs-home-manager)
 - [How To Use It](#how-to-use-it)
 - [Fresh Machine Deployment](#fresh-machine-deployment)
 
@@ -11,6 +12,12 @@
 ## Documentation
 
 [chezmoi docs](https://www.chezmoi.io/)
+
+## VS Home Manager
+
+Decided to manage certain configs using an external tool because home manager has SEVERAL nuissances, such as
+- nix wrapped syntax being a massive blocker with certain packages depending on documentation
+- constant rebuilds to view changes
 
 ## How To Use It
 
