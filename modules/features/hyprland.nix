@@ -36,9 +36,6 @@ in {
         BROWSER = var.browser;
         FILE_MANAGER = var.fileManager;
         LOCATION = var.location;
-        SCREENSHOT_AREA = "screenshot-area";
-        SCREENSHOT_SCREEN = "screenshot-screen";
-        SCREENSHOT_WINDOW = "screenshot-window";
         HYPR_GAME_WORKSPACE = 4;
       };
     };
@@ -50,9 +47,6 @@ in {
       BROWSER = var.browser;
       FILE_MANAGER = var.fileManager;
       LOCATION = var.location;
-      SCREENSHOT_AREA = "screenshot-area";
-      SCREENSHOT_SCREEN = "screenshot-screen";
-      SCREENSHOT_WINDOW = "screenshot-window";
       HYPR_GAME_WORKSPACE = 4;
     };
 
