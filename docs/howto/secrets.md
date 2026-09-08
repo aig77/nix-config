@@ -77,4 +77,4 @@ config.sops.templates."myapp-config.json".path
 osConfig.sops.templates."myapp-config.json".path
 ```
 
-The existing `weatherapi.json` template (for hyprpanel's weather widget) is an example of this.
+The existing `restic.env` template (for the backup service's credentials) is an example of this.

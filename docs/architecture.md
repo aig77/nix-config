@@ -147,7 +147,7 @@ let inherit (config.lib.stylix) colors; in
 - `swww`/`awww` daemon manages the actual display
 - `waypaper` is the GTK picker; it updates `var.wallpaperPath` on every pick via `post_command`
 - `var.wallpaperPath` points to `~/.cache/bebop/current-wallpaper`, a symlink updated by waypaper
-- `hyprlock` reads `var.wallpaperPath` at eval time for the lock screen background
+- the Noctalia lock screen reads `var.wallpaperPath` at runtime for the lock background
 
 `waypaper`'s config is written via `home.activation` rather than `xdg.configFile` so it stays writable at runtime. Waypaper updates the `wallpaper=` line on each pick; a Nix-managed symlink would be read-only and break this.
 
