@@ -40,12 +40,8 @@
             type = lib.types.str;
             default = "";
           };
-          desktop = lib.mkOption {
-            type = lib.types.enum ["noctalia"];
-            default = "noctalia";
-          };
           fileManager = lib.mkOption {
-            type = lib.types.enum ["nautilus" "thunar"];
+            type = lib.types.enum ["thunar"];
             default = "thunar";
           };
           network = lib.mkOption {

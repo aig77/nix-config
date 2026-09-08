@@ -23,19 +23,7 @@ in {
     pkgs,
     var,
     ...
-  }: let
-    # Single source of truth for shell-dependent behavior. Add an entry here whenever
-    # a new hyprland-<shell> bundle is added; the bundle itself only sets var.desktop.
-    shellCommands =
-      {
-        noctalia = {
-          launcher = "noctalia msg panel-toggle launcher";
-          lock = "noctalia msg session lock";
-        };
-      }.${
-        var.desktop
-      };
-  in {
+  }: {
     home = {
       packages = with pkgs; [
         hyprpolkitagent
@@ -46,8 +34,6 @@ in {
       sessionVariables = {
         TERMINAL = var.terminal;
         BROWSER = var.browser;
-        LAUNCHER = shellCommands.launcher;
-        LOCKSCREEN = shellCommands.lock;
         FILE_MANAGER = var.fileManager;
         LOCATION = var.location;
         SELECT_WALLPAPER = "wallpaper-picker";
@@ -55,7 +41,6 @@ in {
         SCREENSHOT_SCREEN = "screenshot-screen";
         SCREENSHOT_WINDOW = "screenshot-window";
         HYPR_GAME_WORKSPACE = 4;
-        HYPR_SHELL = var.desktop;
       };
     };
 
@@ -64,8 +49,6 @@ in {
     systemd.user.sessionVariables = {
       TERMINAL = var.terminal;
       BROWSER = var.browser;
-      LAUNCHER = shellCommands.launcher;
-      LOCKSCREEN = shellCommands.lock;
       FILE_MANAGER = var.fileManager;
       LOCATION = var.location;
       SELECT_WALLPAPER = "wallpaper-picker";
@@ -73,7 +56,6 @@ in {
       SCREENSHOT_SCREEN = "screenshot-screen";
       SCREENSHOT_WINDOW = "screenshot-window";
       HYPR_GAME_WORKSPACE = 4;
-      HYPR_SHELL = var.desktop;
     };
 
     stylix.targets.hyprland.enable = false;

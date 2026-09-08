@@ -28,8 +28,6 @@ in {
       };
       security.polkit.enable = true;
 
-      var.desktop = "noctalia";
-
       home-manager.users.${username} = {
         imports = with hm; [gui noctalia];
         home.packages = [];
