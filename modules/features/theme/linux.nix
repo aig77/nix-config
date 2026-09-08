@@ -3,7 +3,7 @@
     colors = config.lib.stylix.colors.withHashtag;
     font = config.stylix.fonts.monospace.name;
   in {
-    # Base16 palette written to cache so runtime configs (Hyprland lua, Quickshell)
+    # Base16 palette written to cache so runtime configs (Hyprland lua)
     # can read colors without needing build-time substitution.
     home.file.".cache/stylix/colors.json".text = builtins.toJSON {
       inherit
