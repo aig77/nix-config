@@ -41,8 +41,8 @@
             default = "";
           };
           desktop = lib.mkOption {
-            type = lib.types.enum ["waybar" "hyprpanel" "caelestia" "noctalia"];
-            default = "waybar";
+            type = lib.types.enum ["noctalia"];
+            default = "noctalia";
           };
           fileManager = lib.mkOption {
             type = lib.types.enum ["nautilus" "thunar"];

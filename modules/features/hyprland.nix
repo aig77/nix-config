@@ -1,4 +1,7 @@
-_: {
+{config, ...}: let
+  inherit (config.flake.meta.owner) username;
+  hm = config.flake.modules.homeManager;
+in {
   flake.modules.nixos.hyprland = {
     inputs,
     pkgs,
@@ -12,6 +15,8 @@ _: {
       package = inputs.hyprland.packages.${system}.hyprland;
       portalPackage = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
     };
+
+    home-manager.users.${username}.imports = [hm.hyprland];
   };
 
   flake.modules.homeManager.hyprland = {
@@ -23,18 +28,6 @@ _: {
     # a new hyprland-<shell> bundle is added; the bundle itself only sets var.desktop.
     shellCommands =
       {
-        waybar = {
-          launcher = "fuzzel";
-          lock = "hyprlock";
-        };
-        hyprpanel = {
-          launcher = "fuzzel";
-          lock = "hyprlock";
-        };
-        caelestia = {
-          launcher = "caelestia shell drawers toggle launcher";
-          lock = "caelestia shell lock lock";
-        };
         noctalia = {
           launcher = "noctalia msg panel-toggle launcher";
           lock = "noctalia msg session lock";

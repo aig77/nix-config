@@ -4,7 +4,6 @@
     imports =
       [inputs.nixos-facter-modules.nixosModules.facter]
       ++ (with config.flake.modules.nixos; [
-        base
         amdgpu
         htpc
         steamos

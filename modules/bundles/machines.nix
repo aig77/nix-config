@@ -6,15 +6,32 @@ in {
   flake.modules.nixos = {
     desktop = _: {
       imports = with nixos; [
+        base
         audio
         bluetooth
-        desktop-extras
-        grub
         theme
+        grub
+        ly
         thunar
       ];
+
+      services = {
+        xserver = {
+          enable = true;
+          xkb.layout = "us";
+          xkb.variant = "";
+        };
+        gnome.gnome-keyring.enable = true;
+        printing.enable = true;
+        power-profiles-daemon.enable = true;
+        upower.enable = true;
+      };
+      security.polkit.enable = true;
+
+      var.desktop = "noctalia";
+
       home-manager.users.${username} = {
-        imports = with hm; [gui];
+        imports = with hm; [gui noctalia];
         home.packages = [];
       };
     };
@@ -37,9 +54,9 @@ in {
 
     htpc = _: {
       imports = with nixos; [
+        base
         audio
         bluetooth
-        desktop-extras
         grub
         theme
       ];

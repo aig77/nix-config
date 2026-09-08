@@ -4,9 +4,8 @@
     imports =
       [inputs.nixos-facter-modules.nixosModules.facter]
       ++ (with config.flake.modules.nixos; [
-        base
         laptop
-        hyprland-noctalia
+        hyprland
         niri
         intelgpu
         gaming

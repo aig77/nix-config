@@ -4,10 +4,9 @@
     imports =
       [inputs.nixos-facter-modules.nixosModules.facter]
       ++ (with config.flake.modules.nixos; [
-        base
-        desktop
         aarch64-builder
-        hyprland-noctalia
+        desktop
+        hyprland
         niri
         amdgpu
         gaming
