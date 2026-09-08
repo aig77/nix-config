@@ -40,7 +40,7 @@ _: {
             type = "packages";
             key = "󰏖";
             keyColor = "red";
-            format = "{1}";
+            format = "{all}";
           }
           {
             type = "display";
