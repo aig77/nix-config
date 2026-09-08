@@ -17,8 +17,6 @@ _: {
   flake.modules.homeManager.hyprland = {
     pkgs,
     var,
-    config,
-    osConfig,
     ...
   }: let
     # Single source of truth for shell-dependent behavior. Add an entry here whenever
@@ -87,16 +85,6 @@ _: {
       SCREENSHOT_WINDOW = "screenshot-window";
       HYPR_GAME_WORKSPACE = 4;
       HYPR_SHELL = var.desktop;
-    };
-
-    # Symlink both to prevent conflict with hypridle config
-    # hypridle is supposed to go into ~/.config/hypr as well creating a conflict if you symlink all of hypr
-    xdg.configFile = {
-      "hypr/hyprland.lua".source =
-        config.lib.file.mkOutOfStoreSymlink "${osConfig.var.repoPath}/modules/features/hyprland/hypr/hyprland.lua";
-
-      "hypr/config".source =
-        config.lib.file.mkOutOfStoreSymlink "${osConfig.var.repoPath}/modules/features/hyprland/hypr/config";
     };
 
     stylix.targets.hyprland.enable = false;
