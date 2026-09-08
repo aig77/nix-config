@@ -1,6 +1,7 @@
 {config, ...}: let
   inherit (config.flake.meta.owner) username;
   hm = config.flake.modules.homeManager;
+  # inherit (config.stylix) colors;
 in {
   flake.modules.nixos.niri = _: {
     programs.niri.enable = true;
@@ -48,10 +49,25 @@ in {
           layout = "us";
         };
 
+        prefer-no-csd = {};
+
         _children = [
           {"spawn-at-startup" = {_args = ["hyprpolkitagent"];};}
           {"spawn-at-startup" = {_args = ["playerctld"];};}
+          {
+            "window-rule" = {
+              _children = [
+                {"geometry-corner-radius" = {_args = [12];};}
+                {"clip-to-geometry" = {_args = [true];};}
+              ];
+            };
+          }
         ];
+
+        layout = {
+          focus-ring.off = {};
+          border.off = {};
+        };
 
         binds = {
           # Apps
