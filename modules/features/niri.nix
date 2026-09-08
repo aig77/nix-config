@@ -34,7 +34,7 @@ in {
 
         binds = {
           "Mod+Enter".action.spawn = "${var.terminal}";
-          "Mod+D".action.spawn = "noctalia msg panel-toggle launcher";
+          "Mod+Space".action.spawn = "noctalia msg panel-toggle launcher";
           "Mod+Q".action.close-window = {};
           "Mod+H".action.focus-column-left = {};
           "Mod+L".action.focus-column-right = {};
